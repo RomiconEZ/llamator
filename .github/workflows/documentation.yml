@@ -1,0 +1,36 @@
+name: Build documentation
+
+on:
+  push:
+    branches: [main, master]
+
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    container: python:3.11
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements-dev.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      # for best results, it is better to generate
+      # documentation within development environment
+      - name: Create venv
+        run: . ./setup_dev_env.sh
+
+      - name: Build docs
+        run: ./build_docs.sh
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
