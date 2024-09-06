@@ -10,6 +10,7 @@ from ..attacks import (
     complimentary_transition,
     harmful_behavior,
     base64_injection,
+    sycophancy,
 )
 
 # from ..attacks import (
