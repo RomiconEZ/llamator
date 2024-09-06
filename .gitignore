@@ -4,9 +4,12 @@
 .neptune/
 .pytest_cache/
 .mypy_cache/
-venv/
+[.][v]env/
 __pycache__/
 **.egg-info/
+
+# Logs
+*.log
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
