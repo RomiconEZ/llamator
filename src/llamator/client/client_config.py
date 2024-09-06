@@ -29,6 +29,9 @@ class ClientConfig:
     def get_system_prompts(self):
         return self.target_client.system_prompts
 
+    def get_model_description(self):
+        return self.target_client.model_description
+
     def get_system_prompts_summary(self, attack_client: ClientBase) -> str:
         if self.system_prompts_summary is None:
             # Only compute summary once (lazy, on first call)
