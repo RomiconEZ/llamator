@@ -18,9 +18,7 @@ chat_models_info = get_langchain_chat_models_info()
 
 
 class FakeChatClient(ClientBase):
-    def interact(
-        self, history: List[Dict[str, str]], messages: List[Dict[str, str]]
-    ) -> Dict[str, str]:
+    def interact(self, history: List[Dict[str, str]], messages: List[Dict[str, str]]) -> Dict[str, str]:
         return {"role": "assistant", "content": "FakeChat response"}
 
 
@@ -60,9 +58,7 @@ class ClientLangChain(ClientBase):
         self.system_prompts = system_prompts
 
     @staticmethod
-    def _convert_to_langchain_format(
-        messages: List[Dict[str, str]]
-    ) -> List[BaseMessage]:
+    def _convert_to_langchain_format(messages: List[Dict[str, str]]) -> List[BaseMessage]:
         """
         Converts messages in the format List[Dict[str, str]] to the format used by LangChain (HumanMessage, AIMessage).
 
@@ -106,9 +102,7 @@ class ClientLangChain(ClientBase):
         role = "user" if isinstance(message, HumanMessage) else "assistant"
         return {"role": role, "content": message.content}
 
-    def interact(
-        self, history: List[Dict[str, str]], messages: List[Dict[str, str]]
-    ) -> Dict[str, str]:
+    def interact(self, history: List[Dict[str, str]], messages: List[Dict[str, str]]) -> Dict[str, str]:
         """
         Takes conversation history and new messages, sends a request to the model, and returns the response.
 
@@ -133,9 +127,7 @@ class ClientLangChain(ClientBase):
         langchain_history += langchain_messages
         try:
             llm_result: LLMResult = self.client.generate(messages=[langchain_history])
-            response_message: BaseMessage = AIMessage(
-                content=llm_result.generations[0][0].text
-            )
+            response_message: BaseMessage = AIMessage(content=llm_result.generations[0][0].text)
         except Exception as e:
             logger.warning(f"Chat inference failed with error: {e}")
             raise
@@ -172,9 +164,7 @@ class ClientLLMStudio(ClientBase):
         self.system_prompts = system_prompts
 
     @staticmethod
-    def _convert_to_llmstudio_format(
-        history: List[Dict[str, str]]
-    ) -> List[Dict[str, str]]:
+    def _convert_to_llmstudio_format(history: List[Dict[str, str]]) -> List[Dict[str, str]]:
         """
         Converts messages in the format List[Dict[str, str]] to the format expected by the LLM Studio API.
 
@@ -190,9 +180,7 @@ class ClientLLMStudio(ClientBase):
         """
         return [{"role": msg["role"], "content": msg["content"]} for msg in history]
 
-    def interact(
-        self, history: List[Dict[str, str]], messages: List[Dict[str, str]]
-    ) -> Dict[str, str]:
+    def interact(self, history: List[Dict[str, str]], messages: List[Dict[str, str]]) -> Dict[str, str]:
         """
         Takes conversation history and new messages, sends a request to the LLM Studio API, and returns the response.
 
@@ -214,6 +202,103 @@ class ClientLLMStudio(ClientBase):
 
         # Convert the history to the format expected by the LLM Studio API
         api_messages = ClientLLMStudio._convert_to_llmstudio_format(history)
+
+        try:
+            # Send the history to the model and get the result
+            completion = self.client.chat.completions.create(
+                model=self.model,
+                messages=api_messages,
+                temperature=self.temperature,  # Send messages to the API
+            )
+            # Extract the response text from the API
+            response_content = completion.choices[0].message.content
+            response_message = {"role": "assistant", "content": response_content}
+        except Exception as e:
+            logger.warning(f"Chat inference failed with error: {e}")
+            raise
+
+        # Add the response to the history and return the result
+        history.append(response_message)
+        return response_message
+
+
+class ClientDeepSeek(ClientBase):
+    """
+    Wrapper for interacting with Deepseek API.
+
+    Parameters
+    ----------
+    api_key : str
+        The API key for accessing the Deepseek API.
+    model : str
+        The model identifier to use for generating responses.
+    temperature : float
+        The temperature setting for controlling randomness in the model's responses.
+    system_prompts : Optional[List[str]]
+        List of system prompts for initializing the conversation context (optional).
+
+    Methods
+    -------
+    _convert_to_openai_format(history: List[Dict[str, str]]) -> List[Dict[str, str]]
+        Converts messages in the format List[Dict[str, str]] to the format expected by the OpenAI API.
+
+    interact(history: List[Dict[str, str]], messages: List[Dict[str, str]]) -> Dict[str, str]
+        Takes conversation history and new messages, sends a request to the OpenAI API, and returns the response.
+    """
+
+    def __init__(
+        self,
+        api_key: str,
+        model: str,
+        temperature: float = 0.1,
+        system_prompts: Optional[List[str]] = None,
+        model_description: str = None,
+    ):
+        self.client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
+        self.model = model
+        self.temperature = temperature
+        self.system_prompts = system_prompts
+        self.model_description = model_description
+
+    @staticmethod
+    def _convert_to_openai_format(history: List[Dict[str, str]]) -> List[Dict[str, str]]:
+        """
+        Converts messages in the format List[Dict[str, str]] to the format expected by the OpenAI API.
+
+        Parameters
+        ----------
+        history : List[Dict[str, str]]
+            List of conversation messages.
+
+        Returns
+        -------
+        List[Dict[str, str]]
+            Messages in OpenAI API format.
+        """
+        return [{"role": msg["role"], "content": msg["content"]} for msg in history]
+
+    def interact(self, history: List[Dict[str, str]], messages: List[Dict[str, str]]) -> Dict[str, str]:
+        """
+        Takes conversation history and new messages, sends a request to the OpenAI API, and returns the response.
+
+        Parameters
+        ----------
+        history : List[Dict[str, str]]
+            The conversation history.
+
+        messages : List[Dict[str, str]]
+            New messages to be processed.
+
+        Returns
+        -------
+        Dict[str, str]
+            The response from the model in dictionary format.
+        """
+        # Add new messages to the history
+        history += messages
+
+        # Convert the history to the format expected by the OpenAI API
+        api_messages = ClientDeepSeek._convert_to_openai_format(history)
 
         try:
             # Send the history to the model and get the result
