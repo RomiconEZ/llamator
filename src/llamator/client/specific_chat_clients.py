@@ -178,6 +178,9 @@ class ClientOpenAI(ClientBase):
         self.model_description = model_description
 
 
+    # TODO: вернуть конвертер
+
+
     def interact(self, history: List[Dict[str, str]], messages: List[Dict[str, str]]) -> Dict[str, str]:
         """
         Takes conversation history and new messages, sends a request to the OpenAI-compatible API, and returns the response.
