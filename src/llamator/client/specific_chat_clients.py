@@ -136,150 +136,51 @@ class ClientLangChain(ClientBase):
         return ClientLangChain._convert_from_langchain_format(response_message)
 
 
-class ClientLLMStudio(ClientBase):
+class ClientOpenAI(ClientBase):
     """
-    Wrapper for interacting with language models through the LLM Studio API.
-
-    Parameters
-    ----------
-    temperature : float
-        The temperature setting for controlling randomness in the model's responses.
-    system_prompts : Optional[List[str]]
-        List of system prompts for initializing the conversation context (optional).
-
-    Methods
-    -------
-    _convert_to_llmstudio_format(history: List[Dict[str, str]]) -> List[Dict[str, str]]
-        Converts messages in the format List[Dict[str, str]] to the format expected by the LLM Studio API.
-
-    interact(history: List[Dict[str, str]], messages: List[Dict[str, str]]) -> Dict[str, str]
-        Takes conversation history and new messages, sends a request to the LLM Studio API, and returns the response.
-    """
-
-    def __init__(self, temperature: float = 0.1, system_prompts: Optional[List[str]] = None):
-
-        self.client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
-        self.model = "model-identifier"
-        self.temperature = temperature
-        self.system_prompts = system_prompts
-
-    @staticmethod
-    def _convert_to_llmstudio_format(history: List[Dict[str, str]]) -> List[Dict[str, str]]:
-        """
-        Converts messages in the format List[Dict[str, str]] to the format expected by the LLM Studio API.
-
-        Parameters
-        ----------
-        history : List[Dict[str, str]]
-            List of conversation messages.
-
-        Returns
-        -------
-        List[Dict[str, str]]
-            Messages in LLM Studio API format.
-        """
-        return [{"role": msg["role"], "content": msg["content"]} for msg in history]
-
-    def interact(self, history: List[Dict[str, str]], messages: List[Dict[str, str]]) -> Dict[str, str]:
-        """
-        Takes conversation history and new messages, sends a request to the LLM Studio API, and returns the response.
-
-        Parameters
-        ----------
-        history : List[Dict[str, str]]
-            The conversation history.
-
-        messages : List[Dict[str, str]]
-            New messages to be processed.
-
-        Returns
-        -------
-        Dict[str, str]
-            The response from the model in dictionary format.
-        """
-        # Add new messages to the history
-        history += messages
-
-        # Convert the history to the format expected by the LLM Studio API
-        api_messages = ClientLLMStudio._convert_to_llmstudio_format(history)
-
-        try:
-            # Send the history to the model and get the result
-            completion = self.client.chat.completions.create(
-                model=self.model,
-                messages=api_messages,
-                temperature=self.temperature,  # Send messages to the API
-            )
-            # Extract the response text from the API
-            response_content = completion.choices[0].message.content
-            response_message = {"role": "assistant", "content": response_content}
-        except Exception as e:
-            logger.warning(f"Chat inference failed with error: {e}")
-            raise
-
-        # Add the response to the history and return the result
-        history.append(response_message)
-        return response_message
-
-
-class ClientDeepSeek(ClientBase):
-    """
-    Wrapper for interacting with Deepseek API.
+    Wrapper for interacting with OpenAI-compatible API.
+    This client can be used to interact with any language model that supports the OpenAI API, including but not limited to OpenAI models.
 
     Parameters
     ----------
     api_key : str
-        The API key for accessing the Deepseek API.
+        The API key for authentication.
+    base_url : str
+        The base URL of the OpenAI-compatible API.
     model : str
         The model identifier to use for generating responses.
     temperature : float
         The temperature setting for controlling randomness in the model's responses.
     system_prompts : Optional[List[str]]
         List of system prompts for initializing the conversation context (optional).
+    model_description : str
+        Description of the model, including domain and other features (optional).
 
     Methods
     -------
-    _convert_to_openai_format(history: List[Dict[str, str]]) -> List[Dict[str, str]]
-        Converts messages in the format List[Dict[str, str]] to the format expected by the OpenAI API.
-
     interact(history: List[Dict[str, str]], messages: List[Dict[str, str]]) -> Dict[str, str]
-        Takes conversation history and new messages, sends a request to the OpenAI API, and returns the response.
+        Takes conversation history and new messages, sends a request to the OpenAI-compatible API, and returns the response.
     """
 
     def __init__(
         self,
         api_key: str,
+        base_url: str,
         model: str,
         temperature: float = 0.1,
         system_prompts: Optional[List[str]] = None,
-        model_description: str = None,
+        model_description: Optional[str] = None,
     ):
-        self.client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
+        self.client = OpenAI(api_key=api_key, base_url=base_url)
         self.model = model
         self.temperature = temperature
         self.system_prompts = system_prompts
         self.model_description = model_description
 
-    @staticmethod
-    def _convert_to_openai_format(history: List[Dict[str, str]]) -> List[Dict[str, str]]:
-        """
-        Converts messages in the format List[Dict[str, str]] to the format expected by the OpenAI API.
-
-        Parameters
-        ----------
-        history : List[Dict[str, str]]
-            List of conversation messages.
-
-        Returns
-        -------
-        List[Dict[str, str]]
-            Messages in OpenAI API format.
-        """
-        return [{"role": msg["role"], "content": msg["content"]} for msg in history]
 
     def interact(self, history: List[Dict[str, str]], messages: List[Dict[str, str]]) -> Dict[str, str]:
         """
-        Takes conversation history and new messages, sends a request to the OpenAI API, and returns the response.
+        Takes conversation history and new messages, sends a request to the OpenAI-compatible API, and returns the response.
 
         Parameters
         ----------
@@ -297,14 +198,11 @@ class ClientDeepSeek(ClientBase):
         # Add new messages to the history
         history += messages
 
-        # Convert the history to the format expected by the OpenAI API
-        api_messages = ClientDeepSeek._convert_to_openai_format(history)
-
         try:
             # Send the history to the model and get the result
             completion = self.client.chat.completions.create(
                 model=self.model,
-                messages=api_messages,
+                messages=history,
                 temperature=self.temperature,  # Send messages to the API
             )
             # Extract the response text from the API
