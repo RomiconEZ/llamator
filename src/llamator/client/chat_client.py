@@ -24,14 +24,17 @@ class ClientBase(ABC):
     ----------
     system_prompts : Optional[List[str]]
         Optional system prompts to guide the conversation.
+    model_description : Optional[str]
+        Optional model description to guide the conversation.
 
     Methods
     -------
     interact(history: List[Dict[str, str]], messages: List[Dict[str, str]]) -> Dict[str, str]
         Takes the conversation history and new messages, sends them to the LLM, and returns a new response.
     """
-    # Attribute that can be None by default
+    # Attributes that can be None by default
     system_prompts: Optional[List[str]] = None
+    model_description: Optional[str] = None
 
     @abstractmethod
     def interact(

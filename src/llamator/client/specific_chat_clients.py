@@ -18,9 +18,7 @@ chat_models_info = get_langchain_chat_models_info()
 
 
 class FakeChatClient(ClientBase):
-    def interact(
-        self, history: List[Dict[str, str]], messages: List[Dict[str, str]]
-    ) -> Dict[str, str]:
+    def interact(self, history: List[Dict[str, str]], messages: List[Dict[str, str]]) -> Dict[str, str]:
         return {"role": "assistant", "content": "FakeChat response"}
 
 
@@ -60,9 +58,7 @@ class ClientLangChain(ClientBase):
         self.system_prompts = system_prompts
 
     @staticmethod
-    def _convert_to_langchain_format(
-        messages: List[Dict[str, str]]
-    ) -> List[BaseMessage]:
+    def _convert_to_langchain_format(messages: List[Dict[str, str]]) -> List[BaseMessage]:
         """
         Converts messages in the format List[Dict[str, str]] to the format used by LangChain (HumanMessage, AIMessage).
 
@@ -106,9 +102,7 @@ class ClientLangChain(ClientBase):
         role = "user" if isinstance(message, HumanMessage) else "assistant"
         return {"role": role, "content": message.content}
 
-    def interact(
-        self, history: List[Dict[str, str]], messages: List[Dict[str, str]]
-    ) -> Dict[str, str]:
+    def interact(self, history: List[Dict[str, str]], messages: List[Dict[str, str]]) -> Dict[str, str]:
         """
         Takes conversation history and new messages, sends a request to the model, and returns the response.
 
@@ -133,9 +127,7 @@ class ClientLangChain(ClientBase):
         langchain_history += langchain_messages
         try:
             llm_result: LLMResult = self.client.generate(messages=[langchain_history])
-            response_message: BaseMessage = AIMessage(
-                content=llm_result.generations[0][0].text
-            )
+            response_message: BaseMessage = AIMessage(content=llm_result.generations[0][0].text)
         except Exception as e:
             logger.warning(f"Chat inference failed with error: {e}")
             raise
@@ -144,57 +136,54 @@ class ClientLangChain(ClientBase):
         return ClientLangChain._convert_from_langchain_format(response_message)
 
 
-class ClientLLMStudio(ClientBase):
+class ClientOpenAI(ClientBase):
     """
-    Wrapper for interacting with language models through the LLM Studio API.
+    Wrapper for interacting with OpenAI-compatible API.
+    This client can be used to interact with any language model that supports the OpenAI API, including but not limited to OpenAI models.
 
     Parameters
     ----------
+    api_key : str
+        The API key for authentication.
+    base_url : str
+        The base URL of the OpenAI-compatible API.
+    model : str
+        The model identifier to use for generating responses.
     temperature : float
         The temperature setting for controlling randomness in the model's responses.
     system_prompts : Optional[List[str]]
         List of system prompts for initializing the conversation context (optional).
+    model_description : str
+        Description of the model, including domain and other features (optional).
 
     Methods
     -------
-    _convert_to_llmstudio_format(history: List[Dict[str, str]]) -> List[Dict[str, str]]
-        Converts messages in the format List[Dict[str, str]] to the format expected by the LLM Studio API.
-
     interact(history: List[Dict[str, str]], messages: List[Dict[str, str]]) -> Dict[str, str]
-        Takes conversation history and new messages, sends a request to the LLM Studio API, and returns the response.
+        Takes conversation history and new messages, sends a request to the OpenAI-compatible API, and returns the response.
     """
 
-    def __init__(self, temperature: float = 0.1, system_prompts: Optional[List[str]] = None):
-
-        self.client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
-        self.model = "model-identifier"
+    def __init__(
+        self,
+        api_key: str,
+        base_url: str,
+        model: str,
+        temperature: float = 0.1,
+        system_prompts: Optional[List[str]] = None,
+        model_description: Optional[str] = None,
+    ):
+        self.client = OpenAI(api_key=api_key, base_url=base_url)
+        self.model = model
         self.temperature = temperature
         self.system_prompts = system_prompts
+        self.model_description = model_description
 
-    @staticmethod
-    def _convert_to_llmstudio_format(
-        history: List[Dict[str, str]]
-    ) -> List[Dict[str, str]]:
+
+    # TODO: вернуть конвертер
+
+
+    def interact(self, history: List[Dict[str, str]], messages: List[Dict[str, str]]) -> Dict[str, str]:
         """
-        Converts messages in the format List[Dict[str, str]] to the format expected by the LLM Studio API.
-
-        Parameters
-        ----------
-        history : List[Dict[str, str]]
-            List of conversation messages.
-
-        Returns
-        -------
-        List[Dict[str, str]]
-            Messages in LLM Studio API format.
-        """
-        return [{"role": msg["role"], "content": msg["content"]} for msg in history]
-
-    def interact(
-        self, history: List[Dict[str, str]], messages: List[Dict[str, str]]
-    ) -> Dict[str, str]:
-        """
-        Takes conversation history and new messages, sends a request to the LLM Studio API, and returns the response.
+        Takes conversation history and new messages, sends a request to the OpenAI-compatible API, and returns the response.
 
         Parameters
         ----------
@@ -212,14 +201,11 @@ class ClientLLMStudio(ClientBase):
         # Add new messages to the history
         history += messages
 
-        # Convert the history to the format expected by the LLM Studio API
-        api_messages = ClientLLMStudio._convert_to_llmstudio_format(history)
-
         try:
             # Send the history to the model and get the result
             completion = self.client.chat.completions.create(
                 model=self.model,
-                messages=api_messages,
+                messages=history,
                 temperature=self.temperature,  # Send messages to the API
             )
             # Extract the response text from the API

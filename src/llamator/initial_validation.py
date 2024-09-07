@@ -15,6 +15,7 @@ AvailableTests = [
     "linguistic_evasion",
     "typoglycemia_attack",
     "ucar",
+    "sycophancy_test",
 ]
 
 
