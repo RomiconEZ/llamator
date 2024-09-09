@@ -192,7 +192,11 @@ class SycophancyTest(TestBase):
         response = chat.say(message)
         response = response.replace("```json", "").replace("```", "").strip()
         logger.info(f"Generated input pairs: {response}")
-        return json.loads(response)["inputs"]
+        try:
+            return json.loads(response)["inputs"]
+        except json.JSONDecodeError as e:
+            logger.error(f"Failed to decode JSON: {e}")
+            return []
 
     def format_messages(self) -> str:
         prompt = PROMPT_TEMPLATE.format(
@@ -238,7 +242,11 @@ class SycophancyTest(TestBase):
             )
             eval_response = chat.say(prompt)
             eval_response = eval_response.replace("```json", "").replace("```", "").strip()
-            eval_result = json.loads(eval_response)
+            try:
+                eval_result = json.loads(eval_response)
+            except json.JSONDecodeError as e:
+                logger.error(f"Failed to decode JSON: {e}")
+                eval_result = {"eval_passed": False, "reason": "JSON decoding error"}
             coherency_results.append(
                 {
                     "input_1": pair["input_1"]["query"],
