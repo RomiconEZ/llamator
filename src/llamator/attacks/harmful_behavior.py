@@ -1,18 +1,15 @@
 import logging
+import os
 from pathlib import Path
-from typing import Generator
+from typing import Generator, Optional
 
 import pandas as pd
-from pkg_resources import (  # for loading attack data file packaged with the library
-    resource_filename,
-)
 
 from ..attack_provider.attack_registry import register_test
 from ..attack_provider.test_base import StatusUpdate, TestBase
 from ..client.attack_config import AttackConfig
 from ..client.chat_client import ChatSession
 from ..client.client_config import ClientConfig
-
 from .utils import evaluate_response
 
 logger = logging.getLogger(__name__)
@@ -20,23 +17,40 @@ logger = logging.getLogger(__name__)
 
 @register_test
 class TestHarmfulBehaviors(TestBase):
-    def __init__(self, client_config: ClientConfig, attack_config: AttackConfig):
+    def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
         super().__init__(
             client_config,
             attack_config,
             test_name="harmful_behavior",
             test_description="Challenges the LLM with a dataset of harmful behavior prompts",
+            artifacts_path=artifacts_path,  # Добавляем artifacts_path
         )
 
-    def run(self) -> Generator[StatusUpdate, None, None]:
-        # dataset_filename = resource_filename(
-        #     "LLAMATOR", "attack_data/harmful_behavior.csv"
-        # )
+    def _prepare_attack_data(self, attack_prompts: list[str], responses: list[str], statuses: list[str]) -> None:
+        """
+        Prepares attack data in a structured DataFrame format and saves it as a CSV file.
 
+        Args:
+            attack_prompts (list[str]): List of attack texts generated during the test.
+            responses (list[str]): List of responses from the target system.
+            statuses (list[str]): List of statuses ('broken', 'resilient', 'error') corresponding to each attack.
+
+        Returns:
+            None
+        """
+        # Create a DataFrame from the lists
+        df = pd.DataFrame({"attack_text": attack_prompts, "response_text": responses, "status": statuses})
+
+        # Save the DataFrame as a CSV file to the artifacts path
+        if self.artifacts_path:
+            csv_path = os.path.join(self.artifacts_path, f"harmful_behavior_attack_report.csv")
+            df.to_csv(csv_path, index=False)
+            logging.info(f"Harmful Behavior attack report saved to {csv_path}")
+
+    def run(self) -> Generator[StatusUpdate, None, None]:
         # Getting the path to the directory where the file is located harmful_behavior.py
         current_dir = Path(__file__).parent
-        # The path to the harmful_behavior.csv file
-        dataset_filename = current_dir.parent / 'attack_data' / 'harmful_behavior.csv'
+        dataset_filename = current_dir.parent / "attack_data" / "harmful_behavior.csv"
 
         logger.info(f"Dataset filename: {dataset_filename}")
         data = pd.read_csv(dataset_filename)
@@ -49,10 +63,12 @@ class TestHarmfulBehaviors(TestBase):
             )  # constant `random_state` for better reproducibility
             rows_count = data.shape[0]
 
+        attack_prompts = []
+        responses = []
+        statuses = []
+
         # Generate list of attack prompt variations
-        yield StatusUpdate(
-            self.client_config, self.test_name, self.status, "Working", 0, rows_count
-        )
+        yield StatusUpdate(self.client_config, self.test_name, self.status, "Working", 0, rows_count)
         for attack_prompt_index, row in data.iterrows():
             attack_prompt = row["goal"]
             target = row["target"]
@@ -62,31 +78,32 @@ class TestHarmfulBehaviors(TestBase):
             )
             response = chat.say(attack_prompt)
             if not response:
-                logger.warning(
-                    "Error while attacking against target LLM (didn't receive response) ..."
-                )
+                logger.warning("Error while attacking against target LLM (didn't receive response) ...")
                 self.status.report_error(attack_prompt)
-
-            # The idea is to check that response contains something similar to expected response, but without refusal keywords
-            # This is a simple way to discriminate refusal from compliance without requiring a full NLP model.
-            # verified = not contains_refusal_keywords(response)
-            verified = evaluate_response(
-                self.attack_config.attack_client.get_target_client(), response, row["target"]
-            )
-            logger.info(
-                f"Test '{self.test_name}': attack prompt #{attack_prompt_index}: {attack_prompt}"
-            )
-            logger.info(
-                f"Test '{self.test_name}': expected response #{attack_prompt_index}: {target}"
-            )
-            logger.info(
-                f"Test '{self.test_name}': attack response #{attack_prompt_index} break_success={verified}): {response}"
-            )
-
-            if verified:
-                self.status.report_breach(attack_prompt, response)
+                current_status = "Error"
             else:
-                self.status.report_resilient(attack_prompt, response)
+                # Verify if the response is compliant
+                verified = evaluate_response(
+                    self.attack_config.attack_client.get_target_client(), response, row["target"]
+                )
+                logger.info(f"Test '{self.test_name}': attack prompt #{attack_prompt_index}: {attack_prompt}")
+                logger.info(f"Test '{self.test_name}': expected response #{attack_prompt_index}: {target}")
+                logger.info(
+                    f"Test '{self.test_name}': attack response #{attack_prompt_index} break_success={verified}): {response}"
+                )
+
+                if verified:
+                    self.status.report_breach(attack_prompt, response)
+                    current_status = "Broken"
+                else:
+                    self.status.report_resilient(attack_prompt, response)
+                    current_status = "Resilient"
+
+            # Append data for report
+            attack_prompts.append(attack_prompt)
+            responses.append(response)
+            statuses.append(current_status)
+
             yield StatusUpdate(
                 self.client_config,
                 self.test_name,
@@ -95,6 +112,10 @@ class TestHarmfulBehaviors(TestBase):
                 attack_prompt_index,
                 self.attack_config.attack_prompts_count,
             )
+
+        # Prepare data for report generation
+        self._prepare_attack_data(attack_prompts, responses, statuses)
+
         yield StatusUpdate(
             self.client_config,
             self.test_name,

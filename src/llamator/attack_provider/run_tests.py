@@ -4,16 +4,13 @@ import colorama
 from pydantic import ValidationError
 
 from ..attack_provider.attack_registry import instantiate_tests
-from ..attack_provider.work_progress_pool import (
-    ProgressWorker,
-    ThreadSafeTaskIterator,
-    WorkProgressPool,
-)
+from ..attack_provider.work_progress_pool import ProgressWorker, ThreadSafeTaskIterator, WorkProgressPool
 from ..client.attack_config import AttackConfig
 from ..client.chat_client import *
 from ..client.client_config import ClientConfig
 from ..format_output.results_table import print_table
-from .attack_loader import *
+from .attack_loader import *  # noqa
+
 # from .attack_loader import * - to register attacks defined in 'attack/*.py'
 from .test_base import StatusUpdate, TestBase, TestStatus
 
@@ -117,6 +114,7 @@ def run_tests(
     threads_count: int,
     basic_tests: List[str],
     custom_tests: List[Type[TestBase]],
+    artifacts_path: Optional[str] = None,
 ):
     """
     Run the tests on the given client and attack configurations.
@@ -133,6 +131,8 @@ def run_tests(
         A list of basic test names to be executed.
     custom_tests : List[Type[TestBase]]
         A list of custom test instances to be executed.
+    artifacts_path : str, optional
+        The path to the folder where artifacts (logs, reports) will be saved.
 
     Returns
     -------
@@ -145,7 +145,7 @@ def run_tests(
 
     # Instantiate all tests
     tests: List[Type[TestBase]] = instantiate_tests(
-        client_config, attack_config, basic_tests=basic_tests, custom_tests=custom_tests
+        client_config, attack_config, basic_tests=basic_tests, custom_tests=custom_tests, artifacts_path=artifacts_path
     )
 
     # Run tests in parallel mode
@@ -155,7 +155,7 @@ def run_tests(
     report_results(tests)
 
 
-def run_tests_in_parallel(tests: List[Type[TestBase]], threads_count: int):
+def run_tests_in_parallel(tests: List[Type[TestBase]], threads_count: int = 1):
     """
     Run the tests in parallel using a thread pool.
 
@@ -212,11 +212,7 @@ def report_results(tests: List[Type[TestBase]]):
         data=sorted(
             [
                 [
-                    ERROR
-                    if test.status.error_count > 0
-                    else RESILIENT
-                    if isResilient(test.status)
-                    else VULNERABLE,
+                    ERROR if test.status.error_count > 0 else RESILIENT if isResilient(test.status) else VULNERABLE,
                     f"{test.test_name + ' ':.<{50}}",
                     test.status.breach_count,
                     test.status.resilient_count,
@@ -288,14 +284,10 @@ def generate_summary(tests: List[Type[TestBase]]):
     None
     """
     resilient_tests_count = sum(isResilient(test.status) for test in tests)
-    failed_tests = [
-        f"{test.test_name}\n" if not isResilient(test.status) else "" for test in tests
-    ]
+    failed_tests = [f"{test.test_name}\n" if not isResilient(test.status) else "" for test in tests]
 
     total_tests_count = len(tests)
-    resilient_tests_percentage = (
-        resilient_tests_count / total_tests_count * 100 if total_tests_count > 0 else 0
-    )
+    resilient_tests_percentage = resilient_tests_count / total_tests_count * 100 if total_tests_count > 0 else 0
 
     # Print a brief summary of the percentage of tests passed
     print(
@@ -304,9 +296,7 @@ def generate_summary(tests: List[Type[TestBase]]):
 
     # If there are failed tests, print the list of failed tests
     if resilient_tests_count < total_tests_count:
-        print(
-            f"Your Model {BRIGHT_RED}failed{RESET} the following tests:\n{RED}{''.join(failed_tests)}{RESET}\n"
-        )
+        print(f"Your Model {BRIGHT_RED}failed{RESET} the following tests:\n{RED}{''.join(failed_tests)}{RESET}\n")
 
 
 def setup_models_and_tests(
@@ -316,6 +306,7 @@ def setup_models_and_tests(
     num_threads: int = 1,
     tests: List[str] = None,
     custom_tests: List[Type[TestBase]] = None,
+    artifacts_path: Optional[str] = None,
 ):
     """
     Set up and validate the models, then run the tests.
@@ -334,6 +325,8 @@ def setup_models_and_tests(
         A list of basic test names to be executed (default is None).
     custom_tests : List[Type[TestBase]], optional
         A list of custom test instances to be executed (default is None).
+    artifacts_path : str, optional
+        The path to the folder where artifacts (logs, reports) will be saved.
 
     Returns
     -------
@@ -343,20 +336,14 @@ def setup_models_and_tests(
     try:
         client_config = ClientConfig(tested_model)
     except (ModuleNotFoundError, ValidationError) as e:
-        logger.warning(
-            f"Error accessing the Tested Model: {colorama.Fore.RED}{e}{colorama.Style.RESET_ALL}"
-        )
+        logger.warning(f"Error accessing the Tested Model: {colorama.Fore.RED}{e}{colorama.Style.RESET_ALL}")
         return
 
     # Attack model setup
     try:
-        attack_config = AttackConfig(
-            attack_client=ClientConfig(attack_model), attack_prompts_count=num_attempts
-        )
+        attack_config = AttackConfig(attack_client=ClientConfig(attack_model), attack_prompts_count=num_attempts)
     except (ModuleNotFoundError, ValidationError) as e:
-        logger.warning(
-            f"Error accessing the Attack Model: {colorama.Fore.RED}{e}{colorama.Style.RESET_ALL}"
-        )
+        logger.warning(f"Error accessing the Attack Model: {colorama.Fore.RED}{e}{colorama.Style.RESET_ALL}")
         return
 
     # Run tests
@@ -366,4 +353,5 @@ def setup_models_and_tests(
         threads_count=num_threads,
         basic_tests=tests,
         custom_tests=custom_tests,
+        artifacts_path=artifacts_path,
     )

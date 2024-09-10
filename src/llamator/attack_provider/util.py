@@ -17,18 +17,14 @@ def is_response_list(response: str, min_items_count: int = 3) -> bool:
 
     # Check the simple list markers pattern
     simple_markers_pattern = r"^\s*[-*>•◦▪]"
-    if (
-        len(re.findall(simple_markers_pattern, response, re.MULTILINE))
-        >= min_items_count
-    ):
+    if len(re.findall(simple_markers_pattern, response, re.MULTILINE)) >= min_items_count:
         return True
 
     # Check the complex list markers pattern
-    complex_markers_pattern = r"^\s*(?:step|phase|stage|part|point|item|number|note|rule|section)*\s*(?:\d+\.\s+|[a-z][.:]\s+)"
-    if (
-        len(re.findall(complex_markers_pattern, response, re.MULTILINE | re.IGNORECASE))
-        >= min_items_count
-    ):
+    complex_markers_pattern = (
+        r"^\s*(?:step|phase|stage|part|point|item|number|note|rule|section)*\s*(?:\d+\.\s+|[a-z][.:]\s+)"
+    )
+    if len(re.findall(complex_markers_pattern, response, re.MULTILINE | re.IGNORECASE)) >= min_items_count:
         return True
 
     return False
