@@ -58,7 +58,7 @@ def instantiate_tests(
         A list of instantiated test objects.
     """
 
-    csv_report_path = artifacts_path
+    csv_report_path = None
 
     if artifacts_path is not None:
         # Create 'csv_report' directory inside artifacts_path

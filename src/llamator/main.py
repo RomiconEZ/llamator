@@ -82,13 +82,14 @@ def start_testing(
     if artifacts_path is None:
         enable_logging = False
         enable_reports = False
+        artifacts_run_path = None
         print("Logging and reports have been disabled.")
     else:
         # Validate the artifacts path
         if not validate_artifacts_path(artifacts_path):
             print("Invalid artifacts path.")
             return
-        else:
+        elif enable_reports is True or enable_logging is True:
             # Create a new folder named 'llamato_run_{start_timestamp}' inside artifacts_path
             run_folder_name = f"LLAMATOR_run_{start_timestamp}"
             run_folder_path = os.path.join(artifacts_path, run_folder_name)
@@ -124,10 +125,21 @@ def start_testing(
         logging.error("One or more custom tests failed validation.")
         return
 
-    # Running tests with the specified parameters
-    setup_models_and_tests(
-        attack_model, tested_model, num_attempts, num_threads, tests, custom_tests, artifacts_run_path
-    )
+    if enable_reports:
+        # Running tests with the specified parameters
+        setup_models_and_tests(
+            attack_model,
+            tested_model,
+            num_attempts,
+            num_threads,
+            tests,
+            custom_tests,
+            artifacts_path=artifacts_run_path,
+        )
+    else:
+        setup_models_and_tests(
+            attack_model, tested_model, num_attempts, num_threads, tests, custom_tests, artifacts_path=None
+        )
 
     # Thank you message at the end of the program
     logging.info(f"Completion of testing")
