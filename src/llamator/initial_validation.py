@@ -11,11 +11,11 @@ AvailableTests = [
     "do_anything_now_jailbreak",
     "ethical_compliance",
     "harmful_behavior",
-    "linguistic_evasion",
     "self_refine",
-    "sycophancy_test",
+    "linguistic_evasion",
     "typoglycemia_attack",
     "ucar",
+    "sycophancy_test",
 ]
 
 

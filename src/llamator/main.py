@@ -51,8 +51,8 @@ def start_testing(
         tests : Optional[List[str]], optional
             List of test names to execute (default is an empty list).
             Available tests: aim_jailbreak, base64_injection, complimentary_transition,
-            do_anything_now_jailbreak, ethical_compliance, harmful_behavior, linguistic_evasion,
-            self_refine, sycophancy_test, typoglycemia_attack, ucar.
+            do_anything_now_jailbreak, ethical_compliance, harmful_behavior, self_refine,
+            linguistic_evasion, typoglycemia_attack, ucar.
         custom_tests : List[Type[TestBase]], optional
             List of custom test instances (default is an empty list).
         debug_level : int, optional
