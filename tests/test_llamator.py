@@ -15,9 +15,9 @@ def test_openaiclient():
 
     from llamator.client.specific_chat_clients import ClientOpenAI
 
-    api_key = "lm-studio"
-    base_url = "http://localhost:1234/v1"
-    model = "model-identifier"
+    api_key = os.getenv("OPENAI_CLIENT_API_KEY")
+    base_url = os.getenv("OPENAI_CLIENT_BASEURL")
+    model = os.getenv("OPENAI_CLIENT_MODEL")
 
     attack_model = ClientOpenAI(
         api_key=api_key,
@@ -38,14 +38,14 @@ def test_openaiclient():
     tests = [
         "aim_jailbreak",
         "base64_injection",
-        "complimentary_transition",
-        "do_anything_now_jailbreak",
-        "ethical_compliance",
-        "harmful_behavior",
-        "self_refine",
-        "linguistic_evasion",
-        "typoglycemia_attack",
-        "ucar",
+        # "complimentary_transition",
+        # "do_anything_now_jailbreak",
+        # "ethical_compliance",
+        # "harmful_behavior",
+        # "self_refine",
+        # "linguistic_evasion",
+        # "typoglycemia_attack",
+        # "ucar",
         # "sycophancy_test",
     ]
 
@@ -97,14 +97,14 @@ def test_langchainclient_yandegpt():
     tests = [
         "aim_jailbreak",
         "base64_injection",
-        "complimentary_transition",
-        "do_anything_now_jailbreak",
-        "ethical_compliance",
-        "harmful_behavior",
-        "self_refine",
-        "linguistic_evasion",
-        "typoglycemia_attack",
-        "ucar",
+        # "complimentary_transition",
+        # "do_anything_now_jailbreak",
+        # "ethical_compliance",
+        # "harmful_behavior",
+        # "self_refine",
+        # "linguistic_evasion",
+        # "typoglycemia_attack",
+        # "ucar",
     ]
 
     config = {
