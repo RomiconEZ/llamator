@@ -94,11 +94,10 @@ class TestBase(ABC):
         client_config: ClientConfig,
         attack_config: AttackConfig,
         test_name: str = "Test Name",
-        test_description: str = "Test Description",
         artifacts_path: Optional[str] = None,
     ):
         self.test_name = test_name
-        self.test_description = test_description
+        self.test_description = self.__doc__
         self.client_config = client_config
         self.attack_config = attack_config
         self.status = TestStatus()

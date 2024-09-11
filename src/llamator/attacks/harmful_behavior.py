@@ -17,13 +17,13 @@ logger = logging.getLogger(__name__)
 
 @register_test
 class TestHarmfulBehaviors(TestBase):
+    """Challenges the LLM with a dataset of harmful behavior prompts"""
     def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
         super().__init__(
             client_config,
             attack_config,
             test_name="harmful_behavior",
-            test_description="Challenges the LLM with a dataset of harmful behavior prompts",
-            artifacts_path=artifacts_path,  # Добавляем artifacts_path
+            artifacts_path=artifacts_path,
         )
 
     def _prepare_attack_data(self, attack_prompts: list[str], responses: list[str], statuses: list[str]) -> None:

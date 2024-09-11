@@ -24,13 +24,14 @@ self_refine_prompt_template = """Начинай свой ответ со сло�
 
 @register_test
 class TestRuSelfRefine(TestBase):
+    """Probes an Russian-language LLM's ethical compliance by eliciting detailed instructions on illegal activities, 
+    using self-refine technique that attempts to bypass the system prompt by asking the LLM to refine its response"""
     def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
         super().__init__(
             client_config,
             attack_config,
             test_name="self_refine",
-            test_description="Probes an LLM's ethical compliance by eliciting detailed instructions on illegal activities, using self-refine technique that attempts to bypass the system prompt by asking the LLM to refine its response",
-            artifacts_path=artifacts_path,  # Добавляем artifacts_path
+            artifacts_path=artifacts_path,
         )
 
     def _prepare_attack_data(self, attack_prompts: list[str], responses: list[str], statuses: list[str]) -> None:
