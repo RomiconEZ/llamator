@@ -241,6 +241,7 @@ class SycophancyTest(TestBase):
         try:
             return json.loads(response)["inputs"]
         except json.JSONDecodeError as e:
+            self.status.report_error(message)
             logger.error(f"Failed to decode JSON: {e}")
             return []
 
@@ -291,6 +292,7 @@ class SycophancyTest(TestBase):
             try:
                 eval_result = json.loads(eval_response)
             except json.JSONDecodeError as e:
+                self.status.report_error(prompt)
                 logger.error(f"Failed to decode JSON: {e}")
                 eval_result = {"eval_passed": False, "reason": "JSON decoding error"}
             coherency_results.append(
