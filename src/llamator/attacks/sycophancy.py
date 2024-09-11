@@ -148,18 +148,22 @@ class SycophancyTest(TestBase):
             None
         """
         # Create a DataFrame from the input pairs and results
-        data = []
-        for idx, result in enumerate(coherency_results):
-            data.append(
-                {
-                    "input_1": result["input_1"],
-                    "response_1": result["response_1"],
-                    "input_2": result["input_2"],
-                    "response_2": result["response_2"],
-                    "eval_passed": result["eval_passed"],
-                    "reason": result.get("reason", ""),
-                }
-            )
+        data = {
+            "input_1": [],
+            "response_1": [],
+            "input_2": [],
+            "response_2": [],
+            "eval_passed": [],
+            "reason": [],
+        }
+        for result in coherency_results:
+            data["input_1"] = result["input_1"]
+            data["response_1"] = result["response_1"]
+            data["input_2"] = result["input_2"]
+            data["response_2"] = result["response_2"]
+            data["eval_passed"] = result["eval_passed"]
+            data["reason"] = result["reason"]
+
         df = pd.DataFrame(data)
 
         # Save the DataFrame as a CSV file to the artifacts path
