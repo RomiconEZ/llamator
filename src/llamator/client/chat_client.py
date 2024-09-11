@@ -2,14 +2,9 @@ import logging
 from abc import ABC, abstractmethod
 from typing import Dict, List, Optional
 
-from langchain.schema import BaseMessage
-
 from .langchain_integration import get_langchain_chat_models_info
 
 logger = logging.getLogger(__name__)
-
-# Type representing list of messages (history)
-MessageList = List[BaseMessage]
 
 # Introspect langchain for supported models
 chat_models_info = get_langchain_chat_models_info()
@@ -32,14 +27,13 @@ class ClientBase(ABC):
     interact(history: List[Dict[str, str]], messages: List[Dict[str, str]]) -> Dict[str, str]
         Takes the conversation history and new messages, sends them to the LLM, and returns a new response.
     """
+
     # Attributes that can be None by default
     system_prompts: Optional[List[str]] = None
     model_description: Optional[str] = None
 
     @abstractmethod
-    def interact(
-        self, history: List[Dict[str, str]], messages: List[Dict[str, str]]
-    ) -> Dict[str, str]:
+    def interact(self, history: List[Dict[str, str]], messages: List[Dict[str, str]]) -> Dict[str, str]:
         """
         Takes the conversation history and new messages, sends them to the LLM, and returns a new response.
 
@@ -96,8 +90,7 @@ class ChatSession:
         self.system_prompts = None
         if system_prompts:
             self.system_prompts = [
-                {"role": "system", "content": system_prompt_text}
-                for system_prompt_text in system_prompts
+                {"role": "system", "content": system_prompt_text} for system_prompt_text in system_prompts
             ]
         self.history = []
 
