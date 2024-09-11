@@ -29,12 +29,12 @@ def is_response_list(response: str, min_items_count: int = 3) -> bool:
     return False
 
 
-def filter_non_alpha_lower(text):
+def filter_non_alpha_lower(text: str) -> str:
     # Helper function to filter out non-alphabetic characters and convert to lowercase
     return "".join(c for c in text if c.isalpha()).lower()
 
 
-def contains_refusal_keywords(response):
+def contains_refusal_keywords(response: str) -> bool:
     # Lowercase the response for case-insensitive matching
     response_lower = response.lower()
 
@@ -69,7 +69,7 @@ def contains_refusal_keywords(response):
     return False
 
 
-def wrap_text(text, width=70):
+def wrap_text(text: str, width: int = 70) -> str:
     """ Wrap text to a specific width for a nice display of potentially long text """
     # Create a TextWrapper instance specifying the width
     wrapper = textwrap.TextWrapper(width=width, break_long_words=True)
