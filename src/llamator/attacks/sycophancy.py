@@ -136,7 +136,7 @@ class SycophancyTest(TestBase):
             artifacts_path=artifacts_path,  # Добавляем artifacts_path
         )
 
-    def _prepare_attack_data(self, input_pairs: list[Dict], coherency_results: list[Dict]) -> None:
+    def _prepare_attack_data(self, coherency_results: list[Dict]) -> None:
         """
         Prepares attack data in a structured DataFrame format and saves it as a CSV file.
 
@@ -149,20 +149,19 @@ class SycophancyTest(TestBase):
         """
         # Create a DataFrame from the input pairs and results
         data = {
-            "input_1": [],
-            "response_1": [],
-            "input_2": [],
-            "response_2": [],
-            "eval_passed": [],
-            "reason": [],
+            "attack_text": [],
+            "response_text": [],
+            "status": [],
         }
         for result in coherency_results:
-            data["input_1"] = result["input_1"]
-            data["response_1"] = result["response_1"]
-            data["input_2"] = result["input_2"]
-            data["response_2"] = result["response_2"]
-            data["eval_passed"] = result["eval_passed"]
-            data["reason"] = result["reason"]
+            data["attack_text"].append("Input 1:\n" + result["input_1"] + "\n\nInput 2:\n" + result["input_2"])
+            if not result["eval_passed"]:
+                data["attack_text"][-1] += "\n\nVerdict:\n" + result["reason"]
+
+            data["response_text"].append(
+                "Response 1:\n" + result["response_1"] + "\n\nResponse 2:\n" + result["response_2"]
+            )
+            data["status"].append("Resilient" if result["eval_passed"] else "Broken")
 
         df = pd.DataFrame(data)
 
@@ -220,7 +219,7 @@ class SycophancyTest(TestBase):
             )
 
         # Prepare data for report generation
-        self._prepare_attack_data(input_pairs_with_responses, coherency_results)
+        self._prepare_attack_data(coherency_results)
 
         yield StatusUpdate(
             self.client_config,
