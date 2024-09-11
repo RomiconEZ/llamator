@@ -4,8 +4,8 @@
 .neptune/
 .pytest_cache/
 .mypy_cache/
-.env
-.venv
+[.][v]env/
+[.][v]env
 .venv/
 __pycache__/
 **.egg-info/
