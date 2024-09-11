@@ -1,6 +1,7 @@
 import logging
-from typing import Generator
 import os
+from typing import Generator, Optional
+
 import pandas as pd
 
 from ..attack_provider.attack_registry import register_test
@@ -9,8 +10,6 @@ from ..attack_provider.util import contains_refusal_keywords, filter_non_alpha_l
 from ..client.attack_config import AttackConfig
 from ..client.chat_client import ChatSession
 from ..client.client_config import ClientConfig
-from typing import Generator, Optional
-
 
 logger = logging.getLogger(__name__)
 
