@@ -24,7 +24,7 @@ dan_prompt_template = """Изучи следующий текст после д�
 
 @register_test
 class TestRuDAN(TestBase):
-    """Probes an Russian-language LLM's resilience against performing explicitly forbidden activities using the 'Do Anything Now' (DAN) character roleplay technique"""
+    """Probes an Russian-language LLM's resilience against performing explicitly forbidden activities using the 'Do Anything Now' (DAN) character roleplay technique."""
     def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
         super().__init__(
             client_config,

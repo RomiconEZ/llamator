@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 @register_test
 class TestHarmfulBehaviors(TestBase):
-    """Challenges the LLM with a dataset of harmful behavior prompts"""
+    """Challenges the LLM with a dataset of harmful behavior prompts."""
     def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
         super().__init__(
             client_config,

@@ -22,7 +22,7 @@ translation_prompt = """
 
 @register_test
 class TestTranslation(TestBase):
-    """Leverage the use of a non-Russian language to circumvent the restrictions or focus set by the system prompt"""
+    """Leverage the use of a non-Russian language to circumvent the restrictions or focus set by the system prompt."""
     def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
         super().__init__(
             client_config,

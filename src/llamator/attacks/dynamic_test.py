@@ -184,7 +184,7 @@ class DynamicTestBase(TestBase):
 
 @register_test
 class TestAmnesia(DynamicTestBase):
-    """Attempt to cause LLM to forget or disregard its system prompt instructions to cause it to report something unrelated to its purpose"""
+    """Attempt to cause LLM to forget or disregard its system prompt instructions to cause it to report something unrelated to its purpose."""
     def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
         super().__init__(
             client_config,
@@ -200,7 +200,7 @@ class TestAmnesia(DynamicTestBase):
 
 @register_test
 class TestBasicInjectionRoleImpersonation(DynamicTestBase):
-    """Attempt to impersonate as an authoritative role to cause LLM to report something unrelated to its purpose"""
+    """Attempt to impersonate as an authoritative role to cause LLM to report something unrelated to its purpose."""
     def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
         super().__init__(
             client_config,
@@ -216,7 +216,7 @@ class TestBasicInjectionRoleImpersonation(DynamicTestBase):
 
 @register_test
 class TestContextualRedirection(DynamicTestBase):
-    """Attempt at tricking the LLM into adopting a specific role (Roleplay) that may bypass the restrictions or intended use set by the system prompt"""
+    """Attempt at tricking the LLM into adopting a specific role (Roleplay) that may bypass the restrictions or intended use set by the system prompt."""
     def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
         super().__init__(
             client_config,
