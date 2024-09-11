@@ -1,4 +1,5 @@
 import logging
+import os
 from typing import List, Type
 
 from .attack_provider.run_tests import TestBase
@@ -90,3 +91,30 @@ def validate_custom_tests(custom_tests: List[Type[TestBase]]) -> bool:
             logging.error(f"Test {test.__name__} is not a subclass of TestBase.")
             return False
     return True
+
+
+def validate_artifacts_path(artifacts_path: str) -> bool:
+    """
+    Validate that the artifacts path exists, or create it if it doesn't.
+
+    Parameters
+    ----------
+    artifacts_path : str
+        The path to the folder where artifacts (logs, reports) will be saved.
+
+    Returns
+    -------
+    bool
+        Returns True if the path is valid (exists or successfully created),
+        otherwise returns False.
+    """
+    try:
+        # Check if the path exists, if not, create the directory
+        if not os.path.exists(artifacts_path):
+            logging.info(f"Artifacts path '{artifacts_path}' does not exist. Creating...")
+            os.makedirs(artifacts_path, exist_ok=True)
+            logging.info(f"Artifacts path '{artifacts_path}' created successfully.")
+        return True
+    except Exception as e:
+        logging.error(f"Failed to validate or create artifacts path: {e}")
+        return False

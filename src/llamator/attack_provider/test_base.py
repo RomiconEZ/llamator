@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Generator, List
+from typing import Generator, List, Optional
 
 from ..client.attack_config import AttackConfig
 from ..client.client_config import ClientConfig
@@ -95,12 +95,14 @@ class TestBase(ABC):
         attack_config: AttackConfig,
         test_name: str = "Test Name",
         test_description: str = "Test Description",
+        artifacts_path: Optional[str] = None,
     ):
         self.test_name = test_name
         self.test_description = test_description
         self.client_config = client_config
         self.attack_config = attack_config
         self.status = TestStatus()
+        self.artifacts_path = artifacts_path
 
     @abstractmethod
     def run(self) -> Generator[StatusUpdate, None, None]:
