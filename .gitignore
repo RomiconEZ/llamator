@@ -85,4 +85,4 @@ report.xml
 
 # CMake
 cmake-build-*/
-/tests/artifacts/
+*/artifacts/
