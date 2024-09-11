@@ -3,15 +3,12 @@ from typing import Dict, List, Optional
 
 from langchain.schema import AIMessage, BaseMessage, HumanMessage
 from langchain_core.outputs.llm_result import LLMResult
+from openai import OpenAI
 
 from .chat_client import ClientBase
 from .langchain_integration import get_langchain_chat_models_info
-from openai import OpenAI
 
 logger = logging.getLogger(__name__)
-
-# Type representing list of messages (history)
-MessageList = List[BaseMessage]
 
 # Introspect langchain for supported models
 chat_models_info = get_langchain_chat_models_info()
@@ -37,57 +34,62 @@ class ClientLangChain(ClientBase):
 
     Methods
     -------
-    _convert_to_langchain_format(messages: List[Dict[str, str]]) -> List[BaseMessage]
-        Converts messages in the format List[Dict[str, str]] to the format used by LangChain (HumanMessage, AIMessage).
+    _convert_to_base_format(message: BaseMessage) -> Dict[str, str]
+        Converts a LangChain message (HumanMessage, AIMessage) to the base format (Dict with "role" and "content").
 
-    _convert_from_langchain_format(message: BaseMessage) -> Dict[str, str]
-        Converts a LangChain message (HumanMessage, AIMessage) back to a dictionary format.
+    _convert_to_langchain_format(message: Dict[str, str]) -> BaseMessage
+        Converts a message from the base format (Dict) to LangChain's format (HumanMessage, AIMessage).
 
     interact(history: List[Dict[str, str]], messages: List[Dict[str, str]]) -> Dict[str, str]
         Takes conversation history and new messages, sends a request to the model, and returns the response as a dictionary.
     """
 
-    def __init__(self, backend: str, system_prompts: Optional[List[str]] = None, **kwargs):
-
+    def __init__(
+        self,
+        backend: str,
+        system_prompts: Optional[List[str]] = None,
+        model_description: Optional[str] = None,
+        **kwargs,
+    ):
+        chat_models_info = get_langchain_chat_models_info()
         if backend in chat_models_info:
             self.client = chat_models_info[backend].model_cls(**kwargs)
         else:
             raise ValueError(
                 f"Invalid backend name: {backend}. Supported backends: {', '.join(chat_models_info.keys())}"
             )
+
         self.system_prompts = system_prompts
+        self.model_description = model_description
 
     @staticmethod
-    def _convert_to_langchain_format(messages: List[Dict[str, str]]) -> List[BaseMessage]:
+    def _convert_to_langchain_format(message: Dict[str, str]) -> List[BaseMessage]:
         """
-        Converts messages in the format List[Dict[str, str]] to the format used by LangChain (HumanMessage, AIMessage).
+        Converts a message from the base format (Dict) to LangChain's format.
 
         Parameters
         ----------
-        messages : List[Dict[str, str]]
-            List of messages to convert.
+        message : Dict[str, str]
+            A message in the base format (Dict with "role" and "content") to convert.
 
         Returns
         -------
         List[BaseMessage]
-            Messages in LangChain format.
+            The message in LangChain format ([HumanMessage], [AIMessage]).
         """
-        langchain_messages = []
-        for msg in messages:
-            if msg["role"] == "user":
-                langchain_messages.append(HumanMessage(content=msg["content"]))
-            elif msg["role"] == "assistant":
-                langchain_messages.append(AIMessage(content=msg["content"]))
-            elif msg["role"] == "system":
-                langchain_messages.append(
-                    AIMessage(content=msg["content"])
-                )  # In LangChain, there is no "system" role, using AIMessage
-        return langchain_messages
+        if message["role"] == "user":
+            return [HumanMessage(content=message["content"])]
+        elif message["role"] == "assistant":
+            return [AIMessage(content=message["content"])]
+        elif message["role"] == "system":
+            return [AIMessage(content=message["content"])]  # LangChain doesn't have "system", using AIMessage
+        else:
+            raise ValueError(f"Unsupported role: {message['role']}")
 
     @staticmethod
-    def _convert_from_langchain_format(message: BaseMessage) -> Dict[str, str]:
+    def _convert_to_base_format(message: BaseMessage) -> Dict[str, str]:
         """
-        Converts a LangChain message (HumanMessage, AIMessage) back to a dictionary format.
+        Converts a LangChain message (HumanMessage, AIMessage) to the base format.
 
         Parameters
         ----------
@@ -97,9 +99,15 @@ class ClientLangChain(ClientBase):
         Returns
         -------
         Dict[str, str]
-            The message in dictionary format with keys 'role' and 'content'.
+            The message in base format with "role" and "content".
         """
-        role = "user" if isinstance(message, HumanMessage) else "assistant"
+        if isinstance(message, HumanMessage):
+            role = "user"
+        elif isinstance(message, AIMessage):
+            role = "assistant"
+        else:
+            raise ValueError(f"Unsupported message type: {type(message)}")
+
         return {"role": role, "content": message.content}
 
     def interact(self, history: List[Dict[str, str]], messages: List[Dict[str, str]]) -> Dict[str, str]:
@@ -117,23 +125,21 @@ class ClientLangChain(ClientBase):
         Returns
         -------
         Dict[str, str]
-            The response from the model in dictionary format.
+            The response from the model in dictionary format with "role" and "content".
         """
-        # Convert history and new messages to LangChain format
-        langchain_history = ClientLangChain._convert_to_langchain_format(history)
-        langchain_messages = ClientLangChain._convert_to_langchain_format(messages)
+        langchain_history = [ClientLangChain._convert_to_langchain_format(msg) for msg in history]
+        langchain_messages = [ClientLangChain._convert_to_langchain_format(msg) for msg in messages]
 
-        # Update history and send request to LLM
         langchain_history += langchain_messages
+
         try:
-            llm_result: LLMResult = self.client.generate(messages=[langchain_history])
+            llm_result: LLMResult = self.client.generate(messages=langchain_history)
+
             response_message: BaseMessage = AIMessage(content=llm_result.generations[0][0].text)
         except Exception as e:
-            logger.warning(f"Chat inference failed with error: {e}")
-            raise
+            raise RuntimeError(f"Chat inference failed with error: {e}")
 
-        # Convert response back to dictionary format
-        return ClientLangChain._convert_from_langchain_format(response_message)
+        return ClientLangChain._convert_to_base_format(response_message)
 
 
 class ClientOpenAI(ClientBase):
@@ -158,6 +164,12 @@ class ClientOpenAI(ClientBase):
 
     Methods
     -------
+    _convert_to_base_format(message: Dict[str, str]) -> Dict[str, str]
+        Converts a message from OpenAI format (Dict) to the base format (Dict with "role" and "content").
+
+    _convert_to_openai_format(message: Dict[str, str]) -> Dict[str, str]
+        Converts a message from the base format (Dict with "role" and "content") to OpenAI's format (Dict).
+
     interact(history: List[Dict[str, str]], messages: List[Dict[str, str]]) -> Dict[str, str]
         Takes conversation history and new messages, sends a request to the OpenAI-compatible API, and returns the response.
     """
@@ -177,9 +189,39 @@ class ClientOpenAI(ClientBase):
         self.system_prompts = system_prompts
         self.model_description = model_description
 
+    @staticmethod
+    def _convert_to_base_format(message: Dict[str, str]) -> Dict[str, str]:
+        """
+        Converts a message from OpenAI format to the base format.
 
-    # TODO: вернуть конвертер
+        Parameters
+        ----------
+        message : Dict[str, str]
+            A message in OpenAI format to convert.
 
+        Returns
+        -------
+        Dict[str, str]
+            The message in base format with "role" and "content".
+        """
+        return {"role": message["role"], "content": message["content"]}
+
+    @staticmethod
+    def _convert_to_openai_format(message: Dict[str, str]) -> Dict[str, str]:
+        """
+        Converts a message from base format (Dict) to OpenAI format.
+
+        Parameters
+        ----------
+        message : Dict[str, str]
+            A message in the base format (Dict with "role" and "content") to convert.
+
+        Returns
+        -------
+        Dict[str, str]
+            The message in OpenAI format.
+        """
+        return {"role": message["role"], "content": message["content"]}
 
     def interact(self, history: List[Dict[str, str]], messages: List[Dict[str, str]]) -> Dict[str, str]:
         """
@@ -196,17 +238,21 @@ class ClientOpenAI(ClientBase):
         Returns
         -------
         Dict[str, str]
-            The response from the model in dictionary format.
+            The response from the model in dictionary format with "role" and "content".
         """
+        # Convert history and new messages to OpenAI format
+        openai_history = [self._convert_to_openai_format(msg) for msg in history]
+        openai_messages = [self._convert_to_openai_format(msg) for msg in messages]
+
         # Add new messages to the history
-        history += messages
+        openai_history += openai_messages
 
         try:
             # Send the history to the model and get the result
             completion = self.client.chat.completions.create(
                 model=self.model,
-                messages=history,
-                temperature=self.temperature,  # Send messages to the API
+                messages=openai_history,
+                temperature=self.temperature,
             )
             # Extract the response text from the API
             response_content = completion.choices[0].message.content
@@ -215,6 +261,5 @@ class ClientOpenAI(ClientBase):
             logger.warning(f"Chat inference failed with error: {e}")
             raise
 
-        # Add the response to the history and return the result
-        history.append(response_message)
-        return response_message
+        # Convert the response to base format
+        return self._convert_to_base_format(response_message)

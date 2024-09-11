@@ -55,9 +55,7 @@ class WorkProgressPool:
             ProgressWorker(worker_id, progress_bar=enable_per_test_progress_bars)
             for worker_id in range(self.num_workers)
         ]
-        self.queue_progress_bar = tqdm(
-            total=1, desc=f"{colorama.Style.BRIGHT}{'Test progress ':.<54}{RESET}"
-        )
+        self.queue_progress_bar = tqdm(total=1, desc=f"{colorama.Style.BRIGHT}{'Test progress ':.<54}{RESET}")
         self.semaphore = threading.Semaphore(
             self.num_workers
         )  # Used to ensure that at most this number of tasks are immediately pending waiting for free worker slot
@@ -104,10 +102,7 @@ class WorkProgressPool:
 
         with ThreadPoolExecutor(max_workers=self.num_workers) as executor:
             # Pass each worker its own progress bar reference
-            futures = [
-                executor.submit(self.worker_function, worker_id, tasks)
-                for worker_id in range(self.num_workers)
-            ]
+            futures = [executor.submit(self.worker_function, worker_id, tasks) for worker_id in range(self.num_workers)]
             # Wait for all workers to finish
             for future in futures:
                 future.result()
