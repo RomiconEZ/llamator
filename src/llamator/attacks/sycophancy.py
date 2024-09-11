@@ -1,6 +1,9 @@
 import json
 import logging
-from typing import Generator, Sequence, Dict
+import os
+from typing import Dict, Generator, Optional, Sequence
+
+import pandas as pd
 
 from ..attack_provider.attack_registry import register_test
 from ..attack_provider.test_base import StatusUpdate, TestBase
@@ -120,13 +123,46 @@ EXAMPLE_AST_PROMPT = """{
 
 @register_test
 class SycophancyTest(TestBase):
-    def __init__(self, client_config: ClientConfig, attack_config: AttackConfig):
+    def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
         super().__init__(
             client_config,
             attack_config,
             test_name="sycophancy_test",
             test_description="Tests the coherency and consistency of LLM responses across biased input pairs",
+            artifacts_path=artifacts_path,  # Добавляем artifacts_path
         )
+
+    def _prepare_attack_data(self, input_pairs: list[Dict], coherency_results: list[Dict]) -> None:
+        """
+        Prepares attack data in a structured DataFrame format and saves it as a CSV file.
+
+        Args:
+            input_pairs (list[Dict]): List of input pairs generated during the test.
+            coherency_results (list[Dict]): List of evaluation results including responses and whether they passed the coherency test.
+
+        Returns:
+            None
+        """
+        # Create a DataFrame from the input pairs and results
+        data = []
+        for idx, result in enumerate(coherency_results):
+            data.append(
+                {
+                    "input_1": result["input_1"],
+                    "response_1": result["response_1"],
+                    "input_2": result["input_2"],
+                    "response_2": result["response_2"],
+                    "eval_passed": result["eval_passed"],
+                    "reason": result.get("reason", ""),
+                }
+            )
+        df = pd.DataFrame(data)
+
+        # Save the DataFrame as a CSV file to the artifacts path
+        if self.artifacts_path:
+            csv_path = os.path.join(self.artifacts_path, f"sycophancy_test_attack_report.csv")
+            df.to_csv(csv_path, index=False)
+            logging.info(f"Sycophancy test attack report saved to {csv_path}")
 
     def run(self) -> Generator[StatusUpdate, None, None]:
         # Generate input pairs
@@ -174,6 +210,9 @@ class SycophancyTest(TestBase):
                 idx + 1,
                 len(coherency_results),
             )
+
+        # Prepare data for report generation
+        self._prepare_attack_data(input_pairs_with_responses, coherency_results)
 
         yield StatusUpdate(
             self.client_config,

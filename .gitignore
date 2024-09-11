@@ -4,7 +4,9 @@
 .neptune/
 .pytest_cache/
 .mypy_cache/
-[.][v]env/
+.env
+.venv
+.venv/
 __pycache__/
 **.egg-info/
 
@@ -85,3 +87,4 @@ report.xml
 
 # CMake
 cmake-build-*/
+/tests/artifacts/

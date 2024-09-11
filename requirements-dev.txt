@@ -22,11 +22,9 @@ bump2version>=1.0.1,<2.0.0
 
 # Project dependencies
 openai==1.6.1
-langchain==0.0.353
-langchain-community==0.0.7
-langchain-core==0.1.4
-argparse==1.4.0
-python-dotenv==1.0.0
+langchain==0.2.16
+langchain-community==0.2.16
+langchain-core==0.2.38
 tqdm==4.66.1
 colorama==0.4.6
 prettytable==3.10.0
@@ -34,3 +32,7 @@ pandas==2.2.2
 inquirer==3.2.4
 prompt-toolkit==3.0.43
 fastparquet==2024.2.0
+yandexcloud==0.316.0
+openpyxl==3.1.5
+datetime==5.5
+jupyter==1.1.1
