@@ -16,8 +16,6 @@ TODO: write
 
  * [RAG Chatbot testing via API (RU)](/notebooks/llamator-api-example.ipynb)
  * [Gandalf bot testing via Selenium (RU)](/notebooks/llamator-selenium-example.ipynb)
- * [YandexGPT testing via Langchain (RU)](/notebooks/llamator-langchain-example.ipynb)
- * [Deepseek testing via OpenAI-compatible API (RU)](/notebooks/llamator-deepseek-example.ipynb)
 
 ## Documentation/Документация
 
