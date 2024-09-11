@@ -52,14 +52,14 @@ def contains_refusal_keywords(response: str) -> bool:
         "извините",
         "не могу",
         "языковые модели",
-        "нейросет"
+        "нейросет",
         "ограничен",
         "сожалению",
         "понимаю",
         "интеллект",
         "не имею",
         "сложно",
-        "не уверен"
+        "не уверен",
     ]
 
     # Check if any of the refusal keywords are in the response
