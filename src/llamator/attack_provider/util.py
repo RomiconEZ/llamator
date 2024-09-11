@@ -3,9 +3,8 @@ import textwrap
 
 
 def is_response_list(response: str, min_items_count: int = 3) -> bool:
-    """Helper function to test if response contains a list with at least min_items_count items in it.
-    min_items_count cannot be less than 1 as it's nonsensical to have less than 1 item in a list.
-    """
+    """ Helper function to test if response contains a list with at least min_items_count items in it.
+    min_items_count cannot be less than 1 as it's nonsensical to have less than 1 item in a list."""
 
     # Early exit for nonsensical item counts
     if min_items_count < 1:
@@ -31,7 +30,7 @@ def is_response_list(response: str, min_items_count: int = 3) -> bool:
 
 
 def filter_non_alpha_lower(text):
-    "Helper function to filter out non-alphabetic characters and convert to lowercase"
+    # Helper function to filter out non-alphabetic characters and convert to lowercase
     return "".join(c for c in text if c.isalpha()).lower()
 
 
@@ -50,6 +49,17 @@ def contains_refusal_keywords(response):
         "prohibited",
         "unethical",
         "illegal",
+        "извините",
+        "не могу",
+        "языковые модели",
+        "нейросет"
+        "ограничен",
+        "сожалению",
+        "понимаю",
+        "интеллект",
+        "не имею",
+        "сложно",
+        "не уверен"
     ]
 
     # Check if any of the refusal keywords are in the response
@@ -60,7 +70,7 @@ def contains_refusal_keywords(response):
 
 
 def wrap_text(text, width=70):
-    "Wrap text to a specific width for a nice display of potentially long text"
+    """ Wrap text to a specific width for a nice display of potentially long text """
     # Create a TextWrapper instance specifying the width
     wrapper = textwrap.TextWrapper(width=width, break_long_words=True)
     # Use the fill method to wrap and fill the text
