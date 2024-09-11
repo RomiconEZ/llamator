@@ -6,7 +6,6 @@
 .mypy_cache/
 [.][v]env/
 [.][v]env
-.venv/
 __pycache__/
 **.egg-info/
 
