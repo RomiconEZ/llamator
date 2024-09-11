@@ -28,6 +28,7 @@ class TestTranslation(TestBase):
             attack_config,
             test_name="linguistic_evasion",
             test_description="Leverage the use of a non-Russian language to circumvent the restrictions or focus set by the system prompt",
+            artifacts_path=artifacts_path,  # Добавляем artifacts_path
         )
 
     def _prepare_attack_data(self, attack_prompts: list[str], responses: list[str], statuses: list[str]) -> None:
