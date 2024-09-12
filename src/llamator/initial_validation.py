@@ -18,9 +18,9 @@ AvailableTests = [
     "RU_self_refine",
     "sycophancy_test",
     "typoglycemia_attack",
+    "RU_typoglycemia_attack",
     "ucar",
     "RU_ucar",
-    "ru_typoglycemia_attack",
 ]
 
 

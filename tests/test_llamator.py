@@ -110,6 +110,7 @@ def test_langchainclient_yandegpt():
         # "RU_self_refine",
         "sycophancy_test",
         # "typoglycemia_attack",
+        "RU_typoglycemia_attack",
         # "ucar",
         # "RU_ucar",
     ]
