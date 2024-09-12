@@ -66,7 +66,9 @@ def start_testing(
             Available tests: aim_jailbreak, base64_injection, complimentary_transition,
             do_anything_now_jailbreak, RU_do_anything_now_jailbreak, ethical_compliance,
             harmful_behavior, linguistic_evasion, self_refine, RU_self_refine,
-            sycophancy_test, typoglycemia_attack, RU_typoglycemia_attack, ucar, RU_ucar.
+            sycophancy_test, typoglycemia_attack, RU_typoglycemia_attack, ucar, RU_ucar,
+            amnesia, authoritative_role_impersonation, contextual_redirection,
+            affirmative_suffix, system_prompt_stealer.
         custom_tests : List[Type[TestBase]], optional
             List of custom test instances (default is an empty list).
 

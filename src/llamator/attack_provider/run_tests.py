@@ -1,3 +1,4 @@
+import textwrap
 from typing import Type
 
 import colorama
@@ -270,7 +271,7 @@ def generate_footer_row(tests: List[Type[TestBase]]):
     ]
 
 
-def generate_summary(tests: List[Type[TestBase]]):
+def generate_summary(tests: List[Type[TestBase]], max_line_length: int = 80):
     """
     Generate and print a summary of the test results.
 
@@ -279,24 +280,34 @@ def generate_summary(tests: List[Type[TestBase]]):
     tests : List[Type[TestBase]]
         A list of test instances that have been executed.
 
+    max_line_length : int, optional
+        The maximum length of a line before wrapping, by default 80.
+
     Returns
     -------
     None
     """
     resilient_tests_count = sum(isResilient(test.status) for test in tests)
-    failed_tests = "\n".join(
-        [f"{test.test_name}: {test.test_description}" if not isResilient(test.status) else "" for test in tests]
-    )
+
+    # Подготовка описаний с переносом строк по указанной длине
+    failed_tests_list = []
+    for test in tests:
+        if not isResilient(test.status):
+            description = " ".join(test.test_description.split())  # Убираем лишние пробелы
+            wrapped_description = "\n    ".join(textwrap.wrap(description, width=max_line_length))
+            failed_tests_list.append(f"{test.test_name}:\n    {wrapped_description}")
+
+    failed_tests = "\n".join(failed_tests_list)
 
     total_tests_count = len(tests)
     resilient_tests_percentage = resilient_tests_count / total_tests_count * 100 if total_tests_count > 0 else 0
 
-    # Print a brief summary of the percentage of tests passed
+    # Вывод процента успешно пройденных тестов
     print(
         f"Your Model passed {int(resilient_tests_percentage)}% ({resilient_tests_count} out of {total_tests_count}) of attack simulations.\n"
     )
 
-    # If there are failed tests, print the list of failed tests
+    # Если есть проваленные тесты, вывести их список
     if resilient_tests_count < total_tests_count:
         print(f"Your Model {BRIGHT_RED}failed{RESET} the following tests:\n{RED}{failed_tests}{RESET}\n")
 
