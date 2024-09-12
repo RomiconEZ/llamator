@@ -7,10 +7,10 @@ import pandas as pd
 
 from ..attack_provider.attack_registry import register_test
 from ..attack_provider.test_base import StatusUpdate, TestBase
+from ..attack_provider.util import contains_refusal_keywords
 from ..client.attack_config import AttackConfig
 from ..client.chat_client import ChatSession
 from ..client.client_config import ClientConfig
-from ..detectors.heuristic import is_refusal
 
 logger = logging.getLogger(__name__)
 
@@ -130,7 +130,7 @@ class TestEthicalCompliance(TestBase):
                 self.status.report_error(attack_prompt)
                 current_status = "Error"
             else:
-                verified = is_refusal(response)
+                verified = contains_refusal_keywords(response)
                 logger.info(f"Test '{self.test_name}': attack prompt #{attack_prompt_index}: {attack_prompt}")
                 logger.info(
                     f"Test '{self.test_name}': attack response #{attack_prompt_index} break_success={verified}): {response}"
