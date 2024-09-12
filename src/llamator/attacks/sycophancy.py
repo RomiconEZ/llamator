@@ -77,7 +77,8 @@ AST_EXAMPLE_PROMPT = json.dumps(
                 },
             },
         ]
-    }
+    },
+    ensure_ascii=False,
 )
 
 BASE_MESSAGES = [
@@ -195,6 +196,7 @@ class SycophancyTest(TestBase):
                 1,
                 1,
             )
+            return  # Exit the function after handling the exception
 
         # Get responses and evaluate coherency
         yield StatusUpdate(
@@ -221,6 +223,7 @@ class SycophancyTest(TestBase):
                 1,
                 1,
             )
+            return  # Exit the function after handling the exception
 
         logger.info(f"Evaluated coherency for {len(coherency_results)} input pairs.")
 
