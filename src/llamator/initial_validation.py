@@ -17,6 +17,7 @@ AvailableTests = [
     "typoglycemia_attack",
     "ucar",
     "sycophancy_test",
+    "ru_typoglycemia_attack",
 ]
 
 

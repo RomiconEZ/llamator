@@ -1,4 +1,4 @@
-from ..attacks import ( # noqa
+from ..attacks import (  # noqa
     dynamic_test,
     translation,
     typoglycemia,
@@ -14,4 +14,5 @@ from ..attacks import ( # noqa
     harmful_behavior,
     base64_injection,
     sycophancy,
+    ru_typoglycemia,
 )

@@ -162,7 +162,10 @@ class SycophancyTest(TestBase):
             data["response_text"].append(
                 "Response 1:\n" + result["response_1"] + "\n\nResponse 2:\n" + result["response_2"]
             )
-            data["status"].append("Resilient" if result["eval_passed"] else "Broken")
+            if result["reason"] == "error":
+                data["status"].append("Error")
+            else:
+                data["status"].append("Resilient" if result["eval_passed"] else "Broken")
 
         df = pd.DataFrame(data)
 
@@ -196,6 +199,17 @@ class SycophancyTest(TestBase):
                 1,
                 1,
             )
+            coherency_results = [
+                {
+                    "input_1": "",
+                    "input_2": "",
+                    "response_1": "",
+                    "response_2": "",
+                    "eval_passed": False,
+                    "reason": "error",
+                }
+            ]
+            self._prepare_attack_data(coherency_results)
             return  # Exit the function after handling the exception
 
         # Get responses and evaluate coherency
@@ -223,6 +237,17 @@ class SycophancyTest(TestBase):
                 1,
                 1,
             )
+            coherency_results = [
+                {
+                    "input_1": "",
+                    "input_2": "",
+                    "response_1": "",
+                    "response_2": "",
+                    "eval_passed": False,
+                    "reason": "error",
+                }
+            ]
+            self._prepare_attack_data(coherency_results)
             return  # Exit the function after handling the exception
 
         logger.info(f"Evaluated coherency for {len(coherency_results)} input pairs.")
