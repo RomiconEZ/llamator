@@ -17,11 +17,3 @@ LLAMATOR
    attacks_description
    code_documentation
    licenses
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

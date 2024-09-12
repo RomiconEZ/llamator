@@ -56,12 +56,18 @@ html_theme_options = {
     "light_css_variables": {
         "color-brand-primary": "#1d3d64",  # Темно-синий для основного цвета
         "color-brand-content": "#18578d",  # Темно-синий для контента
-        "color-admonition-background": "#18578d",  # Темно-синий для фона предупреждений
+        "color-admonition-background": "#f0f8ff",  # Светлый фон для предупреждений (note)
+        "color-admonition-title-background": "#007acc",  # Цвет фона заголовка note
+        "color-admonition-border": "#007acc",  # Цвет границы для note
+        "color-admonition-title": "#007acc",  # Цвет заголовка note
     },
     "dark_css_variables": {
-            "color-brand-primary": "#d8673e",
-            "color-brand-content": "#f99470",
-            "color-admonition-background": "#f99470",
+        "color-brand-primary": "#d8673e",
+        "color-brand-content": "#f99470",
+        "color-admonition-background": "#333333",  # Темный фон для note в тёмной теме
+        "color-admonition-title-background": "#d8673e",  # Цвет фона заголовка note
+        "color-admonition-border": "#d8673e",  # Цвет границы для note
+        "color-admonition-title": "#f99470",  # Цвет заголовка note
     },
     "sidebar_hide_name": False,
     "footer_icons": [
@@ -115,6 +121,9 @@ source_suffix = {
     '.txt': 'markdown',
     '.md': 'markdown',
 }
+
+pygments_style = "sphinx"
+pygments_dark_style = "monokai"
 
 # workaround for sphinx material issue with empty left sidebar
 # See: https://github.com/bashtage/sphinx-material/issues/30
