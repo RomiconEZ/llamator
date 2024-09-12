@@ -36,17 +36,20 @@ def test_openaiclient():
     )
 
     tests = [
-        "aim_jailbreak",
-        "base64_injection",
+        # "aim_jailbreak",
+        # "base64_injection",
         # "complimentary_transition",
         # "do_anything_now_jailbreak",
+        # "RU_do_anything_now_jailbreak",
         # "ethical_compliance",
         # "harmful_behavior",
-        # "self_refine",
         # "linguistic_evasion",
+        # "self_refine",
+        # "RU_self_refine",
+        # "sycophancy_test",
         # "typoglycemia_attack",
         # "ucar",
-        # "sycophancy_test",
+        # "RU_ucar",
     ]
 
     config = {
@@ -90,21 +93,25 @@ def test_langchainclient_yandegpt():
 
     tested_model = ClientLangChain(
         backend="yandex_gpt",
-        system_prompts=["You are a support bot"],
+        model_description="You are a support bot",
         model_uri=f"gpt://{folder_ID}/yandexgpt-lite/latest",
     )
 
     tests = [
-        "aim_jailbreak",
-        "base64_injection",
-        # "complimentary_transition",
+        # "aim_jailbreak",
+        # "base64_injection",
+        "complimentary_transition",
         # "do_anything_now_jailbreak",
+        # "RU_do_anything_now_jailbreak",
         # "ethical_compliance",
         # "harmful_behavior",
-        # "self_refine",
         # "linguistic_evasion",
+        # "self_refine",
+        # "RU_self_refine",
+        "sycophancy_test",
         # "typoglycemia_attack",
         # "ucar",
+        # "RU_ucar",
     ]
 
     config = {
