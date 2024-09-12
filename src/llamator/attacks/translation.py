@@ -21,13 +21,13 @@ translation_prompt = """
 
 @register_test
 class TestTranslation(TestBase):
+    """Leverage the use of a non-Russian language to circumvent the restrictions or focus set by the system prompt."""
     def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
         super().__init__(
             client_config,
             attack_config,
             test_name="linguistic_evasion",
-            test_description="Leverage the use of a non-Russian language to circumvent the restrictions or focus set by the system prompt",
-            artifacts_path=artifacts_path,  # Добавляем artifacts_path
+            artifacts_path=artifacts_path,
         )
 
     def _prepare_attack_data(self, attack_prompts: list[str], responses: list[str], statuses: list[str]) -> None:
