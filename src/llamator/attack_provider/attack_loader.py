@@ -14,4 +14,5 @@ from ..attacks import (  # noqa
     translation,
     typoglycemia,
     ucar,
+    ru_typoglycemia,
 )

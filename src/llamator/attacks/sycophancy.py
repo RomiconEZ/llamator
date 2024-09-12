@@ -77,7 +77,8 @@ AST_EXAMPLE_PROMPT = json.dumps(
                 },
             },
         ]
-    }
+    },
+    ensure_ascii=False,
 )
 
 BASE_MESSAGES = [
@@ -161,7 +162,10 @@ class SycophancyTest(TestBase):
             data["response_text"].append(
                 "Response 1:\n" + result["response_1"] + "\n\nResponse 2:\n" + result["response_2"]
             )
-            data["status"].append("Resilient" if result["eval_passed"] else "Broken")
+            if result["reason"] == "error":
+                data["status"].append("Error")
+            else:
+                data["status"].append("Resilient" if result["eval_passed"] else "Broken")
 
         df = pd.DataFrame(data)
 
@@ -181,9 +185,32 @@ class SycophancyTest(TestBase):
             0,
             self.attack_config.attack_prompts_count,
         )
-
-        input_pairs = self.generate_inputs()
-        logger.info(f"Generated {len(input_pairs)} input pairs.")
+        try:
+            input_pairs = self.generate_inputs()
+            logger.info(f"Generated {len(input_pairs)} input pairs.")
+        except json.JSONDecodeError as e:
+            self.status.report_error("generate inputs exception")
+            logger.error(f"Failed to decode JSON: {e}")
+            yield StatusUpdate(
+                self.client_config,
+                self.test_name,
+                self.status,
+                "Finished",
+                1,
+                1,
+            )
+            coherency_results = [
+                {
+                    "input_1": "",
+                    "input_2": "",
+                    "response_1": "",
+                    "response_2": "",
+                    "eval_passed": False,
+                    "reason": "error",
+                }
+            ]
+            self._prepare_attack_data(coherency_results)
+            return  # Exit the function after handling the exception
 
         # Get responses and evaluate coherency
         yield StatusUpdate(
@@ -197,8 +224,32 @@ class SycophancyTest(TestBase):
 
         input_pairs_with_responses = self.get_responses(input_pairs)
         logger.info(f"Received responses for {len(input_pairs_with_responses)} input pairs.")
+        try:
+            coherency_results = self.evaluate_coherency(input_pairs_with_responses)
+        except json.JSONDecodeError as e:
+            self.status.report_error("coherency results exception")
+            logger.error(f"Failed to decode JSON: {e}")
+            yield StatusUpdate(
+                self.client_config,
+                self.test_name,
+                self.status,
+                "Finished",
+                1,
+                1,
+            )
+            coherency_results = [
+                {
+                    "input_1": "",
+                    "input_2": "",
+                    "response_1": "",
+                    "response_2": "",
+                    "eval_passed": False,
+                    "reason": "error",
+                }
+            ]
+            self._prepare_attack_data(coherency_results)
+            return  # Exit the function after handling the exception
 
-        coherency_results = self.evaluate_coherency(input_pairs_with_responses)
         logger.info(f"Evaluated coherency for {len(coherency_results)} input pairs.")
 
         for idx, result in enumerate(coherency_results):
@@ -238,11 +289,7 @@ class SycophancyTest(TestBase):
         response = chat.say(message)
         response = response.replace("```json", "").replace("```", "").strip()
         logger.info(f"Generated input pairs: {response}")
-        try:
-            return json.loads(response)["inputs"]
-        except json.JSONDecodeError as e:
-            logger.error(f"Failed to decode JSON: {e}")
-            return []
+        return json.loads(response)["inputs"]
 
     def format_messages(self) -> str:
         prompt = PROMPT_TEMPLATE.format(
@@ -288,11 +335,7 @@ class SycophancyTest(TestBase):
             )
             eval_response = chat.say(prompt)
             eval_response = eval_response.replace("```json", "").replace("```", "").strip()
-            try:
-                eval_result = json.loads(eval_response)
-            except json.JSONDecodeError as e:
-                logger.error(f"Failed to decode JSON: {e}")
-                eval_result = {"eval_passed": False, "reason": "JSON decoding error"}
+            eval_result = json.loads(eval_response)
             coherency_results.append(
                 {
                     "input_1": pair["input_1"]["query"],

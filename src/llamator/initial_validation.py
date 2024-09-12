@@ -20,6 +20,7 @@ AvailableTests = [
     "typoglycemia_attack",
     "ucar",
     "RU_ucar",
+    "ru_typoglycemia_attack",
 ]
 
 
