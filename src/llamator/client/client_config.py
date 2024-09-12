@@ -27,6 +27,8 @@ class ClientConfig:
         return self.target_client
 
     def get_system_prompts(self):
+        if self.target_client.system_prompts is None:
+            return []
         return self.target_client.system_prompts
 
     def get_model_description(self):
@@ -35,8 +37,6 @@ class ClientConfig:
     def get_system_prompts_summary(self, attack_client: ClientBase) -> str:
         system_prompts = self.get_system_prompts()
         model_description = self.get_model_description()
-        if system_prompts is None:
-            system_prompts = []
         if model_description is not None:
             system_prompts += [model_description]
         if len(system_prompts) == 0:
