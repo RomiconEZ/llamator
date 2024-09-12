@@ -66,7 +66,7 @@ config = {
 }
 
 # Start testing
-llamator.start_testing(attack_model, tested_model, 
+llamator.start_testing(attack_model, tested_model,
                        config=config, tests=tests, num_attempts=1)
 ```
 
