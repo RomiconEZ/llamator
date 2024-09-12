@@ -2,8 +2,8 @@ import inspect
 import re
 from typing import Any, Dict, Optional, Type, get_origin
 
-import langchain.chat_models as chat_models
-from langchain.chat_models import __all__ as available_models
+import langchain_community.chat_models as chat_models
+from langchain_community.chat_models import __all__ as available_models
 from langchain_core.language_models.chat_models import BaseChatModel
 
 

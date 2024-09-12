@@ -40,41 +40,58 @@ def start_testing(
 
     Parameters
     ----------
-        attack_model : ClientBase
-            The attacking model used to generate tests.
-        tested_model : ClientBase
-            The model being tested against the attacks.
-        config : dict
-            Configuration dictionary with the following keys:
-            - 'enable_logging' : bool
-                Whether to enable logging.
-            - 'enable_reports' : bool
-                Whether to generate xlsx reports.
-            - 'artifacts_path' : Optional[str]
-                Path to the folder for saving artifacts.
-            - 'debug_level' : int
-                Level of logging verbosity (default is 1).
-                debug_level = 0 - WARNING.
-                debug_level = 1 - INFO.
-                debug_level = 2 - DEBUG.
-        num_attempts : int, optional
-            Number of attempts per test case (default is 1).
-        num_threads : int, optional
-            Number of threads for parallel test execution (default is 1).
-        tests : Optional[List[str]], optional
-            List of test names to execute (default is an empty list).
-            Available tests: aim_jailbreak, base64_injection, complimentary_transition,
-            do_anything_now_jailbreak, RU_do_anything_now_jailbreak, ethical_compliance,
-            harmful_behavior, linguistic_evasion, self_refine, RU_self_refine,
-            sycophancy_test, typoglycemia_attack, RU_typoglycemia_attack, ucar, RU_ucar,
-            amnesia, authoritative_role_impersonation, contextual_redirection,
-            affirmative_suffix, system_prompt_stealer.
-        custom_tests : List[Type[TestBase]], optional
-            List of custom test instances (default is an empty list).
+    attack_model : ClientBase
+        The attacking model used to generate tests.
+    tested_model : ClientBase
+        The model being tested against the attacks.
+    config : dict
+        Configuration dictionary with the following keys:
+
+        - 'enable_logging' : bool
+            Whether to enable logging.
+        - 'enable_reports' : bool
+            Whether to generate xlsx reports.
+        - 'artifacts_path' : Optional[str]
+            Path to the folder for saving artifacts.
+        - 'debug_level' : int
+            Level of logging verbosity (default is 1).
+            debug_level = 0 - WARNING.
+            debug_level = 1 - INFO.
+            debug_level = 2 - DEBUG.
+
+    num_attempts : int, optional
+        Number of attempts per test case (default is 1).
+    num_threads : int, optional
+        Number of threads for parallel test execution (default is 1).
+    tests : Optional[List[str]], optional
+        List of test names to execute (default is an empty list).
+        Available tests:
+        - affirmative_suffix
+        - aim_jailbreak
+        - amnesia
+        - authoritative_role_impersonation
+        - base64_injection
+        - complimentary_transition
+        - contextual_redirection
+        - do_anything_now_jailbreak
+        - ethical_compliance
+        - harmful_behavior
+        - linguistic_evasion
+        - RU_do_anything_now_jailbreak
+        - RU_self_refine
+        - RU_typoglycemia_attack
+        - RU_ucar
+        - self_refine
+        - sycophancy_test
+        - system_prompt_stealer
+        - typoglycemia_attack
+        - ucar
+    custom_tests : List[Type[TestBase]], optional
+        List of custom test instances (default is an empty list).
 
     Returns
     -------
-        None
+    None
     """
 
     # Extract values from the config dictionary
