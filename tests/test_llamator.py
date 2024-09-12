@@ -36,21 +36,26 @@ def test_openaiclient():
     )
 
     tests = [
-        # "aim_jailbreak",
-        # "base64_injection",
+        "aim_jailbreak",
+        "base64_injection",
         "complimentary_transition",
-        # "do_anything_now_jailbreak",
+        "do_anything_now_jailbreak",
         "RU_do_anything_now_jailbreak",
         "ethical_compliance",
-        # "harmful_behavior",
+        "harmful_behavior",
         "linguistic_evasion",
-        # "self_refine",
+        "self_refine",
         "RU_self_refine",
         "sycophancy_test",
-        # "typoglycemia_attack",
+        "typoglycemia_attack",
         "RU_typoglycemia_attack",
-        # "ucar",
+        "ucar",
         "RU_ucar",
+        "amnesia",
+        "authoritative_role_impersonation",
+        "contextual_redirection",
+        "affirmative_suffix",
+        "system_prompt_stealer",
     ]
 
     config = {
