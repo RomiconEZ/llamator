@@ -36,3 +36,7 @@ yandexcloud==0.316.0
 openpyxl==3.1.5
 datetime==5.5
 jupyter==1.1.1
+
+# Publish package
+build==1.2.2
+twine==5.1.1

@@ -10,16 +10,14 @@ Red teaming python-framework for testing vulnerabilities of chatbots based on la
 
 ## Install / Установка
 
-TODO: write
+```bash
+pip install llamator
+```
 
 ## Examples / Примеры
 
  * [RAG Chatbot testing via API (RU)](/notebooks/llamator-api-example.ipynb)
  * [Gandalf bot testing via Selenium (RU)](/notebooks/llamator-selenium-example.ipynb)
-
-## Documentation / Документация
-
-TODO: write
 
 ## Architecture / Архитектура (RU)
 

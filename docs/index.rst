@@ -2,26 +2,18 @@
    You can adapt this file completely to your preferences, but it should at least
    contain the root `toctree` directive.
 
-LLaMasters - LLAMATOR
-====================================================================================================================
+LLAMATOR
+========
 
-Documentation for `llamator` python package.
+`Documentation for` **llamator** `python package.`
 
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Contents
 
    project_overview
-   code_documentation
    howtos
+   attacks_description
+   code_documentation
    licenses
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

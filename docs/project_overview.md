@@ -1,14 +1,10 @@
-# Project overview
+# Project Overview
 
-This is introduction to the project.
+LLAMATOR is a framework for testing vulnerabilities of chatbot systems and LLM.
 
-Write here what this project is about, what problems does it solves on high level.
+**Key Features**
+- Custom configuration of clients both for carrying out attacks and for testing
+- Large selection of attacks in English and Russian languages
+- Detailed testing results with reports in Excel format
 
-You can also use [mermaid](https://mermaid.js.org/) - read more on [extension page](https://github.com/mgaitan/sphinxcontrib-mermaid):
-
-```{mermaid}
-  graph TD;
-      llamator --> B;
-      llamator --> C;
-      B --> D;
-```
+This project is designed for developers and researchers working in NLP and LLM domains.
