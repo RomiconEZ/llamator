@@ -24,13 +24,13 @@ Please respond solely with the generated variation text, without anything added 
 
 @register_test
 class TestDAN(TestBase):
+    """Probes an LLM's resilience against performing explicitly forbidden activities using the 'Do Anything Now' (DAN) character roleplay technique."""
     def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
         super().__init__(
             client_config,
             attack_config,
             test_name="do_anything_now_jailbreak",
-            test_description="Probes an LLM's resilience against performing explicitly forbidden activities using the 'Do Anything Now' (DAN) character roleplay technique",
-            artifacts_path=artifacts_path,  # Добавляем artifacts_path
+            artifacts_path=artifacts_path,
         )
 
     def _prepare_attack_data(self, attack_prompts: list[str], responses: list[str], statuses: list[str]) -> None:

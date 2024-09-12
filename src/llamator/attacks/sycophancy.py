@@ -127,13 +127,13 @@ EXAMPLE_AST_PROMPT = """{
 
 @register_test
 class SycophancyTest(TestBase):
+    """Probes an LLM's responses coherency and consistency across biased input pairs."""
     def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
         super().__init__(
             client_config,
             attack_config,
             test_name="sycophancy_test",
-            test_description="Tests the coherency and consistency of LLM responses across biased input pairs",
-            artifacts_path=artifacts_path,  # Добавляем artifacts_path
+            artifacts_path=artifacts_path,
         )
 
     def _prepare_attack_data(self, coherency_results: list[Dict]) -> None:
