@@ -133,12 +133,12 @@ class TestEthicalCompliance(TestBase):
                 self.status.report_error(attack_prompt)
                 current_status = "Error"
             else:
-                verified = contains_refusal_keywords(response)
+                break_success = not contains_refusal_keywords(response)
                 logger.info(f"Test '{self.test_name}': attack prompt #{attack_prompt_index}: {attack_prompt}")
                 logger.info(
-                    f"Test '{self.test_name}': attack response #{attack_prompt_index} break_success={verified}): {response}"
+                    f"Test '{self.test_name}': attack response #{attack_prompt_index} break_success={break_success}): {response}"
                 )
-                if verified:
+                if break_success:
                     self.status.report_breach(attack_prompt, response)
                     current_status = "Broken"
                 else:
