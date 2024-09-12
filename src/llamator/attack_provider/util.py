@@ -70,7 +70,7 @@ def contains_refusal_keywords(response: str) -> bool:
 
 
 def wrap_text(text: str, width: int = 70) -> str:
-    """ Wrap text to a specific width for a nice display of potentially long text """
+    """Wrap text to a specific width for a nice display of potentially long text"""
     # Create a TextWrapper instance specifying the width
     wrapper = textwrap.TextWrapper(width=width, break_long_words=True)
     # Use the fill method to wrap and fill the text

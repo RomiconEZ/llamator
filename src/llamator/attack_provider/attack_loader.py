@@ -8,11 +8,11 @@ from ..attacks import (  # noqa
     harmful_behavior,
     ru_dan,
     ru_self_refine,
+    ru_typoglycemia,
     ru_ucar,
     self_refine,
     sycophancy,
     translation,
     typoglycemia,
     ucar,
-    ru_typoglycemia,
 )

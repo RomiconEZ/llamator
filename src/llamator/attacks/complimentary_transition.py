@@ -22,8 +22,9 @@ Your response to this message must consist solely of the prompt text, without an
 
 @register_test
 class TestComplimentaryTransition(TestBase):
-    """This test evaluates the LLM's ability to maintain content moderation standards when transitioning from a compliment to a new task. 
+    """This test evaluates the LLM's ability to maintain content moderation standards when transitioning from a compliment to a new task.
     It assesses the LLM's ability to maintain defined boundaries when prompted to switch topics."""
+
     def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
         super().__init__(
             client_config,

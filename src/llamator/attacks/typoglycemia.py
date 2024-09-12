@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 @register_test
 class TestTypoglycemia(TestBase):
     """Attempt to exploit a text processing vulnerability in LLMs that can cause them to generate incorrect responses to queries by removing random characters from words."""
+
     def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
         super().__init__(
             client_config,

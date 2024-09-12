@@ -185,6 +185,7 @@ class DynamicTestBase(TestBase):
 @register_test
 class TestAmnesia(DynamicTestBase):
     """Attempt to cause LLM to forget or disregard its system prompt instructions to cause it to report something unrelated to its purpose."""
+
     def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
         super().__init__(
             client_config,
@@ -201,6 +202,7 @@ class TestAmnesia(DynamicTestBase):
 @register_test
 class TestBasicInjectionRoleImpersonation(DynamicTestBase):
     """Attempt to impersonate as an authoritative role to cause LLM to report something unrelated to its purpose."""
+
     def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
         super().__init__(
             client_config,
@@ -217,6 +219,7 @@ class TestBasicInjectionRoleImpersonation(DynamicTestBase):
 @register_test
 class TestContextualRedirection(DynamicTestBase):
     """Attempt at tricking the LLM into adopting a specific role (Roleplay) that may bypass the restrictions or intended use set by the system prompt."""
+
     def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
         super().__init__(
             client_config,
@@ -233,6 +236,7 @@ class TestContextualRedirection(DynamicTestBase):
 @register_test
 class TestCarnegieMellonUniversal(DynamicTestBase):
     """Exploit a vulnerability in LLMs that can cause them to generate affirmative responses to requests for prohibited content by appending a simple suffix to the query."""
+
     def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
         super().__init__(
             client_config,
@@ -249,6 +253,7 @@ class TestCarnegieMellonUniversal(DynamicTestBase):
 @register_test
 class TestSystemPromptStealer(DynamicTestBase):
     """Attempt to steal the system prompt from the LLM by asking it to output its internal configuration or other sensitive information."""
+
     def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
         super().__init__(
             client_config,
