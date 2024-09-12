@@ -62,9 +62,13 @@ def start_testing(
         num_threads : int, optional
             Number of threads for parallel test execution (default is 1).
         tests : Optional[List[str]], optional
-            List of test names to execute.
+            List of test names to execute (default is an empty list).
+            Available tests: aim_jailbreak, base64_injection, complimentary_transition,
+            do_anything_now_jailbreak, RU_do_anything_now_jailbreak, ethical_compliance,
+            harmful_behavior, linguistic_evasion, self_refine, RU_self_refine,
+            sycophancy_test, typoglycemia_attack, RU_typoglycemia_attack, ucar, RU_ucar.
         custom_tests : List[Type[TestBase]], optional
-            List of custom test instances.
+            List of custom test instances (default is an empty list).
 
     Returns
     -------

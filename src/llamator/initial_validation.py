@@ -10,13 +10,17 @@ AvailableTests = [
     "base64_injection",
     "complimentary_transition",
     "do_anything_now_jailbreak",
+    "RU_do_anything_now_jailbreak",
     "ethical_compliance",
     "harmful_behavior",
-    "self_refine",
     "linguistic_evasion",
-    "typoglycemia_attack",
-    "ucar",
+    "self_refine",
+    "RU_self_refine",
     "sycophancy_test",
+    "typoglycemia_attack",
+    "RU_typoglycemia_attack",
+    "ucar",
+    "RU_ucar",
 ]
 
 

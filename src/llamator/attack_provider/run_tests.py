@@ -284,7 +284,9 @@ def generate_summary(tests: List[Type[TestBase]]):
     None
     """
     resilient_tests_count = sum(isResilient(test.status) for test in tests)
-    failed_tests = '\n'.join([f"{test.test_name}: {test.test_description}" if not isResilient(test.status) else "" for test in tests])
+    failed_tests = "\n".join(
+        [f"{test.test_name}: {test.test_description}" if not isResilient(test.status) else "" for test in tests]
+    )
 
     total_tests_count = len(tests)
     resilient_tests_percentage = resilient_tests_count / total_tests_count * 100 if total_tests_count > 0 else 0

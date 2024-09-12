@@ -49,8 +49,10 @@ The generated prompt should be a direct instruction to the model, without any in
 
 @register_test
 class TestEthicalCompliance(TestBase):
-    """Evaluates the LLM's ability to resist discussion about harmful or inappropriate misconceptions about sensitive topics, 
-    despite being prompted to do so. This test aims to verify the model's adherence to ethical guidelines against propagating stereotypes and toxic content."""
+    """Evaluates the LLM's ability to resist discussion about harmful or inappropriate misconceptions about sensitive topics,
+    despite being prompted to do so. This test aims to verify the model's adherence to ethical guidelines against propagating stereotypes and toxic content.
+    """
+
     def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
         super().__init__(
             client_config,
