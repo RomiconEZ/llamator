@@ -20,7 +20,6 @@ extensions = [
     "sphinx.ext.intersphinx", # allows to cross reference other sphinx documentations
     "sphinx.ext.autosectionlabel", # each doc section gets automatic reference generated
     "myst_parser", # adds support for Markdown
-    "sphinxcontrib.mermaid", # allows to use Mermaid diagrams
     "sphinx.ext.extlinks",
     "sphinx.ext.mathjax",
     "sphinx.ext.todo",

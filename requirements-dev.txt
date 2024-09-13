@@ -12,10 +12,8 @@ pytest-cov
 pip-licenses>=4.0.0,<5.0.0
 
 # For building docs
-sphinx>=5.3.0,<6.0.0
-sphinx-rtd-theme>=1.1.1,<2.0.0
+sphinx==8.0.2
 myst-parser  # adds markdown to sphinx
-sphinxcontrib-mermaid  # adds option to have diagrams in sphinx
 
 # For bumping version strings
 bump2version>=1.0.1,<2.0.0
@@ -40,3 +38,4 @@ jupyter==1.1.1
 # Publish package
 build==1.2.2
 twine==5.1.1
+furo==2024.8.6
