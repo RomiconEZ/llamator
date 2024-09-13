@@ -13,6 +13,9 @@ Red teaming python-framework for testing vulnerabilities of chatbots based on la
 ```bash
 pip install llamator
 ```
+## Documentation / Документация
+
+Documentation Link: https://romiconez.github.io/llamator/
 
 ## Examples / Примеры
 
