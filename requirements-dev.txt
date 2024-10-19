@@ -23,7 +23,7 @@ openai==1.6.1
 langchain==0.2.16
 langchain-community==0.2.16
 langchain-core==0.2.38
-tqdm==4.66.1
+tqdm==4.66.3
 colorama==0.4.6
 prettytable==3.10.0
 pandas==2.2.2
