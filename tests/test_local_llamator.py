@@ -35,27 +35,27 @@ def test_openaiclient():
         system_prompts=["You are a strong model."],
     )
 
-    tests = [
-        "aim_jailbreak",
-        "base64_injection",
-        "complimentary_transition",
-        "do_anything_now_jailbreak",
-        "RU_do_anything_now_jailbreak",
-        "ethical_compliance",
-        "harmful_behavior",
-        "linguistic_evasion",
-        "self_refine",
-        "RU_self_refine",
-        "sycophancy_test",
-        "typoglycemia_attack",
-        "RU_typoglycemia_attack",
-        "ucar",
-        "RU_ucar",
-        "amnesia",
-        "authoritative_role_impersonation",
-        "contextual_redirection",
-        "affirmative_suffix",
-        "system_prompt_stealer",
+    tests_with_attempts = [
+        ("aim_jailbreak", 1),
+        ("base64_injection", 1),
+        ("complimentary_transition", 1),
+        ("do_anything_now_jailbreak", 1),
+        ("RU_do_anything_now_jailbreak", 1),
+        ("ethical_compliance", 1),
+        ("harmful_behavior", 1),
+        ("linguistic_evasion", 1),
+        ("self_refine", 1),
+        ("RU_self_refine", 1),
+        ("sycophancy_test", 1),
+        ("typoglycemia_attack", 1),
+        ("RU_typoglycemia_attack", 1),
+        ("ucar", 1),
+        ("RU_ucar", 1),
+        ("amnesia", 1),
+        ("authoritative_role_impersonation", 1),
+        ("contextual_redirection", 1),
+        ("affirmative_suffix", 1),
+        ("system_prompt_stealer", 1),
     ]
 
     config = {
@@ -67,7 +67,7 @@ def test_openaiclient():
 
     from llamator.main import start_testing
 
-    start_testing(attack_model, tested_model, config=config, tests=tests, num_attempts=1)
+    start_testing(attack_model, tested_model, config=config, tests_with_attempts=tests_with_attempts)
 
 
 def test_langchainclient_yandegpt():
@@ -103,22 +103,27 @@ def test_langchainclient_yandegpt():
         model_uri=f"gpt://{folder_ID}/yandexgpt-lite/latest",
     )
 
-    tests = [
-        # "aim_jailbreak",
-        # "base64_injection",
-        "complimentary_transition",
-        # "do_anything_now_jailbreak",
-        "RU_do_anything_now_jailbreak",
-        "ethical_compliance",
-        # "harmful_behavior",
-        "linguistic_evasion",
-        # "self_refine",
-        "RU_self_refine",
-        "sycophancy_test",
-        # "typoglycemia_attack",
-        "RU_typoglycemia_attack",
-        # "ucar",
-        "RU_ucar",
+    tests_with_attempts = [
+        ("aim_jailbreak", 1),
+        # ("base64_injection", 1),
+        # ("complimentary_transition", 1),
+        # ("do_anything_now_jailbreak", 1),
+        # ("RU_do_anything_now_jailbreak", 1),
+        # ("ethical_compliance", 1),
+        # ("harmful_behavior", 1),
+        # ("linguistic_evasion", 1),
+        # ("self_refine", 1),
+        # ("RU_self_refine", 1),
+        # ("sycophancy_test", 1),
+        # ("typoglycemia_attack", 1),
+        # ("RU_typoglycemia_attack", 1),
+        # ("ucar", 1),
+        # ("RU_ucar", 1),
+        # ("amnesia", 1),
+        # ("authoritative_role_impersonation", 1),
+        # ("contextual_redirection", 1),
+        # ("affirmative_suffix", 1),
+        # ("system_prompt_stealer", 1),
     ]
 
     config = {
@@ -130,4 +135,4 @@ def test_langchainclient_yandegpt():
 
     from llamator.main import start_testing
 
-    start_testing(attack_model, tested_model, config=config, tests=tests, num_attempts=1)
+    start_testing(attack_model, tested_model, config=config, tests_with_attempts=tests_with_attempts)

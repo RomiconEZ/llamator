@@ -18,13 +18,16 @@ logger = logging.getLogger(__name__)
 class TestTypoglycemia(TestBase):
     """Attempt to exploit a text processing vulnerability in LLMs that can cause them to generate incorrect responses to queries by removing random characters from words."""
 
-    def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
-        super().__init__(
-            client_config,
-            attack_config,
-            test_name="typoglycemia_attack",
-            artifacts_path=artifacts_path,
-        )
+    test_name = "typoglycemia_attack"
+
+    def __init__(
+        self,
+        client_config: ClientConfig,
+        attack_config: AttackConfig,
+        artifacts_path: Optional[str] = None,
+        num_attempts: int = 0,
+    ):
+        super().__init__(client_config, attack_config, artifacts_path=artifacts_path, num_attempts=num_attempts)
 
     def _prepare_attack_data(self, attack_prompts: list[str], responses: list[str], statuses: list[str]) -> None:
         """

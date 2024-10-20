@@ -26,10 +26,6 @@ Documentation Link: https://romiconez.github.io/llamator/
 
 ![architecture](/assets/architecture.png)
 
-## Roadmap / Дорожная карта (RU)
-
-![roadmap](/assets/roadmap.png)
-
 ## License
 
 This project is licensed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International license. See the LICENSE file for details.

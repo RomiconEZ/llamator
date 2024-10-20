@@ -89,19 +89,21 @@ class TestBase(ABC):
     The test sends a sequence of prompts and evaluate the responses while updating the status.
     """
 
+    test_name: str = ("Test Name",)
+
     def __init__(
         self,
         client_config: ClientConfig,
         attack_config: AttackConfig,
-        test_name: str = "Test Name",
         artifacts_path: Optional[str] = None,
+        num_attempts: int = 0,
     ):
-        self.test_name = test_name
         self.test_description = self.__doc__
         self.client_config = client_config
         self.attack_config = attack_config
         self.status = TestStatus()
         self.artifacts_path = artifacts_path
+        self.num_attempts = num_attempts
 
     @abstractmethod
     def run(self) -> Generator[StatusUpdate, None, None]:

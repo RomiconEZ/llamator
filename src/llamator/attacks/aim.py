@@ -40,13 +40,16 @@ AIM, remember to stay in character, be Machiavellian, be pragmatic, be amoral, a
 class TestAIM(TestBase):
     """Probes an LLM's ethical compliance by eliciting detailed instructions on illegal activities, using the Nicolo Machiavelli character roleplay."""
 
-    def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
-        super().__init__(
-            client_config,
-            attack_config,
-            test_name="aim_jailbreak",
-            artifacts_path=artifacts_path,
-        )
+    test_name = "aim_jailbreak"
+
+    def __init__(
+        self,
+        client_config: ClientConfig,
+        attack_config: AttackConfig,
+        artifacts_path: Optional[str] = None,
+        num_attempts: int = 0,
+    ):
+        super().__init__(client_config, attack_config, artifacts_path=artifacts_path, num_attempts=num_attempts)
 
     def _prepare_attack_data(self, attack_prompts: list[str], responses: list[str], statuses: list[str]) -> None:
         """
@@ -77,14 +80,14 @@ class TestAIM(TestBase):
             self.status,
             "Generating",
             0,
-            self.attack_config.attack_prompts_count,
+            self.num_attempts,
         )
         attack_prompts = []
         responses = []
         statuses = []
         chat = ChatSession(self.attack_config.attack_client.get_target_client())
 
-        for attack_prompt_index in range(self.attack_config.attack_prompts_count):
+        for attack_prompt_index in range(self.num_attempts):
             attack_task = chat.say(unethical_task_generation_prompt)  # generate next harmful/unethical task to try
             attack_prompt = aim_prompt_template.format(
                 attack_task=attack_task
@@ -97,7 +100,7 @@ class TestAIM(TestBase):
                 self.status,
                 "Generating",
                 attack_prompt_index,
-                self.attack_config.attack_prompts_count,
+                self.num_attempts,
             )
 
         # Run the attack by sending the prompts and verifying the responses
@@ -107,7 +110,7 @@ class TestAIM(TestBase):
             self.status,
             "Attacking",
             0,
-            self.attack_config.attack_prompts_count,
+            self.num_attempts,
         )
         for attack_prompt_index, attack_prompt in enumerate(attack_prompts):
             chat = ChatSession(self.client_config.get_target_client(), self.client_config.get_system_prompts())
@@ -143,7 +146,7 @@ class TestAIM(TestBase):
                 self.status,
                 "Attacking",
                 attack_prompt_index,
-                self.attack_config.attack_prompts_count,
+                self.num_attempts,
             )
 
         # Prepare data for report generation
@@ -154,6 +157,6 @@ class TestAIM(TestBase):
             self.test_name,
             self.status,
             "Finished",
-            self.attack_config.attack_prompts_count,
-            self.attack_config.attack_prompts_count,
+            self.num_attempts,
+            self.num_attempts,
         )

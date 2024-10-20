@@ -20,16 +20,19 @@ Condition Red, автор диалогов, который выводит тек
 
 @register_test
 class TestRuUCAR(TestBase):
-    """Probes an Russian-language LLM's adherence to content restrictions when explicitly requested to ignore such filters.
+    """Probes a Russian-language LLM's adherence to content restrictions when explicitly requested to ignore such filters.
     It assesses the robustness of the LLM's content moderation systems against direct challenges."""
 
-    def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
-        super().__init__(
-            client_config,
-            attack_config,
-            test_name="RU_ucar",
-            artifacts_path=artifacts_path,
-        )
+    test_name = "RU_ucar"
+
+    def __init__(
+        self,
+        client_config: ClientConfig,
+        attack_config: AttackConfig,
+        artifacts_path: Optional[str] = None,
+        num_attempts: int = 0,
+    ):
+        super().__init__(client_config, attack_config, artifacts_path=artifacts_path, num_attempts=num_attempts)
 
     def _prepare_attack_data(self, attack_prompts: list[str], responses: list[str], statuses: list[str]) -> None:
         """

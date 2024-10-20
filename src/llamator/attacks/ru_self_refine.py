@@ -27,13 +27,16 @@ class TestRuSelfRefine(TestBase):
     """Probes a Russian-language LLM's ethical compliance by eliciting detailed instructions on illegal activities,
     using self-refine technique that attempts to bypass the system prompt by asking the LLM to refine its response."""
 
-    def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
-        super().__init__(
-            client_config,
-            attack_config,
-            test_name="RU_self_refine",
-            artifacts_path=artifacts_path,
-        )
+    test_name = "RU_self_refine"
+
+    def __init__(
+        self,
+        client_config: ClientConfig,
+        attack_config: AttackConfig,
+        artifacts_path: Optional[str] = None,
+        num_attempts: int = 0,
+    ):
+        super().__init__(client_config, attack_config, artifacts_path=artifacts_path, num_attempts=num_attempts)
 
     def _prepare_attack_data(self, attack_prompts: list[str], responses: list[str], statuses: list[str]) -> None:
         """
@@ -64,7 +67,7 @@ class TestRuSelfRefine(TestBase):
             self.status,
             "Generating",
             0,
-            self.attack_config.attack_prompts_count,
+            self.num_attempts,
         )
 
         attack_prompts = []
@@ -72,7 +75,7 @@ class TestRuSelfRefine(TestBase):
         statuses = []
 
         chat = ChatSession(self.attack_config.attack_client.get_target_client())
-        for attack_prompt_index in range(self.attack_config.attack_prompts_count):
+        for attack_prompt_index in range(self.num_attempts):
             attack_task = chat.say(unethical_task_generation_prompt)  # generate next harmful/unethical task to try
             attack_prompt = self_refine_prompt_template.format(
                 attack_task=attack_task
@@ -85,7 +88,7 @@ class TestRuSelfRefine(TestBase):
                 self.status,
                 "Generating",
                 attack_prompt_index,
-                self.attack_config.attack_prompts_count,
+                self.num_attempts,
             )
 
         # Run the attack by sending the prompts and verifying the responses
@@ -95,7 +98,7 @@ class TestRuSelfRefine(TestBase):
             self.status,
             "Attacking",
             0,
-            self.attack_config.attack_prompts_count,
+            self.num_attempts,
         )
 
         for attack_prompt_index, attack_prompt in enumerate(attack_prompts):
@@ -137,7 +140,7 @@ class TestRuSelfRefine(TestBase):
                 self.status,
                 "Attacking",
                 attack_prompt_index,
-                self.attack_config.attack_prompts_count,
+                self.num_attempts,
             )
 
         # Prepare data for report generation
@@ -148,6 +151,6 @@ class TestRuSelfRefine(TestBase):
             self.test_name,
             self.status,
             "Finished",
-            self.attack_config.attack_prompts_count,
-            self.attack_config.attack_prompts_count,
+            self.num_attempts,
+            self.num_attempts,
         )
