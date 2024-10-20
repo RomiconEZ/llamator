@@ -1,0 +1,41 @@
+# Requirements as needed for development for this project.
+# ---------------------------------------------------------
+# Install current project
+-e .
+
+# Developer tools
+pre-commit
+pytest>=6.2.5
+pytest-cov
+
+# For getting dependency licenses and docs
+pip-licenses>=4.0.0,<5.0.0
+
+# For building docs
+sphinx==8.0.2
+myst-parser  # adds markdown to sphinx
+
+# For bumping version strings
+bump2version>=1.0.1,<2.0.0
+
+# Project dependencies
+openai==1.6.1
+langchain==0.2.16
+langchain-community==0.2.16
+langchain-core==0.2.38
+tqdm==4.66.3
+colorama==0.4.6
+prettytable==3.10.0
+pandas==2.2.2
+inquirer==3.2.4
+prompt-toolkit==3.0.43
+fastparquet==2024.2.0
+yandexcloud==0.316.0
+openpyxl==3.1.5
+datetime==5.5
+jupyter==1.1.1
+
+# Publish package
+build==1.2.2
+twine==5.1.1
+furo==2024.8.6

@@ -1,0 +1,15 @@
+[run]
+branch = True
+source =
+    src
+
+omit =
+    *__init__*
+    *__version__*
+    */thirdparty/**
+
+[report]
+exclude_lines =
+    pragma: no cover
+    if __name__ == .__main__.
+show_missing = True
