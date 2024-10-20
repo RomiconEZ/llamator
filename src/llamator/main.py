@@ -3,7 +3,7 @@ import logging
 import os
 from datetime import datetime
 from logging.handlers import RotatingFileHandler
-from typing import List, Optional, Type
+from typing import List, Optional, Tuple, Type
 
 import colorama
 from dotenv import load_dotenv
@@ -30,10 +30,9 @@ def start_testing(
     attack_model: ClientBase,
     tested_model: ClientBase,
     config: dict,
-    num_attempts: int = 1,
     num_threads: int = 1,
-    tests: Optional[List[str]] = None,
-    custom_tests: List[Type[TestBase]] = None,
+    tests_with_attempts: Optional[List[Tuple[str, int]]] = None,
+    custom_tests_with_attempts: Optional[List[Tuple[Type[TestBase], int]]] = None,
 ):
     """
     Start testing.
@@ -59,12 +58,10 @@ def start_testing(
             debug_level = 1 - INFO.
             debug_level = 2 - DEBUG.
 
-    num_attempts : int, optional
-        Number of attempts per test case (default is 1).
     num_threads : int, optional
         Number of threads for parallel test execution (default is 1).
-    tests : Optional[List[str]], optional
-        List of test names to execute (default is an empty list).
+    tests_with_attempts : List[Tuple[str, int]], optional
+        List of test names and their corresponding number of attempts.
         Available tests:
         - affirmative_suffix
         - aim_jailbreak
@@ -86,8 +83,8 @@ def start_testing(
         - system_prompt_stealer
         - typoglycemia_attack
         - ucar
-    custom_tests : List[Type[TestBase]], optional
-        List of custom test instances (default is an empty list).
+    custom_tests_with_attempts : List[Tuple[Type[TestBase], int]], optional
+        List of custom test instances and their corresponding number of attempts.
 
     Returns
     -------
@@ -139,12 +136,12 @@ def start_testing(
         return
 
     # Validate the test list
-    if tests and not validate_tests(tests):
+    if tests_with_attempts and not validate_tests([test[0] for test in tests_with_attempts]):
         logging.error("The test list contains invalid values.")
         return
 
     # Validate custom tests
-    if custom_tests and not validate_custom_tests(custom_tests):
+    if custom_tests_with_attempts and not validate_custom_tests([test[0] for test in custom_tests_with_attempts]):
         logging.error("One or more custom tests failed validation.")
         return
 
@@ -153,18 +150,21 @@ def start_testing(
         setup_models_and_tests(
             attack_model,
             tested_model,
-            num_attempts,
-            num_threads,
-            tests,
-            custom_tests,
+            num_threads=num_threads,
+            tests_with_attempts=tests_with_attempts,  # Извлекаем названия тестов
+            custom_tests_with_attempts=custom_tests_with_attempts,  # Извлекаем кастомные тесты
             artifacts_path=artifacts_run_path,
         )
     else:
         setup_models_and_tests(
-            attack_model, tested_model, num_attempts, num_threads, tests, custom_tests, artifacts_path=None
+            attack_model,
+            tested_model,
+            num_threads=num_threads,
+            tests_with_attempts=tests_with_attempts,  # Извлекаем названия тестов
+            custom_tests_with_attempts=custom_tests_with_attempts,  # Извлекаем кастомные тесты
+            artifacts_path=None,
         )
 
-    # Thank you message at the end of the program
     logging.info(f"Completion of testing")
 
     # Явное закрытие файла лога в конце программы
@@ -176,6 +176,5 @@ def start_testing(
         create_attack_report_from_artifacts(
             artifacts_dir=artifacts_run_path, csv_folder_name="csv_report", report_file_name="attacks_report.xlsx"
         )
-        pass
 
     print(f"{BRIGHT}{colorama.Fore.CYAN}Thank you for using LLAMATOR!{RESET}")
