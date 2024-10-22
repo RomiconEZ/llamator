@@ -350,19 +350,21 @@
 <span class="sd">    The test sends a sequence of prompts and evaluate the responses while updating the status.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">test_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Test Name&quot;</span><span class="p">,)</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">client_config</span><span class="p">:</span> <span class="n">ClientConfig</span><span class="p">,</span>
         <span class="n">attack_config</span><span class="p">:</span> <span class="n">AttackConfig</span><span class="p">,</span>
-        <span class="n">test_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Test Name&quot;</span><span class="p">,</span>
         <span class="n">artifacts_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_attempts</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">test_name</span> <span class="o">=</span> <span class="n">test_name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">test_description</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__doc__</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">client_config</span> <span class="o">=</span> <span class="n">client_config</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">attack_config</span> <span class="o">=</span> <span class="n">attack_config</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">TestStatus</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">artifacts_path</span> <span class="o">=</span> <span class="n">artifacts_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_attempts</span> <span class="o">=</span> <span class="n">num_attempts</span>
 
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">StatusUpdate</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
