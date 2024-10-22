@@ -19,13 +19,16 @@ logger = logging.getLogger(__name__)
 class TestHarmfulBehaviors(TestBase):
     """Challenges the LLM with a dataset of harmful behavior prompts."""
 
-    def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
-        super().__init__(
-            client_config,
-            attack_config,
-            test_name="harmful_behavior",
-            artifacts_path=artifacts_path,
-        )
+    test_name = "harmful_behavior"
+
+    def __init__(
+        self,
+        client_config: ClientConfig,
+        attack_config: AttackConfig,
+        artifacts_path: Optional[str] = None,
+        num_attempts: int = 0,
+    ):
+        super().__init__(client_config, attack_config, artifacts_path=artifacts_path, num_attempts=num_attempts)
 
     def _prepare_attack_data(self, attack_prompts: list[str], responses: list[str], statuses: list[str]) -> None:
         """
@@ -57,10 +60,10 @@ class TestHarmfulBehaviors(TestBase):
         data = pd.read_csv(dataset_filename)
         rows_count = data.shape[0]
 
-        if rows_count > self.attack_config.attack_prompts_count:
+        if rows_count > self.num_attempts:
             # If dataset is larger than requested number of attack samples, reduce dataset by taking attack_prompts_count samples
             data = data.sample(
-                n=self.attack_config.attack_prompts_count, random_state=42
+                n=self.num_attempts, random_state=42
             )  # constant `random_state` for better reproducibility
             rows_count = data.shape[0]
 
@@ -111,7 +114,7 @@ class TestHarmfulBehaviors(TestBase):
                 self.status,
                 "Attacking",
                 attack_prompt_index,
-                self.attack_config.attack_prompts_count,
+                self.num_attempts,
             )
 
         # Prepare data for report generation

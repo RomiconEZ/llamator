@@ -116,7 +116,7 @@ class WorkProgressPool:
 
 
 class ThreadSafeTaskIterator:
-    "This is a thread-safe iterator for tasks"
+    """This is a thread-safe iterator for tasks"""
 
     def __init__(self, generator):
         self.generator = generator
