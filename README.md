@@ -21,6 +21,7 @@ Documentation Link: https://romiconez.github.io/llamator/
 
  * [RAG Chatbot testing via API (RU)](/examples/llamator-api.ipynb)
  * [Gandalf bot testing via Selenium (RU)](/examples/llamator-selenium.ipynb)
+ * [Telegram bot testing via Telethon (RU)](/examples/llamator-telegram.ipynb)
 
 ## Architecture / Архитектура (RU)
 
