@@ -10,11 +10,13 @@ from dotenv import load_dotenv
 
 from .attack_provider.run_tests import setup_models_and_tests
 from .attack_provider.test_base import TestBase
-from .attacks.utils import create_attack_report_from_artifacts
 from .client.chat_client import ClientBase
 from .format_output.logo import print_logo
-from .initial_validation import validate_artifacts_path, validate_custom_tests, validate_model, validate_tests
+from .initial_validation import validate_artifacts_path, validate_custom_tests, validate_model, validate_tests, \
+    validate_language
 from .ps_logging import setup_logging
+from .report_generators.excel_report_generator import create_attack_report_from_artifacts
+from .report_generators.word_report_generator import create_word_report
 
 # At this stage, the api keys that the user sets are loaded
 dotenv_path = os.path.join(os.getcwd(), ".env")
@@ -57,6 +59,9 @@ def start_testing(
             debug_level = 0 - WARNING.
             debug_level = 1 - INFO.
             debug_level = 2 - DEBUG.
+        - 'report_language' : str
+            Language for the report (default is 'en').
+            Possible values: 'en', 'ru'.
 
     num_threads : int, optional
         Number of threads for parallel test execution (default is 1).
@@ -96,6 +101,7 @@ def start_testing(
     enable_reports = config.get("enable_reports", False)
     artifacts_path = config.get("artifacts_path", None)
     debug_level = config.get("debug_level", 1)
+    report_language = config.get("report_language", 'en')
 
     start_timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
@@ -151,8 +157,8 @@ def start_testing(
             attack_model,
             tested_model,
             num_threads=num_threads,
-            tests_with_attempts=tests_with_attempts,  # Извлекаем названия тестов
-            custom_tests_with_attempts=custom_tests_with_attempts,  # Извлекаем кастомные тесты
+            tests_with_attempts=tests_with_attempts,
+            custom_tests_with_attempts=custom_tests_with_attempts,
             artifacts_path=artifacts_run_path,
         )
     else:
@@ -160,21 +166,32 @@ def start_testing(
             attack_model,
             tested_model,
             num_threads=num_threads,
-            tests_with_attempts=tests_with_attempts,  # Извлекаем названия тестов
-            custom_tests_with_attempts=custom_tests_with_attempts,  # Извлекаем кастомные тесты
+            tests_with_attempts=tests_with_attempts,
+            custom_tests_with_attempts=custom_tests_with_attempts,
             artifacts_path=None,
         )
 
     logging.info(f"Completion of testing")
 
-    # Явное закрытие файла лога в конце программы
+    # Explicitly close log files at the end of the progra
     for handler in logging.getLogger().handlers:
         if isinstance(handler, RotatingFileHandler):
             handler.close()
 
     if enable_reports:
+        report_language = validate_language(report_language)
+        csv_folder_name = "csv_report"
+        # Create Excel report
         create_attack_report_from_artifacts(
-            artifacts_dir=artifacts_run_path, csv_folder_name="csv_report", report_file_name="attacks_report.xlsx"
+            artifacts_dir=artifacts_run_path,
+            csv_folder_name=csv_folder_name,
+            report_file_name="attacks_report.xlsx"
+        )
+        create_word_report(
+            artifacts_dir=artifacts_run_path,
+            csv_folder_name=csv_folder_name,
+            docx_file_name="attacks_report.docx",
+            language=report_language
         )
 
     print(f"{BRIGHT}{colorama.Fore.CYAN}Thank you for using LLAMATOR!{RESET}")

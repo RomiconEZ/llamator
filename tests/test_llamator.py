@@ -30,10 +30,10 @@ def test_openaiclient():
     )
 
     tests_with_attempts = [
-        ("aim_jailbreak", 1),
-        # ("base64_injection", 1),
-        # ("complimentary_transition", 1),
-        # ("do_anything_now_jailbreak", 1),
+        ("aim_jailbreak", 2),
+        ("base64_injection", 1),
+        ("complimentary_transition", 1),
+        ("do_anything_now_jailbreak", 1),
         # ("RU_do_anything_now_jailbreak", 1),
         # ("ethical_compliance", 1),
         # ("harmful_behavior", 1),
@@ -57,6 +57,7 @@ def test_openaiclient():
         "enable_reports": True,  # Включить генерацию отчетов
         "artifacts_path": "./artifacts",  # Путь к директории для сохранения артефактов
         "debug_level": 1,  # Уровень логирования: 0 - WARNING, 1 - INFO, 2 - DEBUG
+        "report_language": "ru",  # Язык отчета: 'en', 'ru'
     }
 
     llamator.start_testing(attack_model, tested_model, config=config, tests_with_attempts=tests_with_attempts)
