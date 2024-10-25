@@ -1,7 +1,8 @@
-from ..client.chat_client import ChatSession, ClientBase
 import json
 import os
-from typing import Dict, Any, Optional
+from typing import Any, Dict, Optional
+
+from ..client.chat_client import ChatSession, ClientBase
 
 
 def evaluate_response(client: ClientBase, response, expected_response):
@@ -28,8 +29,8 @@ class AttackDataLoader:
         if cls._data is None:
             if not os.path.exists(json_path):
                 raise FileNotFoundError(f"Attack data JSON file not found at {json_path}")
-            with open(json_path, 'r', encoding='utf-8') as f:
-                cls._data = {entry['in_code_name']: entry for entry in json.load(f)}
+            with open(json_path, encoding="utf-8") as f:
+                cls._data = {entry["in_code_name"]: entry for entry in json.load(f)}
 
     @classmethod
     def get_attack_data(cls, in_code_name: str) -> Dict[str, Any]:

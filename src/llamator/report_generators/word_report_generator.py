@@ -1,14 +1,15 @@
-import os
 import json
-import pandas as pd
 import logging
+import os
+
+import pandas as pd
 from docx import Document
-from docx.shared import Inches, Pt, RGBColor
-from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.style import WD_STYLE_TYPE
+from docx.enum.table import WD_TABLE_ALIGNMENT
+from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
+from docx.shared import Inches, Pt, RGBColor
 
 # ==========================
 # Global Constants
@@ -20,7 +21,8 @@ JSON_FILE_PATH = os.path.join(os.path.dirname(__file__), "..", "attacks", "attac
 # Helper Functions
 # ==========================
 
-def set_table_border(table, border_color="404040", border_size=4, border_space=0, border_type='single'):
+
+def set_table_border(table, border_color="404040", border_size=4, border_space=0, border_type="single"):
     """
     Sets gray-black borders for the table.
 
@@ -39,17 +41,18 @@ def set_table_border(table, border_color="404040", border_size=4, border_space=0
     """
     tbl = table._element
     tblPr = tbl.tblPr
-    tblBorders = OxmlElement('w:tblBorders')
+    tblBorders = OxmlElement("w:tblBorders")
 
-    for edge in ['top', 'left', 'bottom', 'right', 'insideH', 'insideV']:
-        edge_element = OxmlElement(f'w:{edge}')
-        edge_element.set(qn('w:val'), border_type)
-        edge_element.set(qn('w:sz'), str(border_size))
-        edge_element.set(qn('w:space'), str(border_space))
-        edge_element.set(qn('w:color'), border_color)
+    for edge in ["top", "left", "bottom", "right", "insideH", "insideV"]:
+        edge_element = OxmlElement(f"w:{edge}")
+        edge_element.set(qn("w:val"), border_type)
+        edge_element.set(qn("w:sz"), str(border_size))
+        edge_element.set(qn("w:space"), str(border_space))
+        edge_element.set(qn("w:color"), border_color)
         tblBorders.append(edge_element)
 
     tblPr.append(tblBorders)
+
 
 def set_page_background(document, color):
     """
@@ -62,9 +65,10 @@ def set_page_background(document, color):
     color : str
         The background color in hexadecimal format (e.g., "F0F8FF" for AliceBlue).
     """
-    background = OxmlElement('w:background')
-    background.set(qn('w:color'), color)
+    background = OxmlElement("w:background")
+    background.set(qn("w:color"), color)
     document.element.insert(0, background)
+
 
 def load_tests_json(json_file_path: str) -> dict:
     """
@@ -81,14 +85,15 @@ def load_tests_json(json_file_path: str) -> dict:
         A dictionary mapping 'in_code_name' to the corresponding test data.
     """
     try:
-        with open(json_file_path, 'r', encoding='utf-8') as f:
+        with open(json_file_path, encoding="utf-8") as f:
             tests = json.load(f)
         # Create a mapping: in_code_name -> test data
-        tests_mapping = {test['in_code_name']: test for test in tests}
+        tests_mapping = {test["in_code_name"]: test for test in tests}
         return tests_mapping
     except Exception as e:
         logging.error(f"Error loading JSON file {json_file_path}: {e}")
         return {}
+
 
 def set_cell_background(cell, fill_color):
     """
@@ -103,9 +108,10 @@ def set_cell_background(cell, fill_color):
     """
     tc = cell._tc
     tcPr = tc.get_or_add_tcPr()
-    shd = OxmlElement('w:shd')
-    shd.set(qn('w:fill'), fill_color)
+    shd = OxmlElement("w:shd")
+    shd.set(qn("w:fill"), fill_color)
     tcPr.append(shd)
+
 
 def set_table_background(table, fill_color):
     """
@@ -127,13 +133,14 @@ def set_table_background(table, fill_color):
 # Main Report Generation Function
 # ==========================
 
+
 def create_word_report(
     artifacts_dir: str,
     csv_folder_name: str = "csv_report",
     docx_file_name: str = "attacks_report.docx",
     status_legend: dict = None,
     main_statuses: tuple = ("Broken", "Resilient", "Errors"),
-    language: str = "en"
+    language: str = "en",
 ) -> None:
     """
     Generates a well-formatted Word report based on testing results in the chosen language.
@@ -170,7 +177,7 @@ def create_word_report(
             "status_column_missing": "Столбец 'status' не найден в {}. Пропуск файла.",
             "test_not_found": "Тест с in_code_name '{in_code}' не найден в JSON. Пропуск файла {file}.",
             "description_missing": "Описание для теста '{test}' не найдено. Используется название CSV файла.",
-            "total": "Итого"
+            "total": "Итого",
         },
         "en": {
             "framework_title": "LLAMATOR",
@@ -186,8 +193,8 @@ def create_word_report(
             "status_column_missing": "The 'status' column is missing in {}. Skipping file.",
             "test_not_found": "Test with in_code_name '{in_code}' not found in JSON. Skipping file {file}.",
             "description_missing": "Description for test '{test}' not found. Using CSV file name.",
-            "total": "Total"
-        }
+            "total": "Total",
+        },
     }
 
     lang = strings.get(language, strings["en"])  # Default to English if language key is not found
@@ -235,44 +242,44 @@ def create_word_report(
     styles = document.styles
 
     # Add style for CenterTitle (Sans-serif for headings)
-    if 'CenterTitle' not in styles:
-        center_title_style = styles.add_style('CenterTitle', WD_STYLE_TYPE.PARAGRAPH)
-        center_title_style.font.name = 'Helvetica'  # Sans-serif
+    if "CenterTitle" not in styles:
+        center_title_style = styles.add_style("CenterTitle", WD_STYLE_TYPE.PARAGRAPH)
+        center_title_style.font.name = "Helvetica"  # Sans-serif
         center_title_style.font.size = Pt(20)
         center_title_style.font.bold = True
         center_title_style.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
         center_title_style.paragraph_format.space_after = Pt(10)
         # Ensure EastAsia and ASCII fonts are also set to Helvetica
-        center_title_style.font.eastasia = 'Helvetica'
-        center_title_style.font.ascii = 'Helvetica'
+        center_title_style.font.eastasia = "Helvetica"
+        center_title_style.font.ascii = "Helvetica"
     else:
-        center_title_style = styles['CenterTitle']
+        center_title_style = styles["CenterTitle"]
 
     # Add style for Heading2Custom (Sans-serif for subheadings)
-    if 'Heading2Custom' not in styles:
-        heading2_style = styles.add_style('Heading2Custom', WD_STYLE_TYPE.PARAGRAPH)
-        heading2_style.base_style = styles['Heading 2']
-        heading2_style.font.name = 'Helvetica'  # Sans-serif
+    if "Heading2Custom" not in styles:
+        heading2_style = styles.add_style("Heading2Custom", WD_STYLE_TYPE.PARAGRAPH)
+        heading2_style.base_style = styles["Heading 2"]
+        heading2_style.font.name = "Helvetica"  # Sans-serif
         heading2_style.font.size = Pt(14)
         heading2_style.paragraph_format.space_after = Pt(10)
         # Ensure EastAsia and ASCII fonts are also set to Helvetica
-        heading2_style.font.eastasia = 'Helvetica'
-        heading2_style.font.ascii = 'Helvetica'
+        heading2_style.font.eastasia = "Helvetica"
+        heading2_style.font.ascii = "Helvetica"
     else:
-        heading2_style = styles['Heading2Custom']
+        heading2_style = styles["Heading2Custom"]
 
     # Add style for NormalStyle (Serif for body text)
-    if 'NormalStyle' not in styles:
-        normal_style = styles.add_style('NormalStyle', WD_STYLE_TYPE.PARAGRAPH)
-        normal_style.base_style = styles['Normal']
-        normal_style.font.name = 'Times New Roman'  # Serif
+    if "NormalStyle" not in styles:
+        normal_style = styles.add_style("NormalStyle", WD_STYLE_TYPE.PARAGRAPH)
+        normal_style.base_style = styles["Normal"]
+        normal_style.font.name = "Times New Roman"  # Serif
         normal_style.font.size = Pt(12)
         normal_style.paragraph_format.space_after = Pt(6)
         # Ensure EastAsia and ASCII fonts are also set to Times New Roman
-        normal_style.font.eastasia = 'Times New Roman'
-        normal_style.font.ascii = 'Times New Roman'
+        normal_style.font.eastasia = "Times New Roman"
+        normal_style.font.ascii = "Times New Roman"
     else:
-        normal_style = styles['NormalStyle']
+        normal_style = styles["NormalStyle"]
 
     # Set a pale blue background for the document
     set_page_background(document, "F0F8FF")  # "F0F8FF" - AliceBlue
@@ -282,7 +289,7 @@ def create_word_report(
     # ==========================
 
     # Add the title "LLAMATOR"
-    framework_title = document.add_paragraph(lang["framework_title"], style='CenterTitle')
+    framework_title = document.add_paragraph(lang["framework_title"], style="CenterTitle")
     for run in framework_title.runs:
         run.font.color.rgb = RGBColor(80, 80, 80)  # Dark gray text color
 
@@ -292,30 +299,30 @@ def create_word_report(
     # Create a horizontal line using the bottom border of the paragraph
     p_para = p._element
     p_pPr = p_para.get_or_add_pPr()
-    p_pBdr = OxmlElement('w:pBdr')
-    bottom = OxmlElement('w:bottom')
-    bottom.set(qn('w:val'), 'single')
-    bottom.set(qn('w:sz'), '6')  # Line thickness
-    bottom.set(qn('w:space'), '1')
-    bottom.set(qn('w:color'), '000000')  # Black color
+    p_pBdr = OxmlElement("w:pBdr")
+    bottom = OxmlElement("w:bottom")
+    bottom.set(qn("w:val"), "single")
+    bottom.set(qn("w:sz"), "6")  # Line thickness
+    bottom.set(qn("w:space"), "1")
+    bottom.set(qn("w:color"), "000000")  # Black color
     p_pBdr.append(bottom)
     p_pPr.append(p_pBdr)
 
     # Add the "Testing Report" title (localized)
-    testing_report_title = document.add_paragraph(lang["testing_report"], style='CenterTitle')
+    testing_report_title = document.add_paragraph(lang["testing_report"], style="CenterTitle")
     for run in testing_report_title.runs:
         run.font.color.rgb = RGBColor(80, 80, 80)  # Dark gray text color
 
     document.add_paragraph()  # Add an empty paragraph for spacing
 
     # Add the status legend title
-    legend_title = document.add_paragraph(lang["legend_title"], style='Heading2Custom')
+    legend_title = document.add_paragraph(lang["legend_title"], style="Heading2Custom")
     for run in legend_title.runs:
         run.font.color.rgb = RGBColor(80, 80, 80)  # Dark gray text color
 
     # Add each status and its description to the legend
     for status, description in status_legend.items():
-        p = document.add_paragraph(style='NormalStyle')
+        p = document.add_paragraph(style="NormalStyle")
         run_status = p.add_run(f"{status}: ")
         run_status.bold = True
         run_status.font.color.rgb = RGBColor(80, 80, 80)  # Dark gray text color
@@ -347,8 +354,8 @@ def create_word_report(
             test_name = in_code_name
             test_description = ""
         else:
-            test_name = test_info['name']
-            test_description = test_info.get(f'description_{language}')
+            test_name = test_info["name"]
+            test_description = test_info.get(f"description_{language}")
             if not test_description:
                 logging.warning(lang["description_missing"].format(test=test_name))
                 # Use the CSV file name as the attack name if description is missing
@@ -362,12 +369,12 @@ def create_word_report(
             continue
 
         # Check for the 'status' column
-        if 'status' not in df.columns:
+        if "status" not in df.columns:
             logging.warning(lang["status_column_missing"].format(csv_path))
             continue
 
         # Aggregate the number of attempts by status
-        summary = df['status'].value_counts().to_dict()
+        summary = df["status"].value_counts().to_dict()
 
         # Ensure all main statuses are present, even if their count is zero
         summary_complete = {status: summary.get(status, 0) for status in main_statuses}
@@ -376,7 +383,7 @@ def create_word_report(
         total_attempts = sum(summary_complete.values())
 
         # Add the attack name
-        attack_title = document.add_paragraph(test_name, style='Heading2Custom')
+        attack_title = document.add_paragraph(test_name, style="Heading2Custom")
         for run in attack_title.runs:
             run.font.color.rgb = RGBColor(80, 80, 80)  # Dark gray text color
 
@@ -386,7 +393,7 @@ def create_word_report(
 
         # Add the attack description if available
         if test_description:
-            attack_description = document.add_paragraph(test_description, style='NormalStyle')
+            attack_description = document.add_paragraph(test_description, style="NormalStyle")
             for run in attack_description.runs:
                 run.font.color.rgb = RGBColor(80, 80, 80)  # Dark gray text color
 
@@ -413,9 +420,9 @@ def create_word_report(
                     run.font.bold = True
                     run.font.size = Pt(12)
                     run.font.color.rgb = RGBColor(80, 80, 80)  # Dark gray text color
-                    run.font.name = 'Helvetica'  # Sans-serif
-                    run.font.eastasia = 'Helvetica'
-                    run.font.ascii = 'Helvetica'
+                    run.font.name = "Helvetica"  # Sans-serif
+                    run.font.eastasia = "Helvetica"
+                    run.font.ascii = "Helvetica"
                 paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
         # Add data rows to the table
@@ -430,9 +437,9 @@ def create_word_report(
                     for run in paragraph.runs:
                         run.font.size = Pt(12)
                         run.font.color.rgb = RGBColor(80, 80, 80)  # Dark gray text color
-                        run.font.name = 'Times New Roman'  # Serif
-                        run.font.eastasia = 'Times New Roman'
-                        run.font.ascii = 'Times New Roman'
+                        run.font.name = "Times New Roman"  # Serif
+                        run.font.eastasia = "Times New Roman"
+                        run.font.ascii = "Times New Roman"
 
             # Apply specific cell shading based on status
             if status == "Resilient" and language == "en" or status == "Resilient" and language == "ru":
@@ -458,16 +465,16 @@ def create_word_report(
                     run.font.bold = True
                     run.font.size = Pt(12)
                     run.font.color.rgb = RGBColor(80, 80, 80)  # Dark gray text color
-                    run.font.name = 'Times New Roman'  # Serif
-                    run.font.eastasia = 'Times New Roman'
-                    run.font.ascii = 'Times New Roman'
+                    run.font.name = "Times New Roman"  # Serif
+                    run.font.eastasia = "Times New Roman"
+                    run.font.ascii = "Times New Roman"
 
         # Установить светло-серый фон для ячеек итоговой строки
         set_cell_background(total_row[0], "d6d6d6")  # Светло-серый
         set_cell_background(total_row[1], "d6d6d6")  # Светло-серый
 
         # Set table borders
-        set_table_border(table, border_color="404040", border_size=4, border_space=0, border_type='single')
+        set_table_border(table, border_color="404040", border_size=4, border_space=0, border_type="single")
 
         # Изменение заливки всей таблицы на более светлый оттенок
         set_table_background(table, "ededed")

@@ -12,8 +12,13 @@ from .attack_provider.run_tests import setup_models_and_tests
 from .attack_provider.test_base import TestBase
 from .client.chat_client import ClientBase
 from .format_output.logo import print_logo
-from .initial_validation import validate_artifacts_path, validate_custom_tests, validate_model, validate_tests, \
-    validate_language
+from .initial_validation import (
+    validate_artifacts_path,
+    validate_custom_tests,
+    validate_language,
+    validate_model,
+    validate_tests,
+)
 from .ps_logging import setup_logging
 from .report_generators.excel_report_generator import create_attack_report_from_artifacts
 from .report_generators.word_report_generator import create_word_report
@@ -101,7 +106,7 @@ def start_testing(
     enable_reports = config.get("enable_reports", False)
     artifacts_path = config.get("artifacts_path", None)
     debug_level = config.get("debug_level", 1)
-    report_language = config.get("report_language", 'en')
+    report_language = config.get("report_language", "en")
 
     start_timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
@@ -183,15 +188,13 @@ def start_testing(
         csv_folder_name = "csv_report"
         # Create Excel report
         create_attack_report_from_artifacts(
-            artifacts_dir=artifacts_run_path,
-            csv_folder_name=csv_folder_name,
-            report_file_name="attacks_report.xlsx"
+            artifacts_dir=artifacts_run_path, csv_folder_name=csv_folder_name, report_file_name="attacks_report.xlsx"
         )
         create_word_report(
             artifacts_dir=artifacts_run_path,
             csv_folder_name=csv_folder_name,
             docx_file_name="attacks_report.docx",
-            language=report_language
+            language=report_language,
         )
 
     print(f"{BRIGHT}{colorama.Fore.CYAN}Thank you for using LLAMATOR!{RESET}")

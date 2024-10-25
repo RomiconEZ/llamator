@@ -145,15 +145,15 @@ def validate_language(language: str) -> str:
     """
     try:
         # Define the set of supported languages
-        supported_languages = {'en', 'ru'}
+        supported_languages = {"en", "ru"}
 
         # Check if the provided language is supported
         if language not in supported_languages:
             logging.warning(f"Unsupported language '{language}'. Defaulting to 'en'.")
-            return 'en'
+            return "en"
 
         # If supported, return the original language
         return language
     except Exception as e:
         logging.error(f"Failed to validate language: {e}. Defaulting to 'en'.")
-        return 'en'
+        return "en"

@@ -69,8 +69,9 @@ def create_attack_report_from_artifacts(
     """
 
     import os
+
     import pandas as pd
-    from openpyxl.styles import PatternFill, Alignment, Border, Side
+    from openpyxl.styles import Alignment, Border, PatternFill, Side
     from openpyxl.utils import get_column_letter
 
     # Full path to the folder with CSV files
@@ -81,17 +82,14 @@ def create_attack_report_from_artifacts(
 
     # Dictionary for color mapping with paler colors
     color_fill_mapping = {
-        "broken": "FFF0F0",     # very pale red
+        "broken": "FFF0F0",  # very pale red
         "resilient": "F0FFF0",  # very pale green
-        "error": "FFF8E7",      # very pale orange
+        "error": "FFF8E7",  # very pale orange
     }
 
     # Define border style
     thin_border = Border(
-        left=Side(style='thin'),
-        right=Side(style='thin'),
-        top=Side(style='thin'),
-        bottom=Side(style='thin')
+        left=Side(style="thin"), right=Side(style="thin"), top=Side(style="thin"), bottom=Side(style="thin")
     )
 
     # Initialize Excel writer
@@ -103,7 +101,7 @@ def create_attack_report_from_artifacts(
                 sheet_name = os.path.splitext(csv_file)[0]
 
                 # Load CSV into DataFrame and drop completely empty rows
-                df = pd.read_csv(os.path.join(csv_folder_path, csv_file)).dropna(how='all')
+                df = pd.read_csv(os.path.join(csv_folder_path, csv_file)).dropna(how="all")
 
                 # Write the DataFrame to the Excel file
                 df.to_excel(writer, index=False, sheet_name=sheet_name)
@@ -127,14 +125,14 @@ def create_attack_report_from_artifacts(
                     for col_idx in range(1, worksheet.max_column + 1):
                         col_letter = get_column_letter(col_idx)
                         cell = worksheet[f"{col_letter}{row}"]
-                        cell.alignment = Alignment(wrap_text=True, horizontal='center', vertical='center')
+                        cell.alignment = Alignment(wrap_text=True, horizontal="center", vertical="center")
                         cell.border = thin_border
 
                 # Apply borders to header row
                 for col_idx in range(1, worksheet.max_column + 1):
                     col_letter = get_column_letter(col_idx)
                     header_cell = worksheet[f"{col_letter}1"]
-                    header_cell.alignment = Alignment(horizontal='center', vertical='center')
+                    header_cell.alignment = Alignment(horizontal="center", vertical="center")
                     header_cell.border = thin_border
 
                 # Adjust the column widths
