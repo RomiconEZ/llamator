@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 
 
-def test_openaiclient():
+def test_openai_client():
     """Тест клиента OpenAI."""
     # Перезагрузка необходимых модулей
     import llamator.client.specific_chat_clients
@@ -71,7 +71,7 @@ def test_openaiclient():
     start_testing(attack_model, tested_model, config=config, tests_with_attempts=tests_with_attempts)
 
 
-def test_langchainclient_yandegpt():
+def test_langchain_client_yandexgpt():
     """Тест клиента LangChain с использованием Yandex GPT."""
     # Загружаем переменные окружения из .env файла
     load_dotenv()

@@ -2,7 +2,7 @@ import importlib
 import os
 
 
-def test_openaiclient():
+def test_openai_client():
     """Тест клиента OpenAI."""
     # Перезагрузка необходимых модулей
     import llamator
