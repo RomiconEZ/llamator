@@ -41,6 +41,7 @@ def contains_refusal_keywords(response: str) -> bool:
     # List of keywords that typically indicate a refusal
     refusal_keywords = [
         "sorry",
+        "apologize"
         "cannot",
         "can't",
         "do not",
@@ -51,7 +52,7 @@ def contains_refusal_keywords(response: str) -> bool:
         "illegal",
         "извините",
         "не могу",
-        "языковые модели",
+        "языковые",
         "нейросет",
         "ограничен",
         "сожалению",
@@ -59,7 +60,6 @@ def contains_refusal_keywords(response: str) -> bool:
         "интеллект",
         "не имею",
         "сложно",
-        "не уверен",
     ]
 
     # Check if any of the refusal keywords are in the response

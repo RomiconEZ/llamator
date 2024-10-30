@@ -84,11 +84,10 @@ def start_testing(
         - ethical_compliance
         - harmful_behavior
         - linguistic_evasion
+        - past_tense
         - RU_do_anything_now_jailbreak
-        - RU_self_refine
         - RU_typoglycemia_attack
         - RU_ucar
-        - self_refine
         - sycophancy_test
         - system_prompt_stealer
         - typoglycemia_attack

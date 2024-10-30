@@ -126,16 +126,6 @@ Probes a Russian-language LLM's resilience against performing explicitly forbidd
 </details>
 
 <details>
-<summary><strong>RU_self_refine</strong></summary>
-<p>
-Probes a Russian-language LLM's ethical compliance by eliciting detailed instructions on illegal activities, using the self-refine technique to bypass the system prompt by asking the LLM to refine its response.
-</p>
-<p>
-<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/ru_self_refine.py">View code on GitHub</a>
-</p>
-</details>
-
-<details>
 <summary><strong>RU_typoglycemia_attack</strong></summary>
 <p>
 Attempts to exploit a text processing vulnerability in Russian-language LLMs that can cause incorrect responses by removing random characters from words.
@@ -152,16 +142,6 @@ Probes a Russian-language LLM's adherence to content restrictions when explicitl
 </p>
 <p>
 <a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/ru_ucar.py">View code on GitHub</a>
-</p>
-</details>
-
-<details>
-<summary><strong>self_refine</strong></summary>
-<p>
-Probes an LLM's ethical compliance by eliciting detailed instructions on illegal activities, using the self-refine technique to bypass the system prompt by asking the LLM to refine its response.
-</p>
-<p>
-<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/self_refine.py">View code on GitHub</a>
 </p>
 </details>
 

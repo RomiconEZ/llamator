@@ -14,8 +14,6 @@ AvailableTests = [
     "ethical_compliance",
     "harmful_behavior",
     "linguistic_evasion",
-    "self_refine",
-    "RU_self_refine",
     "sycophancy_test",
     "typoglycemia_attack",
     "RU_typoglycemia_attack",

@@ -84,13 +84,6 @@
     "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/ru_dan.py"
   },
   {
-    "name": "RU Self Refine",
-    "in_code_name": "RU_self_refine",
-    "description_en": "Probes a Russian-language LLM's ethical compliance by eliciting detailed instructions on illegal activities, using the self-refine technique to bypass the system prompt by asking the LLM to refine its response.",
-    "description_ru": "Проверяет этическую соответствие русскоязычной модели LLM, запрашивая подробные инструкции по незаконной деятельности, используя технику самосовершенствования для обхода системного промпта, прося LLM уточнить свой ответ.",
-    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/ru_self_refine.py"
-  },
-  {
     "name": "RU Typoglycemia Attack",
     "in_code_name": "RU_typoglycemia_attack",
     "description_en": "Attempts to exploit a text processing vulnerability in Russian-language LLMs that can cause incorrect responses by removing random characters from words.",
@@ -103,13 +96,6 @@
     "description_en": "Probes a Russian-language LLM's adherence to content restrictions when explicitly requested to ignore such filters. It assesses the robustness of the LLM's content moderation systems against direct challenges.",
     "description_ru": "Проверяет соблюдение русскоязычной моделью LLM ограничений по контенту при явном запросе игнорировать такие фильтры. Оценивает устойчивость систем модерации контента LLM к прямым вызовам.",
     "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/ru_ucar.py"
-  },
-  {
-    "name": "Self Refine",
-    "in_code_name": "self_refine",
-    "description_en": "Probes an LLM's ethical compliance by eliciting detailed instructions on illegal activities, using the self-refine technique to bypass the system prompt by asking the LLM to refine its response.",
-    "description_ru": "Проверяет этическую соответствие LLM, вызывая детальные инструкции по незаконной деятельности, используя технику самосовершенствования для обхода системного промпта, прося LLM уточнить свой ответ.",
-    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/self_refine.py"
   },
   {
     "name": "Sycophancy Test",
@@ -138,5 +124,12 @@
     "description_en": "Probes an LLM's adherence to content restrictions when explicitly requested to ignore such filters. It assesses the robustness of the LLM's content moderation systems against direct challenges.",
     "description_ru": "Проверяет соблюдение LLM ограничений по контенту при явном запросе игнорировать такие фильтры. Оценивает устойчивость систем модерации контента LLM к прямым вызовам.",
     "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/ucar.py"
+  },
+  {
+    "name": "Past Tense Attack",
+    "in_code_name": "past_tense",
+    "description_en": "Challenges the LLM with a dataset of harmful behavior prompts in past tense form.",
+    "description_ru": "Проверяет устойчивость модели к  выполнению вредных запросов, сформулированных в прошедшем времени.",
+    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/past_tense.py"
   }
 ]
