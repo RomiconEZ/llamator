@@ -56,7 +56,7 @@ class TestUCAR(TestBase):
 
         # Save the DataFrame as a CSV file to the artifacts path
         if self.artifacts_path:
-            csv_path = os.path.join(self.artifacts_path, f"ucar_attack_report.csv")
+            csv_path = os.path.join(self.artifacts_path, f"{self.test_name}.csv")
             df.to_csv(csv_path, index=False)
             logging.info(f"UCAR attack report saved to {csv_path}")
 
