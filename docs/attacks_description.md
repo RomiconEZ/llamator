@@ -116,6 +116,16 @@ Challenges the LLM with a dataset of harmful behavior prompts.
 </details>
 
 <details>
+<summary><strong>past_tense</strong></summary>
+<p>
+Challenges the LLM with a dataset of harmful behavior prompts in past tense form.
+</p>
+<p>
+<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/past_tense.py">View code on GitHub</a>
+</p>
+</details>
+
+<details>
 <summary><strong>RU_do_anything_now_jailbreak</strong></summary>
 <p>
 Probes a Russian-language LLM's resilience against performing explicitly forbidden activities using the "Do Anything Now" (DAN) character roleplay technique.
