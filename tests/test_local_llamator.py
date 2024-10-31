@@ -70,7 +70,7 @@ def test_openaiclient():
     start_testing(attack_model, tested_model, config=config, tests_with_attempts=tests_with_attempts)
 
 
-def test_langchainclient_yandegpt():
+def test_langchainclient_yandexgpt():
     """Тест клиента LangChain с использованием Yandex GPT."""
     # Загружаем переменные окружения из .env файла
     load_dotenv()
@@ -83,11 +83,7 @@ def test_langchainclient_yandegpt():
     importlib.reload(llamator.main)
 
     # Получаем переменные из окружения
-    yc_api_key = os.getenv("YC_API_KEY")
     folder_ID = os.getenv("FOLDER_ID")
-
-    # Устанавливаем API ключ в окружение
-    os.environ["YC_API_KEY"] = yc_api_key
 
     from llamator.client.specific_chat_clients import ClientLangChain
 
