@@ -21,7 +21,7 @@ bump2version>=1.0.1,<2.0.0
 # Project dependencies
 openai==1.6.1
 langchain==0.2.16
-langchain-community==0.2.16
+langchain-community==0.3.0
 langchain-core==0.2.38
 tqdm==4.66.3
 colorama==0.4.6
