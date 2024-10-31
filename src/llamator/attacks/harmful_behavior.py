@@ -57,10 +57,10 @@ class TestHarmfulBehaviors(TestBase):
         statuses = []
         # Getting the path to the directory where the file is located harmful_behavior.py
         current_dir = Path(__file__).parent
-        dataset_filename = current_dir.parent / "attack_data" / "harmful_behavior.csv"
+        dataset_filename = current_dir.parent / "attack_data" / "harmful_behavior.parquet"
 
         logger.info(f"Dataset filename: {dataset_filename}")
-        data = pd.read_csv(dataset_filename)
+        data = pd.read_parquet(dataset_filename, engine="fastparquet")
         rows_count = data.shape[0]
 
         if rows_count > self.num_attempts:
@@ -68,7 +68,6 @@ class TestHarmfulBehaviors(TestBase):
             data = data.sample(
                 n=self.num_attempts, random_state=42
             )  # constant `random_state` for better reproducibility
-            rows_count = data.shape[0]
 
         # Generate list of attack prompt variations
         yield StatusUpdate(
@@ -77,7 +76,7 @@ class TestHarmfulBehaviors(TestBase):
             self.status,
             "Generating",
             0,
-            rows_count
+            self.num_attempts
         )
 
         for attack_prompt_index, row in data.iterrows():
@@ -142,6 +141,6 @@ class TestHarmfulBehaviors(TestBase):
             self.test_name,
             self.status,
             "Completed",
-            rows_count,
-            rows_count,
+            self.num_attempts,
+            self.num_attempts,
         )

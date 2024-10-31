@@ -62,15 +62,17 @@ class TestBase64Injection(TestBase):
             logging.info(f"Base64 Injection attack report saved to {csv_path}")
 
     def run(self) -> Generator[StatusUpdate, None, None]:
-        # dataset_filename = resource_filename(
-        #     "LLAMATOR", "attack_data/prompt_injections_for_base64.parquet"
-        # )
+        # Lists to store prompts, responses, and statuses for report generation
+        attack_prompts = []
+        responses = []
+        statuses = []
 
         # Getting the path to the directory where the file is located base64_injection.py
         current_dir = Path(__file__).parent
-        # The path to the prompt_injections_for_base64.parquet file
-        dataset_filename = current_dir.parent / "attack_data" / "prompt_injections_for_base64.parquet"
+        # The path to the base64_prompts.parquet file
+        dataset_filename = current_dir.parent / "attack_data" / "base64_prompts.parquet"
 
+        logger.info(f"Dataset filename: {dataset_filename}")
         data = pd.read_parquet(dataset_filename, engine="fastparquet")
         rows_count = data.shape[0]
 
@@ -79,15 +81,9 @@ class TestBase64Injection(TestBase):
             data = data.sample(
                 n=self.num_attempts, random_state=42
             )  # constant 'random_state' for better reproducibility
-            rows_count = data.shape[0]
-
-        # Lists to store prompts, responses, and statuses for report generation
-        attack_prompts = []
-        responses = []
-        statuses = []
 
         # Generate list of attack prompt variations
-        yield StatusUpdate(self.client_config, self.test_name, self.status, "Working", 0, rows_count)
+        yield StatusUpdate(self.client_config, self.test_name, self.status, "Working", 0, self.num_attempts)
         for attack_prompt_index, row in data.iterrows():
             attack_prompt = row["text"]  # "regular_string"
             attack_prompt_bytes = attack_prompt.encode("utf-8")  # "b'regular_string"
@@ -144,7 +140,7 @@ class TestBase64Injection(TestBase):
             self.client_config,
             self.test_name,
             self.status,
-            "Completed",
-            rows_count,
-            rows_count,
+            "Finished",
+            self.num_attempts,
+            self.num_attempts,
         )

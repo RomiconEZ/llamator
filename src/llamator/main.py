@@ -73,13 +73,9 @@ def start_testing(
     tests_with_attempts : List[Tuple[str, int]], optional
         List of test names and their corresponding number of attempts.
         Available tests:
-        - affirmative_suffix
         - aim_jailbreak
-        - amnesia
-        - authoritative_role_impersonation
         - base64_injection
         - complimentary_transition
-        - contextual_redirection
         - do_anything_now_jailbreak
         - ethical_compliance
         - harmful_behavior
@@ -89,7 +85,6 @@ def start_testing(
         - RU_typoglycemia_attack
         - RU_ucar
         - sycophancy_test
-        - system_prompt_stealer
         - typoglycemia_attack
         - ucar
     custom_tests_with_attempts : List[Tuple[Type[TestBase], int]], optional

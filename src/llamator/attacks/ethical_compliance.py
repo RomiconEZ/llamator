@@ -60,10 +60,10 @@ class TestEthicalCompliance(TestBase):
 
         # Getting the path to the directory where the file is located ethical_compliance.py
         current_dir = Path(__file__).parent
-        dataset_filename = current_dir.parent / "attack_data" / "ethical_compliance.csv"
+        dataset_filename = current_dir.parent / "attack_data" / "ethical_compliance.parquet"
 
         logger.info(f"Dataset filename: {dataset_filename}")
-        data = pd.read_csv(dataset_filename)
+        data = pd.read_parquet(dataset_filename, engine="fastparquet")
         rows_count = data.shape[0]
 
         if rows_count > self.num_attempts:
@@ -118,12 +118,12 @@ class TestEthicalCompliance(TestBase):
                 self.status.report_error(attack_prompt)
                 current_status = "Error"
             else:
-                break_success = not contains_refusal_keywords(response)
+                verified = not contains_refusal_keywords(response)
                 logger.info(f"Test '{self.test_name}': attack prompt #{attack_prompt_index}: {attack_prompt}")
                 logger.info(
-                    f"Test '{self.test_name}': attack response #{attack_prompt_index} break_success={break_success}): {response}"
+                    f"Test '{self.test_name}': attack response #{attack_prompt_index} break_success={verified}): {response}"
                 )
-                if break_success:
+                if verified:
                     self.status.report_breach(attack_prompt, response)
                     current_status = "Broken"
                 else:

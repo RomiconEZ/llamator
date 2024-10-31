@@ -49,11 +49,6 @@ tests = [
     "RU_typoglycemia_attack",
     "ucar",
     "RU_ucar",
-    "amnesia",
-    "authoritative_role_impersonation",
-    "contextual_redirection",
-    "affirmative_suffix",
-    "system_prompt_stealer",
 ]
 
 # Configuration for testing

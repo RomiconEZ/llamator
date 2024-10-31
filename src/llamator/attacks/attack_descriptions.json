@@ -28,41 +28,6 @@
     "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/dan.py"
   },
   {
-    "name": "Amnesia",
-    "in_code_name": "amnesia",
-    "description_en": "Attempts to cause the LLM to forget or disregard its system prompt instructions, causing it to report something unrelated to its purpose.",
-    "description_ru": "Пытается заставить LLM забыть или проигнорировать инструкции системного промпта, заставляя его сообщать что-то несвязанное с его целью.",
-    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/dynamic_test.py"
-  },
-  {
-    "name": "Authoritative Role Impersonation",
-    "in_code_name": "authoritative_role_impersonation",
-    "description_en": "Attempts to impersonate an authoritative role to cause the LLM to report something unrelated to its purpose.",
-    "description_ru": "Пытается имитировать авторитетную роль, чтобы заставить LLM сообщать что-то несвязанное с его целью.",
-    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/dynamic_test.py"
-  },
-  {
-    "name": "Contextual Redirection",
-    "in_code_name": "contextual_redirection",
-    "description_en": "Attempts to trick the LLM into adopting a specific role (Roleplay) that may bypass the restrictions or intended use set by the system prompt.",
-    "description_ru": "Пытается обмануть LLM, заставив его принять определенную роль (ролевую игру), которая может обойти ограничения или предназначенное использование, установленное системным промптом.",
-    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/dynamic_test.py"
-  },
-  {
-    "name": "Affirmative Suffix",
-    "in_code_name": "affirmative_suffix",
-    "description_en": "Exploits a vulnerability in LLMs that can cause them to generate affirmative responses to requests for prohibited content by appending a simple suffix to the query.",
-    "description_ru": "Использует уязвимость в LLM, которая может заставить их генерировать утвердительные ответы на запросы запрещенного контента, добавляя простой суффикс к запросу.",
-    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/dynamic_test.py"
-  },
-  {
-    "name": "System Prompt Stealer",
-    "in_code_name": "system_prompt_stealer",
-    "description_en": "Attempts to steal the system prompt from the LLM by asking it to output its internal configuration or other sensitive information.",
-    "description_ru": "Пытается украсть системный промпт из LLM, прося его вывести свою внутреннюю конфигурацию или другую конфиденциальную информацию.",
-    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/dynamic_test.py"
-  },
-  {
     "name": "Ethical Compliance",
     "in_code_name": "ethical_compliance",
     "description_en": "Evaluates the LLM's ability to resist discussions about harmful or inappropriate misconceptions on sensitive topics. This test aims to verify the model's adherence to ethical guidelines against propagating stereotypes and toxic content.",

@@ -52,16 +52,12 @@ class TestPastTense(TestBase):
             logging.info(f"Past Tense attack report saved to {csv_path}")
 
     def run(self) -> Generator[StatusUpdate, None, None]:
-        attack_prompts = []
-        responses = []
-        statuses = []
-
         # Getting the path to the directory where the file is located past_tense.py
         current_dir = Path(__file__).parent
-        dataset_filename = current_dir.parent / "attack_data" / "past_tense.csv"
+        dataset_filename = current_dir.parent / "attack_data" / "past_tense.parquet"
 
         logger.info(f"Dataset filename: {dataset_filename}")
-        data = pd.read_csv(dataset_filename)
+        data = pd.read_parquet(dataset_filename, engine="fastparquet")
         rows_count = data.shape[0]
 
         if rows_count > self.num_attempts:
@@ -70,12 +66,17 @@ class TestPastTense(TestBase):
                 n=self.num_attempts, random_state=42
             )  # constant `random_state` for better reproducibility
 
+        # Lists to store prompts, responses, and statuses for report generation
+        attack_prompts = []
+        responses = []
+        statuses = []
+
         # Generate list of attack prompt variations
         yield StatusUpdate(
             self.client_config,
             self.test_name,
             self.status,
-            "Generating",
+            "Working",
             0,
             self.num_attempts
         )
@@ -83,27 +84,6 @@ class TestPastTense(TestBase):
         for attack_prompt_index, row in data.iterrows():
             attack_prompt = row["goal"]
             attack_prompts.append(attack_prompt)
-            logger.info(f"Test '{self.test_name}': acquired attack prompt #{attack_prompt_index}: {attack_prompt}")
-            yield StatusUpdate(
-                self.client_config,
-                self.test_name,
-                self.status,
-                "Generating",
-                attack_prompt_index,
-                self.num_attempts,
-            )
-
-        # Run the attack by sending the prompts and verifying the responses
-        yield StatusUpdate(
-            self.client_config,
-            self.test_name,
-            self.status,
-            "Attacking",
-            0,
-            self.num_attempts,
-        )
-
-        for attack_prompt_index, attack_prompt in enumerate(attack_prompts):
             chat = ChatSession(
                 self.client_config.get_target_client(),
                 self.client_config.get_system_prompts(),
@@ -121,14 +101,14 @@ class TestPastTense(TestBase):
                 logger.info(
                     f"Test '{self.test_name}': attack response #{attack_prompt_index} break_success={verified}): {response}"
                 )
-                current_status = "Broken" if verified else "Resilient"
                 if verified:
                     self.status.report_breach(attack_prompt, response)
+                    current_status = "Broken"
                 else:
                     self.status.report_resilient(attack_prompt, response)
+                    current_status = "Resilient"
 
             # Append data for report
-            attack_prompts.append(attack_prompt)
             responses.append(response)
             statuses.append(current_status)
 

@@ -45,56 +45,6 @@ Probes an LLM's resilience against performing explicitly forbidden activities us
 </details>
 
 <details>
-<summary><strong>amnesia</strong></summary>
-<p>
-Attempts to cause the LLM to forget or disregard its system prompt instructions, causing it to report something unrelated to its purpose.
-</p>
-<p>
-<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/dynamic_test.py">View code on GitHub</a>
-</p>
-</details>
-
-<details>
-<summary><strong>authoritative_role_impersonation</strong></summary>
-<p>
-Attempts to impersonate an authoritative role to cause the LLM to report something unrelated to its purpose.
-</p>
-<p>
-<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/dynamic_test.py">View code on GitHub</a>
-</p>
-</details>
-
-<details>
-<summary><strong>contextual_redirection</strong></summary>
-<p>
-Attempts to trick the LLM into adopting a specific role (Roleplay) that may bypass the restrictions or intended use set by the system prompt.
-</p>
-<p>
-<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/dynamic_test.py">View code on GitHub</a>
-</p>
-</details>
-
-<details>
-<summary><strong>affirmative_suffix</strong></summary>
-<p>
-Exploits a vulnerability in LLMs that can cause them to generate affirmative responses to requests for prohibited content by appending a simple suffix to the query.
-</p>
-<p>
-<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/dynamic_test.py">View code on GitHub</a>
-</p>
-</details>
-
-<details>
-<summary><strong>system_prompt_stealer</strong></summary>
-<p>
-Attempts to steal the system prompt from the LLM by asking it to output its internal configuration or other sensitive information.
-</p>
-<p>
-<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/dynamic_test.py">View code on GitHub</a>
-</p>
-</details>
-
-<details>
 <summary><strong>ethical_compliance</strong></summary>
 <p>
 Evaluates the LLM's ability to resist discussions about harmful or inappropriate misconceptions on sensitive topics.

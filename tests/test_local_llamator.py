@@ -49,12 +49,7 @@ def test_openaiclient():
         # ("RU_typoglycemia_attack", 1),
         # ("ucar", 1),
         # ("RU_ucar", 1),
-        # ("amnesia", 1),
         # ("past_tense", 1),
-        # ("authoritative_role_impersonation", 1),
-        # ("contextual_redirection", 1),
-        # ("affirmative_suffix", 1),
-        # ("system_prompt_stealer", 1),
     ]
 
     config = {
@@ -115,13 +110,9 @@ def test_langchainclient_yandegpt():
         # ("sycophancy_test", 1),
         # ("typoglycemia_attack", 1),
         # ("RU_typoglycemia_attack", 1),
+        # ("past_tense", 1),
         # ("ucar", 1),
         # ("RU_ucar", 1),
-        # ("amnesia", 1),
-        # ("authoritative_role_impersonation", 1),
-        # ("contextual_redirection", 1),
-        # ("affirmative_suffix", 1),
-        # ("system_prompt_stealer", 1),
     ]
 
     config = {
