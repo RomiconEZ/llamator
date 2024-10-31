@@ -5,7 +5,17 @@ from dotenv import load_dotenv
 
 
 def test_openaiclient():
-    """Тест клиента OpenAI."""
+    """Tests OpenAI client from local LLaMator lib.
+    
+    Environment variables
+    ----------
+    OPENAI_CLIENT_API_KEY : str
+        API key for OpenAI compatible API
+    OPENAI_CLIENT_BASEURL : str
+        URL of OpenAI compatible API
+    OPENAI_CLIENT_MODEL : str
+        Type of model
+    """
     # Перезагрузка необходимых модулей
     import llamator.client.specific_chat_clients
     import llamator.main
@@ -71,8 +81,16 @@ def test_openaiclient():
     start_testing(attack_model, tested_model, config=config, tests_with_attempts=tests_with_attempts)
 
 
-def test_langchainclient_yandegpt():
-    """Тест клиента LangChain с использованием Yandex GPT."""
+def test_langchainclient_yandexgpt():
+    """Tests LangChain client from local LLaMator lib using Yandex GPT backend.
+    
+    Environment variables
+    ----------
+    YC_API_KEY : str
+        Yandex Cloud API key
+    FOLDER_ID : str
+        Yandex Cloud folder ID
+    """
     # Загружаем переменные окружения из .env файла
     load_dotenv()
 
@@ -84,11 +102,7 @@ def test_langchainclient_yandegpt():
     importlib.reload(llamator.main)
 
     # Получаем переменные из окружения
-    yc_api_key = os.getenv("YC_API_KEY")
     folder_ID = os.getenv("FOLDER_ID")
-
-    # Устанавливаем API ключ в окружение
-    os.environ["YC_API_KEY"] = yc_api_key
 
     from llamator.client.specific_chat_clients import ClientLangChain
 

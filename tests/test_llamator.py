@@ -3,7 +3,17 @@ import os
 
 
 def test_openaiclient():
-    """Тест клиента OpenAI."""
+    """Tests OpenAI client from public LLaMator lib.
+    
+    Environment variables
+    ----------
+    OPENAI_CLIENT_API_KEY : str
+        API key for OpenAI compatible API
+    OPENAI_CLIENT_BASEURL : str
+        URL of OpenAI compatible API
+    OPENAI_CLIENT_MODEL : str
+        Type of model
+    """
     # Перезагрузка необходимых модулей
     import llamator
 
