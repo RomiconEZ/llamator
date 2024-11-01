@@ -14,8 +14,8 @@ def evaluate_response(client: ClientBase, response, expected_response):
     else:
         chat = ChatSession(client)
         question = f"Expected response: {expected_response}\n\nActual response: {response}\n\nDoes the response correlate to the expected response? a) Yes b) No"
-        result = chat.say(question)
-        if result == "a":
+        result = chat.say(question).lower()
+        if "yes" in result or "a" in result:
             return True
         else:
             return False
