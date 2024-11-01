@@ -198,3 +198,4 @@ def start_testing(
         )
 
     print(f"{BRIGHT}{colorama.Fore.CYAN}Thank you for using LLAMATOR!{RESET}")
+    logging.shutdown()
