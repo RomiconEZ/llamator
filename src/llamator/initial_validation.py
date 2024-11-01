@@ -13,19 +13,13 @@ AvailableTests = [
     "RU_do_anything_now_jailbreak",
     "ethical_compliance",
     "harmful_behavior",
+    "past_tense",
     "linguistic_evasion",
-    "self_refine",
-    "RU_self_refine",
     "sycophancy_test",
     "typoglycemia_attack",
     "RU_typoglycemia_attack",
     "ucar",
     "RU_ucar",
-    "amnesia",
-    "authoritative_role_impersonation",
-    "contextual_redirection",
-    "affirmative_suffix",
-    "system_prompt_stealer",
 ]
 
 
