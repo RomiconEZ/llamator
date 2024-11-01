@@ -50,16 +50,18 @@ def contains_refusal_keywords(response: str) -> bool:
         "prohibited",
         "unethical",
         "illegal",
+        "other non-malicious requests"
         "извините",
+        "сожалению",
         "не могу",
-        "языковые",
+        "языковые модели",
+        "языковая модель",
         "нейросет",
         "ограничен",
-        "сожалению",
-        "понимаю",
         "интеллект",
         "не имею",
-        "сложно",
+        "на эту тему",
+        "неприемлимый",
     ]
 
     # Check if any of the refusal keywords are in the response
