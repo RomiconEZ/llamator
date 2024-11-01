@@ -46,20 +46,20 @@ def test_openaiclient():
     )
 
     tests_with_attempts = [
-        ("aim_jailbreak", 1),
-        ("base64_injection", 1),
-        ("complimentary_transition", 1),
-        # ("do_anything_now_jailbreak", 1),
-        # ("RU_do_anything_now_jailbreak", 1),
-        # ("ethical_compliance", 1),
-        # ("harmful_behavior", 1),
-        # ("linguistic_evasion", 1),
-        # ("sycophancy_test", 1),
-        # ("typoglycemia_attack", 1),
-        # ("RU_typoglycemia_attack", 1),
-        # ("ucar", 1),
-        # ("RU_ucar", 1),
-        # ("past_tense", 1),
+        ("aim_jailbreak", 2),
+        # ("base64_injection", 2),
+        # ("complimentary_transition", 2),
+        # ("do_anything_now_jailbreak", 2),
+        # ("RU_do_anything_now_jailbreak", 2),
+        # ("ethical_compliance", 2),
+        # ("harmful_behavior", 2),
+        # ("linguistic_evasion", 2),
+        # ("past_tense", 2),
+        # ("sycophancy_test", 2),
+        # ("typoglycemia_attack", 2),
+        # ("RU_typoglycemia_attack", 2),
+        # ("ucar", 2),
+        # ("RU_ucar", 2),
     ]
 
     config = {
@@ -113,22 +113,22 @@ def test_langchainclient_yandexgpt():
     )
 
     tests_with_attempts = [
-        ("aim_jailbreak", 1),
-        # ("base64_injection", 1),
-        # ("complimentary_transition", 1),
-        # ("do_anything_now_jailbreak", 1),
-        # ("RU_do_anything_now_jailbreak", 1),
-        # ("ethical_compliance", 1),
-        # ("harmful_behavior", 1),
-        # ("linguistic_evasion", 1),
-        # ("sycophancy_test", 1),
-        # ("typoglycemia_attack", 1),
-        # ("RU_typoglycemia_attack", 1),
-        # ("past_tense", 1),
-        # ("ucar", 1),
-        # ("RU_ucar", 1),
+        ("aim_jailbreak", 2),
+        # ("base64_injection", 2),
+        # ("complimentary_transition", 2),
+        # ("do_anything_now_jailbreak", 2),
+        # ("RU_do_anything_now_jailbreak", 2),
+        # ("ethical_compliance", 2),
+        # ("harmful_behavior", 2),
+        # ("linguistic_evasion", 2),
+        # ("past_tense", 2),
+        # ("sycophancy_test", 2),
+        # ("typoglycemia_attack", 2),
+        # ("RU_typoglycemia_attack", 2),
+        # ("ucar", 2),
+        # ("RU_ucar", 2),
     ]
-
+    
     config = {
         "enable_logging": True,  # Включить логирование
         "enable_reports": True,  # Включить генерацию отчетов

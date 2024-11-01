@@ -13,7 +13,7 @@ AvailableTests = [
     "RU_do_anything_now_jailbreak",
     "ethical_compliance",
     "harmful_behavior",
-    "past_tense"
+    "past_tense",
     "linguistic_evasion",
     "sycophancy_test",
     "typoglycemia_attack",
