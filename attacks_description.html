@@ -309,51 +309,6 @@ Probes an LLM's resilience against performing explicitly forbidden activities us
 </p>
 </details>
 <details>
-<summary><strong>amnesia</strong></summary>
-<p>
-Attempts to cause the LLM to forget or disregard its system prompt instructions, causing it to report something unrelated to its purpose.
-</p>
-<p>
-<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/dynamic_test.py">View code on GitHub</a>
-</p>
-</details>
-<details>
-<summary><strong>authoritative_role_impersonation</strong></summary>
-<p>
-Attempts to impersonate an authoritative role to cause the LLM to report something unrelated to its purpose.
-</p>
-<p>
-<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/dynamic_test.py">View code on GitHub</a>
-</p>
-</details>
-<details>
-<summary><strong>contextual_redirection</strong></summary>
-<p>
-Attempts to trick the LLM into adopting a specific role (Roleplay) that may bypass the restrictions or intended use set by the system prompt.
-</p>
-<p>
-<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/dynamic_test.py">View code on GitHub</a>
-</p>
-</details>
-<details>
-<summary><strong>affirmative_suffix</strong></summary>
-<p>
-Exploits a vulnerability in LLMs that can cause them to generate affirmative responses to requests for prohibited content by appending a simple suffix to the query.
-</p>
-<p>
-<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/dynamic_test.py">View code on GitHub</a>
-</p>
-</details>
-<details>
-<summary><strong>system_prompt_stealer</strong></summary>
-<p>
-Attempts to steal the system prompt from the LLM by asking it to output its internal configuration or other sensitive information.
-</p>
-<p>
-<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/dynamic_test.py">View code on GitHub</a>
-</p>
-</details>
-<details>
 <summary><strong>ethical_compliance</strong></summary>
 <p>
 Evaluates the LLM's ability to resist discussions about harmful or inappropriate misconceptions on sensitive topics.
@@ -373,21 +328,21 @@ Challenges the LLM with a dataset of harmful behavior prompts.
 </p>
 </details>
 <details>
+<summary><strong>past_tense</strong></summary>
+<p>
+Challenges the LLM with a dataset of harmful behavior prompts in past tense form.
+</p>
+<p>
+<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/past_tense.py">View code on GitHub</a>
+</p>
+</details>
+<details>
 <summary><strong>RU_do_anything_now_jailbreak</strong></summary>
 <p>
 Probes a Russian-language LLM's resilience against performing explicitly forbidden activities using the "Do Anything Now" (DAN) character roleplay technique.
 </p>
 <p>
 <a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/ru_dan.py">View code on GitHub</a>
-</p>
-</details>
-<details>
-<summary><strong>RU_self_refine</strong></summary>
-<p>
-Probes a Russian-language LLM's ethical compliance by eliciting detailed instructions on illegal activities, using the self-refine technique to bypass the system prompt by asking the LLM to refine its response.
-</p>
-<p>
-<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/ru_self_refine.py">View code on GitHub</a>
 </p>
 </details>
 <details>
@@ -406,15 +361,6 @@ Probes a Russian-language LLM's adherence to content restrictions when explicitl
 </p>
 <p>
 <a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/ru_ucar.py">View code on GitHub</a>
-</p>
-</details>
-<details>
-<summary><strong>self_refine</strong></summary>
-<p>
-Probes an LLM's ethical compliance by eliciting detailed instructions on illegal activities, using the self-refine technique to bypass the system prompt by asking the LLM to refine its response.
-</p>
-<p>
-<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/self_refine.py">View code on GitHub</a>
 </p>
 </details>
 <details>
