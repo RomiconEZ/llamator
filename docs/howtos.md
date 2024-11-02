@@ -1,10 +1,10 @@
 # How To Use
 
 ## Notebooks Examples
-* RAG Chatbot testing via API (RU) - [GitHub](https://github.com/RomiconEZ/llamator/blob/main/examples/llamator-api.ipynb)
-* Testing the Gandalf webbot - [GitHub](https://github.com/RomiconEZ/llamator/blob/main/examples/llamator-selenium.ipynb)
-* Telegram bot testing via Telethon (RU) - [GitHub](https://github.com/RomiconEZ/llamator/blob/main/examples/llamator-telegram.ipynb)
-* LangChain client testing with custom attack (RU)](https://github.com/RomiconEZ/llamator/blob/main/examples/llamator-langchain-custom-attack.ipynb)
+* RAG Chatbot testing via API (RU) - [GitHub](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-api.ipynb)
+* Testing the Gandalf webbot - [GitHub](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-selenium.ipynb)
+* Telegram bot testing via Telethon (RU) - [GitHub](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-telegram.ipynb)
+* LangChain client testing with custom attack (RU)](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-langchain-custom-attack.ipynb)
 
 ## Installation Guide
 
