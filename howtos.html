@@ -243,12 +243,12 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="https://github.com/RomiconEZ/llamator/blob/main/src/howtos.md?plain=true" title="View this page">
+  <a class="muted-link" href="https://github.com/RomiconEZ/llamator/blob/release/src/howtos.md?plain=true" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/RomiconEZ/llamator/edit/main/src/howtos.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/RomiconEZ/llamator/edit/release/src/howtos.md" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
@@ -272,10 +272,10 @@
 <section id="notebooks-examples">
 <h2>Notebooks Examples<a class="headerlink" href="#notebooks-examples" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>RAG Chatbot testing via API (RU) - <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-api.ipynb">GitHub</a></p></li>
-<li><p>Testing the Gandalf webbot - <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-selenium.ipynb">GitHub</a></p></li>
-<li><p>Telegram bot testing via Telethon (RU) - <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-telegram.ipynb">GitHub</a></p></li>
-<li><p>LangChain client testing with custom attack (RU)](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-langchain-custom-attack.ipynb)</p></li>
+<li><p><strong>RAG Chatbot testing via API (RU)</strong> - <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-api.ipynb">GitHub</a></p></li>
+<li><p><strong>Testing the Gandalf webbot</strong> - <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-selenium.ipynb">GitHub</a></p></li>
+<li><p><strong>Telegram bot testing via Telethon (RU)</strong> - <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-telegram.ipynb">GitHub</a></p></li>
+<li><p><strong>LangChain client testing with custom attack (RU)</strong> - <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-langchain-custom-attack.ipynb">GitHub</a></p></li>
 </ul>
 </section>
 <section id="installation-guide">
@@ -306,22 +306,23 @@
     <span class="n">system_prompts</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;You are a defensive model.&quot;</span><span class="p">],</span>
 <span class="p">)</span>
 
-<span class="c1"># List of tests</span>
-<span class="n">tests</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;aim_jailbreak&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;base64_injection&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;complimentary_transition&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;do_anything_now_jailbreak&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;RU_do_anything_now_jailbreak&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ethical_compliance&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;harmful_behavior&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;linguistic_evasion&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sycophancy_test&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;typoglycemia_attack&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;past_tense&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;RU_typoglycemia_attack&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ucar&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;RU_ucar&quot;</span><span class="p">,</span>
+<span class="c1"># List of tests with the number of attempts</span>
+<span class="n">tests_with_attempts</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;aim_jailbreak&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;base64_injection&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;complimentary_transition&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;do_anything_now_jailbreak&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="c1"># Uncomment the following lines to include additional tests</span>
+    <span class="c1"># (&quot;RU_do_anything_now_jailbreak&quot;, 2),</span>
+    <span class="c1"># (&quot;ethical_compliance&quot;, 2),</span>
+    <span class="c1"># (&quot;harmful_behavior&quot;, 2),</span>
+    <span class="c1"># (&quot;linguistic_evasion&quot;, 2),</span>
+    <span class="c1"># (&quot;past_tense&quot;, 2),</span>
+    <span class="c1"># (&quot;sycophancy_test&quot;, 2),</span>
+    <span class="c1"># (&quot;typoglycemia_attack&quot;, 2),</span>
+    <span class="c1"># (&quot;RU_typoglycemia_attack&quot;, 2),</span>
+    <span class="c1"># (&quot;ucar&quot;, 2),</span>
+    <span class="c1"># (&quot;RU_ucar&quot;, 2),</span>
 <span class="p">]</span>
 
 <span class="c1"># Configuration for testing</span>
@@ -330,11 +331,16 @@
     <span class="s2">&quot;enable_reports&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># Enable report generation</span>
     <span class="s2">&quot;artifacts_path&quot;</span><span class="p">:</span> <span class="s2">&quot;./artifacts&quot;</span><span class="p">,</span>  <span class="c1"># Path to save artifacts</span>
     <span class="s2">&quot;debug_level&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>  <span class="c1"># Logging level: 0 - WARNING, 1 - INFO, 2 - DEBUG</span>
+    <span class="s2">&quot;report_language&quot;</span><span class="p">:</span> <span class="s2">&quot;en&quot;</span><span class="p">,</span>  <span class="c1"># Report language: &#39;en&#39;, &#39;ru&#39;</span>
 <span class="p">}</span>
 
 <span class="c1"># Start testing</span>
-<span class="n">llamator</span><span class="o">.</span><span class="n">start_testing</span><span class="p">(</span><span class="n">attack_model</span><span class="p">,</span> <span class="n">tested_model</span><span class="p">,</span>
-                       <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">tests</span><span class="o">=</span><span class="n">tests</span><span class="p">,</span> <span class="n">num_attempts</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">llamator</span><span class="o">.</span><span class="n">start_testing</span><span class="p">(</span>
+    <span class="n">attack_model</span><span class="p">,</span> 
+    <span class="n">tested_model</span><span class="p">,</span> 
+    <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> 
+    <span class="n">tests_with_attempts</span><span class="o">=</span><span class="n">tests_with_attempts</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </section>
