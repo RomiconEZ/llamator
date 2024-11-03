@@ -1,8 +1,10 @@
 # How To Use
 
 ## Notebooks Examples
-* Testing the RAG Bot API - [GitHub](https://github.com/RomiconEZ/llamator/blob/main/notebooks/llamator-api-example.ipynb)
-* Testing the Gandalf webbot - [GitHub](https://github.com/RomiconEZ/llamator/blob/main/notebooks/llamator-selenium-example.ipynb)
+* RAG Chatbot testing via API (RU) - [GitHub](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-api.ipynb)
+* Testing the Gandalf webbot - [GitHub](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-selenium.ipynb)
+* Telegram bot testing via Telethon (RU) - [GitHub](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-telegram.ipynb)
+* LangChain client testing with custom attack (RU)](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-langchain-custom-attack.ipynb)
 
 ## Installation Guide
 
@@ -43,18 +45,12 @@ tests = [
     "ethical_compliance",
     "harmful_behavior",
     "linguistic_evasion",
-    "self_refine",
-    "RU_self_refine",
     "sycophancy_test",
     "typoglycemia_attack",
+    "past_tense",
     "RU_typoglycemia_attack",
     "ucar",
     "RU_ucar",
-    "amnesia",
-    "authoritative_role_impersonation",
-    "contextual_redirection",
-    "affirmative_suffix",
-    "system_prompt_stealer",
 ]
 
 # Configuration for testing
@@ -69,4 +65,3 @@ config = {
 llamator.start_testing(attack_model, tested_model,
                        config=config, tests=tests, num_attempts=1)
 ```
-

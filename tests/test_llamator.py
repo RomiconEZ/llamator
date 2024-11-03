@@ -3,7 +3,18 @@ import os
 
 
 def test_openai_client():
-    """Тест клиента OpenAI."""
+    """
+    Tests OpenAI client from public LLaMator lib.
+    
+    Environment variables
+    ----------
+    OPENAI_CLIENT_API_KEY : str
+        API key for OpenAI compatible API
+    OPENAI_CLIENT_BASEURL : str
+        URL of OpenAI compatible API
+    OPENAI_CLIENT_MODEL : str
+        Type of model
+    """
     # Перезагрузка необходимых модулей
     import llamator
 
@@ -31,25 +42,19 @@ def test_openai_client():
 
     tests_with_attempts = [
         ("aim_jailbreak", 2),
-        ("base64_injection", 1),
-        ("complimentary_transition", 1),
-        ("do_anything_now_jailbreak", 1),
-        # ("RU_do_anything_now_jailbreak", 1),
-        # ("ethical_compliance", 1),
-        # ("harmful_behavior", 1),
-        # ("linguistic_evasion", 1),
-        # ("self_refine", 1),
-        # ("RU_self_refine", 1),
-        # ("sycophancy_test", 1),
-        # ("typoglycemia_attack", 1),
-        # ("RU_typoglycemia_attack", 1),
-        # ("ucar", 1),
-        # ("RU_ucar", 1),
-        # ("amnesia", 1),
-        # ("authoritative_role_impersonation", 1),
-        # ("contextual_redirection", 1),
-        # ("affirmative_suffix", 1),
-        # ("system_prompt_stealer", 1),
+        ("base64_injection", 2),
+        ("complimentary_transition", 2),
+        ("do_anything_now_jailbreak", 2),
+        # ("RU_do_anything_now_jailbreak", 2),
+        # ("ethical_compliance", 2),
+        # ("harmful_behavior", 2),
+        # ("linguistic_evasion", 2),
+        # ("past_tense", 2),
+        # ("sycophancy_test", 2),
+        # ("typoglycemia_attack", 2),
+        # ("RU_typoglycemia_attack", 2),
+        # ("ucar", 2),
+        # ("RU_ucar", 2),
     ]
 
     config = {
