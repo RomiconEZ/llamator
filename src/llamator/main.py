@@ -3,18 +3,25 @@ import logging
 import os
 from datetime import datetime
 from logging.handlers import RotatingFileHandler
-from typing import List, Optional, Type
+from typing import List, Optional, Tuple, Type
 
 import colorama
 from dotenv import load_dotenv
 
 from .attack_provider.run_tests import setup_models_and_tests
 from .attack_provider.test_base import TestBase
-from .attacks.utils import create_attack_report_from_artifacts
 from .client.chat_client import ClientBase
 from .format_output.logo import print_logo
-from .initial_validation import validate_artifacts_path, validate_custom_tests, validate_model, validate_tests
+from .initial_validation import (
+    validate_artifacts_path,
+    validate_custom_tests,
+    validate_language,
+    validate_model,
+    validate_tests,
+)
 from .ps_logging import setup_logging
+from .report_generators.excel_report_generator import create_attack_report_from_artifacts
+from .report_generators.word_report_generator import create_word_report
 
 # At this stage, the api keys that the user sets are loaded
 dotenv_path = os.path.join(os.getcwd(), ".env")
@@ -30,10 +37,9 @@ def start_testing(
     attack_model: ClientBase,
     tested_model: ClientBase,
     config: dict,
-    num_attempts: int = 1,
     num_threads: int = 1,
-    tests: Optional[List[str]] = None,
-    custom_tests: List[Type[TestBase]] = None,
+    tests_with_attempts: Optional[List[Tuple[str, int]]] = None,
+    custom_tests_with_attempts: Optional[List[Tuple[Type[TestBase], int]]] = None,
 ):
     """
     Start testing.
@@ -58,36 +64,31 @@ def start_testing(
             debug_level = 0 - WARNING.
             debug_level = 1 - INFO.
             debug_level = 2 - DEBUG.
+        - 'report_language' : str
+            Language for the report (default is 'en').
+            Possible values: 'en', 'ru'.
 
-    num_attempts : int, optional
-        Number of attempts per test case (default is 1).
     num_threads : int, optional
         Number of threads for parallel test execution (default is 1).
-    tests : Optional[List[str]], optional
-        List of test names to execute (default is an empty list).
+    tests_with_attempts : List[Tuple[str, int]], optional
+        List of test names and their corresponding number of attempts.
         Available tests:
-        - affirmative_suffix
         - aim_jailbreak
-        - amnesia
-        - authoritative_role_impersonation
         - base64_injection
         - complimentary_transition
-        - contextual_redirection
         - do_anything_now_jailbreak
         - ethical_compliance
         - harmful_behavior
         - linguistic_evasion
+        - past_tense
         - RU_do_anything_now_jailbreak
-        - RU_self_refine
         - RU_typoglycemia_attack
         - RU_ucar
-        - self_refine
         - sycophancy_test
-        - system_prompt_stealer
         - typoglycemia_attack
         - ucar
-    custom_tests : List[Type[TestBase]], optional
-        List of custom test instances (default is an empty list).
+    custom_tests_with_attempts : List[Tuple[Type[TestBase], int]], optional
+        List of custom test instances and their corresponding number of attempts.
 
     Returns
     -------
@@ -99,6 +100,7 @@ def start_testing(
     enable_reports = config.get("enable_reports", False)
     artifacts_path = config.get("artifacts_path", None)
     debug_level = config.get("debug_level", 1)
+    report_language = config.get("report_language", "en")
 
     start_timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
@@ -139,12 +141,12 @@ def start_testing(
         return
 
     # Validate the test list
-    if tests and not validate_tests(tests):
+    if tests_with_attempts and not validate_tests([test[0] for test in tests_with_attempts]):
         logging.error("The test list contains invalid values.")
         return
 
     # Validate custom tests
-    if custom_tests and not validate_custom_tests(custom_tests):
+    if custom_tests_with_attempts and not validate_custom_tests([test[0] for test in custom_tests_with_attempts]):
         logging.error("One or more custom tests failed validation.")
         return
 
@@ -153,29 +155,41 @@ def start_testing(
         setup_models_and_tests(
             attack_model,
             tested_model,
-            num_attempts,
-            num_threads,
-            tests,
-            custom_tests,
+            num_threads=num_threads,
+            tests_with_attempts=tests_with_attempts,
+            custom_tests_with_attempts=custom_tests_with_attempts,
             artifacts_path=artifacts_run_path,
         )
     else:
         setup_models_and_tests(
-            attack_model, tested_model, num_attempts, num_threads, tests, custom_tests, artifacts_path=None
+            attack_model,
+            tested_model,
+            num_threads=num_threads,
+            tests_with_attempts=tests_with_attempts,
+            custom_tests_with_attempts=custom_tests_with_attempts,
+            artifacts_path=None,
         )
 
-    # Thank you message at the end of the program
     logging.info(f"Completion of testing")
 
-    # Явное закрытие файла лога в конце программы
+    # Explicitly close log files at the end of the progra
     for handler in logging.getLogger().handlers:
         if isinstance(handler, RotatingFileHandler):
             handler.close()
 
     if enable_reports:
+        report_language = validate_language(report_language)
+        csv_folder_name = "csv_report"
+        # Create Excel report
         create_attack_report_from_artifacts(
-            artifacts_dir=artifacts_run_path, csv_folder_name="csv_report", report_file_name="attacks_report.xlsx"
+            artifacts_dir=artifacts_run_path, csv_folder_name=csv_folder_name, report_file_name="attacks_report.xlsx"
         )
-        pass
+        create_word_report(
+            artifacts_dir=artifacts_run_path,
+            csv_folder_name=csv_folder_name,
+            docx_file_name="attacks_report.docx",
+            language=report_language,
+        )
 
     print(f"{BRIGHT}{colorama.Fore.CYAN}Thank you for using LLAMATOR!{RESET}")
+    logging.shutdown()

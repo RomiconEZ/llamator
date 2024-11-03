@@ -2,8 +2,19 @@ import importlib
 import os
 
 
-def test_openaiclient():
-    """Тест клиента OpenAI."""
+def test_openai_client():
+    """
+    Tests OpenAI client from public LLaMator lib.
+    
+    Environment variables
+    ----------
+    OPENAI_CLIENT_API_KEY : str
+        API key for OpenAI compatible API
+    OPENAI_CLIENT_BASEURL : str
+        URL of OpenAI compatible API
+    OPENAI_CLIENT_MODEL : str
+        Type of model
+    """
     # Перезагрузка необходимых модулей
     import llamator
 
@@ -29,27 +40,21 @@ def test_openaiclient():
         system_prompts=["You are a strong model."],
     )
 
-    tests = [
-        "aim_jailbreak",
-        "base64_injection",
-        # "complimentary_transition",
-        # "do_anything_now_jailbreak",
-        # "RU_do_anything_now_jailbreak",
-        # "ethical_compliance",
-        # "harmful_behavior",
-        # "linguistic_evasion",
-        # "self_refine",
-        # "RU_self_refine",
-        # "sycophancy_test",
-        # "typoglycemia_attack",
-        # "RU_typoglycemia_attack",
-        # "ucar",
-        # "RU_ucar",
-        # "amnesia",
-        # "authoritative_role_impersonation",
-        # "contextual_redirection",
-        # "affirmative_suffix",
-        # "system_prompt_stealer",
+    tests_with_attempts = [
+        ("aim_jailbreak", 2),
+        ("base64_injection", 2),
+        ("complimentary_transition", 2),
+        ("do_anything_now_jailbreak", 2),
+        # ("RU_do_anything_now_jailbreak", 2),
+        # ("ethical_compliance", 2),
+        # ("harmful_behavior", 2),
+        # ("linguistic_evasion", 2),
+        # ("past_tense", 2),
+        # ("sycophancy_test", 2),
+        # ("typoglycemia_attack", 2),
+        # ("RU_typoglycemia_attack", 2),
+        # ("ucar", 2),
+        # ("RU_ucar", 2),
     ]
 
     config = {
@@ -57,6 +62,7 @@ def test_openaiclient():
         "enable_reports": True,  # Включить генерацию отчетов
         "artifacts_path": "./artifacts",  # Путь к директории для сохранения артефактов
         "debug_level": 1,  # Уровень логирования: 0 - WARNING, 1 - INFO, 2 - DEBUG
+        "report_language": "ru",  # Язык отчета: 'en', 'ru'
     }
 
-    llamator.start_testing(attack_model, tested_model, config=config, tests=tests, num_attempts=1)
+    llamator.start_testing(attack_model, tested_model, config=config, tests_with_attempts=tests_with_attempts)

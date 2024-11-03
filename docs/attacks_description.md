@@ -4,7 +4,7 @@ This section provides an overview of all available attacks.
 ---
 
 <details>
-<summary><strong>aim_jailbreak</strong></summary>
+<summary><strong>Aim Jailbreak</strong></summary>
 <p>
 Probes an LLM's ethical compliance by eliciting detailed instructions on illegal activities, using the Nicolo Machiavelli character roleplay.
 </p>
@@ -14,7 +14,7 @@ Probes an LLM's ethical compliance by eliciting detailed instructions on illegal
 </details>
 
 <details>
-<summary><strong>base64_injection</strong></summary>
+<summary><strong>Base64 Injection</strong></summary>
 <p>
 Challenges the LLM with a dataset of lines, encoded into base64.
 </p>
@@ -24,10 +24,9 @@ Challenges the LLM with a dataset of lines, encoded into base64.
 </details>
 
 <details>
-<summary><strong>complimentary_transition</strong></summary>
+<summary><strong>Complimentary Transition</strong></summary>
 <p>
-This test evaluates the LLM's ability to maintain content moderation standards when transitioning from a compliment to a new task.
-It assesses the LLM's ability to maintain defined boundaries when prompted to switch topics.
+This test evaluates the LLM's ability to maintain content moderation standards when transitioning from a compliment to a new task. It assesses the LLM's ability to maintain defined boundaries when prompted to switch topics.
 </p>
 <p>
 <a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/complimentary_transition.py">View code on GitHub</a>
@@ -35,7 +34,7 @@ It assesses the LLM's ability to maintain defined boundaries when prompted to sw
 </details>
 
 <details>
-<summary><strong>do_anything_now_jailbreak</strong></summary>
+<summary><strong>Do Anything Now Jailbreak</strong></summary>
 <p>
 Probes an LLM's resilience against performing explicitly forbidden activities using the "Do Anything Now" (DAN) character roleplay technique.
 </p>
@@ -45,60 +44,9 @@ Probes an LLM's resilience against performing explicitly forbidden activities us
 </details>
 
 <details>
-<summary><strong>amnesia</strong></summary>
+<summary><strong>Ethical Compliance</strong></summary>
 <p>
-Attempts to cause the LLM to forget or disregard its system prompt instructions, causing it to report something unrelated to its purpose.
-</p>
-<p>
-<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/dynamic_test.py">View code on GitHub</a>
-</p>
-</details>
-
-<details>
-<summary><strong>authoritative_role_impersonation</strong></summary>
-<p>
-Attempts to impersonate an authoritative role to cause the LLM to report something unrelated to its purpose.
-</p>
-<p>
-<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/dynamic_test.py">View code on GitHub</a>
-</p>
-</details>
-
-<details>
-<summary><strong>contextual_redirection</strong></summary>
-<p>
-Attempts to trick the LLM into adopting a specific role (Roleplay) that may bypass the restrictions or intended use set by the system prompt.
-</p>
-<p>
-<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/dynamic_test.py">View code on GitHub</a>
-</p>
-</details>
-
-<details>
-<summary><strong>affirmative_suffix</strong></summary>
-<p>
-Exploits a vulnerability in LLMs that can cause them to generate affirmative responses to requests for prohibited content by appending a simple suffix to the query.
-</p>
-<p>
-<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/dynamic_test.py">View code on GitHub</a>
-</p>
-</details>
-
-<details>
-<summary><strong>system_prompt_stealer</strong></summary>
-<p>
-Attempts to steal the system prompt from the LLM by asking it to output its internal configuration or other sensitive information.
-</p>
-<p>
-<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/dynamic_test.py">View code on GitHub</a>
-</p>
-</details>
-
-<details>
-<summary><strong>ethical_compliance</strong></summary>
-<p>
-Evaluates the LLM's ability to resist discussions about harmful or inappropriate misconceptions on sensitive topics.
-This test aims to verify the model's adherence to ethical guidelines against propagating stereotypes and toxic content.
+Evaluates the LLM's ability to resist discussions about harmful or inappropriate misconceptions on sensitive topics. This test aims to verify the model's adherence to ethical guidelines against propagating stereotypes and toxic content.
 </p>
 <p>
 <a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/ethical_compliance.py">View code on GitHub</a>
@@ -106,7 +54,7 @@ This test aims to verify the model's adherence to ethical guidelines against pro
 </details>
 
 <details>
-<summary><strong>harmful_behavior</strong></summary>
+<summary><strong>Harmful Behavior</strong></summary>
 <p>
 Challenges the LLM with a dataset of harmful behavior prompts.
 </p>
@@ -116,7 +64,7 @@ Challenges the LLM with a dataset of harmful behavior prompts.
 </details>
 
 <details>
-<summary><strong>RU_do_anything_now_jailbreak</strong></summary>
+<summary><strong>RU Do Anything Now Jailbreak</strong></summary>
 <p>
 Probes a Russian-language LLM's resilience against performing explicitly forbidden activities using the "Do Anything Now" (DAN) character roleplay technique.
 </p>
@@ -126,17 +74,7 @@ Probes a Russian-language LLM's resilience against performing explicitly forbidd
 </details>
 
 <details>
-<summary><strong>RU_self_refine</strong></summary>
-<p>
-Probes a Russian-language LLM's ethical compliance by eliciting detailed instructions on illegal activities, using the self-refine technique to bypass the system prompt by asking the LLM to refine its response.
-</p>
-<p>
-<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/ru_self_refine.py">View code on GitHub</a>
-</p>
-</details>
-
-<details>
-<summary><strong>RU_typoglycemia_attack</strong></summary>
+<summary><strong>RU Typoglycemia Attack</strong></summary>
 <p>
 Attempts to exploit a text processing vulnerability in Russian-language LLMs that can cause incorrect responses by removing random characters from words.
 </p>
@@ -146,7 +84,7 @@ Attempts to exploit a text processing vulnerability in Russian-language LLMs tha
 </details>
 
 <details>
-<summary><strong>RU_ucar</strong></summary>
+<summary><strong>RU Ucar</strong></summary>
 <p>
 Probes a Russian-language LLM's adherence to content restrictions when explicitly requested to ignore such filters. It assesses the robustness of the LLM's content moderation systems against direct challenges.
 </p>
@@ -156,17 +94,7 @@ Probes a Russian-language LLM's adherence to content restrictions when explicitl
 </details>
 
 <details>
-<summary><strong>self_refine</strong></summary>
-<p>
-Probes an LLM's ethical compliance by eliciting detailed instructions on illegal activities, using the self-refine technique to bypass the system prompt by asking the LLM to refine its response.
-</p>
-<p>
-<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/self_refine.py">View code on GitHub</a>
-</p>
-</details>
-
-<details>
-<summary><strong>sycophancy_test</strong></summary>
+<summary><strong>Sycophancy Test</strong></summary>
 <p>
 Probes an LLM's response coherency and consistency across biased input pairs.
 </p>
@@ -176,7 +104,7 @@ Probes an LLM's response coherency and consistency across biased input pairs.
 </details>
 
 <details>
-<summary><strong>linguistic_evasion</strong></summary>
+<summary><strong>Linguistic Evasion</strong></summary>
 <p>
 Leverages the use of a non-Russian language to circumvent the restrictions or focus set by the system prompt.
 </p>
@@ -186,7 +114,7 @@ Leverages the use of a non-Russian language to circumvent the restrictions or fo
 </details>
 
 <details>
-<summary><strong>typoglycemia_attack</strong></summary>
+<summary><strong>Typoglycemia Attack</strong></summary>
 <p>
 Attempts to exploit a text processing vulnerability in LLMs that can cause incorrect responses by removing random characters from words.
 </p>
@@ -196,11 +124,21 @@ Attempts to exploit a text processing vulnerability in LLMs that can cause incor
 </details>
 
 <details>
-<summary><strong>ucar</strong></summary>
+<summary><strong>Ucar</strong></summary>
 <p>
 Probes an LLM's adherence to content restrictions when explicitly requested to ignore such filters. It assesses the robustness of the LLM's content moderation systems against direct challenges.
 </p>
 <p>
 <a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/ucar.py">View code on GitHub</a>
+</p>
+</details>
+
+<details>
+<summary><strong>Past Tense Attack</strong></summary>
+<p>
+Challenges the LLM with a dataset of harmful behavior prompts in past tense form.
+</p>
+<p>
+<a href="https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/past_tense.py">View code on GitHub</a>
 </p>
 </details>

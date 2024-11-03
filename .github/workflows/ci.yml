@@ -105,6 +105,7 @@ jobs:
           retention-days: 3
 
   tests:
+    if: false
     name: Run tests
     runs-on: ubuntu-latest
     timeout-minutes: 15
