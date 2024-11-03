@@ -1,5 +1,5 @@
 import textwrap
-from typing import Type
+from typing import Tuple, Type
 
 import colorama
 from pydantic import ValidationError
@@ -113,8 +113,8 @@ def run_tests(
     client_config: ClientConfig,
     attack_config: AttackConfig,
     threads_count: int,
-    basic_tests: List[str],
-    custom_tests: List[Type[TestBase]],
+    basic_tests_with_attempts: Optional[List[Tuple[str, int]]] = None,
+    custom_tests_with_attempts: Optional[List[Tuple[Type[TestBase], int]]] = None,
     artifacts_path: Optional[str] = None,
 ):
     """
@@ -128,10 +128,12 @@ def run_tests(
         The configuration for the attack model.
     threads_count : int
         The number of threads to use for parallel testing.
-    basic_tests : List[str]
-        A list of basic test names to be executed.
-    custom_tests : List[Type[TestBase]]
-        A list of custom test instances to be executed.
+    basic_tests_with_attempts : List[Tuple[str, int]], optional
+        A list where each element is a list consisting of a basic test name and the number of attempts
+        to be executed (default is None).
+    custom_tests_with_attempts : List[Tuple[Type[TestBase], int]], optional
+        A list where each element is a list consisting of a custom test instance and the number of attempts
+        to be executed (default is None).
     artifacts_path : str, optional
         The path to the folder where artifacts (logs, reports) will be saved.
 
@@ -142,11 +144,17 @@ def run_tests(
     print(f"{BRIGHT_CYAN}Running tests on your system prompt{RESET} ...")
 
     logger.debug("Initializing tests...")
-    logger.debug(f"List of basic tests: {basic_tests}")
+    # Extract the test names from the list
+    basic_test_names = [test[0] for test in basic_tests_with_attempts] if basic_tests_with_attempts else []
+    logger.debug(f"List of basic tests: {basic_test_names}")
 
     # Instantiate all tests
-    tests: List[Type[TestBase]] = instantiate_tests(
-        client_config, attack_config, basic_tests=basic_tests, custom_tests=custom_tests, artifacts_path=artifacts_path
+    tests: List[TestBase] = instantiate_tests(
+        client_config,
+        attack_config,
+        basic_tests_with_attempts=basic_tests_with_attempts,
+        custom_tests_with_attempts=custom_tests_with_attempts,
+        artifacts_path=artifacts_path,
     )
 
     # Run tests in parallel mode
@@ -156,13 +164,13 @@ def run_tests(
     report_results(tests)
 
 
-def run_tests_in_parallel(tests: List[Type[TestBase]], threads_count: int = 1):
+def run_tests_in_parallel(tests: List[TestBase], threads_count: int = 1):
     """
     Run the tests in parallel using a thread pool.
 
     Parameters
     ----------
-    tests : List[Type[TestBase]]
+    tests : List[TestBase]
         A list of test instances to be executed.
     threads_count : int
         The number of threads to use for parallel testing.
@@ -182,13 +190,13 @@ def run_tests_in_parallel(tests: List[Type[TestBase]], threads_count: int = 1):
     work_pool.run(ThreadSafeTaskIterator(test_tasks), len(tests))
 
 
-def report_results(tests: List[Type[TestBase]]):
+def report_results(tests: List[TestBase]):
     """
     Generate and print the test results.
 
     Parameters
     ----------
-    tests : List[Type[TestBase]]
+    tests : List[TestBase]
         A list of test instances that have been executed.
 
     Returns
@@ -234,13 +242,13 @@ def report_results(tests: List[Type[TestBase]]):
     generate_summary(tests)
 
 
-def generate_footer_row(tests: List[Type[TestBase]]):
+def generate_footer_row(tests: List[TestBase]):
     """
     Generate the footer row for the test results table.
 
     Parameters
     ----------
-    tests : List[Type[TestBase]]
+    tests : List[TestBase]
         A list of test instances that have been executed.
 
     Returns
@@ -271,13 +279,13 @@ def generate_footer_row(tests: List[Type[TestBase]]):
     ]
 
 
-def generate_summary(tests: List[Type[TestBase]], max_line_length: int = 80):
+def generate_summary(tests: List[TestBase], max_line_length: int = 80):
     """
     Generate and print a summary of the test results.
 
     Parameters
     ----------
-    tests : List[Type[TestBase]]
+    tests : List[TestBase]
         A list of test instances that have been executed.
 
     max_line_length : int, optional
@@ -315,10 +323,9 @@ def generate_summary(tests: List[Type[TestBase]], max_line_length: int = 80):
 def setup_models_and_tests(
     attack_model: ClientBase,
     tested_model: ClientBase,
-    num_attempts: int = 1,
     num_threads: int = 1,
-    tests: List[str] = None,
-    custom_tests: List[Type[TestBase]] = None,
+    tests_with_attempts: Optional[List[Tuple[str, int]]] = None,
+    custom_tests_with_attempts: Optional[List[Tuple[Type[TestBase], int]]] = None,
     artifacts_path: Optional[str] = None,
 ):
     """
@@ -330,14 +337,14 @@ def setup_models_and_tests(
         The model that will be used to perform the attacks.
     tested_model : ClientBase
         The model that will be tested for vulnerabilities.
-    num_attempts : int, optional
-        The number of attempts per attack (default is 1).
     num_threads : int, optional
         The number of threads to use for parallel testing (default is 1).
-    tests : List[str], optional
-        A list of basic test names to be executed (default is None).
-    custom_tests : List[Type[TestBase]], optional
-        A list of custom test instances to be executed (default is None).
+    tests_with_attempts : List[Tuple[str, int]], optional
+        A list where each element is a list consisting of a basic test name and the number of attempts
+        to be executed (default is None).
+    custom_tests_with_attempts : List[Tuple[Type[TestBase], int]], optional
+        A list where each element is a list consisting of a custom test instance and the number of attempts
+        to be executed (default is None).
     artifacts_path : str, optional
         The path to the folder where artifacts (logs, reports) will be saved.
 
@@ -354,7 +361,7 @@ def setup_models_and_tests(
 
     # Attack model setup
     try:
-        attack_config = AttackConfig(attack_client=ClientConfig(attack_model), attack_prompts_count=num_attempts)
+        attack_config = AttackConfig(attack_client=ClientConfig(attack_model))
     except (ModuleNotFoundError, ValidationError) as e:
         logger.warning(f"Error accessing the Attack Model: {colorama.Fore.RED}{e}{colorama.Style.RESET_ALL}")
         return
@@ -364,7 +371,7 @@ def setup_models_and_tests(
         client_config,
         attack_config,
         threads_count=num_threads,
-        basic_tests=tests,
-        custom_tests=custom_tests,
+        basic_tests_with_attempts=tests_with_attempts,
+        custom_tests_with_attempts=custom_tests_with_attempts,
         artifacts_path=artifacts_path,
     )

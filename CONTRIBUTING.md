@@ -1,0 +1,168 @@
+# Contributing to LLAMATOR
+
+Thank you for your interest in contributing to LLAMATOR! 
+
+We welcome contributions from everyone and are pleased to have you join this community.
+
+This document provides guidelines and instructions for contributing to this project.
+
+## Getting Started
+
+### Prerequisites
+
+Before you begin, ensure you have the following installed:
+- Python 3.10
+- Git
+
+### Setting Up Your Development Environment
+
+1. **Fork the Repository**: Start by forking the repository on GitHub.
+
+2. **Clone Your Fork**:
+    ```bash
+    git clone https://github.com/RomiconEZ/llamator/tree/release
+    ```
+
+### Set up a virtual environment
+
+```bash
+. ./setup_dev_env.sh
+source venv/bin/activate  # On Unix or macOS
+```
+
+### Install dependencies
+
+Install the project dependencies in editable mode (with the '-e' argument).
+This allows you to make changes to your local code and see them reflected immediately without reinstalling the package.
+
+```bash
+pip install -r requirements-dev.txt
+```
+
+### Install pre-commit
+
+To ensure code quality we use pre-commit hook with several checks.
+
+```bash
+pre-commit install
+```
+
+### Run tests
+
+1) Go to tests/test_local_llamator.py
+
+2) Create .env from .env.example and fill in the necessary fields.
+
+3) Run the function to perform testing depending on your LLM client
+
+## Making Changes
+
+1. Always create a new side-branch for your work.
+
+    ```bash
+    git checkout -b your-branch-name
+    ```
+2. Make your changes to the code and add or modify unit tests as necessary.
+
+3. Run tests again
+
+4. Commit Your Changes
+
+    Keep your commits as small and focused as possible and include meaningful commit messages.
+    ```bash
+    git add .
+    git commit -m "Add a brief description of your change"
+    ```
+
+5. Push the changes you did to GitHub
+
+6. 
+    ```bash
+    git push origin your-branch-name
+    ```
+
+## Get Started with Your First Contribution: Adding a New Test
+
+The easist way to contribute to LLAMATOR project is by creating a new test! 
+This can be easily acheived by:
+
+#### 1. Create a Test File
+* Navigate to the attacks directory. 
+* Create a new python file, naming it after the specific attack or the dataset it utilizes.
+
+#### 2. Set Up Your File
+
+The easiest way is to copy the existing attack (py file in the attacks directory) 
+and change the elements in it according to your implementation
+
+#### 3. Creating datasets with texts for attacks
+
+All files containing attack texts or prompts must be in parquet format.
+
+These files are stored in the attack_data folder.
+
+#### 3. Add your attack file name to the attack_loader.py file:
+```text
+from .attacks import (
+    dynamic_test,
+    translation,
+    typoglycemia,
+    dan,
+    aim,
+    self_refine,
+    ethical_compliance,
+    ucar,
+    complimentary_transition,
+    harmful_behavior,
+    base64_injection
+    
+    #TODO: YOUR TEST HERE
+)
+``` 
+
+#### 4. Add your attack name to the initial_validation.py file:
+```text
+AvailableTests = [
+    "aim_jailbreak",
+    "base64_injection",
+    "complimentary_transition",
+    "do_anything_now_jailbreak",
+    "RU_do_anything_now_jailbreak",
+    "ethical_compliance",
+    "harmful_behavior",
+    "past_tense",
+    "linguistic_evasion",
+    "sycophancy_test",
+    "typoglycemia_attack",
+    "RU_typoglycemia_attack",
+    "ucar",
+    "RU_ucar",
+    
+    #TODO: YOUR TEST HERE
+]
+``` 
+
+#### 5. Add your attack description to the attack_descriptions.json file:
+
+#### 6. Open a PR! Submit your changes for review by opening a pull request.
+
+## Submitting a pull request
+
+1. Update your branch
+
+   Fetch any new changes from the base branch and rebase your branch.
+   ```bash
+   git fetch origin
+   git rebase origin/main
+
+2. Submit a Pull Request
+
+    Go to GitHub and submit a pull request from your branch to the project main branch.
+
+3. Request Reviews
+
+    Request reviews from other contributors listed as maintainers. If you receive a feedback - make any necessary changes and push them.
+
+4. Merge
+
+    Once your pull request is approved, it will be merged into the main branch.

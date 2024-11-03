@@ -19,13 +19,16 @@ logger = logging.getLogger(__name__)
 class TestHarmfulBehaviors(TestBase):
     """Challenges the LLM with a dataset of harmful behavior prompts."""
 
-    def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
-        super().__init__(
-            client_config,
-            attack_config,
-            test_name="harmful_behavior",
-            artifacts_path=artifacts_path,
-        )
+    test_name = "harmful_behavior"
+
+    def __init__(
+        self,
+        client_config: ClientConfig,
+        attack_config: AttackConfig,
+        artifacts_path: Optional[str] = None,
+        num_attempts: int = 0,
+    ):
+        super().__init__(client_config, attack_config, artifacts_path=artifacts_path, num_attempts=num_attempts)
 
     def _prepare_attack_data(self, attack_prompts: list[str], responses: list[str], statuses: list[str]) -> None:
         """
@@ -44,35 +47,52 @@ class TestHarmfulBehaviors(TestBase):
 
         # Save the DataFrame as a CSV file to the artifacts path
         if self.artifacts_path:
-            csv_path = os.path.join(self.artifacts_path, f"harmful_behavior_attack_report.csv")
+            csv_path = os.path.join(self.artifacts_path, f"{self.test_name}.csv")
             df.to_csv(csv_path, index=False)
             logging.info(f"Harmful Behavior attack report saved to {csv_path}")
 
     def run(self) -> Generator[StatusUpdate, None, None]:
-        # Getting the path to the directory where the file is located harmful_behavior.py
-        current_dir = Path(__file__).parent
-        dataset_filename = current_dir.parent / "attack_data" / "harmful_behavior.csv"
-
-        logger.info(f"Dataset filename: {dataset_filename}")
-        data = pd.read_csv(dataset_filename)
-        rows_count = data.shape[0]
-
-        if rows_count > self.attack_config.attack_prompts_count:
-            # If dataset is larger than requested number of attack samples, reduce dataset by taking attack_prompts_count samples
-            data = data.sample(
-                n=self.attack_config.attack_prompts_count, random_state=42
-            )  # constant `random_state` for better reproducibility
-            rows_count = data.shape[0]
-
         attack_prompts = []
         responses = []
         statuses = []
+        # Getting the path to the directory where the file is located harmful_behavior.py
+        current_dir = Path(__file__).parent
+        dataset_filename = current_dir.parent / "attack_data" / "harmful_behavior.parquet"
+
+        logger.info(f"Dataset filename: {dataset_filename}")
+        data = pd.read_parquet(dataset_filename, engine="fastparquet")
+        rows_count = data.shape[0]
+
+        if rows_count > self.num_attempts:
+            # If dataset is larger than requested number of samples, reduce dataset by taking num_attempts samples
+            data = data.sample(
+                n=self.num_attempts, random_state=42
+            )  # constant `random_state` for better reproducibility
 
         # Generate list of attack prompt variations
-        yield StatusUpdate(self.client_config, self.test_name, self.status, "Working", 0, rows_count)
+        yield StatusUpdate(
+            self.client_config,
+            self.test_name,
+            self.status,
+            "Generating",
+            0,
+            self.num_attempts
+        )
+
         for attack_prompt_index, row in data.iterrows():
             attack_prompt = row["goal"]
+            attack_prompts.append(attack_prompt)
             target = row["target"]
+            logger.info(f"Test '{self.test_name}': generated attack prompt #{attack_prompt_index}: {attack_prompt}")
+            yield StatusUpdate(
+                self.client_config,
+                self.test_name,
+                self.status,
+                "Generating",
+                attack_prompt_index,
+                self.num_attempts,
+            )
+
             chat = ChatSession(
                 self.client_config.get_target_client(),
                 self.client_config.get_system_prompts(),
@@ -101,7 +121,6 @@ class TestHarmfulBehaviors(TestBase):
                     current_status = "Resilient"
 
             # Append data for report
-            attack_prompts.append(attack_prompt)
             responses.append(response)
             statuses.append(current_status)
 
@@ -111,7 +130,7 @@ class TestHarmfulBehaviors(TestBase):
                 self.status,
                 "Attacking",
                 attack_prompt_index,
-                self.attack_config.attack_prompts_count,
+                self.num_attempts,
             )
 
         # Prepare data for report generation
@@ -122,6 +141,6 @@ class TestHarmfulBehaviors(TestBase):
             self.test_name,
             self.status,
             "Completed",
-            rows_count,
-            rows_count,
+            self.num_attempts,
+            self.num_attempts,
         )
