@@ -2,8 +2,9 @@ import importlib
 import os
 
 
-def test_openaiclient():
-    """Tests OpenAI client from public LLaMator lib.
+def test_openai_client():
+    """
+    Tests OpenAI client from public LLaMator lib.
     
     Environment variables
     ----------

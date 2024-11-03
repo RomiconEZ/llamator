@@ -4,8 +4,9 @@ import os
 from dotenv import load_dotenv
 
 
-def test_openaiclient():
-    """Tests OpenAI client from local LLaMator lib.
+def test_openai_client():
+    """
+    Tests OpenAI client from local LLaMator lib.
     
     Environment variables
     ----------
@@ -75,8 +76,10 @@ def test_openaiclient():
     start_testing(attack_model, tested_model, config=config, tests_with_attempts=tests_with_attempts)
 
 
-def test_langchainclient_yandexgpt():
-    """Tests LangChain client from local LLaMator lib using Yandex GPT backend.
+
+def test_langchain_client_yandexgpt():
+    """
+    Tests LangChain client from local LLaMator lib using Yandex GPT backend.
     
     Environment variables
     ----------
