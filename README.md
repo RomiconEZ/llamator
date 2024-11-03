@@ -1,11 +1,4 @@
-
-<p align="center">
-    <strong style="font-size: 32px;">LLAMATOR</strong>  
-    <br>
-    <span style="font-size: 20px;">Red teaming framework</span>
-</p>
-
----
+# LLAMATOR
 
 ## Description
 
@@ -16,6 +9,7 @@ Red teaming python-framework for testing vulnerabilities of chatbots based on la
 ```bash
 pip install llamator
 ```
+
 ## Documentation
 
 Documentation Link: https://romiconez.github.io/llamator/

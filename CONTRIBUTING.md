@@ -1,8 +1,4 @@
-<p align="center">
-    <strong style="font-size: 32px;">Contributing to LLAMATOR</strong>  
-</p>
-
----
+# Contributing to LLAMATOR
 
 Thank you for your interest in contributing to LLAMATOR! 
 
