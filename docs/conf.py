@@ -82,7 +82,7 @@ html_theme_options = {
             },
         ],
     "source_repository": "https://github.com/RomiconEZ/llamator",
-    "source_branch": "main",
+    "source_branch": "release",
     "source_directory": "src/",
 }
 

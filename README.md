@@ -1,30 +1,33 @@
-# LLAMATOR — red teaming framework
 
-## Description / Описание
+<p align="center">
+    <strong style="font-size: 32px;">LLAMATOR</strong>  
+    <br>
+    <span style="font-size: 20px;">Red teaming framework</span>
+</p>
 
-### RU
-Red teaming python-фреймворк для тестирования уязвимостей чат-ботов на базе больших языковых моделей (LLM). Поддерживает работу с русскоязычными RAG-системами.
+---
 
-### EN
+## Description
+
 Red teaming python-framework for testing vulnerabilities of chatbots based on large language models (LLM). Supports testing of Russian-language RAG systems.
 
-## Install / Установка
+## Install
 
 ```bash
 pip install llamator
 ```
-## Documentation / Документация
+## Documentation
 
 Documentation Link: https://romiconez.github.io/llamator/
 
-## Examples / Примеры
+## Examples
 
  * [RAG Chatbot testing via API (RU)](/examples/llamator-api.ipynb)
  * [Gandalf bot testing via Selenium (RU)](/examples/llamator-selenium.ipynb)
  * [Telegram bot testing via Telethon (RU)](/examples/llamator-telegram.ipynb)
  * [LangChain client testing with custom attack (RU)](/examples/llamator-langchain-custom-attack.ipynb)
 
-## Architecture / Архитектура (RU)
+## Architecture
 
 ![architecture](/assets/architecture.png)
 
