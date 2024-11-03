@@ -8,6 +8,7 @@
 [.][v]env
 __pycache__/
 **.egg-info/
+*.session*
 
 # Logs
 *.log

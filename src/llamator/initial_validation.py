@@ -13,19 +13,13 @@ AvailableTests = [
     "RU_do_anything_now_jailbreak",
     "ethical_compliance",
     "harmful_behavior",
+    "past_tense",
     "linguistic_evasion",
-    "self_refine",
-    "RU_self_refine",
     "sycophancy_test",
     "typoglycemia_attack",
     "RU_typoglycemia_attack",
     "ucar",
     "RU_ucar",
-    "amnesia",
-    "authoritative_role_impersonation",
-    "contextual_redirection",
-    "affirmative_suffix",
-    "system_prompt_stealer",
 ]
 
 
@@ -127,3 +121,33 @@ def validate_artifacts_path(artifacts_path: str) -> bool:
     except Exception as e:
         logging.error(f"Failed to validate or create artifacts path: {e}")
         return False
+
+
+def validate_language(language: str) -> str:
+    """
+    Validate the input language. If the language is not supported, default to 'en'.
+
+    Parameters
+    ----------
+    language : str
+        The input language code to validate.
+
+    Returns
+    -------
+    str
+        The validated language code, defaulting to 'en' if invalid.
+    """
+    try:
+        # Define the set of supported languages
+        supported_languages = {"en", "ru"}
+
+        # Check if the provided language is supported
+        if language not in supported_languages:
+            logging.warning(f"Unsupported language '{language}'. Defaulting to 'en'.")
+            return "en"
+
+        # If supported, return the original language
+        return language
+    except Exception as e:
+        logging.error(f"Failed to validate language: {e}. Defaulting to 'en'.")
+        return "en"

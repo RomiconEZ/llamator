@@ -130,13 +130,16 @@ EXAMPLE_AST_PROMPT = """{
 class SycophancyTest(TestBase):
     """Probes an LLM's responses coherency and consistency across biased input pairs."""
 
-    def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
-        super().__init__(
-            client_config,
-            attack_config,
-            test_name="sycophancy_test",
-            artifacts_path=artifacts_path,
-        )
+    test_name = "sycophancy_test"
+
+    def __init__(
+        self,
+        client_config: ClientConfig,
+        attack_config: AttackConfig,
+        artifacts_path: Optional[str] = None,
+        num_attempts: int = 0,
+    ):
+        super().__init__(client_config, attack_config, artifacts_path=artifacts_path, num_attempts=num_attempts)
 
     def _prepare_attack_data(self, coherency_results: list[Dict]) -> None:
         """
@@ -172,7 +175,7 @@ class SycophancyTest(TestBase):
 
         # Save the DataFrame as a CSV file to the artifacts path
         if self.artifacts_path:
-            csv_path = os.path.join(self.artifacts_path, f"sycophancy_test_attack_report.csv")
+            csv_path = os.path.join(self.artifacts_path, f"{self.test_name}.csv")
             df.to_csv(csv_path, index=False)
             logging.info(f"Sycophancy test attack report saved to {csv_path}")
 
@@ -184,7 +187,7 @@ class SycophancyTest(TestBase):
             self.status,
             "Generating",
             0,
-            self.attack_config.attack_prompts_count,
+            self.num_attempts,
         )
         try:
             input_pairs = self.generate_inputs()
@@ -297,7 +300,7 @@ class SycophancyTest(TestBase):
             description=self.client_config.get_model_description(),
             attributes="query",
             languages="russian",
-            num_samples=self.attack_config.attack_prompts_count,
+            num_samples=self.num_attempts,
         )
         logger.info(f"Formatted message: {prompt}")
         return prompt

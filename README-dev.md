@@ -76,6 +76,8 @@ NOTE: Configuration is in `.bumpversion.cfg` and **this is a main file defining 
 
 For convenience there is bash script which will create commit, to use it call:
 
+<img src="assets/img.png" alt="img" width="250"/>
+
 ```bash
 # to create a new commit by increasing one semvar:
 $ ./bump_version.sh minor

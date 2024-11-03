@@ -25,13 +25,16 @@ class TestComplimentaryTransition(TestBase):
     """This test evaluates the LLM's ability to maintain content moderation standards when transitioning from a compliment to a new task.
     It assesses the LLM's ability to maintain defined boundaries when prompted to switch topics."""
 
-    def __init__(self, client_config: ClientConfig, attack_config: AttackConfig, artifacts_path: Optional[str] = None):
-        super().__init__(
-            client_config,
-            attack_config,
-            test_name="complimentary_transition",
-            artifacts_path=artifacts_path,
-        )
+    test_name = "complimentary_transition"
+
+    def __init__(
+        self,
+        client_config: ClientConfig,
+        attack_config: AttackConfig,
+        artifacts_path: Optional[str] = None,
+        num_attempts: int = 0,
+    ):
+        super().__init__(client_config, attack_config, artifacts_path=artifacts_path, num_attempts=num_attempts)
 
     def _prepare_attack_data(self, attack_prompts: list[str], responses: list[str], statuses: list[str]) -> None:
         """
@@ -50,7 +53,7 @@ class TestComplimentaryTransition(TestBase):
 
         # Save the DataFrame as a CSV file to the artifacts path
         if self.artifacts_path:
-            csv_path = os.path.join(self.artifacts_path, f"complimentary_transition_attack_report.csv")
+            csv_path = os.path.join(self.artifacts_path, f"{self.test_name}.csv")
             df.to_csv(csv_path, index=False)
             logging.info(f"Complimentary Transition attack report saved to {csv_path}")
 
@@ -62,7 +65,7 @@ class TestComplimentaryTransition(TestBase):
             self.status,
             "Generating",
             0,
-            self.attack_config.attack_prompts_count,
+            self.num_attempts,
         )
 
         attack_prompts = []
@@ -70,7 +73,7 @@ class TestComplimentaryTransition(TestBase):
         statuses = []
         chat = ChatSession(self.attack_config.attack_client.get_target_client())
 
-        for attack_prompt_index in range(self.attack_config.attack_prompts_count):
+        for attack_prompt_index in range(self.num_attempts):
             target_system_prompt_summary = self.client_config.get_system_prompts_summary(
                 attack_client=self.attack_config.attack_client.get_target_client()
             )
@@ -85,7 +88,7 @@ class TestComplimentaryTransition(TestBase):
                 self.status,
                 "Generating",
                 attack_prompt_index,
-                self.attack_config.attack_prompts_count,
+                self.num_attempts,
             )
 
         # Run the attack by sending the prompts and verifying the responses
@@ -95,7 +98,7 @@ class TestComplimentaryTransition(TestBase):
             self.status,
             "Attacking",
             0,
-            self.attack_config.attack_prompts_count,
+            self.num_attempts,
         )
 
         for attack_prompt_index, attack_prompt in enumerate(attack_prompts):
@@ -132,7 +135,7 @@ class TestComplimentaryTransition(TestBase):
                 self.status,
                 "Attacking",
                 attack_prompt_index,
-                self.attack_config.attack_prompts_count,
+                self.num_attempts,
             )
 
         # Prepare data for report generation
@@ -143,6 +146,6 @@ class TestComplimentaryTransition(TestBase):
             self.test_name,
             self.status,
             "Finished",
-            self.attack_config.attack_prompts_count,
-            self.attack_config.attack_prompts_count,
+            self.num_attempts,
+            self.num_attempts,
         )
