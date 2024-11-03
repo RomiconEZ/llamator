@@ -1,9 +1,4 @@
-
-<p align="center">
-    <strong style="font-size: 32px;">LLAMATOR</strong>  
-    <br>
-    <span style="font-size: 20px;">Red teaming framework</span>
-</p>
+# LLAMATOR
 
 ---
 
