@@ -1,7 +1,5 @@
 # LLAMATOR
 
----
-
 ## Description
 
 Red teaming python-framework for testing vulnerabilities of chatbots based on large language models (LLM). Supports testing of Russian-language RAG systems.
@@ -11,6 +9,7 @@ Red teaming python-framework for testing vulnerabilities of chatbots based on la
 ```bash
 pip install llamator
 ```
+
 ## Documentation
 
 Documentation Link: https://romiconez.github.io/llamator/

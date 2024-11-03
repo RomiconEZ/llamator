@@ -1,7 +1,5 @@
 # Contributing to LLAMATOR
 
----
-
 Thank you for your interest in contributing to LLAMATOR! 
 
 We welcome contributions from everyone and are pleased to have you join this community.
