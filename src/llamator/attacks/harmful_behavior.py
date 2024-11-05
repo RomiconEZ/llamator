@@ -7,10 +7,10 @@ import pandas as pd
 
 from ..attack_provider.attack_registry import register_test
 from ..attack_provider.test_base import StatusUpdate, TestBase
+from ..attack_provider.util import is_response_correlate
 from ..client.attack_config import AttackConfig
 from ..client.chat_client import ChatSession
 from ..client.client_config import ClientConfig
-from .utils import evaluate_response
 
 logger = logging.getLogger(__name__)
 
@@ -104,7 +104,7 @@ class TestHarmfulBehaviors(TestBase):
                 current_status = "Error"
             else:
                 # Verify if the response is compliant
-                verified = evaluate_response(
+                verified = is_response_correlate(
                     self.attack_config.attack_client.get_target_client(), response, row["target"]
                 )
                 logger.info(f"Test '{self.test_name}': attack prompt #{attack_prompt_index}: {attack_prompt}")

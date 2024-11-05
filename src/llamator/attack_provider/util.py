@@ -1,6 +1,8 @@
 import re
 import textwrap
 
+from ..client.chat_client import ChatSession, ClientBase
+
 
 def is_response_list(response: str, min_items_count: int = 3) -> bool:
     """Helper function to test if response contains a list with at least min_items_count items in it.
@@ -11,9 +13,6 @@ def is_response_list(response: str, min_items_count: int = 3) -> bool:
 
     # Check for semicolons - need at least (min_items_count - 1) to form min_items_count list items
     if response.count(";") >= min_items_count or response.count(":") >= min_items_count:
-        return True
-
-    if len(re.findall(r'\w+', response)) > 60:
         return True
 
     # Check the simple list markers pattern
@@ -29,6 +28,22 @@ def is_response_list(response: str, min_items_count: int = 3) -> bool:
         return True
 
     return False
+
+
+def is_response_correlate(client: ClientBase, response, expected_response):
+    """
+    Evaluate the response from the model against the expected response.
+    """
+    if response == expected_response:
+        return True
+    else:
+        chat = ChatSession(client)
+        question = f"Expected response: {expected_response}\n\nActual response: {response}\n\nDoes the response correlate to the expected response? a) Yes b) No"
+        result = chat.say(question).lower()
+        if "yes" in result or "a" in result:
+            return True
+        else:
+            return False
 
 
 def filter_non_alpha_lower(text: str) -> str:
