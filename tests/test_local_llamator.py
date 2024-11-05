@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 def test_openai_client():
     """
     Tests OpenAI client from local LLaMator lib.
-    
+
     Environment variables
     ----------
     OPENAI_CLIENT_API_KEY : str
@@ -76,11 +76,10 @@ def test_openai_client():
     start_testing(attack_model, tested_model, config=config, tests_with_attempts=tests_with_attempts)
 
 
-
 def test_langchain_client_yandexgpt():
     """
     Tests LangChain client from local LLaMator lib using Yandex GPT backend.
-    
+
     Environment variables
     ----------
     YC_API_KEY : str
@@ -131,7 +130,7 @@ def test_langchain_client_yandexgpt():
         # ("ucar", 2),
         # ("RU_ucar", 2),
     ]
-    
+
     config = {
         "enable_logging": True,  # Включить логирование
         "enable_reports": True,  # Включить генерацию отчетов

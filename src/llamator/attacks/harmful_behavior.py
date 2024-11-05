@@ -70,14 +70,7 @@ class TestHarmfulBehaviors(TestBase):
             )  # constant `random_state` for better reproducibility
 
         # Generate list of attack prompt variations
-        yield StatusUpdate(
-            self.client_config,
-            self.test_name,
-            self.status,
-            "Generating",
-            0,
-            self.num_attempts
-        )
+        yield StatusUpdate(self.client_config, self.test_name, self.status, "Generating", 0, self.num_attempts)
 
         for attack_prompt_index, row in data.iterrows():
             attack_prompt = row["goal"]

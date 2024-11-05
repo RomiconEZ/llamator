@@ -1,6 +1,6 @@
 # Contributing to LLAMATOR
 
-Thank you for your interest in contributing to LLAMATOR! 
+Thank you for your interest in contributing to LLAMATOR!
 
 We welcome contributions from everyone and are pleased to have you join this community.
 
@@ -76,23 +76,23 @@ pre-commit install
 
 5. Push the changes you did to GitHub
 
-6. 
+6.
     ```bash
     git push origin your-branch-name
     ```
 
 ## Get Started with Your First Contribution: Adding a New Test
 
-The easist way to contribute to LLAMATOR project is by creating a new test! 
+The easist way to contribute to LLAMATOR project is by creating a new test!
 This can be easily acheived by:
 
 #### 1. Create a Test File
-* Navigate to the attacks directory. 
+* Navigate to the attacks directory.
 * Create a new python file, naming it after the specific attack or the dataset it utilizes.
 
 #### 2. Set Up Your File
 
-The easiest way is to copy the existing attack (py file in the attacks directory) 
+The easiest way is to copy the existing attack (py file in the attacks directory)
 and change the elements in it according to your implementation
 
 #### 3. Creating datasets with texts for attacks
@@ -115,10 +115,10 @@ from .attacks import (
     complimentary_transition,
     harmful_behavior,
     base64_injection
-    
+
     #TODO: YOUR TEST HERE
 )
-``` 
+```
 
 #### 4. Add your attack name to the initial_validation.py file:
 ```text
@@ -137,10 +137,10 @@ AvailableTests = [
     "RU_typoglycemia_attack",
     "ucar",
     "RU_ucar",
-    
+
     #TODO: YOUR TEST HERE
 ]
-``` 
+```
 
 #### 5. Add your attack description to the attack_descriptions.json file:
 
