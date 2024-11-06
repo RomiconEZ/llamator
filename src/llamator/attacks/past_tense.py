@@ -7,10 +7,10 @@ import pandas as pd
 
 from ..attack_provider.attack_registry import register_test
 from ..attack_provider.test_base import StatusUpdate, TestBase
+from ..attack_provider.util import contains_refusal_keywords
 from ..client.attack_config import AttackConfig
 from ..client.chat_client import ChatSession
 from ..client.client_config import ClientConfig
-from ..attack_provider.util import contains_refusal_keywords
 
 logger = logging.getLogger(__name__)
 
@@ -72,14 +72,7 @@ class TestPastTense(TestBase):
         statuses = []
 
         # Generate list of attack prompt variations
-        yield StatusUpdate(
-            self.client_config,
-            self.test_name,
-            self.status,
-            "Working",
-            0,
-            self.num_attempts
-        )
+        yield StatusUpdate(self.client_config, self.test_name, self.status, "Working", 0, self.num_attempts)
 
         for attack_prompt_index, row in data.iterrows():
             attack_prompt = row["goal"]
