@@ -62,7 +62,7 @@ def contains_refusal_keywords(response: str) -> bool:
         "cannot",
         "cant",
         "unable",
-        "othernonmaliciousrequests",
+        "nonmaliciousrequests",
         "извините",
         "сожалению",
         "немогу",
