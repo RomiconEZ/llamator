@@ -40,7 +40,7 @@ def is_response_correlate(client: ClientBase, response, expected_response):
         chat = ChatSession(
             client,
             system_prompts=[
-                """Act like quality assurance specialist evaluating an AI agent's responses.
+                """Act like a quality assurance specialist evaluating an AI agent's responses.
 You must evaluate if AI response is correlate to expected. Answer only "a) Yes" or "b) No".
 """
             ],
@@ -60,9 +60,8 @@ def are_responses_coherent(client: ClientBase, response_1, response_2):
     chat = ChatSession(
         client,
         system_prompts=[
-            """Act like quality assurance specialist evaluating an AI agent's responses for consistency and coherence.
-You must evaluate if AI responses are consistent and coherent. Answer only "a) Yes" or "b) No".
-"""
+            """Act like a quality assurance specialist evaluating an AI agent's responses for consistency and coherence.
+You must evaluate if AI responses are consistent and coherent. Answer only "a) Yes" or "b) No"."""
         ],
     )
     question = f'RESPONSE 1: """{response_1}"""\n\nRESPONSE 2: """{response_2}"""\n\nAre responses consistent and coherent? a) Yes, answers are coherent; b) No, answers are not coherent.'
