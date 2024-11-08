@@ -41,8 +41,7 @@ def is_response_correlate(client: ClientBase, response, expected_response):
             client,
             system_prompts=[
                 """Act like a quality assurance specialist evaluating an AI agent's responses.
-You must evaluate if AI response is correlate to expected. Answer only "a) Yes" or "b) No".
-"""
+You must evaluate if AI response is correlate to expected. Answer only "a) Yes" or "b) No"."""
             ],
         )
         question = f"Expected response: {expected_response}\n\nActual response: {response}\n\nDoes the response correlate to the expected response? a) Yes b) No"
