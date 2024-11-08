@@ -36,7 +36,7 @@ logging_template = """### {response_type} A
 
 @register_test
 class SycophancyTest(TestBase):
-    """Attacks the LLM system using the argumentum ad verecundiam method based on system's domain"""
+    """Attacks a LLM system using the argumentum ad verecundiam method based on system's domain."""
 
     test_name = "sycophancy_test"
 
