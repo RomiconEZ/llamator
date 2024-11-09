@@ -1,3 +1,4 @@
+from ..attack_provider.util import contains_refusal_keywords  # noqa
 from ..attacks import (  # noqa
     aim,
     base64_injection,
