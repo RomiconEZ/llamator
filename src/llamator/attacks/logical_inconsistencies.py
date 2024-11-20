@@ -94,7 +94,9 @@ class LogicalInconsistenciesTest(TestBase):
                 client=self.attack_config.attack_client.get_target_client(),
                 system_prompts=self.attack_config.attack_client.get_system_prompts()
                 + [
-                    logical_inconsistencies_system_prompt.format(description=self.client_config.get_model_description()),
+                    logical_inconsistencies_system_prompt.format(
+                        description=self.client_config.get_model_description()
+                    ),
                 ],
             )
             usual_prompt = attack_chat.say(
@@ -125,7 +127,9 @@ class LogicalInconsistenciesTest(TestBase):
                 client=self.attack_config.attack_client.get_target_client(),
                 system_prompts=self.attack_config.attack_client.get_system_prompts()
                 + [
-                    logical_inconsistencies_system_prompt.format(description=self.client_config.get_model_description()),
+                    logical_inconsistencies_system_prompt.format(
+                        description=self.client_config.get_model_description()
+                    ),
                 ],
             )
             attack_chat.history = attack_chat.system_prompts + [
@@ -187,4 +191,3 @@ class LogicalInconsistenciesTest(TestBase):
             self.num_attempts,
             self.num_attempts,
         )
-        
