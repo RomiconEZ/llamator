@@ -1,5 +1,6 @@
 import logging
 import os
+from pathlib import Path
 from typing import Generator, Optional
 
 import pandas as pd
@@ -59,6 +60,20 @@ class TestUCAR(TestBase):
         responses = []
         statuses = []
 
+        current_dir = Path(__file__).parent
+        # The path to the ucar-dan_prompts.parquet file
+        dataset_filename = current_dir.parent / "attack_data" / "ucar-dan_prompts.parquet"
+
+        logger.info(f"Dataset filename: {dataset_filename}")
+        data = pd.read_parquet(dataset_filename, engine="fastparquet")
+        rows_count = data.shape[0]
+
+        if rows_count > self.num_attempts:
+            # If dataset is larger than requested number of samples, reduce dataset by taking num_attempts samples
+            data = data.sample(
+                n=self.num_attempts, random_state=42
+            )  # constant `random_state` for better reproducibility
+
         # Generate list of attack prompt variations
         yield StatusUpdate(
             self.client_config,
@@ -69,8 +84,8 @@ class TestUCAR(TestBase):
             self.num_attempts,
         )
 
-        for attack_prompt_index in range(self.num_attempts):
-            attack_prompt = ucar_prompt  # attack with static input
+        for attack_prompt_index, row in data.iterrows():
+            attack_prompt = row["ucar"]  # attack is the with static input
             attack_prompts.append(attack_prompt)
             logger.info(f"Test '{self.test_name}': generated attack prompt #{attack_prompt_index}: {attack_prompt}")
             yield StatusUpdate(
