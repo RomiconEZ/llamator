@@ -82,7 +82,7 @@ class TestRuUCAR(TestBase):
         )
 
         for attack_prompt_index, row in data.iterrows():
-            attack_prompt = row["ucar_ru"]  # attack is the with static input
+            attack_prompt = row["ru_ucar"]  # attack is the with static input
             attack_prompts.append(attack_prompt)
             logger.info(f"Test '{self.test_name}': generated attack prompt #{attack_prompt_index}: {attack_prompt}")
             yield StatusUpdate(
