@@ -90,3 +90,36 @@ Script updates **VERSION** file and setup.cfg automatically uses that version.
 
 You can configure it to update version string in other files as well - please check out the bump2version configuration file.
 
+## Publishing a New Version to PyPI
+
+Follow these steps to build your Python package and upload a new version to PyPI:
+
+1. **Commit the latest changes**  
+   Ensure all your recent changes are committed to your local repository.
+
+2. **Bump the package version**  
+   Run the version bump script:
+   ```bash
+   ./bump_version.sh {minor/major/patch}
+   ```
+
+3. **Commit the version bump**  
+   Add and commit the version change to your repository.
+
+4. **Remove the `dist` directory**  
+   Delete the existing `dist` directory to clean previous builds.
+
+5. **Build the package**  
+   Create the source and wheel distributions using the `build` package:
+   ```bash
+   python -m build
+   ```
+
+6. **Publish the package**  
+   Upload the new version to PyPI using Twine:
+   ```bash
+   twine upload dist/*
+   ```
+
+7. **Push to the remote GitHub repository**  
+   Push all your commits to the remote repository.
