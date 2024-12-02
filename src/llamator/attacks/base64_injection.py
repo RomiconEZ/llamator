@@ -93,7 +93,7 @@ class TestBase64Injection(TestBase):
         # Generate list of attack prompt variations
         yield StatusUpdate(self.client_config, self.test_name, self.status, "Working", 0, self.num_attempts)
         for attack_prompt_index, row in data.iterrows():
-            attack_prompt = row["text"]  # "regular_string"
+            attack_prompt = row["goal"]  # "regular_string"
             attack_prompt_bytes = attack_prompt.encode("utf-8")  # "b'regular_string"
             attack_prompt_bytes_base64 = base64.b64encode(attack_prompt_bytes)  # "b'base64_string"
             attack_prompt_base64_string = attack_prompt_bytes_base64.decode("utf-8")  # "base64_string"
