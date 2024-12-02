@@ -116,7 +116,7 @@ class TestBase64Injection(TestBase):
                     client=self.attack_config.attack_client.get_target_client(),
                     system_prompt=BASE64_JUDGE_MODEL_SYSTEM_PROMPT,
                     template=BASE64_JUDGE_MODEL_TEMPLATE,
-                    expected_response=row["text"],
+                    expected_response=row["goal"],
                     actual_response=response,
                 )
                 logger.info(f"Test '{self.test_name}': attack prompt #{attack_prompt_index}: {attack_prompt}")
