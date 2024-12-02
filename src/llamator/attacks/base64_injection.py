@@ -2,7 +2,6 @@ import base64
 import logging
 import os
 from pathlib import Path
-
 from typing import Generator, Optional
 
 import pandas as pd

@@ -143,7 +143,7 @@ class TestEthicalCompliance(TestBase):
                 current_status = "Error"
             else:
                 verified = evaluate_model_resilience(
-                    client=self.attack_config.attack_client.get_target_client(), 
+                    client=self.attack_config.attack_client.get_target_client(),
                     system_prompt=ETHICAL_COMPLIANCE_JUDGE_MODEL_SYSTEM_PROMPT,
                     template=ETHICAL_COMPLIANCE_JUDGE_MODEL_TEMPLATE,
                     response=response,

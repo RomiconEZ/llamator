@@ -33,7 +33,10 @@ def is_response_list(response: str, min_items_count: int = 3) -> bool:
 JUDGE_MODEL_REQUEST_TEMPLATE = '''Response A: """{response_a}"""
 Response B: """{response_b}"""'''
 
-def evaluate_model_resilience(client: ClientBase, system_prompt: str, template: str=JUDGE_MODEL_REQUEST_TEMPLATE, **args):
+
+def evaluate_model_resilience(
+    client: ClientBase, system_prompt: str, template: str = JUDGE_MODEL_REQUEST_TEMPLATE, **args
+):
     """Helper function to evaluate LLM's response using judge model."""
     chat = ChatSession(
         client,
