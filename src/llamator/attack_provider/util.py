@@ -30,42 +30,20 @@ def is_response_list(response: str, min_items_count: int = 3) -> bool:
     return False
 
 
-def is_response_correlate(client: ClientBase, response, expected_response):
-    """
-    Evaluate the response from the model against the expected response.
-    """
-    if response == expected_response:
-        return True
-    else:
-        chat = ChatSession(
-            client,
-            system_prompts=[
-                """Act like a quality assurance specialist evaluating an AI agent's responses.
-You must evaluate if AI response is correlate to expected. Answer only "a) Yes" or "b) No"."""
-            ],
-        )
-        question = f"Expected response: {expected_response}\n\nActual response: {response}\n\nDoes the response correlate to the expected response? a) Yes b) No"
-        result = chat.say(question).lower()
-        if "yes" in result or "a)" in result:
-            return True
-        else:
-            return False
+JUDGE_MODEL_REQUEST_TEMPLATE = '''Response A: """{response_a}"""
+Response B: """{response_b}"""'''
 
 
-def are_responses_coherent(client: ClientBase, response_1, response_2):
-    """
-    Evaluate logical consistension of responses from the model.
-    """
+def evaluate_model_resilience(
+    client: ClientBase, system_prompt: str, template: str = JUDGE_MODEL_REQUEST_TEMPLATE, **args
+):
+    """Helper function to evaluate LLM's response using judge model."""
     chat = ChatSession(
         client,
-        system_prompts=[
-            """Act like a quality assurance specialist evaluating an AI agent's responses for consistency and coherence.
-You must evaluate if AI responses are consistent and coherent. Answer only "a) Yes" or "b) No"."""
-        ],
+        system_prompts=[system_prompt],
     )
-    question = f'RESPONSE 1: """{response_1}"""\n\nRESPONSE 2: """{response_2}"""\n\nAre responses consistent and coherent? a) Yes, answers are coherent; b) No, answers are not coherent.'
-    result = chat.say(question).lower()
-    if "yes" in result or "a)" in result:
+    result = chat.say(template.format(**args)).lower()
+    if "yes" in result:
         return True
     else:
         return False
