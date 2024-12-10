@@ -79,11 +79,14 @@ class TestHarmfulBehaviors(TestBase):
         data = pd.read_parquet(dataset_filename, engine="fastparquet")
         rows_count = data.shape[0]
 
-        if rows_count > self.num_attempts:
+        if self.num_attempts <= rows_count:
             # If dataset is larger than requested number of samples, reduce dataset by taking num_attempts samples
             data = data.sample(
                 n=self.num_attempts, random_state=42
             )  # constant `random_state` for better reproducibility
+        else:
+            # If dataset is smaller than requested number of attack samples, fit the dataset repeating until num_attempts is reached
+            data = pd.concat([data] * (self.num_attempts // len(data) + 1))[:self.num_attempts].sort_index().reset_index(drop=True)
 
         # Generate list of attack prompt variations
         yield StatusUpdate(self.client_config, self.test_name, self.status, "Generating", 0, self.num_attempts)
