@@ -19,6 +19,7 @@ Documentation Link: [https://romiconez.github.io/llamator](https://romiconez.git
 * 📄 [RAG Chatbot testing via API (RU)](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-api.ipynb)
 * 🧙‍♂️ [Gandalf bot testing via Selenium (RU)](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-selenium.ipynb)
 * 💬 [Telegram bot testing via Telethon (RU)](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-telegram.ipynb)
+* 📱[WhatsApp client testing via Selenium (ENG)](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-whatsapp.ipynb)
 * 🔗 [LangChain client testing with custom attack (RU)](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-langchain-custom-attack.ipynb)
 
 ## Supported Clients 🛠️
