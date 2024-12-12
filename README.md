@@ -7,7 +7,7 @@ Red teaming python-framework for testing vulnerabilities of chatbots based on la
 ## Install 🚀
 
 ```bash
-pip install llamator==1.0.2
+pip install llamator==1.1.0
 ```
 
 ## Documentation 📚

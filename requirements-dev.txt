@@ -19,6 +19,7 @@ myst-parser  # adds markdown to sphinx
 bump2version>=1.0.1,<2.0.0
 
 # Project dependencies
+httpx==0.27.2
 openai==1.6.1
 langchain==0.2.16
 langchain-community==0.2.16
