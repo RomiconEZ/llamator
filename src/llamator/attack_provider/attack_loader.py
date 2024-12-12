@@ -5,6 +5,7 @@ from ..attacks import (  # noqa
     dan,
     ethical_compliance,
     harmful_behavior,
+    logical_inconsistencies,
     past_tense,
     ru_dan,
     ru_typoglycemia,
