@@ -89,3 +89,4 @@ report.xml
 cmake-build-*/
 */artifacts/
 /examples/chrome-data/
+/venv/
