@@ -6,6 +6,8 @@
 - **Testing the Gandalf webbot** - [GitHub](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-selenium.ipynb)
 - **Telegram bot testing via Telethon (RU)** - [GitHub](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-telegram.ipynb)
 - **LangChain client testing with custom attack (RU)** - [GitHub](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-langchain-custom-attack.ipynb)
+- **WhatsApp client testing via Selenium (ENG)** - [GitHub](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-whatsapp.ipynb)
+
 
 ## Installation Guide
 
