@@ -5,7 +5,7 @@ import os
 def test_openai_client():
     """
     Tests OpenAI client from public LLaMator lib.
-    
+
     Environment variables
     ----------
     OPENAI_CLIENT_API_KEY : str
