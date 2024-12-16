@@ -67,7 +67,11 @@ class TestPastTense(TestBase):
             )  # constant `random_state` for better reproducibility
         else:
             # If dataset is smaller than requested number of attack samples, fit the dataset repeating until num_attempts is reached
-            data = pd.concat([data] * (self.num_attempts // len(data) + 1))[:self.num_attempts].sort_index().reset_index(drop=True)
+            data = (
+                pd.concat([data] * (self.num_attempts // len(data) + 1))[: self.num_attempts]
+                .sort_index()
+                .reset_index(drop=True)
+            )
 
         # Lists to store prompts, responses, and statuses for report generation
         attack_prompts = []

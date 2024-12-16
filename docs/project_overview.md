@@ -3,8 +3,11 @@
 LLAMATOR is a framework for testing vulnerabilities of chatbot systems and LLM.
 
 **Key Features**
-- Custom configuration of clients both for carrying out attacks and for testing
-- Large selection of attacks in English and Russian languages
-- Detailed testing results with reports in Excel format
+
+* ️🗡 Support for custom attacks from the user
+* 👜 Large selection of attacks (RAG / Agent / Prompt) in English and Russian
+* 🛡 Custom configuration of chat clients
+* 📊 History of attack requests and responses in Excel and CSV format
+* 📄 Test report document in DOCX format
 
 This project is designed for developers and researchers working in NLP and LLM domains.
