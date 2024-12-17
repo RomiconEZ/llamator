@@ -1,6 +1,6 @@
 import logging
 from abc import ABC, abstractmethod
-from typing import Dict, List, Optional
+from typing import Callable, Dict, List, Optional
 
 from .langchain_integration import get_langchain_chat_models_info
 
@@ -68,6 +68,11 @@ class ChatSession:
     history : List[Dict[str, str]]
         The conversation history, containing both user and assistant messages.
 
+    use_history : Optional[bool]
+        Determines whether to use the existing conversation history.
+        If False, only the system prompts and the current user prompt are used.
+        Defaults to True.
+
     Methods
     -------
     say(user_prompt: str, use_history: bool = True) -> str
@@ -77,7 +82,9 @@ class ChatSession:
         Clears the conversation history and re-initializes it with system prompts.
     """
 
-    def __init__(self, client: ClientBase, system_prompts: Optional[List[str]] = None):
+    def __init__(
+        self, client: ClientBase, system_prompts: Optional[List[str]] = None, use_history: Optional[bool] = True
+    ):
         """
         Initializes the ChatSession with a client and optional system prompts.
 
@@ -88,8 +95,14 @@ class ChatSession:
 
         system_prompts : Optional[List[str]]
             A list of system prompts to guide the conversation from the start.
+
+        use_history : Optional[bool]
+            Determines whether to use the existing conversation history.
+            If False, only the system prompts and the current user prompt are used.
+            Defaults to True.
         """
         self.client = client
+        self.use_history = use_history
         if system_prompts:
             self.system_prompts = [
                 {"role": "system", "content": system_prompt_text} for system_prompt_text in system_prompts
@@ -99,7 +112,7 @@ class ChatSession:
         # Initialize history with system prompts
         self.history = list(self.system_prompts)
 
-    def say(self, user_prompt: str, use_history: bool = True) -> str:
+    def say(self, user_prompt: str) -> str:
         """
         Sends a user message to the LLM, updates the conversation history based on the use_history flag,
         and returns the assistant's response.
@@ -109,11 +122,6 @@ class ChatSession:
         user_prompt : str
             The user's message to be sent to the LLM.
 
-        use_history : bool, optional
-            Determines whether to use the existing conversation history.
-            If False, only the system prompts and the current user prompt are used.
-            Defaults to True.
-
         Returns
         -------
         str
@@ -122,29 +130,15 @@ class ChatSession:
         logger.debug(f"say: system_prompts={self.system_prompts}")
         logger.debug(f"say: prompt={user_prompt}")
 
-        if use_history:
-            # Use existing history
-            input_messages = list(self.history)
-        else:
-            # Ignore existing history and use only system prompts
-            input_messages = list(self.system_prompts)
-
-        # Append the current user prompt
-        input_messages.append({"role": "user", "content": user_prompt})
-
         # Interact with the LLM
-        result = self.client.interact(self.history if use_history else [], input_messages)
+        result = self.client.interact(
+            history=self.history if self.use_history else list(self.system_prompts),
+            messages=[{"role": "user", "content": user_prompt}],
+        )
         logger.debug(f"say: result={result}")
 
-        if use_history:
-            # Update the history with the new user message and the assistant's response
-            self.history.append({"role": "user", "content": user_prompt})
-            self.history.append(result)
-        else:
-            # Reset history to include only system prompts, current user prompt, and response
-            self.history = list(self.system_prompts)
-            self.history.append({"role": "user", "content": user_prompt})
-            self.history.append(result)
+        self.history.append({"role": "user", "content": user_prompt})
+        self.history.append(result)
 
         return result["content"]
 
@@ -169,6 +163,8 @@ class MultiStageInteractionSession:
         A function that determines whether to stop the conversation based on the defender's response.
     history_limit : int
         The maximum allowed history length for the attacking model.
+    current_step : int
+        The current step of the attacking model.
 
     Methods
     -------
@@ -178,6 +174,8 @@ class MultiStageInteractionSession:
         Returns the conversation history of the attacking model.
     get_defender_history() -> List[Dict[str, str]]
         Returns the conversation history of the defending model.
+    get_current_step() -> int
+        Returns the current step of the attacking model.
     """
 
     def __init__(
@@ -206,15 +204,16 @@ class MultiStageInteractionSession:
         self.defender_session = defender_session
         self.stop_criterion = stop_criterion if stop_criterion is not None else self.default_stop_criterion
         self.history_limit = history_limit
+        self.current_step = 1
 
     @staticmethod
-    def default_stop_criterion(response: Dict[str, str]) -> bool:
+    def default_stop_criterion(response: str) -> bool:
         """
         Default stopping criterion that never stops the conversation.
 
         Parameters
         ----------
-        response : Dict[str, str]
+        response : str
             The response from the defender model.
 
         Returns
@@ -242,6 +241,7 @@ class MultiStageInteractionSession:
 
         # Атакующая модель начинает разговор
         attacker_response = self.attacker_session.say(start_prompt)
+        logger.debug(f"Current step: {self.current_step}")
         logger.debug(f"Attacker response: {attacker_response}")
 
         while True:
@@ -254,17 +254,16 @@ class MultiStageInteractionSession:
                 logger.debug("Stopping criterion met.")
                 return True
 
-            # Передаём ответ защищающей модели атакующей модели
-            attacker_response = self.attacker_session.say(defender_response)
-            logger.debug(f"Attacker response: {attacker_response}")
-
             # Проверяем ограничение на длину истории атакующей модели
-            attacker_history_length = len(self.attacker_session.history)
-            logger.debug(f"Attacker history length: {attacker_history_length}")
-
-            if attacker_history_length > self.history_limit:
+            if self.current_step == self.history_limit:
                 logger.debug("History limit exceeded.")
                 return False
+
+            # Передаём ответ защищающей модели атакующей модели
+            self.current_step += 1
+            logger.debug(f"Current step: {self.current_step}")
+            attacker_response = self.attacker_session.say(defender_response)
+            logger.debug(f"Attacker response: {attacker_response}")
 
     def get_attacker_history(self) -> List[Dict[str, str]]:
         """
@@ -287,3 +286,14 @@ class MultiStageInteractionSession:
             The history of messages in the defending model's session.
         """
         return self.defender_session.history
+
+    def get_current_step(self) -> int:
+        """
+        Returns the current step of the attacking model.
+
+        Returns
+        -------
+        int
+            The current step of the attacking model.
+        """
+        return self.current_step
