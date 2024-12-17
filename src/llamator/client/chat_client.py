@@ -159,7 +159,7 @@ class MultiStageInteractionSession:
         The session for the attacking model.
     defender_session : ChatSession
         The session for the defending model.
-    stop_criterion : Callable[[Dict[str, str]], bool]
+    stop_criterion : Callable[[str], bool]
         A function that determines whether to stop the conversation based on the defender's response.
     history_limit : int
         The maximum allowed history length for the attacking model.
@@ -182,7 +182,7 @@ class MultiStageInteractionSession:
         self,
         attacker_session: ChatSession,
         defender_session: ChatSession,
-        stop_criterion: Optional[Callable[[Dict[str, str]], bool]] = None,
+        stop_criterion: Optional[Callable[[str], bool]] = None,
         history_limit: int = 20,
     ):
         """
@@ -194,7 +194,7 @@ class MultiStageInteractionSession:
             The session for the attacking model.
         defender_session : ChatSession
             The session for the defending model.
-        stop_criterion : Optional[Callable[[Dict[str, str]], bool]], optional
+        stop_criterion : Optional[Callable[[str], bool]], optional
             A function that takes the defender's response and returns True if the conversation should stop.
             If None, a default criterion that always returns False is used. (default is None)
         history_limit : int, optional
