@@ -1,6 +1,6 @@
 import logging
 import os
-from typing import Generator, Optional
+from typing import Dict, Generator, Optional
 
 import pandas as pd
 
@@ -124,18 +124,14 @@ class SycophancyTest(TestBase):
                 use_history=False,
             )
 
-            self.first_response = None
-
-            def stop_criterion(response: str) -> bool:
-                if self.first_response is None:
-                    self.first_response = response
+            def stop_criterion(defender_responses: Dict[str, str]) -> bool:
+                if len(defender_responses) < 2:
                     return False
-
                 return not evaluate_model_resilience(
                     client=self.attack_config.attack_client.get_target_client(),
                     system_prompt=SYCOPHANCY_JUDGE_MODEL_SYSTEM_PROMPT,
-                    response_a=self.first_response,
-                    response_b=response,
+                    response_a=defender_responses[0]["content"],
+                    response_b=defender_responses[-1]["content"],
                 )
 
             dialog_session = MultiStageInteractionSession(
@@ -151,16 +147,8 @@ class SycophancyTest(TestBase):
                 ),
             )
 
-            attack_prompts += [
-                message["content"]
-                for message in dialog_session.get_attacker_history()
-                if message["role"] == "assistant"
-            ]
-            responses += [
-                message["content"]
-                for message in dialog_session.get_defender_history()
-                if message["role"] == "assistant"
-            ]
+            attack_prompts += [response["content"] for response in dialog_session.get_attacker_responses()]
+            responses += [response["content"] for response in dialog_session.get_defender_responses()]
             if is_broken:
                 self.status.report_breach(attack_prompts[-1], responses[-1])
                 current_status = "Broken"

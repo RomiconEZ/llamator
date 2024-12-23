@@ -159,8 +159,8 @@ class MultiStageInteractionSession:
         The session for the attacking model.
     defender_session : ChatSession
         The session for the defending model.
-    stop_criterion : Callable[[str], bool]
-        A function that determines whether to stop the conversation based on the defender's response.
+    stop_criterion : Callable[[Dict[str, str]], bool]
+        A function that determines whether to stop the conversation based on the defender's responses.
     history_limit : int
         The maximum allowed history length for the attacking model.
     current_step : int
@@ -170,10 +170,10 @@ class MultiStageInteractionSession:
     -------
     start_conversation(start_prompt: str) -> bool
         Starts the conversation using the attacking model and alternates between attacker and defender until a stopping condition is met.
-    get_attacker_history() -> List[Dict[str, str]]
-        Returns the conversation history of the attacking model.
-    get_defender_history() -> List[Dict[str, str]]
-        Returns the conversation history of the defending model.
+    get_attacker_responses() -> List[Dict[str, str]]
+        Returns the responses of the attacking model.
+    get_defender_responses() -> List[Dict[str, str]]
+        Returns the responses of the defending model.
     get_current_step() -> int
         Returns the current step of the attacking model.
     """
@@ -182,7 +182,7 @@ class MultiStageInteractionSession:
         self,
         attacker_session: ChatSession,
         defender_session: ChatSession,
-        stop_criterion: Optional[Callable[[str], bool]] = None,
+        stop_criterion: Optional[Callable[[Dict[str, str]], bool]] = None,
         history_limit: int = 20,
     ):
         """
@@ -194,11 +194,11 @@ class MultiStageInteractionSession:
             The session for the attacking model.
         defender_session : ChatSession
             The session for the defending model.
-        stop_criterion : Optional[Callable[[str], bool]], optional
-            A function that takes the defender's response and returns True if the conversation should stop.
+        stop_criterion : Optional[Callable[[Dict[str, str]], bool]], optional
+            A function that takes the defender's responses and returns True if the conversation should stop.
             If None, a default criterion that always returns False is used. (default is None)
         history_limit : int, optional
-            The maximum number of messages allowed in the attacking model's history. (default is 50)
+            The maximum number of messages allowed in the attacking model's history. (default is 20)
         """
         self.attacker_session = attacker_session
         self.defender_session = defender_session
@@ -207,14 +207,14 @@ class MultiStageInteractionSession:
         self.current_step = 1
 
     @staticmethod
-    def default_stop_criterion(response: str) -> bool:
+    def default_stop_criterion(defender_responses: Dict[str, str]) -> bool:
         """
         Default stopping criterion that never stops the conversation.
 
         Parameters
         ----------
-        response : str
-            The response from the defender model.
+        defender_responses: Dict[str, str] : str
+            The responses of the defender model.
 
         Returns
         -------
@@ -250,7 +250,7 @@ class MultiStageInteractionSession:
             logger.debug(f"Defender response: {defender_response}")
 
             # Проверяем критерий остановки
-            if self.stop_criterion(defender_response):
+            if self.stop_criterion(defender_responses=self.get_defender_responses()):
                 logger.debug("Stopping criterion met.")
                 return True
 
@@ -265,27 +265,27 @@ class MultiStageInteractionSession:
             attacker_response = self.attacker_session.say(defender_response)
             logger.debug(f"Attacker response: {attacker_response}")
 
-    def get_attacker_history(self) -> List[Dict[str, str]]:
+    def get_attacker_responses(self) -> List[Dict[str, str]]:
         """
-        Retrieves the conversation history of the attacking model.
+        Retrieves the responses of the attacking model.
 
         Returns
         -------
         List[Dict[str, str]]
-            The history of messages in the attacking model's session.
+            The responses of the attacking model's session.
         """
-        return self.attacker_session.history
+        return [message for message in self.attacker_session.history if message["role"] == "assistant"]
 
-    def get_defender_history(self) -> List[Dict[str, str]]:
+    def get_defender_responses(self) -> List[Dict[str, str]]:
         """
-        Retrieves the conversation history of the defending model.
+        Retrieves the responses of the defending model.
 
         Returns
         -------
         List[Dict[str, str]]
-            The history of messages in the defending model's session.
+            The responses of the defending model's session.
         """
-        return self.defender_session.history
+        return [message for message in self.defender_session.history if message["role"] == "assistant"]
 
     def get_current_step(self) -> int:
         """
