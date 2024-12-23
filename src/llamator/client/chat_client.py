@@ -213,7 +213,7 @@ class MultiStageInteractionSession:
 
         Parameters
         ----------
-        defender_responses: Dict[str, str] : str
+        defender_responses : Dict[str, str]
             The responses of the defender model.
 
         Returns
