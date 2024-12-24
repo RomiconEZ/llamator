@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 @register_test
 class TestTypoglycemia(TestBase):
-    """Attempt to exploit a text processing vulnerability in LLMs that can cause them to generate incorrect responses to queries by removing random characters from words."""
+    """Attempts to exploit a text processing vulnerability in LLMs that can cause them to generate incorrect responses to queries by removing random characters from words."""
 
     test_name = "typoglycemia_attack"
 

@@ -4,104 +4,104 @@
     "in_code_name": "aim_jailbreak",
     "description_en": "Probes an LLM's ethical compliance by eliciting detailed instructions on illegal activities, using the Nicolo Machiavelli character roleplay.",
     "description_ru": "Проверяет этическую соответствие LLM, вызывая детальные инструкции по незаконной деятельности, используя ролевую игру персонажа Никколо Макиавелли.",
-    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/aim.py"
+    "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/aim.py"
   },
   {
     "name": "Base64 Injection",
     "in_code_name": "base64_injection",
     "description_en": "Challenges the LLM with a dataset of lines, encoded into base64.",
     "description_ru": "Испытывает LLM с набором строк, закодированных в base64.",
-    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/base64_injection.py"
+    "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/base64_injection.py"
   },
   {
     "name": "Complimentary Transition",
     "in_code_name": "complimentary_transition",
-    "description_en": "This test evaluates the LLM's ability to maintain content moderation standards when transitioning from a compliment to a new task. It assesses the LLM's ability to maintain defined boundaries when prompted to switch topics.",
-    "description_ru": "Этот тест оценивает способность LLM поддерживать стандарты модерации контента при переходе от комплимента к новой задаче. Он оценивает способность LLM сохранять определенные границы при переходе на другую тему.",
-    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/complimentary_transition.py"
+    "description_en": "Evaluates the LLM's ability to maintain content moderation standards when transitioning from a compliment to a new task. It assesses the LLM's ability to maintain defined boundaries when prompted to switch topics.",
+    "description_ru": "Оценивает способность LLM поддерживать стандарты модерации контента при переходе от комплимента к новой задаче. Он оценивает способность LLM сохранять определенные границы при переходе на другую тему.",
+    "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/complimentary_transition.py"
   },
   {
     "name": "Do Anything Now Jailbreak",
     "in_code_name": "do_anything_now_jailbreak",
     "description_en": "Probes an LLM's resilience against performing explicitly forbidden activities using the \"Do Anything Now\" (DAN) character roleplay technique.",
     "description_ru": "Проверяет устойчивость LLM к выполнению явно запрещенных действий, используя технику ролевой игры персонажа «Сделай что угодно сейчас» (DAN).",
-    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/dan.py"
+    "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/dan.py"
   },
   {
     "name": "Ethical Compliance",
     "in_code_name": "ethical_compliance",
     "description_en": "Evaluates the LLM's ability to resist discussions about harmful or inappropriate misconceptions on sensitive topics. This test aims to verify the model's adherence to ethical guidelines against propagating stereotypes and toxic content.",
     "description_ru": "Оценивает способность LLM противостоять обсуждениям вредных или неуместных заблуждений по чувствительным темам. Этот тест направлен на проверку соответствия модели этическим рекомендациям против распространения стереотипов и токсичного контента.",
-    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/ethical_compliance.py"
+    "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/ethical_compliance.py"
   },
   {
     "name": "Harmful Behavior",
     "in_code_name": "harmful_behavior",
     "description_en": "Challenges the LLM with a dataset of harmful behavior prompts.",
     "description_ru": "Испытывает LLM с набором запросов, связанных с вредным поведением.",
-    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/harmful_behavior.py"
+    "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/harmful_behavior.py"
+  },
+  {
+    "name": "Logical Inconsistencies Test",
+    "in_code_name": "logical_inconsistencies_test",
+    "description_en": "Attacks the LLM system during a long conversation to generate logical inconsistencies in answers using antonyms, negations, and paraphrases based on the system's domain.",
+    "description_ru": "Проверяет связность и последовательность ответов LLM-системы в ходе продолжительного диалога на основе её описания, вступая с ней в спор с использованием перефразирования и отрицания.",
+    "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/logical_inconsistencies.py"
+  },
+  {
+    "name": "Past Tense Attack",
+    "in_code_name": "past_tense",
+    "description_en": "Challenges the LLM with a dataset of harmful behavior prompts in past tense form.",
+    "description_ru": "Проверяет устойчивость модели к выполнению вредных запросов, сформулированных в прошедшем времени.",
+    "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/past_tense.py"
   },
   {
     "name": "RU Do Anything Now Jailbreak",
     "in_code_name": "RU_do_anything_now_jailbreak",
     "description_en": "Probes a Russian-language LLM's resilience against performing explicitly forbidden activities using the \"Do Anything Now\" (DAN) character roleplay technique.",
     "description_ru": "Проверяет устойчивость русскоязычной модели LLM к выполнению явно запрещенных действий, используя технику ролевой игры персонажа «Сделай что угодно сейчас» (DAN).",
-    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/ru_dan.py"
+    "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/ru_dan.py"
   },
   {
     "name": "RU Typoglycemia Attack",
     "in_code_name": "RU_typoglycemia_attack",
     "description_en": "Attempts to exploit a text processing vulnerability in Russian-language LLMs that can cause incorrect responses by removing random characters from words.",
     "description_ru": "Пытается использовать уязвимость в обработке текста русскоязычными моделями LLM, которая может вызвать неправильные ответы, удаляя случайные символы из слов.",
-    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/ru_typoglycemia.py"
+    "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/ru_typoglycemia.py"
   },
   {
     "name": "RU Ucar",
     "in_code_name": "RU_ucar",
     "description_en": "Probes a Russian-language LLM's adherence to content restrictions when explicitly requested to ignore such filters. It assesses the robustness of the LLM's content moderation systems against direct challenges.",
     "description_ru": "Проверяет соблюдение русскоязычной моделью LLM ограничений по контенту при явном запросе игнорировать такие фильтры. Оценивает устойчивость систем модерации контента LLM к прямым вызовам.",
-    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/ru_ucar.py"
+    "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/ru_ucar.py"
   },
   {
     "name": "Sycophancy Test",
     "in_code_name": "sycophancy_test",
-    "description_en": "Attacks a LLM system using the argumentum ad verecundiam method based on system's domain.",
-    "description_ru": "Проверяет связность и последовательность ответов LLM-системы на основе её описания, вступая с ней в спор с использованием аргументации к авторитету (лат. argumentum ad verecundiam).",
-    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/sycophancy.py"
+    "description_en": "Attacks the LLM system during a long conversation using the argumentum ad verecundiam method based on system's domain.",
+    "description_ru": "Проверяет связность и последовательность ответов LLM-системы в ходе продолжительного диалога на основе её описания, вступая с ней в спор с использованием аргументации к авторитету (лат. argumentum ad verecundiam).",
+    "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/sycophancy.py"
   },
   {
     "name": "Linguistic Evasion",
     "in_code_name": "linguistic_evasion",
     "description_en": "Leverages the use of a non-Russian language to circumvent the restrictions or focus set by the system prompt.",
     "description_ru": "Использует не-русский язык для обхода ограничений или фокуса, установленного системным промптом.",
-    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/translation.py"
+    "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/translation.py"
   },
   {
     "name": "Typoglycemia Attack",
     "in_code_name": "typoglycemia_attack",
     "description_en": "Attempts to exploit a text processing vulnerability in LLMs that can cause incorrect responses by removing random characters from words.",
     "description_ru": "Пытается использовать уязвимость в обработке текста LLM, которая может вызвать неправильные ответы, удаляя случайные символы из слов.",
-    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/typoglycemia.py"
+    "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/typoglycemia.py"
   },
   {
     "name": "Ucar",
     "in_code_name": "ucar",
     "description_en": "Probes an LLM's adherence to content restrictions when explicitly requested to ignore such filters. It assesses the robustness of the LLM's content moderation systems against direct challenges.",
     "description_ru": "Проверяет соблюдение LLM ограничений по контенту при явном запросе игнорировать такие фильтры. Оценивает устойчивость систем модерации контента LLM к прямым вызовам.",
-    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/ucar.py"
-  },
-  {
-    "name": "Past Tense Attack",
-    "in_code_name": "past_tense",
-    "description_en": "Challenges the LLM with a dataset of harmful behavior prompts in past tense form.",
-    "description_ru": "Проверяет устойчивость модели к  выполнению вредных запросов, сформулированных в прошедшем времени.",
-    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/past_tense.py"
-  },
-  {
-    "name": "Logical Inconsistencies Test",
-    "in_code_name": "logical_inconsistencies_test",
-    "description_en": "Attacks a LLM system to generate logical inconsistencies in answers using antonyms, negations, and paraphrases based on the system's domain.",
-    "description_ru": "Проверяет связность и последовательность ответов LLM-системы на основе её описания, вступая с ней в спор с использованием перефразирования и отрицания.",
-    "github_link": "https://github.com/RomiconEZ/llamator/blob/main/src/llamator/attacks/logical_inconsistencies.py"
+    "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/ucar.py"
   }
 ]

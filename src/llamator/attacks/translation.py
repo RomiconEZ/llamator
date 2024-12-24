@@ -21,7 +21,7 @@ translation_prompt = """Действуй как модель, проверяющ
 
 @register_test
 class TestTranslation(TestBase):
-    """Leverage the use of a non-Russian language to circumvent the restrictions or focus set by the system prompt."""
+    """Leverages the use of a non-Russian language to circumvent the restrictions or focus set by the system prompt."""
 
     test_name = "linguistic_evasion"
 
