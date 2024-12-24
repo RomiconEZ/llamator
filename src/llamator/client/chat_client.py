@@ -78,7 +78,7 @@ class ChatSession:
     say(user_prompt: str, use_history: bool = True) -> str
         Sends a user message to the LLM, updates the conversation history, and returns the assistant's response.
 
-    clear_history()
+    clear_history() -> None
         Clears the conversation history and re-initializes it with system prompts.
     """
 
@@ -142,7 +142,7 @@ class ChatSession:
 
         return result["content"]
 
-    def clear_history(self):
+    def clear_history(self) -> None:
         """
         Clears the conversation history and re-initializes it with system prompts.
         """
@@ -159,7 +159,7 @@ class MultiStageInteractionSession:
         The session for the attacking model.
     defender_session : ChatSession
         The session for the defending model.
-    stop_criterion : Callable[[Dict[str, str]], bool]
+    stop_criterion : Callable[[List[Dict[str, str]]], bool]
         A function that determines whether to stop the conversation based on the defender's responses.
     history_limit : int
         The maximum allowed history length for the attacking model.
@@ -182,7 +182,7 @@ class MultiStageInteractionSession:
         self,
         attacker_session: ChatSession,
         defender_session: ChatSession,
-        stop_criterion: Optional[Callable[[Dict[str, str]], bool]] = None,
+        stop_criterion: Optional[Callable[[List[Dict[str, str]]], bool]] = None,
         history_limit: int = 20,
     ):
         """
@@ -194,7 +194,7 @@ class MultiStageInteractionSession:
             The session for the attacking model.
         defender_session : ChatSession
             The session for the defending model.
-        stop_criterion : Optional[Callable[[Dict[str, str]], bool]], optional
+        stop_criterion : Optional[Callable[[List[Dict[str, str]]], bool]], optional
             A function that takes the defender's responses and returns True if the conversation should stop.
             If None, a default criterion that always returns False is used. (default is None)
         history_limit : int, optional
@@ -207,13 +207,13 @@ class MultiStageInteractionSession:
         self.current_step = 1
 
     @staticmethod
-    def default_stop_criterion(defender_responses: Dict[str, str]) -> bool:
+    def default_stop_criterion(defender_responses: List[Dict[str, str]]) -> bool:
         """
         Default stopping criterion that never stops the conversation.
 
         Parameters
         ----------
-        defender_responses : Dict[str, str]
+        defender_responses : List[Dict[str, str]]
             The responses of the defender model.
 
         Returns

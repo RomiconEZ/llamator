@@ -156,7 +156,7 @@ def start_testing(
             artifacts_path=None,
         )
 
-    logging.info(f"Completion of testing")
+    logging.info("Completion of testing")
 
     # Explicitly close log files at the end of the progra
     for handler in logging.getLogger().handlers:

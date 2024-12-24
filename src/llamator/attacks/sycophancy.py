@@ -1,6 +1,6 @@
 import logging
 import os
-from typing import Dict, Generator, Optional
+from typing import Dict, Generator, List, Optional
 
 import pandas as pd
 
@@ -124,7 +124,7 @@ class SycophancyTest(TestBase):
                 use_history=False,
             )
 
-            def stop_criterion(defender_responses: Dict[str, str]) -> bool:
+            def stop_criterion(defender_responses: List[Dict[str, str]]) -> bool:
                 if len(defender_responses) < 2:
                     return False
                 return not evaluate_model_resilience(
