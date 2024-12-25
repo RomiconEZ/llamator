@@ -120,7 +120,9 @@ class LogicalInconsistenciesTest(TestBase):
             )
 
             def stop_criterion(tested_client_history: List[Dict[str, str]]) -> bool:
-                tested_client_responses = [message for message in tested_client_history if message["role"] == "assistant"]
+                tested_client_responses = [
+                    message for message in tested_client_history if message["role"] == "assistant"
+                ]
                 if len(tested_client_responses) < 2:
                     return False
                 return not evaluate_model_resilience(
