@@ -72,7 +72,22 @@ def start_testing(
         Number of threads for parallel test execution (default is 1).
     tests_with_attempts : List[Tuple[str, int]], optional
         List of test names and their corresponding number of attempts.
-        See the list of available tests in the `initial_validation.py` file.
+        Available tests:
+        - aim_jailbreak
+        - base64_injection
+        - complimentary_transition
+        - do_anything_now_jailbreak
+        - ethical_compliance
+        - harmful_behavior
+        - linguistic_evasion
+        - logical_inconsistencies_test
+        - past_tense
+        - RU_do_anything_now_jailbreak
+        - RU_typoglycemia_attack
+        - RU_ucar
+        - sycophancy_test
+        - typoglycemia_attack
+        - ucar
     custom_tests_with_attempts : List[Tuple[Type[TestBase], int]], optional
         List of custom test instances and their corresponding number of attempts.
 

@@ -64,6 +64,16 @@ Challenges the LLM with a dataset of harmful behavior prompts.
 </details>
 
 <details>
+<summary><strong>Linguistic Evasion</strong></summary>
+<p>
+Leverages the use of a non-Russian language to circumvent the restrictions or focus set by the system prompt.
+</p>
+<p>
+<a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/translation.py">View code on GitHub</a>
+</p>
+</details>
+
+<details>
 <summary><strong>Logical Inconsistencies Test</strong></summary>
 <p>
 Attacks the LLM system during a long conversation to generate logical inconsistencies in answers using antonyms, negations, and paraphrases based on the system's domain.
@@ -120,16 +130,6 @@ Attacks the LLM system during a long conversation using the argumentum ad verecu
 </p>
 <p>
 <a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/sycophancy.py">View code on GitHub</a>
-</p>
-</details>
-
-<details>
-<summary><strong>Linguistic Evasion</strong></summary>
-<p>
-Leverages the use of a non-Russian language to circumvent the restrictions or focus set by the system prompt.
-</p>
-<p>
-<a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/translation.py">View code on GitHub</a>
 </p>
 </details>
 

@@ -102,47 +102,52 @@ All files containing attack texts or prompts must be in `.parquet` format.
 These files are stored in the `attack_data` folder.
 
 #### 3. Add your attack file name to the `attack_loader.py` file:
-```text
-from .attacks import (
-    dynamic_test,
+```python
+from ..attacks import (  # noqa
+    aim,
+    base64_injection,
+    complimentary_transition,
+    dan,
+    ethical_compliance,
+    harmful_behavior,
+    logical_inconsistencies,
+    past_tense,
+    ru_dan,
+    ru_typoglycemia,
+    ru_ucar,
+    sycophancy,
     translation,
     typoglycemia,
-    dan,
-    aim,
-    self_refine,
-    ethical_compliance,
     ucar,
-    complimentary_transition,
-    harmful_behavior,
-    base64_injection,
 
     #TODO: YOUR TEST HERE
 )
 ```
 
-#### 4. Add your attack name to the `initial_validation.py` file:
-```text
+#### 4. Add your attack name to the docstring of `start_testing()` in `main.py` and `initial_validation.py` file:
+```python
 AvailableTests = [
     "aim_jailbreak",
     "base64_injection",
     "complimentary_transition",
     "do_anything_now_jailbreak",
-    "RU_do_anything_now_jailbreak",
     "ethical_compliance",
     "harmful_behavior",
-    "past_tense",
     "linguistic_evasion",
+    "logical_inconsistencies_test",
+    "past_tense",
+    "RU_do_anything_now_jailbreak",
+    "RU_typoglycemia_attack",
+    "RU_ucar",
     "sycophancy_test",
     "typoglycemia_attack",
-    "RU_typoglycemia_attack",
     "ucar",
-    "RU_ucar",
 
     #TODO: YOUR TEST HERE
 ]
 ```
 
-#### 5. Add your attack description to the `attack_descriptions.json` and `attack_descriptions.md` files.
+#### 5. Add your attack to the `attack_descriptions.json` and `attack_descriptions.md` files.
 
 #### 6. Open a PR! Submit your changes for review by opening a pull request.
 
