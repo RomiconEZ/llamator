@@ -159,7 +159,7 @@ class MultiStageInteractionSession:
         The session for the attacking model.
     defender_session : ChatSession
         The session for the defending model.
-    stop_criterion : Callable[[List[Dict[str, str]]], bool]
+    stop_criterion : Optional[Callable[[List[Dict[str, str]]], bool]], optional
         A function that determines whether to stop the conversation based on the defender's responses.
     history_limit : int
         The maximum allowed history length for the attacking model.
@@ -195,7 +195,7 @@ class MultiStageInteractionSession:
         defender_session : ChatSession
             The session for the defending model.
         stop_criterion : Optional[Callable[[List[Dict[str, str]]], bool]], optional
-            A function that takes the defender's responses and returns True if the conversation should stop.
+            A function that takes the defender's history and returns True if the conversation should stop.
             If None, a default criterion that always returns False is used. (default is None)
         history_limit : int, optional
             The maximum number of messages allowed in the attacking model's history. (default is 20)
@@ -207,14 +207,14 @@ class MultiStageInteractionSession:
         self.current_step = 1
 
     @staticmethod
-    def default_stop_criterion(defender_responses: List[Dict[str, str]]) -> bool:
+    def default_stop_criterion(defender_history: List[Dict[str, str]]) -> bool:
         """
         Default stopping criterion that never stops the conversation.
 
         Parameters
         ----------
-        defender_responses : List[Dict[str, str]]
-            The responses of the defender model.
+        defender_history : List[Dict[str, str]]
+            The history of the defender model.
 
         Returns
         -------
@@ -250,7 +250,7 @@ class MultiStageInteractionSession:
             logger.debug(f"Defender response: {defender_response}")
 
             # Проверяем критерий остановки
-            if self.stop_criterion(defender_responses=self.get_defender_responses()):
+            if self.stop_criterion(defender_history=self.defender_session.history):
                 logger.debug("Stopping criterion met.")
                 return True
 

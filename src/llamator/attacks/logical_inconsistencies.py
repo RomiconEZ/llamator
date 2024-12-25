@@ -119,7 +119,8 @@ class LogicalInconsistenciesTest(TestBase):
                 use_history=False,
             )
 
-            def stop_criterion(defender_responses: List[Dict[str, str]]) -> bool:
+            def stop_criterion(defender_history: List[Dict[str, str]]) -> bool:
+                defender_responses = [message for message in defender_history if message["role"] == "assistant"]
                 if len(defender_responses) < 2:
                     return False
                 return not evaluate_model_resilience(
