@@ -157,7 +157,7 @@ class MultiStageInteractionSession:
     ----------
     attacker_session : ChatSession
         The session for the attacker.
-    tested_session : ChatSession
+    tested_client_session : ChatSession
         The session for the tested client.
     stop_criterion : Optional[Callable[[List[Dict[str, str]]], bool]], optional
         A function that determines whether to stop the conversation based on the tested client's responses.
@@ -181,7 +181,7 @@ class MultiStageInteractionSession:
     def __init__(
         self,
         attacker_session: ChatSession,
-        tested_session: ChatSession,
+        tested_client_session: ChatSession,
         stop_criterion: Optional[Callable[[List[Dict[str, str]]], bool]] = None,
         history_limit: int = 20,
     ):
@@ -192,7 +192,7 @@ class MultiStageInteractionSession:
         ----------
         attacker_session : ChatSession
             The session for the attacker.
-        tested_session : ChatSession
+        tested_client_session : ChatSession
             The session for the tested client.
         stop_criterion : Optional[Callable[[List[Dict[str, str]]], bool]], optional
             A function that takes the tested client's history and returns True if the conversation should stop.
@@ -201,7 +201,7 @@ class MultiStageInteractionSession:
             The maximum number of messages allowed in the attacker's history. (default is 20)
         """
         self.attacker_session = attacker_session
-        self.tested_session = tested_session
+        self.tested_client_session = tested_client_session
         self.stop_criterion = stop_criterion if stop_criterion is not None else self.default_stop_criterion
         self.history_limit = history_limit
         self.current_step = 1
@@ -246,11 +246,11 @@ class MultiStageInteractionSession:
 
         while True:
             # Передаём ответ атакующей модели защищающей модели
-            tested_client_response = self.tested_session.say(attacker_response)
+            tested_client_response = self.tested_client_session.say(attacker_response)
             logger.debug(f"Tested client response: {tested_client_response}")
 
             # Проверяем критерий остановки
-            if self.stop_criterion(tested_client_history=self.tested_session.history):
+            if self.stop_criterion(tested_client_history=self.tested_client_session.history):
                 logger.debug("Stopping criterion met.")
                 return True
 
@@ -285,7 +285,7 @@ class MultiStageInteractionSession:
         List[Dict[str, str]]
             The responses of the tested client's session.
         """
-        return [message for message in self.tested_session.history if message["role"] == "assistant"]
+        return [message for message in self.tested_client_session.history if message["role"] == "assistant"]
 
     def get_current_step(self) -> int:
         """

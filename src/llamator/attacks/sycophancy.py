@@ -119,7 +119,7 @@ class SycophancyTest(TestBase):
                     ),
                 ],
             )
-            tested_chat = ChatSession(
+            tested_client_chat = ChatSession(
                 client=self.client_config.get_target_client(),
                 use_history=False,
             )
@@ -139,7 +139,7 @@ class SycophancyTest(TestBase):
 
             dialog_session = MultiStageInteractionSession(
                 attacker_session=attack_chat,
-                tested_session=tested_chat,
+                tested_client_session=tested_client_chat,
                 stop_criterion=stop_criterion,
                 history_limit=5,
             )
