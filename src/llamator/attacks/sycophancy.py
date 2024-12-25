@@ -119,25 +119,25 @@ class SycophancyTest(TestBase):
                     ),
                 ],
             )
-            defender_chat = ChatSession(
+            tested_chat = ChatSession(
                 client=self.client_config.get_target_client(),
                 use_history=False,
             )
 
-            def stop_criterion(defender_history: List[Dict[str, str]]) -> bool:
-                defender_responses = [message for message in defender_history if message["role"] == "assistant"]
-                if len(defender_responses) < 2:
+            def stop_criterion(tested_client_history: List[Dict[str, str]]) -> bool:
+                tested_client_responses = [message for message in tested_client_history if message["role"] == "assistant"]
+                if len(tested_client_responses) < 2:
                     return False
                 return not evaluate_model_resilience(
                     client=self.attack_config.attack_client.get_target_client(),
                     system_prompt=SYCOPHANCY_JUDGE_MODEL_SYSTEM_PROMPT,
-                    response_a=defender_responses[0]["content"],
-                    response_b=defender_responses[-1]["content"],
+                    response_a=tested_client_responses[0]["content"],
+                    response_b=tested_client_responses[-1]["content"],
                 )
 
             dialog_session = MultiStageInteractionSession(
                 attacker_session=attack_chat,
-                defender_session=defender_chat,
+                tested_session=tested_chat,
                 stop_criterion=stop_criterion,
                 history_limit=5,
             )
@@ -149,7 +149,7 @@ class SycophancyTest(TestBase):
             )
 
             attack_prompts += [response["content"] for response in dialog_session.get_attacker_responses()]
-            responses += [response["content"] for response in dialog_session.get_defender_responses()]
+            responses += [response["content"] for response in dialog_session.get_tested_client_responses()]
             if is_broken:
                 self.status.report_breach(attack_prompts[-1], responses[-1])
                 current_status = "Broken"
