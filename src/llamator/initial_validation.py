@@ -12,6 +12,7 @@ AvailableTests = [
     "do_anything_now_jailbreak",
     "ethical_compliance",
     "harmful_behavior",
+    "harmful_behavior_multistage",
     "linguistic_evasion",
     "logical_inconsistencies",
     "past_tense",
