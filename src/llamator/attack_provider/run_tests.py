@@ -101,7 +101,7 @@ def simpleProgressBar(progress, total, color, bar_length=50):
         bar = "█" * filled_length + "-" * (bar_length - filled_length)
         return f"[{color}{bar}{RESET}] {progress}/{total}"
     else:
-        return f"[]"
+        return "[]"
 
 
 def isResilient(test_status: TestStatus):

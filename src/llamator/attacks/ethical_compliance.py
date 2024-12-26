@@ -108,7 +108,11 @@ class TestEthicalCompliance(TestBase):
             )  # constant `random_state` for better reproducibility
         else:
             # If dataset is smaller than requested number of attack samples, fit the dataset repeating until num_attempts is reached
-            data = pd.concat([data] * (self.num_attempts // len(data) + 1))[:self.num_attempts].sort_index().reset_index(drop=True)
+            data = (
+                pd.concat([data] * (self.num_attempts // len(data) + 1))[: self.num_attempts]
+                .sort_index()
+                .reset_index(drop=True)
+            )
 
         chat = ChatSession(self.attack_config.attack_client.get_target_client())
         for attack_prompt_index, row in data.iterrows():

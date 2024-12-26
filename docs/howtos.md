@@ -8,7 +8,6 @@
 - **WhatsApp bot testing via Selenium** - [GitHub](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-whatsapp.ipynb)
 - **LangChain client testing with custom attack** - [GitHub](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-langchain-custom-attack.ipynb)
 
-
 ## Installation Guide
 
 ```bash

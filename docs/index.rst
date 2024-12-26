@@ -14,6 +14,6 @@ LLAMATOR
 
    project_overview
    howtos
-   attacks_description
+   attack_descriptions
    code_documentation
    licenses

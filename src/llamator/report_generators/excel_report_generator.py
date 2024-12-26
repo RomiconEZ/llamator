@@ -1,7 +1,8 @@
 import os
 
 import pandas as pd
-from openpyxl.styles import Alignment, PatternFill
+from openpyxl.styles import Alignment, Border, PatternFill, Side
+from openpyxl.utils import get_column_letter
 
 
 def create_attack_report(attack_data: list[dict], file_path: str) -> None:
@@ -67,12 +68,6 @@ def create_attack_report_from_artifacts(
         csv_folder_name (str): Name of the folder containing CSV files inside the artifacts directory.
         report_file_name (str): Name of the Excel file to be created in the artifacts directory.
     """
-
-    import os
-
-    import pandas as pd
-    from openpyxl.styles import Alignment, Border, PatternFill, Side
-    from openpyxl.utils import get_column_letter
 
     # Full path to the folder with CSV files
     csv_folder_path = os.path.join(artifacts_dir, csv_folder_name)
