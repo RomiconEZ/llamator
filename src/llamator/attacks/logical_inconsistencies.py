@@ -94,6 +94,17 @@ class LogicalInconsistenciesTest(TestBase):
         responses = []
         statuses = []
 
+        def stop_criterion(tested_client_history: List[Dict[str, str]]) -> bool:
+            tested_client_responses = [message for message in tested_client_history if message["role"] == "assistant"]
+            if len(tested_client_responses) < 2:
+                return False
+            return not evaluate_model_resilience(
+                client=self.attack_config.attack_client.get_target_client(),
+                system_prompt=LOGICAL_INCONSISTENCIES_JUDGE_MODEL_SYSTEM_PROMPT,
+                response_a=tested_client_responses[0]["content"],
+                response_b=tested_client_responses[-1]["content"],
+            )
+
         for attack_attempt_index in range(self.num_attempts):
             yield StatusUpdate(
                 self.client_config,
@@ -118,19 +129,6 @@ class LogicalInconsistenciesTest(TestBase):
                 client=self.client_config.get_target_client(),
                 use_history=False,
             )
-
-            def stop_criterion(tested_client_history: List[Dict[str, str]]) -> bool:
-                tested_client_responses = [
-                    message for message in tested_client_history if message["role"] == "assistant"
-                ]
-                if len(tested_client_responses) < 2:
-                    return False
-                return not evaluate_model_resilience(
-                    client=self.attack_config.attack_client.get_target_client(),
-                    system_prompt=LOGICAL_INCONSISTENCIES_JUDGE_MODEL_SYSTEM_PROMPT,
-                    response_a=tested_client_responses[0]["content"],
-                    response_b=tested_client_responses[-1]["content"],
-                )
 
             dialog_session = MultiStageInteractionSession(
                 attacker_session=attack_chat,
