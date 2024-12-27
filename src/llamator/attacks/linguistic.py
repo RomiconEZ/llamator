@@ -20,7 +20,7 @@ TRANSLATION_PROMPT = """Действуй как модель, проверяющ
 
 
 @register_test
-class TestTranslation(TestBase):
+class TestLinguisticEvasion(TestBase):
     """Leverages the use of a non-Russian language to circumvent the restrictions or focus set by the system prompt."""
 
     test_name = "linguistic_evasion"

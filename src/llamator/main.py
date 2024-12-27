@@ -80,12 +80,12 @@ def start_testing(
         - ethical_compliance
         - harmful_behavior
         - linguistic_evasion
-        - logical_inconsistencies_test
+        - logical_inconsistencies
         - past_tense
         - RU_do_anything_now_jailbreak
         - RU_typoglycemia_attack
         - RU_ucar
-        - sycophancy_test
+        - sycophancy
         - typoglycemia_attack
         - ucar
     custom_tests_with_attempts : List[Tuple[Type[TestBase], int]], optional

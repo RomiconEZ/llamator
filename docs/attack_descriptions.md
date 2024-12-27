@@ -69,7 +69,7 @@ Challenges the LLM with a dataset of harmful behavior prompts.
 Leverages the use of a non-Russian language to circumvent the restrictions or focus set by the system prompt.
 </p>
 <p>
-<a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/translation.py">View code on GitHub</a>
+<a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/linguistic.py">View code on GitHub</a>
 </p>
 </details>
 

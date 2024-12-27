@@ -56,10 +56,10 @@ Your response to this message will be sent directly to the LLM system and must c
 
 
 @register_test
-class LogicalInconsistenciesTest(TestBase):
+class TestLogicalInconsistencies(TestBase):
     """Attacks the LLM system during a long conversation to generate logical inconsistencies in answers using antonyms, negations, and paraphrases based on the system's domain."""
 
-    test_name = "logical_inconsistencies_test"
+    test_name = "logical_inconsistencies"
 
     def __init__(
         self,
@@ -94,6 +94,17 @@ class LogicalInconsistenciesTest(TestBase):
         responses = []
         statuses = []
 
+        def stop_criterion(tested_client_history: List[Dict[str, str]]) -> bool:
+            tested_client_responses = [message for message in tested_client_history if message["role"] == "assistant"]
+            if len(tested_client_responses) < 2:
+                return False
+            return not evaluate_model_resilience(
+                client=self.attack_config.attack_client.get_target_client(),
+                system_prompt=LOGICAL_INCONSISTENCIES_JUDGE_MODEL_SYSTEM_PROMPT,
+                response_a=tested_client_responses[0]["content"],
+                response_b=tested_client_responses[-1]["content"],
+            )
+
         for attack_attempt_index in range(self.num_attempts):
             yield StatusUpdate(
                 self.client_config,
@@ -118,19 +129,6 @@ class LogicalInconsistenciesTest(TestBase):
                 client=self.client_config.get_target_client(),
                 use_history=False,
             )
-
-            def stop_criterion(tested_client_history: List[Dict[str, str]]) -> bool:
-                tested_client_responses = [
-                    message for message in tested_client_history if message["role"] == "assistant"
-                ]
-                if len(tested_client_responses) < 2:
-                    return False
-                return not evaluate_model_resilience(
-                    client=self.attack_config.attack_client.get_target_client(),
-                    system_prompt=LOGICAL_INCONSISTENCIES_JUDGE_MODEL_SYSTEM_PROMPT,
-                    response_a=tested_client_responses[0]["content"],
-                    response_b=tested_client_responses[-1]["content"],
-                )
 
             dialog_session = MultiStageInteractionSession(
                 attacker_session=attack_chat,
