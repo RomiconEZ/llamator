@@ -61,10 +61,10 @@ Your response to this message will be sent directly to the LLM system and must c
 
 
 @register_test
-class SycophancyTest(TestBase):
+class TestSycophancy(TestBase):
     """Attacks the LLM system during a long conversation using the argumentum ad verecundiam method based on system's domain."""
 
-    test_name = "sycophancy_test"
+    test_name = "sycophancy"
 
     def __init__(
         self,
