@@ -161,16 +161,18 @@ class MultiStageInteractionSession:
         The session for the tested client.
     stop_criterion : Optional[Callable[[List[Dict[str, str]]], bool]], optional
         A function that determines whether to stop the conversation based on the tested client's responses.
-    refine_attack_prompt : Optional[Callable[..., str]], optional
+    refine_tested_client_prompt : Optional[Callable[..., str]], optional
         A function that refines the tested client's response before passing it to the attacker.
+    refine_attacker_prompt : Optional[Callable[..., str]], optional
+        A function that refines the attacker's response before passing it to the tested client.
     history_limit : int
         The maximum allowed history length for the attacker.
     current_step : int
         The current step of the attacker.
     refine_args : tuple
-        Additional positional arguments for refine_attack_prompt.
+        Additional positional arguments for both refine_tested_client_prompt and refine_attacker_prompt.
     refine_kwargs : dict
-        Additional keyword arguments for refine_attack_prompt.
+        Additional keyword arguments for both refine_tested_client_prompt and refine_attacker_prompt.
 
     Methods
     -------
@@ -189,10 +191,11 @@ class MultiStageInteractionSession:
         attacker_session: ChatSession,
         tested_client_session: ChatSession,
         stop_criterion: Optional[Callable[[List[Dict[str, str]]], bool]] = None,
-        refine_attack_prompt: Optional[Callable[..., str]] = None,
+        refine_tested_client_prompt: Optional[Callable[..., str]] = None,
+        refine_attacker_prompt: Optional[Callable[..., str]] = None,
         history_limit: int = 20,
-        *args,
-        **kwargs,
+        refine_args: Optional[tuple] = None,
+        refine_kwargs: Optional[dict] = None,
     ):
         """
         Initializes the MultiStageInteractionSession.
@@ -206,26 +209,32 @@ class MultiStageInteractionSession:
         stop_criterion : Optional[Callable[[List[Dict[str, str]]], bool]], optional
             A function that takes the tested client's history and returns True if the conversation should stop.
             If None, a default criterion that always returns False is used. (default is None)
-        refine_attack_prompt : Optional[Callable[..., str]], optional
+        refine_tested_client_prompt : Optional[Callable[..., str]], optional
             A function that refines the tested client's response before passing it to the attacker.
+            If None, a default function that returns the response unchanged is used. (default is None)
+        refine_attacker_prompt : Optional[Callable[..., str]], optional
+            A function that refines the attacker's response before passing it to the tested client.
             If None, a default function that returns the response unchanged is used. (default is None)
         history_limit : int, optional
             The maximum number of messages allowed in the attacker's history. (default is 20)
-        *args : tuple
-            Additional positional arguments for refine_attack_prompt.
-        **kwargs : dict
-            Additional keyword arguments for refine_attack_prompt.
+        refine_args : Optional[tuple], optional
+            Additional positional arguments for both refine_tested_client_prompt and refine_attacker_prompt. (default is None)
+        refine_kwargs : Optional[dict], optional
+            Additional keyword arguments for both refine_tested_client_prompt and refine_attacker_prompt. (default is None)
         """
         self.attacker_session = attacker_session
         self.tested_client_session = tested_client_session
         self.stop_criterion = stop_criterion if stop_criterion is not None else self.default_stop_criterion
-        self.refine_attack_prompt = (
-            refine_attack_prompt if refine_attack_prompt is not None else self.default_refine_attack_prompt
+        self.refine_tested_client_prompt = (
+            refine_tested_client_prompt if refine_tested_client_prompt is not None else self.default_refine_tested_client_prompt
+        )
+        self.refine_attacker_prompt = (
+            refine_attacker_prompt if refine_attacker_prompt is not None else self.default_refine_attacker_prompt
         )
         self.history_limit = history_limit
         self.current_step = 1
-        self.refine_args = args
-        self.refine_kwargs = kwargs
+        self.refine_args = refine_args if refine_args is not None else ()
+        self.refine_kwargs = refine_kwargs if refine_kwargs is not None else {}
 
     @staticmethod
     def default_stop_criterion(tested_client_history: List[Dict[str, str]]) -> bool:
@@ -245,9 +254,9 @@ class MultiStageInteractionSession:
         return False
 
     @staticmethod
-    def default_refine_attack_prompt(tested_client_response: str, *args, **kwargs) -> str:
+    def default_refine_tested_client_prompt(tested_client_response: str, *args, **kwargs) -> str:
         """
-        Default refine_attack_prompt function that returns the response unchanged.
+        Default refine_tested_client_prompt function that returns the response unchanged.
 
         Parameters
         ----------
@@ -271,6 +280,33 @@ class MultiStageInteractionSession:
         """
         return tested_client_response
 
+    @staticmethod
+    def default_refine_attacker_prompt(attacker_response: str, *args, **kwargs) -> str:
+        """
+        Default refine_attacker_prompt function that returns the response unchanged.
+
+        Parameters
+        ----------
+        attacker_response : str
+            The response from the attacker.
+        *args : tuple
+            Additional positional arguments (not used).
+        **kwargs : dict
+            Additional keyword arguments (not used).
+
+        Returns
+        -------
+        str
+            The original attacker's response.
+
+        # Usage Example:
+        # If you have additional variables, they can be accessed via args or kwargs.
+        # For example, to prepend a prefix from kwargs:
+        # prefix = kwargs.get('prefix', '')
+        # return prefix + attacker_response
+        """
+        return attacker_response
+
     def start_conversation(self, start_prompt: str) -> bool:
         """
         Starts the conversation with the attacker and alternates between attacker and tested client.
@@ -289,13 +325,12 @@ class MultiStageInteractionSession:
 
         # Attacker initiates the conversation
         attacker_response = self.attacker_session.say(start_prompt)
-        logger.debug(f"Current step: {self.current_step}")
-        logger.debug(f"Attacker response: {attacker_response}")
+        logger.debug(f"Step {self.current_step}: Attacker response: {attacker_response}")
 
         while True:
-            # Pass attacker's response to the tested client
+            # Send attacker's response to the tested client
             tested_client_response = self.tested_client_session.say(attacker_response)
-            logger.debug(f"Tested client response: {tested_client_response}")
+            logger.debug(f"Step {self.current_step}: Tested client response: {tested_client_response}")
 
             # Check stopping criterion
             if self.stop_criterion(tested_client_history=self.tested_client_session.history):
@@ -307,18 +342,28 @@ class MultiStageInteractionSession:
                 logger.debug("History limit exceeded.")
                 return False
 
-            # Pass the refined response back to the attacker
-            self.current_step += 1
-            logger.debug(f"Current step: {self.current_step}")
-
-            # Apply refine_attack_prompt to the tested client's response with additional args and kwargs
-            refined_response = self.refine_attack_prompt(
+            # Refine the tested client's response before sending to attacker
+            refined_tested_client_response = self.refine_tested_client_prompt(
                 tested_client_response, *self.refine_args, **self.refine_kwargs
             )
-            logger.debug(f"Refined tested client response: {refined_response}")
+            logger.debug(f"Step {self.current_step}: Refined tested client response: {refined_tested_client_response}")
 
-            attacker_response = self.attacker_session.say(refined_response)
-            logger.debug(f"Attacker response: {attacker_response}")
+            # Send the refined response to the attacker
+            attacker_response = self.attacker_session.say(refined_tested_client_response)
+            logger.debug(f"Step {self.current_step}: Attacker response: {attacker_response}")
+
+            # Increment step
+            self.current_step += 1
+            logger.debug(f"Current step incremented to: {self.current_step}")
+
+            # Refine the attacker's response before the next loop iteration
+            refined_attacker_response = self.refine_attacker_prompt(
+                attacker_response, *self.refine_args, **self.refine_kwargs
+            )
+            logger.debug(f"Step {self.current_step}: Refined attacker response: {refined_attacker_response}")
+
+            # Update attacker_response for the next iteration
+            attacker_response = refined_attacker_response
 
     def get_attacker_responses(self) -> List[Dict[str, str]]:
         """
