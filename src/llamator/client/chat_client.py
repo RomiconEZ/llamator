@@ -221,7 +221,9 @@ class MultiStageInteractionSession:
         self.stop_criterion = stop_criterion if stop_criterion is not None else self.default_stop_criterion
         self.history_limit = history_limit
         self.tested_client_response_handler = (
-            tested_client_response_handler if tested_client_response_handler is not None else self.default_tested_client_response_handler
+            tested_client_response_handler
+            if tested_client_response_handler is not None
+            else self.default_tested_client_response_handler
         )
         self.current_step = 1
         self.refine_args = refine_args if refine_args is not None else ()
