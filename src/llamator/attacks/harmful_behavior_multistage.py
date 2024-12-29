@@ -28,7 +28,7 @@ Response with only the refined prompt"""
 
 @register_test
 class TestHarmfulBehaviorsMultiStage(TestBase):
-    """Challenges the LLM with a dataset of harmful behavior prompts."""
+    """Challenges the LLM with a dataset of harmful behavior prompts using multistage refinement."""
 
     test_name = "harmful_behavior_multistage"
 

@@ -64,6 +64,16 @@ Challenges the LLM with a dataset of harmful behavior prompts.
 </details>
 
 <details>
+<summary><strong>Harmful Behavior Multistage</strong></summary>
+<p>
+Challenges the LLM with a dataset of harmful behavior prompts using multistage refinement.
+</p>
+<p>
+<a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/harmful_behavior_multistage.py">View code on GitHub</a>
+</p>
+</details>
+
+<details>
 <summary><strong>Linguistic Evasion</strong></summary>
 <p>
 Leverages the use of a non-Russian language to circumvent the restrictions or focus set by the system prompt.
