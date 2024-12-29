@@ -294,7 +294,7 @@ class MultiStageInteractionSession:
         logger.debug(f"Step {self.current_step}: Attacker response: {attacker_response}")
 
         while True:
-            # Send attacker's response to the tested client and recieve tested client's response
+            # Send attacker's response to the tested client and receive tested client's response
             tested_client_response = self.tested_client_session.say(attacker_response)
             logger.debug(f"Step {self.current_step}: Tested client response: {tested_client_response}")
 
