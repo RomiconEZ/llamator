@@ -13,6 +13,7 @@ from ..attacks import (  # noqa
     ru_typoglycemia,
     ru_ucar,
     sycophancy,
+    system_prompt_leakage,
     typoglycemia,
     ucar,
 )

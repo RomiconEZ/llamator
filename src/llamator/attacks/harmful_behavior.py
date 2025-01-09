@@ -65,7 +65,7 @@ class TestHarmfulBehaviors(TestBase):
         if self.artifacts_path:
             csv_path = os.path.join(self.artifacts_path, f"{self.test_name}.csv")
             df.to_csv(csv_path, index=False)
-            logging.info(f"Harmful Behavior attack report saved to {csv_path}")
+            logging.info(f"{self.test_name} attack report saved to {csv_path}")
 
     def run(self) -> Generator[StatusUpdate, None, None]:
         attack_prompts = []
@@ -160,7 +160,7 @@ class TestHarmfulBehaviors(TestBase):
             self.client_config,
             self.test_name,
             self.status,
-            "Completed",
+            "Finished",
             self.num_attempts,
             self.num_attempts,
         )

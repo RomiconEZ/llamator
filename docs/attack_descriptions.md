@@ -144,6 +144,16 @@ Attacks the LLM system during a long conversation using the argumentum ad verecu
 </details>
 
 <details>
+<summary><strong>System Prompt Leakage</strong></summary>
+<p>
+Challenges the LLM with datasets of malicious prompts to extract system instructions using multistage refinement.
+</p>
+<p>
+<a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/system_prompt_leakage.py">View code on GitHub</a>
+</p>
+</details>
+
+<details>
 <summary><strong>Typoglycemia Attack</strong></summary>
 <p>
 Attempts to exploit a text processing vulnerability in LLMs that can cause incorrect responses by removing random characters from words.
