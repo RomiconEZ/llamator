@@ -49,6 +49,7 @@ class TestHarmfulBehaviorsMultiStage(TestBase):
             *args,
             **kwargs,
         )
+        self.multistage_depth = kwargs.get('multistage_depth', 20)
 
     def _prepare_attack_data(self, attack_prompts: list[str], responses: list[str], statuses: list[str]) -> None:
         """
@@ -142,7 +143,7 @@ class TestHarmfulBehaviorsMultiStage(TestBase):
                 attacker_session=attack_chat,
                 tested_client_session=tested_client_chat,
                 stop_criterion=self.stop_criterion,
-                history_limit=7,
+                history_limit=self.multistage_depth,
                 tested_client_response_handler=self.refine_attack_prompt,
                 refine_kwargs={"objective": objective, "last_attacker_response": attack_prompt},
             )

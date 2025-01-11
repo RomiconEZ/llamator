@@ -40,7 +40,7 @@ def start_testing(
     num_threads: int = 1,
     tests_with_attempts: Optional[List[Tuple[str, int]]] = None,
     custom_tests_with_attempts: Optional[List[Tuple[Type[TestBase], int]]] = None,
-    history_limit: int = 20,
+    multistage_depth: int = 20,
 ):
     """
     Start testing.
@@ -92,7 +92,7 @@ def start_testing(
         - ucar
     custom_tests_with_attempts : List[Tuple[Type[TestBase], int]], optional
         List of custom test instances and their corresponding number of attempts.
-    history_limit : int, optional
+    multistage_depth : int, optional
         The maximum allowed history length that can be passed to multi-stage interactions (default is 20).
 
     Returns
@@ -164,7 +164,7 @@ def start_testing(
             tests_with_attempts=tests_with_attempts,
             custom_tests_with_attempts=custom_tests_with_attempts,
             artifacts_path=artifacts_run_path,
-            history_limit=history_limit,
+            multistage_depth=multistage_depth,
         )
     else:
         setup_models_and_tests(
@@ -174,7 +174,7 @@ def start_testing(
             tests_with_attempts=tests_with_attempts,
             custom_tests_with_attempts=custom_tests_with_attempts,
             artifacts_path=None,
-            history_limit=history_limit,
+            multistage_depth=multistage_depth,
         )
 
     logging.info("Completion of testing")

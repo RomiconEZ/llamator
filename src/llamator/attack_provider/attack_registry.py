@@ -34,7 +34,7 @@ def instantiate_tests(
     basic_tests_with_attempts: Optional[List[Tuple[str, int]]] = None,
     custom_tests_with_attempts: Optional[List[Tuple[Type[TestBase], int]]] = None,
     artifacts_path: Optional[str] = None,
-    history_limit: int = 20,
+    multistage_depth: int = 20,
 ) -> List[TestBase]:
     """
     Instantiate and return a list of test instances based on registered test classes
@@ -52,7 +52,7 @@ def instantiate_tests(
         List of custom test classes and repeat counts (default is None).
     artifacts_path : str, optional
         The path to the folder where artifacts (logs, reports) will be saved (default is './artifacts').
-    history_limit : int, optional
+    multistage_depth : int, optional
         The maximum allowed history length that can be passed to multi-stage interactions (default is 20).
 
     Returns

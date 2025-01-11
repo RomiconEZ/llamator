@@ -78,6 +78,7 @@ class TestLogicalInconsistencies(TestBase):
             *args,
             **kwargs,
         )
+        self.multistage_depth = kwargs.get('multistage_depth', 20)
 
     def _prepare_attack_data(self, attack_prompts: list[str], responses: list[str], statuses: list[str]) -> None:
         """
@@ -143,7 +144,7 @@ class TestLogicalInconsistencies(TestBase):
                 attacker_session=attack_chat,
                 tested_client_session=tested_client_chat,
                 stop_criterion=stop_criterion,
-                history_limit=5,
+                history_limit=self.multistage_depth,
             )
 
             is_broken = dialog_session.start_conversation(
