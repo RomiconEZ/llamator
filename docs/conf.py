@@ -54,60 +54,55 @@ html_title = "LLAMATOR"
 html_theme_options = {
     "light_css_variables": {
         # Основные цвета фона
-        "color-background-primary": "#f5f5f5",  # Светло-серый фон
-        "color-background-secondary": "#e8e8e8",  # Чуть темнее серый для вторичных элементов
+        "color-background-primary": "#f8f5fa",  # Очень светлый розовато-лиловый фон
+        "color-background-secondary": "#f0ebf3",  # Чуть темнее розовато-лиловый
         # Цвета текста
-        "color-foreground-primary": "#0a1435",  # Очень темно-синий для основного текста
-        "color-foreground-secondary": "#152456",  # Темно-синий для вторичного текста
+        "color-foreground-primary": "#2d1b36",  # Очень темный пурпурный для текста
+        "color-foreground-secondary": "#432952",  # Темный пурпурный для вторичного текста
         # Брендовые цвета
-        "color-brand-primary": "#0a1435",  # Очень темно-синий
-        "color-brand-content": "#152456",  # Темно-синий
+        "color-brand-primary": "#2d1b36",  # Очень темный пурпурный
+        "color-brand-content": "#432952",  # Темный пурпурный
         # Ссылки
-        "color-link": "#1a237e",  # Темно-синий для ссылок
-        "color-link-hover": "#283593",  # Чуть светлее синий при наведении
+        "color-link": "#614378",  # Пурпурный для ссылок
+        "color-link-hover": "#7b5696",  # Светлее пурпурный при наведении
         # Оформление примечаний (admonitions)
-        "color-admonition-background": "#ffffff",  # Белый фон для примечаний
-        "color-admonition-title-background": "#0a1435",  # Очень темно-синий для заголовка
+        "color-admonition-background": "#fff9fc",  # Очень светлый розовый фон для примечаний
+        "color-admonition-title-background": "#2d1b36",  # Очень темный пурпурный для заголовка
         "color-admonition-title": "#ffffff",  # Белый текст на темном фоне
-        "color-admonition-border": "#0a1435",  # Очень темно-синяя граница
+        "color-admonition-border": "#2d1b36",  # Очень темный пурпурный для границы
         # Код
-        "color-code-background": "#f0f0f0",  # Светло-серый фон для кода
-        "color-code-foreground": "#0a1435",  # Очень темно-синий текст кода
+        "color-code-background": "#f5f0f7",  # Светлый розовато-лиловый фон для кода
+        "color-code-foreground": "#2d1b36",  # Очень темный пурпурный текст кода
         # Навигация
-        "color-sidebar-background": "#f0f0f0",  # Светло-серый фон сайдбара
-        "color-sidebar-item-background--hover": "#e0e0e0",  # При наведении на пункт меню
-        "color-sidebar-item-expander-background--hover": "#d0d0d0",  # При наведении на раскрывающийся элемент
-        "color-sidebar-search-background": "#ffffff",  # Белый фон поиска
-        "color-sidebar-search-background--focus": "#ffffff",  # Белый фон при фокусе на поиске
+        "color-sidebar-background": "#f5f0f7",  # Светлый розовато-лиловый фон сайдбара
+        "color-sidebar-item-background--hover": "#ebe4ef",  # При наведении на пункт меню
+        "color-sidebar-item-expander-background--hover": "#e0d7e6",  # При наведении на раскрывающийся элемент
+        "color-sidebar-search-background": "#fff9fc",  # Очень светлый розовый фон поиска
+        "color-sidebar-search-background--focus": "#fff9fc",  # То же самое при фокусе
     },
     "dark_css_variables": {
-        # Основные цвета фона
-        "color-background-primary": "#1a1b24",  # Более темный фон (темнее Dracula)
-        "color-background-secondary": "#44475a",  # Dracula current line
-        # Цвета текста
-        "color-foreground-primary": "#f8f8f2",  # Dracula foreground
-        "color-foreground-secondary": "#6272a4",  # Dracula comment
-        # Брендовые цвета
-        "color-brand-primary": "#bd93f9",  # Dracula purple
-        "color-brand-content": "#ff79c6",  # Dracula pink
-        # Ссылки
-        "color-link": "#8be9fd",  # Dracula cyan
-        "color-link-hover": "#ff79c6",  # Dracula pink
-        # Оформление примечаний (admonitions)
-        "color-admonition-background": "#282a36",  # Dracula background
-        "color-admonition-title-background": "#44475a",  # Dracula current line
-        "color-admonition-title": "#f8f8f2",  # Dracula foreground
-        "color-admonition-border": "#6272a4",  # Dracula comment
-        # Код
-        "color-code-background": "#282a36",  # Оригинальный фон Dracula для контраста
-        "color-code-foreground": "#f8f8f2",  # Dracula foreground
-        # Навигация
-        "color-sidebar-background": "#282a36",  # Оригинальный фон Dracula для сайдбара
-        "color-sidebar-item-background--hover": "#44475a",  # Dracula current line
-        "color-sidebar-item-expander-background--hover": "#6272a4",  # Dracula comment
-        "color-sidebar-search-background": "#44475a",  # Dracula current line
-        "color-sidebar-search-background--focus": "#44475a",  # Тот же цвет, что и без фокуса
+        # [Оставляем темную тему без изменений]
+        "color-background-primary": "#1a1b24",
+        "color-background-secondary": "#44475a",
+        "color-foreground-primary": "#f8f8f2",
+        "color-foreground-secondary": "#6272a4",
+        "color-brand-primary": "#bd93f9",
+        "color-brand-content": "#ff79c6",
+        "color-link": "#8be9fd",
+        "color-link-hover": "#ff79c6",
+        "color-admonition-background": "#282a36",
+        "color-admonition-title-background": "#44475a",
+        "color-admonition-title": "#f8f8f2",
+        "color-admonition-border": "#6272a4",
+        "color-code-background": "#282a36",
+        "color-code-foreground": "#f8f8f2",
+        "color-sidebar-background": "#282a36",
+        "color-sidebar-item-background--hover": "#44475a",
+        "color-sidebar-item-expander-background--hover": "#6272a4",
+        "color-sidebar-search-background": "#44475a",
+        "color-sidebar-search-background--focus": "#44475a",
     },
+    # [Остальные настройки остаются без изменений]
     "sidebar_hide_name": False,
     "footer_icons": [
         {
