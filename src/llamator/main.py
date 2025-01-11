@@ -40,6 +40,7 @@ def start_testing(
     num_threads: int = 1,
     tests_with_attempts: Optional[List[Tuple[str, int]]] = None,
     custom_tests_with_attempts: Optional[List[Tuple[Type[TestBase], int]]] = None,
+    history_limit: int = 20,
 ):
     """
     Start testing.
@@ -91,6 +92,8 @@ def start_testing(
         - ucar
     custom_tests_with_attempts : List[Tuple[Type[TestBase], int]], optional
         List of custom test instances and their corresponding number of attempts.
+    history_limit : int, optional
+        The maximum allowed history length that can be passed to multi-stage interactions (default is 20).
 
     Returns
     -------
@@ -117,7 +120,7 @@ def start_testing(
             print("Invalid artifacts path.")
             return
         elif enable_reports is True or enable_logging is True:
-            # Create a new folder named 'llamato_run_{start_timestamp}' inside artifacts_path
+            # Create a new folder named 'LLAMATOR_run_{start_timestamp}' inside artifacts_path
             run_folder_name = f"LLAMATOR_run_{start_timestamp}"
             run_folder_path = os.path.join(artifacts_path, run_folder_name)
             os.makedirs(run_folder_path, exist_ok=True)
@@ -161,6 +164,7 @@ def start_testing(
             tests_with_attempts=tests_with_attempts,
             custom_tests_with_attempts=custom_tests_with_attempts,
             artifacts_path=artifacts_run_path,
+            history_limit=history_limit,
         )
     else:
         setup_models_and_tests(
@@ -170,11 +174,12 @@ def start_testing(
             tests_with_attempts=tests_with_attempts,
             custom_tests_with_attempts=custom_tests_with_attempts,
             artifacts_path=None,
+            history_limit=history_limit,
         )
 
     logging.info("Completion of testing")
 
-    # Explicitly close log files at the end of the progra
+    # Explicitly close log files at the end of the program
     for handler in logging.getLogger().handlers:
         if isinstance(handler, RotatingFileHandler):
             handler.close()

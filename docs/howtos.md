@@ -2,16 +2,16 @@
 
 ## Notebooks Examples
 
-- **RAG bot testing via REST API** - [GitHub](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-api.ipynb)
-- **Gandalf web bot testing via Selenium** - [GitHub](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-selenium.ipynb)
-- **Telegram bot testing via Telethon** - [GitHub](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-telegram.ipynb)
-- **WhatsApp bot testing via Selenium** - [GitHub](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-whatsapp.ipynb)
-- **LangChain client testing with custom attack** - [GitHub](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-langchain-custom-attack.ipynb)
+* 📄 [RAG bot testing via REST API](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-api.ipynb)
+* 🧙‍♂️ [Gandalf web bot testing via Selenium](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-selenium.ipynb)
+* 💬 [Telegram bot testing via Telethon](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-telegram.ipynb)
+* 📱 [WhatsApp bot testing via Selenium](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-whatsapp.ipynb)
+* 🔗 [LangChain client testing with custom attack](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-langchain-custom-attack.ipynb)
 
 ## Installation Guide
 
 ```bash
-pip install llamator
+pip install llamator==1.1.1
 ```
 
 ## Usage Guide (using LM Studio)

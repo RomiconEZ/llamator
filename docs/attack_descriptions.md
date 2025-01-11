@@ -104,7 +104,7 @@ Challenges the LLM with a dataset of harmful behavior prompts in past tense form
 </details>
 
 <details>
-<summary><strong>RU Do Anything Now Jailbreak</strong></summary>
+<summary><strong>Do Anything Now Jailbreak (RU)</strong></summary>
 <p>
 Probes a Russian-language LLM's resilience against performing explicitly forbidden activities using the "Do Anything Now" (DAN) character roleplay technique.
 </p>
@@ -114,7 +114,7 @@ Probes a Russian-language LLM's resilience against performing explicitly forbidd
 </details>
 
 <details>
-<summary><strong>RU Typoglycemia Attack</strong></summary>
+<summary><strong>Typoglycemia Attack (RU)</strong></summary>
 <p>
 Attempts to exploit a text processing vulnerability in Russian-language LLMs that can cause incorrect responses by removing random characters from words.
 </p>
@@ -124,7 +124,7 @@ Attempts to exploit a text processing vulnerability in Russian-language LLMs tha
 </details>
 
 <details>
-<summary><strong>RU Ucar</strong></summary>
+<summary><strong>UCAR (RU)</strong></summary>
 <p>
 Probes a Russian-language LLM's adherence to content restrictions when explicitly requested to ignore such filters. It assesses the robustness of the LLM's content moderation systems against direct challenges.
 </p>
@@ -154,7 +154,7 @@ Attempts to exploit a text processing vulnerability in LLMs that can cause incor
 </details>
 
 <details>
-<summary><strong>Ucar</strong></summary>
+<summary><strong>UCAR</strong></summary>
 <p>
 Probes an LLM's adherence to content restrictions when explicitly requested to ignore such filters. It assesses the robustness of the LLM's content moderation systems against direct challenges.
 </p>

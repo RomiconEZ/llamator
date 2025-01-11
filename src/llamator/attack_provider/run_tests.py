@@ -116,6 +116,7 @@ def run_tests(
     basic_tests_with_attempts: Optional[List[Tuple[str, int]]] = None,
     custom_tests_with_attempts: Optional[List[Tuple[Type[TestBase], int]]] = None,
     artifacts_path: Optional[str] = None,
+    history_limit: int = 20,
 ):
     """
     Run the tests on the given client and attack configurations.
@@ -136,6 +137,8 @@ def run_tests(
         to be executed (default is None).
     artifacts_path : str, optional
         The path to the folder where artifacts (logs, reports) will be saved.
+    history_limit : int, optional
+        The maximum allowed history length that can be passed to multi-stage interactions (default is 20).
 
     Returns
     -------
@@ -155,6 +158,7 @@ def run_tests(
         basic_tests_with_attempts=basic_tests_with_attempts,
         custom_tests_with_attempts=custom_tests_with_attempts,
         artifacts_path=artifacts_path,
+        history_limit=history_limit,
     )
 
     # Run tests in parallel mode
@@ -327,6 +331,7 @@ def setup_models_and_tests(
     tests_with_attempts: Optional[List[Tuple[str, int]]] = None,
     custom_tests_with_attempts: Optional[List[Tuple[Type[TestBase], int]]] = None,
     artifacts_path: Optional[str] = None,
+    history_limit: int = 20,
 ):
     """
     Set up and validate the models, then run the tests.
@@ -347,6 +352,8 @@ def setup_models_and_tests(
         to be executed (default is None).
     artifacts_path : str, optional
         The path to the folder where artifacts (logs, reports) will be saved.
+    history_limit : int, optional
+        The maximum allowed history length that can be passed to multi-stage interactions (default is 20).
 
     Returns
     -------
@@ -374,4 +381,5 @@ def setup_models_and_tests(
         basic_tests_with_attempts=tests_with_attempts,
         custom_tests_with_attempts=custom_tests_with_attempts,
         artifacts_path=artifacts_path,
+        history_limit=history_limit,
     )
