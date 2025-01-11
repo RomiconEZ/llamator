@@ -47,7 +47,7 @@ Documentation Link: [https://romiconez.github.io/llamator](https://romiconez.git
 * 🕵 [LLM07: System Prompt Leakage](https://github.com/OWASP/www-project-top-10-for-large-language-model-applications/blob/main/2_0_vulns/LLM07_SystemPromptLeakage.md)
 * 🎭 [LLM09: Misinformation](https://github.com/OWASP/www-project-top-10-for-large-language-model-applications/blob/main/2_0_vulns/LLM09_Misinformation.md)
 
-## Community 🌍 
+## Community 🌍
 
 * 📣 [Telegram Channel — AI Security Lab](https://t.me/aisecuritylab)
 * 💬 [Telegram Chat — LLAMATOR | AI Red Team Community](https://t.me/llamator)
