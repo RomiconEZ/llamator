@@ -82,7 +82,7 @@ html_theme_options = {
     },
     "dark_css_variables": {
         # Основные цвета фона
-        "color-background-primary": "#282a36",  # Dracula background
+        "color-background-primary": "#1a1b24",  # Более темный фон (темнее Dracula)
         "color-background-secondary": "#44475a",  # Dracula current line
         # Цвета текста
         "color-foreground-primary": "#f8f8f2",  # Dracula foreground
@@ -99,14 +99,14 @@ html_theme_options = {
         "color-admonition-title": "#f8f8f2",  # Dracula foreground
         "color-admonition-border": "#6272a4",  # Dracula comment
         # Код
-        "color-code-background": "#44475a",  # Dracula current line
+        "color-code-background": "#282a36",  # Оригинальный фон Dracula для контраста
         "color-code-foreground": "#f8f8f2",  # Dracula foreground
         # Навигация
-        "color-sidebar-background": "#282a36",  # Dracula background
+        "color-sidebar-background": "#282a36",  # Оригинальный фон Dracula для сайдбара
         "color-sidebar-item-background--hover": "#44475a",  # Dracula current line
         "color-sidebar-item-expander-background--hover": "#6272a4",  # Dracula comment
         "color-sidebar-search-background": "#44475a",  # Dracula current line
-        "color-sidebar-search-background--focus": "#6272a4",  # Dracula comment
+        "color-sidebar-search-background--focus": "#44475a",  # Тот же цвет, что и без фокуса
     },
     "sidebar_hide_name": False,
     "footer_icons": [
