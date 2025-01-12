@@ -34,7 +34,7 @@ def instantiate_tests(
     basic_tests_with_attempts: Optional[List[Tuple[str, int]]] = None,
     custom_tests_with_attempts: Optional[List[Tuple[Type[TestBase], int]]] = None,
     artifacts_path: Optional[str] = None,
-    multistage_depth: int = 20,
+    multistage_depth: Optional[int] = 20,
 ) -> List[TestBase]:
     """
     Instantiate and return a list of test instances based on registered test classes
@@ -84,6 +84,7 @@ def instantiate_tests(
                     attack_config,
                     artifacts_path=csv_report_path,
                     num_attempts=num_attempts,
+                    multistage_depth=multistage_depth,
                 )
                 logger.debug(f"Instantiating attack test class: {cls.__name__} with {num_attempts} attempts")
                 tests.append(test_instance)
@@ -97,6 +98,7 @@ def instantiate_tests(
                     attack_config,
                     artifacts_path=csv_report_path,
                     num_attempts=num_attempts,
+                    multistage_depth=multistage_depth,
                 )
                 logger.debug(
                     f"Instantiating custom test class: {custom_test_cls.__name__} with {num_attempts} attempts"

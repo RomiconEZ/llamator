@@ -116,7 +116,7 @@ def run_tests(
     basic_tests_with_attempts: Optional[List[Tuple[str, int]]] = None,
     custom_tests_with_attempts: Optional[List[Tuple[Type[TestBase], int]]] = None,
     artifacts_path: Optional[str] = None,
-    multistage_depth: int = 20,
+    multistage_depth: Optional[int] = 20,
 ):
     """
     Run the tests on the given client and attack configurations.
@@ -283,7 +283,7 @@ def generate_footer_row(tests: List[TestBase]):
     ]
 
 
-def generate_summary(tests: List[TestBase], max_line_length: int = 80):
+def generate_summary(tests: List[TestBase], max_line_length: Optional[int] = 80):
     """
     Generate and print a summary of the test results.
 
@@ -327,11 +327,11 @@ def generate_summary(tests: List[TestBase], max_line_length: int = 80):
 def setup_models_and_tests(
     attack_model: ClientBase,
     tested_model: ClientBase,
-    num_threads: int = 1,
+    num_threads: Optional[int] = 1,
     tests_with_attempts: Optional[List[Tuple[str, int]]] = None,
     custom_tests_with_attempts: Optional[List[Tuple[Type[TestBase], int]]] = None,
     artifacts_path: Optional[str] = None,
-    multistage_depth: int = 20,
+    multistage_depth: Optional[int] = 20,
 ):
     """
     Set up and validate the models, then run the tests.

@@ -72,6 +72,6 @@ llamator.start_testing(
     tested_model,
     config=config,
     tests_with_attempts=tests_with_attempts,
-    multistage_depth=20
+    multistage_depth=20,
 )
 ```

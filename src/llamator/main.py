@@ -37,10 +37,10 @@ def start_testing(
     attack_model: ClientBase,
     tested_model: ClientBase,
     config: dict,
-    num_threads: int = 1,
+    num_threads: Optional[int] = 1,
     tests_with_attempts: Optional[List[Tuple[str, int]]] = None,
     custom_tests_with_attempts: Optional[List[Tuple[Type[TestBase], int]]] = None,
-    multistage_depth: int = 20,
+    multistage_depth: Optional[int] = 20,
 ):
     """
     Start testing.
