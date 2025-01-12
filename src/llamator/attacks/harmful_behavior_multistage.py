@@ -63,15 +63,11 @@ class TestHarmfulBehaviorsMultiStage(TestBase):
             logging.info(f"{self.test_name} attack report saved to {csv_path}")
 
     @staticmethod
-    def refine_attack_prompt(
-        tested_client_history: List[Dict[str, str]], objective: str, last_attacker_response: str
-    ) -> str:
+    def refine_attack_prompt(tested_client_history: List[Dict[str, str]], objective: str) -> str:
         """
         Refines the attack prompt to be more effective.
         """
-        refined_prompt = REFINE_PROMPT_GENERATION_TEMPLATE.format(
-            objective=objective
-        )
+        refined_prompt = REFINE_PROMPT_GENERATION_TEMPLATE.format(objective=objective)
         return refined_prompt
 
     @staticmethod
