@@ -48,20 +48,6 @@ def test_openai_client():
 
     tests_with_attempts = [
         ("aim_jailbreak", 2),
-        # ("base64_injection", 2),
-        # ("complimentary_transition", 2),
-        # ("do_anything_now_jailbreak", 2),
-        # ("RU_do_anything_now_jailbreak", 2),
-        # ("ethical_compliance", 2),
-        # ("harmful_behavior", 2),
-        # ("linguistic_evasion", 2),
-        # ("logical_inconsistencies", 2),
-        # ("past_tense", 2),
-        # ("sycophancy", 2),
-        # ("typoglycemia_attack", 2),
-        # ("RU_typoglycemia_attack", 2),
-        # ("ucar", 2),
-        # ("RU_ucar", 2),
     ]
 
     config = {
@@ -117,20 +103,6 @@ def test_langchain_client_yandexgpt():
 
     tests_with_attempts = [
         ("aim_jailbreak", 2),
-        # ("base64_injection", 2),
-        # ("complimentary_transition", 2),
-        # ("do_anything_now_jailbreak", 2),
-        # ("RU_do_anything_now_jailbreak", 2),
-        # ("ethical_compliance", 2),
-        # ("harmful_behavior", 2),
-        # ("linguistic_evasion", 2),
-        # ("logical_inconsistencies", 2),
-        # ("past_tense", 2),
-        # ("sycophancy", 2),
-        # ("typoglycemia_attack", 2),
-        # ("RU_typoglycemia_attack", 2),
-        # ("ucar", 2),
-        # ("RU_ucar", 2),
     ]
 
     config = {
