@@ -91,11 +91,12 @@ def contains_system_prompt_keywords(response: str) -> bool:
         "like",
         "helpful",
         "assistant",
+        "imagine",
         "answer",
         "действуй",
+        "представь",
         "рол",
         "помощник",
-        "полезный",
         "полезный",
         "ответ",
     ]
