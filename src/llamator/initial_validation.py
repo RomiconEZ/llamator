@@ -20,6 +20,7 @@ AvailableTests = [
     "RU_typoglycemia_attack",
     "RU_ucar",
     "sycophancy",
+    "system_prompt_leakage",
     "typoglycemia_attack",
     "ucar",
 ]

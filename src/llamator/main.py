@@ -87,6 +87,7 @@ def start_testing(
         - RU_typoglycemia_attack
         - RU_ucar
         - sycophancy
+        - system_prompt_leakage
         - typoglycemia_attack
         - ucar
     custom_tests_with_attempts : List[Tuple[Type[TestBase], int]], optional
