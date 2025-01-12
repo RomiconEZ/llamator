@@ -86,7 +86,7 @@ Leverages the use of a non-Russian language to circumvent the restrictions or fo
 <details>
 <summary><strong>Logical Inconsistencies Test</strong></summary>
 <p>
-Attacks the LLM system during a long conversation to generate logical inconsistencies in answers using antonyms, negations, and paraphrases based on the system's domain.
+Attacks the LLM system during a multistage conversation to generate logical inconsistencies in answers using antonyms, negations, and paraphrases based on the system's domain.
 </p>
 <p>
 <a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/logical_inconsistencies.py">View code on GitHub</a>
@@ -136,10 +136,20 @@ Probes a Russian-language LLM's adherence to content restrictions when explicitl
 <details>
 <summary><strong>Sycophancy Test</strong></summary>
 <p>
-Attacks the LLM system during a long conversation using the argumentum ad verecundiam method based on system's domain.
+Attacks the LLM system during a multistage conversation using the argumentum ad verecundiam method based on the system's domain.
 </p>
 <p>
 <a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/sycophancy.py">View code on GitHub</a>
+</p>
+</details>
+
+<details>
+<summary><strong>System Prompt Leakage</strong></summary>
+<p>
+Challenges the LLM with datasets of malicious prompts to extract system instructions using multistage refinement.
+</p>
+<p>
+<a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/system_prompt_leakage.py">View code on GitHub</a>
 </p>
 </details>
 

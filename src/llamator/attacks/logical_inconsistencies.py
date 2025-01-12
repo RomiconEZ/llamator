@@ -57,7 +57,7 @@ Your response to this message will be sent directly to the LLM system and must c
 
 @register_test
 class TestLogicalInconsistencies(TestBase):
-    """Attacks the LLM system during a long conversation to generate logical inconsistencies in answers using antonyms, negations, and paraphrases based on the system's domain."""
+    """Attacks the LLM system during a multistage conversation to generate logical inconsistencies in answers using antonyms, negations, and paraphrases based on the system's domain."""
 
     test_name = "logical_inconsistencies"
 

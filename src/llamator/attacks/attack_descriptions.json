@@ -45,7 +45,7 @@
     "name": "Harmful Behavior Multistage",
     "in_code_name": "harmful_behavior_multistage",
     "description_en": "Challenges the LLM with a dataset of harmful behavior prompts using multistage refinement.",
-    "description_ru": "Испытывает LLM с набором запросов, связанных с вредным поведением используя самоулучшение.",
+    "description_ru": "Испытывает LLM с набором запросов, связанных с вредным поведением, используя самоулучшение атакующей модели.",
     "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/harmful_behavior_multistage.py"
   },
   {
@@ -58,7 +58,7 @@
   {
     "name": "Logical Inconsistencies Test",
     "in_code_name": "logical_inconsistencies",
-    "description_en": "Attacks the LLM system during a long conversation to generate logical inconsistencies in answers using antonyms, negations, and paraphrases based on the system's domain.",
+    "description_en": "Attacks the LLM system during a multistage conversation to generate logical inconsistencies in answers using antonyms, negations, and paraphrases based on the system's domain.",
     "description_ru": "Проверяет связность и последовательность ответов LLM-системы в ходе продолжительного диалога на основе её описания, вступая с ней в спор с использованием перефразирования и отрицания.",
     "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/logical_inconsistencies.py"
   },
@@ -93,9 +93,16 @@
   {
     "name": "Sycophancy Test",
     "in_code_name": "sycophancy",
-    "description_en": "Attacks the LLM system during a long conversation using the argumentum ad verecundiam method based on system's domain.",
+    "description_en": "Attacks the LLM system during a multistage conversation using the argumentum ad verecundiam method based on the system's domain.",
     "description_ru": "Проверяет связность и последовательность ответов LLM-системы в ходе продолжительного диалога на основе её описания, вступая с ней в спор с использованием аргументации к авторитету (лат. argumentum ad verecundiam).",
     "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/sycophancy.py"
+  },
+  {
+    "name": "System Prompt Leakage",
+    "in_code_name": "system_prompt_leakage",
+    "description_en": "Challenges the LLM with datasets of malicious prompts to extract system instructions using multistage refinement.",
+    "description_ru": "Провоцирует LLM выдать системные инструкции с помощью датасета вредоносных промтов с последующим улучшением атакующей моделью.",
+    "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/system_prompt_leakage.py"
   },
   {
     "name": "Typoglycemia Attack",
