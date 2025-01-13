@@ -49,11 +49,11 @@ pre-commit install
 
 ### Run tests
 
-1) Go to tests/test_local_llamator.py
+1) Go to `tests/test_local_llamator.py`.
 
-2) Create .env from .env.example and fill in the necessary fields.
+2) Create `.env` from `.env.example` and fill in the necessary fields.
 
-3) Run the function to perform testing depending on your LLM client
+3) Run the function to perform testing depending on your LLM client.
 
 ## Making Changes
 
@@ -62,11 +62,12 @@ pre-commit install
     ```bash
     git checkout -b your-branch-name
     ```
+
 2. Make your changes to the code and add or modify unit tests as necessary.
 
-3. Run tests again
+3. Run tests again.
 
-4. Commit Your Changes
+4. Commit Your Changes.
 
     Keep your commits as small and focused as possible and include meaningful commit messages.
     ```bash
@@ -74,9 +75,8 @@ pre-commit install
     git commit -m "Add a brief description of your change"
     ```
 
-5. Push the changes you did to GitHub
+5. Push the changes you did to GitHub.
 
-6.
     ```bash
     git push origin your-branch-name
     ```
@@ -86,83 +86,91 @@ pre-commit install
 The easist way to contribute to LLAMATOR project is by creating a new test!
 This can be easily acheived by:
 
-#### 1. Create a Test File
-* Navigate to the attacks directory.
+#### 1. Create a Test File:
+* Navigate to the `attacks` directory.
 * Create a new python file, naming it after the specific attack or the dataset it utilizes.
 
-#### 2. Set Up Your File
+#### 2. Set Up Your File.
 
 The easiest way is to copy the existing attack (py file in the attacks directory)
-and change the elements in it according to your implementation
+and change the elements in it according to your implementation.
 
-#### 3. Creating datasets with texts for attacks
+For multi-stage attack implementation see "What Drives the Multi-stage?" notes in [docs](https://romiconez.github.io/llamator/attacks_description.html).
 
-All files containing attack texts or prompts must be in parquet format.
+#### 3. Creating datasets with texts for attacks.
 
-These files are stored in the attack_data folder.
+All files containing attack texts or prompts must be in `.parquet` format.
 
-#### 3. Add your attack file name to the attack_loader.py file:
-```text
-from .attacks import (
-    dynamic_test,
-    translation,
-    typoglycemia,
-    dan,
+These files are stored in the `attack_data` folder.
+
+#### 3. Add your attack file name to the `attack_loader.py` file:
+```python
+from ..attacks import (  # noqa
     aim,
-    self_refine,
-    ethical_compliance,
-    ucar,
+    base64_injection,
     complimentary_transition,
+    dan,
+    ethical_compliance,
     harmful_behavior,
-    base64_injection
+    linguistic,
+    logical_inconsistencies,
+    past_tense,
+    ru_dan,
+    ru_typoglycemia,
+    ru_ucar,
+    sycophancy,
+    typoglycemia,
+    ucar,
 
     #TODO: YOUR TEST HERE
 )
 ```
 
-#### 4. Add your attack name to the initial_validation.py file:
-```text
+#### 4. Add your attack name to the docstring of `start_testing()` in `main.py` and `initial_validation.py` file:
+```python
 AvailableTests = [
     "aim_jailbreak",
     "base64_injection",
     "complimentary_transition",
     "do_anything_now_jailbreak",
-    "RU_do_anything_now_jailbreak",
     "ethical_compliance",
     "harmful_behavior",
-    "past_tense",
     "linguistic_evasion",
-    "sycophancy_test",
-    "typoglycemia_attack",
+    "logical_inconsistencies",
+    "past_tense",
+    "RU_do_anything_now_jailbreak",
     "RU_typoglycemia_attack",
-    "ucar",
     "RU_ucar",
+    "sycophancy",
+    "typoglycemia_attack",
+    "ucar",
 
     #TODO: YOUR TEST HERE
 ]
 ```
 
-#### 5. Add your attack description to the attack_descriptions.json file:
+#### 5. Add your attack to the `attack_descriptions.json` and `attack_descriptions.md` files.
 
 #### 6. Open a PR! Submit your changes for review by opening a pull request.
 
-## Submitting a pull request
+## Submitting a pull request.
 
-1. Update your branch
+1. Update your branch.
 
    Fetch any new changes from the base branch and rebase your branch.
    ```bash
    git fetch origin
    git rebase origin/main
+   ```
 
-2. Submit a Pull Request
+2. Submit a Pull Request.
 
     Go to GitHub and submit a pull request from your branch to the project main branch.
 
-3. Request Reviews
+3. Request Reviews.
 
     Request reviews from other contributors listed as maintainers. If you receive a feedback - make any necessary changes and push them.
 
-4. Merge
+4. Merge.
 
     Once your pull request is approved, it will be merged into the main branch.

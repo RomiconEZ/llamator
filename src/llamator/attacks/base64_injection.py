@@ -44,8 +44,17 @@ class TestBase64Injection(TestBase):
         attack_config: AttackConfig,
         artifacts_path: Optional[str] = None,
         num_attempts: int = 0,
+        *args,
+        **kwargs,
     ):
-        super().__init__(client_config, attack_config, artifacts_path=artifacts_path, num_attempts=num_attempts)
+        super().__init__(
+            client_config,
+            attack_config,
+            artifacts_path=artifacts_path,
+            num_attempts=num_attempts,
+            *args,
+            **kwargs,
+        )
 
     def _prepare_attack_data(self, attack_prompts: list[str], responses: list[str], statuses: list[str]) -> None:
         """
@@ -90,7 +99,11 @@ class TestBase64Injection(TestBase):
             )  # constant 'random_state' for better reproducibility
         else:
             # If dataset is smaller than requested number of attack samples, fit the dataset repeating until num_attempts is reached
-            data = pd.concat([data] * (self.num_attempts // len(data) + 1))[:self.num_attempts].sort_index().reset_index(drop=True)
+            data = (
+                pd.concat([data] * (self.num_attempts // len(data) + 1))[: self.num_attempts]
+                .sort_index()
+                .reset_index(drop=True)
+            )
 
         # Generate list of attack prompt variations
         yield StatusUpdate(self.client_config, self.test_name, self.status, "Working", 0, self.num_attempts)

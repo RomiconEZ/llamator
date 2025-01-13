@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 @register_test
 class TestTypoglycemia(TestBase):
-    """Attempt to exploit a text processing vulnerability in LLMs that can cause them to generate incorrect responses to queries by removing random characters from words."""
+    """Attempts to exploit a text processing vulnerability in LLMs that can cause them to generate incorrect responses to queries by removing random characters from words."""
 
     test_name = "typoglycemia_attack"
 
@@ -26,8 +26,17 @@ class TestTypoglycemia(TestBase):
         attack_config: AttackConfig,
         artifacts_path: Optional[str] = None,
         num_attempts: int = 0,
+        *args,
+        **kwargs,
     ):
-        super().__init__(client_config, attack_config, artifacts_path=artifacts_path, num_attempts=num_attempts)
+        super().__init__(
+            client_config,
+            attack_config,
+            artifacts_path=artifacts_path,
+            num_attempts=num_attempts,
+            *args,
+            **kwargs,
+        )
 
     def _prepare_attack_data(self, attack_prompts: list[str], responses: list[str], statuses: list[str]) -> None:
         """

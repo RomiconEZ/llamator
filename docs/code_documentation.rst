@@ -1,4 +1,4 @@
-Code documentation
+Code Documentation
 ==================
 
 Main Functions

@@ -25,7 +25,7 @@ def setup_logging(debug_level: int, artifacts_path: str):
     allowed_logging_levels = [logging.WARNING, logging.INFO, logging.DEBUG]
     logging_level = allowed_logging_levels[debug_level]
 
-    log_file_name = f"LLAMATOR_runtime.log"
+    log_file_name = "LLAMATOR_runtime.log"
 
     # Full path to the log file
     log_file_path = os.path.join(artifacts_path, log_file_name)

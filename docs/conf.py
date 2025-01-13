@@ -53,34 +53,69 @@ html_title = "LLAMATOR"
 
 html_theme_options = {
     "light_css_variables": {
-        "color-brand-primary": "#1d3d64",  # Темно-синий для основного цвета
-        "color-brand-content": "#18578d",  # Темно-синий для контента
-        "color-admonition-background": "#f0f8ff",  # Светлый фон для предупреждений (note)
-        "color-admonition-title-background": "#007acc",  # Цвет фона заголовка note
-        "color-admonition-border": "#007acc",  # Цвет границы для note
-        "color-admonition-title": "#007acc",  # Цвет заголовка note
+        # Основные цвета фона
+        "color-background-primary": "#f8f5fa",  # Очень светлый розовато-лиловый фон
+        "color-background-secondary": "#f0ebf3",  # Чуть темнее розовато-лиловый
+        # Цвета текста
+        "color-foreground-primary": "#2d1b36",  # Очень темный пурпурный для текста
+        "color-foreground-secondary": "#432952",  # Темный пурпурный для вторичного текста
+        # Брендовые цвета
+        "color-brand-primary": "#2d1b36",  # Очень темный пурпурный
+        "color-brand-content": "#432952",  # Темный пурпурный
+        # Ссылки
+        "color-link": "#614378",  # Пурпурный для ссылок
+        "color-link-hover": "#7b5696",  # Светлее пурпурный при наведении
+        # Оформление примечаний (admonitions)
+        "color-admonition-background": "#fff9fc",  # Очень светлый розовый фон для примечаний
+        "color-admonition-title-background": "#2d1b36",  # Очень темный пурпурный для заголовка
+        "color-admonition-title": "#ffffff",  # Белый текст на темном фоне
+        "color-admonition-border": "#2d1b36",  # Очень темный пурпурный для границы
+        # Код
+        "color-code-background": "#f5f0f7",  # Светлый розовато-лиловый фон для кода
+        "color-code-foreground": "#2d1b36",  # Очень темный пурпурный текст кода
+        # Навигация
+        "color-sidebar-background": "#f5f0f7",  # Светлый розовато-лиловый фон сайдбара
+        "color-sidebar-item-background--hover": "#ebe4ef",  # При наведении на пункт меню
+        "color-sidebar-item-expander-background--hover": "#e0d7e6",  # При наведении на раскрывающийся элемент
+        "color-sidebar-search-background": "#fff9fc",  # Очень светлый розовый фон поиска
+        "color-sidebar-search-background--focus": "#fff9fc",  # То же самое при фокусе
     },
     "dark_css_variables": {
-        "color-brand-primary": "#d8673e",
-        "color-brand-content": "#f99470",
-        "color-admonition-background": "#333333",  # Темный фон для note в тёмной теме
-        "color-admonition-title-background": "#d8673e",  # Цвет фона заголовка note
-        "color-admonition-border": "#d8673e",  # Цвет границы для note
-        "color-admonition-title": "#f99470",  # Цвет заголовка note
+        # [Оставляем темную тему без изменений]
+        "color-background-primary": "#1a1b24",
+        "color-background-secondary": "#44475a",
+        "color-foreground-primary": "#f8f8f2",
+        "color-foreground-secondary": "#6272a4",
+        "color-brand-primary": "#bd93f9",
+        "color-brand-content": "#ff79c6",
+        "color-link": "#8be9fd",
+        "color-link-hover": "#ff79c6",
+        "color-admonition-background": "#282a36",
+        "color-admonition-title-background": "#44475a",
+        "color-admonition-title": "#f8f8f2",
+        "color-admonition-border": "#6272a4",
+        "color-code-background": "#282a36",
+        "color-code-foreground": "#f8f8f2",
+        "color-sidebar-background": "#282a36",
+        "color-sidebar-item-background--hover": "#44475a",
+        "color-sidebar-item-expander-background--hover": "#6272a4",
+        "color-sidebar-search-background": "#44475a",
+        "color-sidebar-search-background--focus": "#44475a",
     },
+    # [Остальные настройки остаются без изменений]
     "sidebar_hide_name": False,
     "footer_icons": [
-            {
-                "name": "GitHub",
-                "url": "https://github.com/RomiconEZ/llamator",
-                "html": """
-                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
-                    </svg>
-                """,
-                "class": "",
-            },
-        ],
+        {
+            "name": "GitHub",
+            "url": "https://github.com/RomiconEZ/llamator",
+            "html": """
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            """,
+            "class": "",
+        },
+    ],
     "source_repository": "https://github.com/RomiconEZ/llamator",
     "source_branch": "release",
     "source_directory": "src/",
@@ -121,8 +156,8 @@ source_suffix = {
     '.md': 'markdown',
 }
 
-pygments_style = "sphinx"
-pygments_dark_style = "monokai"
+pygments_style = "dracula"
+pygments_dark_style = "dracula"
 
 # workaround for sphinx material issue with empty left sidebar
 # See: https://github.com/bashtage/sphinx-material/issues/30
