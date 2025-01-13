@@ -12,7 +12,7 @@
 Documentation for |LLAMATOR|_ python package.
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :caption: Contents
 
    project_overview
