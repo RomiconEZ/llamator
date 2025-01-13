@@ -138,7 +138,7 @@ Probes a Russian-language LLM's adherence to content restrictions when explicitl
 ## Multi-stage attacks
 
 <details>
-<summary><strong>What is Engine for Multi-stage?</strong></summary>
+<summary><strong>What Drives the Multi-stage?</strong></summary>
 
 Multi-stage attacks are inspired by the [Jailbreaking Black Box Large Language Models in Twenty Queries (PAIR)](https://arxiv.org/html/2310.08419) paper.
 
