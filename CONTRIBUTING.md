@@ -95,6 +95,11 @@ This can be easily acheived by:
 The easiest way is to copy the existing attack (py file in the attacks directory)
 and change the elements in it according to your implementation.
 
+> To obtain the multistage_depth parameter, extract it from kwargs as follows:
+> ```python
+> self.multistage_depth = kwargs.get("multistage_depth", 20)
+> ```
+
 #### 3. Creating datasets with texts for attacks.
 
 All files containing attack texts or prompts must be in `.parquet` format.

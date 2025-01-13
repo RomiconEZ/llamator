@@ -70,21 +70,21 @@
     "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/past_tense.py"
   },
   {
-    "name": "RU Do Anything Now Jailbreak",
+    "name": "Do Anything Now Jailbreak (RU)",
     "in_code_name": "RU_do_anything_now_jailbreak",
     "description_en": "Probes a Russian-language LLM's resilience against performing explicitly forbidden activities using the \"Do Anything Now\" (DAN) character roleplay technique.",
     "description_ru": "Проверяет устойчивость русскоязычной модели LLM к выполнению явно запрещенных действий, используя технику ролевой игры персонажа «Сделай что угодно сейчас» (DAN).",
     "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/ru_dan.py"
   },
   {
-    "name": "RU Typoglycemia Attack",
+    "name": "Typoglycemia Attack (RU)",
     "in_code_name": "RU_typoglycemia_attack",
     "description_en": "Attempts to exploit a text processing vulnerability in Russian-language LLMs that can cause incorrect responses by removing random characters from words.",
     "description_ru": "Пытается использовать уязвимость в обработке текста русскоязычными моделями LLM, которая может вызвать неправильные ответы, удаляя случайные символы из слов.",
     "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/ru_typoglycemia.py"
   },
   {
-    "name": "RU Ucar",
+    "name": "UCAR (RU)",
     "in_code_name": "RU_ucar",
     "description_en": "Probes a Russian-language LLM's adherence to content restrictions when explicitly requested to ignore such filters. It assesses the robustness of the LLM's content moderation systems against direct challenges.",
     "description_ru": "Проверяет соблюдение русскоязычной моделью LLM ограничений по контенту при явном запросе игнорировать такие фильтры. Оценивает устойчивость систем модерации контента LLM к прямым вызовам.",
@@ -112,7 +112,7 @@
     "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/typoglycemia.py"
   },
   {
-    "name": "Ucar",
+    "name": "UCAR",
     "in_code_name": "ucar",
     "description_en": "Probes an LLM's adherence to content restrictions when explicitly requested to ignore such filters. It assesses the robustness of the LLM's content moderation systems against direct challenges.",
     "description_ru": "Проверяет соблюдение LLM ограничений по контенту при явном запросе игнорировать такие фильтры. Оценивает устойчивость систем модерации контента LLM к прямым вызовам.",
