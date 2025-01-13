@@ -295,7 +295,7 @@ class MultiStageInteractionSession:
 
         while True:
             # Send attacker's response to the tested client and receive tested client's response
-            tested_client_response = self.tested_client_session.say(attacker_response.strip(" \t\n[]<>"))
+            tested_client_response = self.tested_client_session.say(attacker_response.strip(" \t\n[]<>\"'"))
             logger.debug(f"Step {self.current_step}: Tested client response: {tested_client_response}")
 
             # Check stopping criterion by history

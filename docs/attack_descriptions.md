@@ -3,7 +3,7 @@ This section provides an overview of all available attacks.
 
 ## Single-stage attacks
 
-### OWASP [LLM01:2025](https://genai.owasp.org/llmrisk/llm01-prompt-injection/") Prompt Injection
+### OWASP [LLM01:2025](https://genai.owasp.org/llmrisk/llm01-prompt-injection/) Prompt Injection
 
 <details>
 <summary><strong>Aim Jailbreak</strong></summary>
@@ -158,7 +158,7 @@ The `multistage_depth` parameter for using in `history_limit` can be extracted f
 ```
 </details>
 
-### OWASP [LLM01:2025](https://genai.owasp.org/llmrisk/llm01-prompt-injection/") Prompt Injection
+### OWASP [LLM01:2025](https://genai.owasp.org/llmrisk/llm01-prompt-injection/) Prompt Injection
 
 <details>
 <summary><strong>Harmful Behavior Multistage</strong></summary>
@@ -170,7 +170,7 @@ Challenges the LLM with a dataset of harmful behavior prompts using multistage r
 <a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/harmful_behavior_multistage.py">View code on GitHub</a>
 </details>
 
-### OWASP [LLM07:2025](https://genai.owasp.org/llmrisk/llm072025-system-prompt-leakage/") System Prompt Leakage
+### OWASP [LLM07:2025](https://genai.owasp.org/llmrisk/llm072025-system-prompt-leakage/) System Prompt Leakage
 
 <details>
 <summary><strong>System Prompt Leakage</strong></summary>
@@ -182,7 +182,7 @@ Challenges the LLM with datasets of malicious prompts to extract system instruct
 <a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/system_prompt_leakage.py">View code on GitHub</a>
 </details>
 
-### OWASP [LLM09:2025](https://genai.owasp.org/llmrisk/llm092025-misinformation/") Misinformation
+### OWASP [LLM09:2025](https://genai.owasp.org/llmrisk/llm092025-misinformation/) Misinformation
 
 <details>
 <summary><strong>Logical Inconsistencies Test</strong></summary>
