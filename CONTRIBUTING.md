@@ -95,10 +95,7 @@ This can be easily acheived by:
 The easiest way is to copy the existing attack (py file in the attacks directory)
 and change the elements in it according to your implementation.
 
-> To obtain the multistage_depth parameter, extract it from kwargs as follows:
-> ```python
-> self.multistage_depth = kwargs.get("multistage_depth", 20)
-> ```
+For multi-stage attack implementation see "What is Engine for Multi-stage?" notes in [docs](https://romiconez.github.io/llamator/attacks_description.html).
 
 #### 3. Creating datasets with texts for attacks.
 
