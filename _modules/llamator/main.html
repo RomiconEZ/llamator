@@ -6,7 +6,7 @@
 
     <!-- Generated with Sphinx 8.0.2 and Furo 2024.08.06 -->
         <title>llamator.main - LLAMATOR</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a5519fdd" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
     
@@ -15,38 +15,77 @@
 
 <style>
   body {
-    --color-code-background: #eeffcc;
-  --color-code-foreground: black;
-  --color-brand-primary: #1d3d64;
-  --color-brand-content: #18578d;
-  --color-admonition-background: #f0f8ff;
-  --color-admonition-title-background: #007acc;
-  --color-admonition-border: #007acc;
-  --color-admonition-title: #007acc;
+    --color-code-background: #282a36;
+  --color-code-foreground: #f8f8f2;
+  --color-background-primary: #f8f5fa;
+  --color-background-secondary: #f0ebf3;
+  --color-foreground-primary: #2d1b36;
+  --color-foreground-secondary: #432952;
+  --color-brand-primary: #2d1b36;
+  --color-brand-content: #432952;
+  --color-link: #614378;
+  --color-link-hover: #7b5696;
+  --color-admonition-background: #fff9fc;
+  --color-admonition-title-background: #2d1b36;
+  --color-admonition-title: #ffffff;
+  --color-admonition-border: #2d1b36;
+  --color-code-background: #f5f0f7;
+  --color-code-foreground: #2d1b36;
+  --color-sidebar-background: #f5f0f7;
+  --color-sidebar-item-background--hover: #ebe4ef;
+  --color-sidebar-item-expander-background--hover: #e0d7e6;
+  --color-sidebar-search-background: #fff9fc;
+  --color-sidebar-search-background--focus: #fff9fc;
   
   }
   @media not print {
     body[data-theme="dark"] {
-      --color-code-background: #272822;
+      --color-code-background: #282a36;
   --color-code-foreground: #f8f8f2;
-  --color-brand-primary: #d8673e;
-  --color-brand-content: #f99470;
-  --color-admonition-background: #333333;
-  --color-admonition-title-background: #d8673e;
-  --color-admonition-border: #d8673e;
-  --color-admonition-title: #f99470;
+  --color-background-primary: #1a1b24;
+  --color-background-secondary: #44475a;
+  --color-foreground-primary: #f8f8f2;
+  --color-foreground-secondary: #6272a4;
+  --color-brand-primary: #bd93f9;
+  --color-brand-content: #ff79c6;
+  --color-link: #8be9fd;
+  --color-link-hover: #ff79c6;
+  --color-admonition-background: #282a36;
+  --color-admonition-title-background: #44475a;
+  --color-admonition-title: #f8f8f2;
+  --color-admonition-border: #6272a4;
+  --color-code-background: #282a36;
+  --color-code-foreground: #f8f8f2;
+  --color-sidebar-background: #282a36;
+  --color-sidebar-item-background--hover: #44475a;
+  --color-sidebar-item-expander-background--hover: #6272a4;
+  --color-sidebar-search-background: #44475a;
+  --color-sidebar-search-background--focus: #44475a;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
-        --color-code-background: #272822;
+        --color-code-background: #282a36;
   --color-code-foreground: #f8f8f2;
-  --color-brand-primary: #d8673e;
-  --color-brand-content: #f99470;
-  --color-admonition-background: #333333;
-  --color-admonition-title-background: #d8673e;
-  --color-admonition-border: #d8673e;
-  --color-admonition-title: #f99470;
+  --color-background-primary: #1a1b24;
+  --color-background-secondary: #44475a;
+  --color-foreground-primary: #f8f8f2;
+  --color-foreground-secondary: #6272a4;
+  --color-brand-primary: #bd93f9;
+  --color-brand-content: #ff79c6;
+  --color-link: #8be9fd;
+  --color-link-hover: #ff79c6;
+  --color-admonition-background: #282a36;
+  --color-admonition-title-background: #44475a;
+  --color-admonition-title: #f8f8f2;
+  --color-admonition-border: #6272a4;
+  --color-code-background: #282a36;
+  --color-code-foreground: #f8f8f2;
+  --color-sidebar-background: #282a36;
+  --color-sidebar-item-background--hover: #44475a;
+  --color-sidebar-item-expander-background--hover: #6272a4;
+  --color-sidebar-search-background: #44475a;
+  --color-sidebar-search-background--focus: #44475a;
   
       }
     }
@@ -219,8 +258,8 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../project_overview.html">Project Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../howtos.html">How To Use</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../attacks_description.html">Attacks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../code_documentation.html">Code documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../attack_descriptions.html">Attacks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code_documentation.html">Code Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../licenses.html">Licenses</a></li>
 </ul>
 
@@ -258,29 +297,29 @@
         <article role="main" id="furo-main-content">
           <h1>Source code for llamator.main</h1><div class="highlight"><pre>
 <span></span><span class="ch">#!/usr/bin/env python3</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="kn">from</span> <span class="nn">logging.handlers</span> <span class="kn">import</span> <span class="n">RotatingFileHandler</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Type</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">logging.handlers</span><span class="w"> </span><span class="kn">import</span> <span class="n">RotatingFileHandler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Type</span>
 
-<span class="kn">import</span> <span class="nn">colorama</span>
-<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">colorama</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dotenv</span>
 
-<span class="kn">from</span> <span class="nn">.attack_provider.run_tests</span> <span class="kn">import</span> <span class="n">setup_models_and_tests</span>
-<span class="kn">from</span> <span class="nn">.attack_provider.test_base</span> <span class="kn">import</span> <span class="n">TestBase</span>
-<span class="kn">from</span> <span class="nn">.client.chat_client</span> <span class="kn">import</span> <span class="n">ClientBase</span>
-<span class="kn">from</span> <span class="nn">.format_output.logo</span> <span class="kn">import</span> <span class="n">print_logo</span>
-<span class="kn">from</span> <span class="nn">.initial_validation</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.attack_provider.run_tests</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup_models_and_tests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.attack_provider.test_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestBase</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.client.chat_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClientBase</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.format_output.logo</span><span class="w"> </span><span class="kn">import</span> <span class="n">print_logo</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.initial_validation</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">validate_artifacts_path</span><span class="p">,</span>
     <span class="n">validate_custom_tests</span><span class="p">,</span>
     <span class="n">validate_language</span><span class="p">,</span>
     <span class="n">validate_model</span><span class="p">,</span>
     <span class="n">validate_tests</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">.ps_logging</span> <span class="kn">import</span> <span class="n">setup_logging</span>
-<span class="kn">from</span> <span class="nn">.report_generators.excel_report_generator</span> <span class="kn">import</span> <span class="n">create_attack_report_from_artifacts</span>
-<span class="kn">from</span> <span class="nn">.report_generators.word_report_generator</span> <span class="kn">import</span> <span class="n">create_word_report</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.ps_logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup_logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.report_generators.excel_report_generator</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_attack_report_from_artifacts</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.report_generators.word_report_generator</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_word_report</span>
 
 <span class="c1"># At this stage, the api keys that the user sets are loaded</span>
 <span class="n">dotenv_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;.env&quot;</span><span class="p">)</span>
@@ -294,13 +333,14 @@
 
 <div class="viewcode-block" id="start_testing">
 <a class="viewcode-back" href="../../code_documentation.html#llamator.start_testing">[docs]</a>
-<span class="k">def</span> <span class="nf">start_testing</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">start_testing</span><span class="p">(</span>
     <span class="n">attack_model</span><span class="p">:</span> <span class="n">ClientBase</span><span class="p">,</span>
     <span class="n">tested_model</span><span class="p">:</span> <span class="n">ClientBase</span><span class="p">,</span>
     <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
-    <span class="n">num_threads</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">num_threads</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
     <span class="n">tests_with_attempts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">custom_tests_with_attempts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Type</span><span class="p">[</span><span class="n">TestBase</span><span class="p">],</span> <span class="nb">int</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">multistage_depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Start testing.</span>
@@ -340,16 +380,21 @@
 <span class="sd">        - do_anything_now_jailbreak</span>
 <span class="sd">        - ethical_compliance</span>
 <span class="sd">        - harmful_behavior</span>
+<span class="sd">        - harmful_behavior_multistage</span>
 <span class="sd">        - linguistic_evasion</span>
+<span class="sd">        - logical_inconsistencies</span>
 <span class="sd">        - past_tense</span>
 <span class="sd">        - RU_do_anything_now_jailbreak</span>
 <span class="sd">        - RU_typoglycemia_attack</span>
 <span class="sd">        - RU_ucar</span>
-<span class="sd">        - sycophancy_test</span>
+<span class="sd">        - sycophancy</span>
+<span class="sd">        - system_prompt_leakage</span>
 <span class="sd">        - typoglycemia_attack</span>
 <span class="sd">        - ucar</span>
 <span class="sd">    custom_tests_with_attempts : List[Tuple[Type[TestBase], int]], optional</span>
 <span class="sd">        List of custom test instances and their corresponding number of attempts.</span>
+<span class="sd">    multistage_depth : int, optional</span>
+<span class="sd">        The maximum allowed history length that can be passed to multi-stage interactions (default is 20).</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -376,7 +421,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid artifacts path.&quot;</span><span class="p">)</span>
             <span class="k">return</span>
         <span class="k">elif</span> <span class="n">enable_reports</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">or</span> <span class="n">enable_logging</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="c1"># Create a new folder named &#39;llamato_run_{start_timestamp}&#39; inside artifacts_path</span>
+            <span class="c1"># Create a new folder named &#39;LLAMATOR_run_{start_timestamp}&#39; inside artifacts_path</span>
             <span class="n">run_folder_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;LLAMATOR_run_</span><span class="si">{</span><span class="n">start_timestamp</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="n">run_folder_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">artifacts_path</span><span class="p">,</span> <span class="n">run_folder_name</span><span class="p">)</span>
             <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">run_folder_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -420,6 +465,7 @@
             <span class="n">tests_with_attempts</span><span class="o">=</span><span class="n">tests_with_attempts</span><span class="p">,</span>
             <span class="n">custom_tests_with_attempts</span><span class="o">=</span><span class="n">custom_tests_with_attempts</span><span class="p">,</span>
             <span class="n">artifacts_path</span><span class="o">=</span><span class="n">artifacts_run_path</span><span class="p">,</span>
+            <span class="n">multistage_depth</span><span class="o">=</span><span class="n">multistage_depth</span><span class="p">,</span>
         <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">setup_models_and_tests</span><span class="p">(</span>
@@ -429,11 +475,12 @@
             <span class="n">tests_with_attempts</span><span class="o">=</span><span class="n">tests_with_attempts</span><span class="p">,</span>
             <span class="n">custom_tests_with_attempts</span><span class="o">=</span><span class="n">custom_tests_with_attempts</span><span class="p">,</span>
             <span class="n">artifacts_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">multistage_depth</span><span class="o">=</span><span class="n">multistage_depth</span><span class="p">,</span>
         <span class="p">)</span>
 
-    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Completion of testing&quot;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Completion of testing&quot;</span><span class="p">)</span>
 
-    <span class="c1"># Explicitly close log files at the end of the progra</span>
+    <span class="c1"># Explicitly close log files at the end of the program</span>
     <span class="k">for</span> <span class="n">handler</span> <span class="ow">in</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span><span class="o">.</span><span class="n">handlers</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handler</span><span class="p">,</span> <span class="n">RotatingFileHandler</span><span class="p">):</span>
             <span class="n">handler</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -477,10 +524,10 @@
           <div class="right-details">
             <div class="icons">
               <a class="muted-link " href="https://github.com/RomiconEZ/llamator" aria-label="GitHub">
-                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
-                    </svg>
-                </a>
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
               
             </div>
           </div>

@@ -6,7 +6,7 @@
 
     <!-- Generated with Sphinx 8.0.2 and Furo 2024.08.06 -->
         <title>llamator.client.chat_client - LLAMATOR</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a5519fdd" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=302659d7" />
     
@@ -15,38 +15,77 @@
 
 <style>
   body {
-    --color-code-background: #eeffcc;
-  --color-code-foreground: black;
-  --color-brand-primary: #1d3d64;
-  --color-brand-content: #18578d;
-  --color-admonition-background: #f0f8ff;
-  --color-admonition-title-background: #007acc;
-  --color-admonition-border: #007acc;
-  --color-admonition-title: #007acc;
+    --color-code-background: #282a36;
+  --color-code-foreground: #f8f8f2;
+  --color-background-primary: #f8f5fa;
+  --color-background-secondary: #f0ebf3;
+  --color-foreground-primary: #2d1b36;
+  --color-foreground-secondary: #432952;
+  --color-brand-primary: #2d1b36;
+  --color-brand-content: #432952;
+  --color-link: #614378;
+  --color-link-hover: #7b5696;
+  --color-admonition-background: #fff9fc;
+  --color-admonition-title-background: #2d1b36;
+  --color-admonition-title: #ffffff;
+  --color-admonition-border: #2d1b36;
+  --color-code-background: #f5f0f7;
+  --color-code-foreground: #2d1b36;
+  --color-sidebar-background: #f5f0f7;
+  --color-sidebar-item-background--hover: #ebe4ef;
+  --color-sidebar-item-expander-background--hover: #e0d7e6;
+  --color-sidebar-search-background: #fff9fc;
+  --color-sidebar-search-background--focus: #fff9fc;
   
   }
   @media not print {
     body[data-theme="dark"] {
-      --color-code-background: #272822;
+      --color-code-background: #282a36;
   --color-code-foreground: #f8f8f2;
-  --color-brand-primary: #d8673e;
-  --color-brand-content: #f99470;
-  --color-admonition-background: #333333;
-  --color-admonition-title-background: #d8673e;
-  --color-admonition-border: #d8673e;
-  --color-admonition-title: #f99470;
+  --color-background-primary: #1a1b24;
+  --color-background-secondary: #44475a;
+  --color-foreground-primary: #f8f8f2;
+  --color-foreground-secondary: #6272a4;
+  --color-brand-primary: #bd93f9;
+  --color-brand-content: #ff79c6;
+  --color-link: #8be9fd;
+  --color-link-hover: #ff79c6;
+  --color-admonition-background: #282a36;
+  --color-admonition-title-background: #44475a;
+  --color-admonition-title: #f8f8f2;
+  --color-admonition-border: #6272a4;
+  --color-code-background: #282a36;
+  --color-code-foreground: #f8f8f2;
+  --color-sidebar-background: #282a36;
+  --color-sidebar-item-background--hover: #44475a;
+  --color-sidebar-item-expander-background--hover: #6272a4;
+  --color-sidebar-search-background: #44475a;
+  --color-sidebar-search-background--focus: #44475a;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
-        --color-code-background: #272822;
+        --color-code-background: #282a36;
   --color-code-foreground: #f8f8f2;
-  --color-brand-primary: #d8673e;
-  --color-brand-content: #f99470;
-  --color-admonition-background: #333333;
-  --color-admonition-title-background: #d8673e;
-  --color-admonition-border: #d8673e;
-  --color-admonition-title: #f99470;
+  --color-background-primary: #1a1b24;
+  --color-background-secondary: #44475a;
+  --color-foreground-primary: #f8f8f2;
+  --color-foreground-secondary: #6272a4;
+  --color-brand-primary: #bd93f9;
+  --color-brand-content: #ff79c6;
+  --color-link: #8be9fd;
+  --color-link-hover: #ff79c6;
+  --color-admonition-background: #282a36;
+  --color-admonition-title-background: #44475a;
+  --color-admonition-title: #f8f8f2;
+  --color-admonition-border: #6272a4;
+  --color-code-background: #282a36;
+  --color-code-foreground: #f8f8f2;
+  --color-sidebar-background: #282a36;
+  --color-sidebar-item-background--hover: #44475a;
+  --color-sidebar-item-expander-background--hover: #6272a4;
+  --color-sidebar-search-background: #44475a;
+  --color-sidebar-search-background--focus: #44475a;
   
       }
     }
@@ -219,8 +258,8 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../project_overview.html">Project Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../howtos.html">How To Use</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../attacks_description.html">Attacks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../code_documentation.html">Code documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../attack_descriptions.html">Attacks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code_documentation.html">Code Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../licenses.html">Licenses</a></li>
 </ul>
 
@@ -257,11 +296,11 @@
         </div>
         <article role="main" id="furo-main-content">
           <h1>Source code for llamator.client.chat_client</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
 
-<span class="kn">from</span> <span class="nn">.langchain_integration</span> <span class="kn">import</span> <span class="n">get_langchain_chat_models_info</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.langchain_integration</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_langchain_chat_models_info</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -271,7 +310,7 @@
 
 <div class="viewcode-block" id="ClientBase">
 <a class="viewcode-back" href="../../../code_documentation.html#llamator.ClientBase">[docs]</a>
-<span class="k">class</span> <span class="nc">ClientBase</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ClientBase</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for interacting with chat models.</span>
 <span class="sd">    The history and new messages are passed as a list of dictionaries.</span>
@@ -296,7 +335,7 @@
 <div class="viewcode-block" id="ClientBase.interact">
 <a class="viewcode-back" href="../../../code_documentation.html#llamator.ClientBase.interact">[docs]</a>
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="nf">interact</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">history</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="n">messages</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">interact</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">history</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="n">messages</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Takes the conversation history and new messages, sends them to the LLM, and returns a new response.</span>
 
@@ -318,7 +357,7 @@
 
 
 
-<span class="k">class</span> <span class="nc">ChatSession</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ChatSession</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Maintains a single conversation session, including the history, and supports optional system prompts.</span>
 
@@ -327,19 +366,29 @@
 <span class="sd">    client : ClientBase</span>
 <span class="sd">        The client responsible for interacting with the LLM.</span>
 
-<span class="sd">    system_prompts : Optional[List[str]]</span>
+<span class="sd">    system_prompts : List[Dict[str, str]]</span>
 <span class="sd">        A list of system prompts used to initialize the conversation (if any).</span>
 
 <span class="sd">    history : List[Dict[str, str]]</span>
 <span class="sd">        The conversation history, containing both user and assistant messages.</span>
 
+<span class="sd">    use_history : Optional[bool]</span>
+<span class="sd">        Determines whether to use the existing conversation history.</span>
+<span class="sd">        If False, only the system prompts and the current user prompt are used.</span>
+<span class="sd">        Defaults to True.</span>
+
 <span class="sd">    Methods</span>
 <span class="sd">    -------</span>
-<span class="sd">    say(user_prompt: str) -&gt; str</span>
+<span class="sd">    say(user_prompt: str, use_history: bool = True) -&gt; str</span>
 <span class="sd">        Sends a user message to the LLM, updates the conversation history, and returns the assistant&#39;s response.</span>
+
+<span class="sd">    clear_history() -&gt; None</span>
+<span class="sd">        Clears the conversation history and re-initializes it with system prompts.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">ClientBase</span><span class="p">,</span> <span class="n">system_prompts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">ClientBase</span><span class="p">,</span> <span class="n">system_prompts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">use_history</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initializes the ChatSession with a client and optional system prompts.</span>
 
@@ -350,18 +399,27 @@
 
 <span class="sd">        system_prompts : Optional[List[str]]</span>
 <span class="sd">            A list of system prompts to guide the conversation from the start.</span>
+
+<span class="sd">        use_history : Optional[bool]</span>
+<span class="sd">            Determines whether to use the existing conversation history.</span>
+<span class="sd">            If False, only the system prompts and the current user prompt are used.</span>
+<span class="sd">            Defaults to True.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">client</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">system_prompts</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_history</span> <span class="o">=</span> <span class="n">use_history</span>
         <span class="k">if</span> <span class="n">system_prompts</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">system_prompts</span> <span class="o">=</span> <span class="p">[</span>
                 <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">system_prompt_text</span><span class="p">}</span> <span class="k">for</span> <span class="n">system_prompt_text</span> <span class="ow">in</span> <span class="n">system_prompts</span>
             <span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">system_prompts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Initialize history with system prompts</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">system_prompts</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">say</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">say</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Sends a user message to the LLM, updates the conversation history, and returns the assistant&#39;s response.</span>
+<span class="sd">        Sends a user message to the LLM, updates the conversation history based on the use_history flag,</span>
+<span class="sd">        and returns the assistant&#39;s response.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -373,20 +431,234 @@
 <span class="sd">        str</span>
 <span class="sd">            The response from the assistant (LLM) as a string.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;say: system_prompt=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">system_prompts</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;say: system_prompts=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">system_prompts</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;say: prompt=</span><span class="si">{</span><span class="n">user_prompt</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">input_messages</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">system_prompts</span><span class="p">:</span>
-            <span class="n">input_messages</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">system_prompts</span><span class="p">)</span>
-        <span class="n">input_messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">user_prompt</span><span class="p">})</span>
 
-        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="p">,</span> <span class="n">input_messages</span><span class="p">)</span>
+        <span class="c1"># Interact with the LLM</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span>
+            <span class="n">history</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_history</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">system_prompts</span><span class="p">),</span>
+            <span class="n">messages</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">user_prompt</span><span class="p">}],</span>
+        <span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;say: result=</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">input_messages</span><span class="p">)</span>  <span class="c1"># Update the conversation history</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Add the response to the history</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">user_prompt</span><span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear_history</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Clears the conversation history and re-initializes it with system prompts.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">system_prompts</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MultiStageInteractionSession</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Manages a multi-stage interaction between attacker and tested chat clients.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    attacker_session : ChatSession</span>
+<span class="sd">        The session for the attacker.</span>
+<span class="sd">    tested_client_session : ChatSession</span>
+<span class="sd">        The session for the tested client.</span>
+<span class="sd">    stop_criterion : Callable[[List[Dict[str, str]]], bool], optional</span>
+<span class="sd">        A function that determines whether to stop the conversation based on the tested client&#39;s responses.</span>
+<span class="sd">    history_limit : int</span>
+<span class="sd">        The maximum allowed history length for the attacker.</span>
+<span class="sd">    tested_client_response_handler : Callable[..., str], optional</span>
+<span class="sd">        A function that handles the tested client&#39;s response before passing it to the attacker.</span>
+<span class="sd">    current_step : int</span>
+<span class="sd">        The current step of the attacker.</span>
+<span class="sd">    refine_args : tuple</span>
+<span class="sd">        Additional positional arguments for tested_client_response_handler.</span>
+<span class="sd">    refine_kwargs : dict</span>
+<span class="sd">        Additional keyword arguments for tested_client_response_handler.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    start_conversation(start_prompt: str) -&gt; bool</span>
+<span class="sd">        Starts the conversation using the attacker and alternates between attacker and tested client until a stopping condition is met.</span>
+<span class="sd">    get_attacker_responses() -&gt; List[Dict[str, str]]</span>
+<span class="sd">        Returns the responses of the attacker.</span>
+<span class="sd">    get_tested_client_responses() -&gt; List[Dict[str, str]]</span>
+<span class="sd">        Returns the responses of the tested client.</span>
+<span class="sd">    get_current_step() -&gt; int</span>
+<span class="sd">        Returns the current step of the attacker.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">attacker_session</span><span class="p">:</span> <span class="n">ChatSession</span><span class="p">,</span>
+        <span class="n">tested_client_session</span><span class="p">:</span> <span class="n">ChatSession</span><span class="p">,</span>
+        <span class="n">stop_criterion</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]],</span> <span class="nb">bool</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">history_limit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+        <span class="n">tested_client_response_handler</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">refine_args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">refine_kwargs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the MultiStageInteractionSession.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        attacker_session : ChatSession</span>
+<span class="sd">            The session for the attacker.</span>
+<span class="sd">        tested_client_session : ChatSession</span>
+<span class="sd">            The session for the tested client.</span>
+<span class="sd">        stop_criterion : Callable[[List[Dict[str, str]]], bool]], optional</span>
+<span class="sd">            A function that takes the tested client&#39;s history and returns True if the conversation should stop.</span>
+<span class="sd">            If None, a default criterion that always returns False is used. (default is None)</span>
+<span class="sd">        history_limit : int, optional</span>
+<span class="sd">            The maximum number of messages allowed in the attacker&#39;s history. (default is 20)</span>
+<span class="sd">        tested_client_response_handler : Callable[..., str], optional</span>
+<span class="sd">            A function that handles the tested client&#39;s response before passing it to the attacker.</span>
+<span class="sd">            If None, a default function that returns the response unchanged is used. (default is None)</span>
+<span class="sd">        refine_args : tuple, optional</span>
+<span class="sd">            Additional positional arguments for tested_client_response_handler. (default is None)</span>
+<span class="sd">        refine_kwargs : dict, optional</span>
+<span class="sd">            Additional keyword arguments for tested_client_response_handler. (default is None)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attacker_session</span> <span class="o">=</span> <span class="n">attacker_session</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tested_client_session</span> <span class="o">=</span> <span class="n">tested_client_session</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop_criterion</span> <span class="o">=</span> <span class="n">stop_criterion</span> <span class="k">if</span> <span class="n">stop_criterion</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_stop_criterion</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">history_limit</span> <span class="o">=</span> <span class="n">history_limit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tested_client_response_handler</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">tested_client_response_handler</span>
+            <span class="k">if</span> <span class="n">tested_client_response_handler</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_tested_client_response_handler</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_step</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refine_args</span> <span class="o">=</span> <span class="n">refine_args</span> <span class="k">if</span> <span class="n">refine_args</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refine_kwargs</span> <span class="o">=</span> <span class="n">refine_kwargs</span> <span class="k">if</span> <span class="n">refine_kwargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{}</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">default_stop_criterion</span><span class="p">(</span><span class="n">tested_client_history</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Default stopping criterion that never stops the conversation.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        tested_client_history : List[Dict[str, str]]</span>
+<span class="sd">            The history of the tested client.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            Always returns False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">default_tested_client_response_handler</span><span class="p">(</span><span class="n">tested_client_response</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Default tested_client_response_handler function that returns the response unchanged.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        tested_client_response : str</span>
+<span class="sd">            The response from the tested client.</span>
+<span class="sd">        *args : tuple</span>
+<span class="sd">            Additional positional arguments (not used).</span>
+<span class="sd">        **kwargs : dict</span>
+<span class="sd">            Additional keyword arguments (not used).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            The original tested client&#39;s response.</span>
+
+<span class="sd">        # Usage Example:</span>
+<span class="sd">        # If you have additional variables, they can be accessed via args or kwargs.</span>
+<span class="sd">        # For example, to append a suffix from kwargs:</span>
+<span class="sd">        # suffix = kwargs.get(&#39;suffix&#39;, &#39;&#39;)</span>
+<span class="sd">        # return tested_client_response + suffix</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tested_client_response</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">start_conversation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Starts the conversation with the attacker and alternates between attacker and tested client.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        start_prompt : str</span>
+<span class="sd">            The initial prompt sent by the attacker to start the conversation.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            Returns True if the stopping criterion was met, otherwise False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Starting multi-stage conversation.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Attacker initiates the conversation</span>
+        <span class="n">attacker_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attacker_session</span><span class="o">.</span><span class="n">say</span><span class="p">(</span><span class="n">start_prompt</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_step</span><span class="si">}</span><span class="s2">: Attacker response: </span><span class="si">{</span><span class="n">attacker_response</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1"># Send attacker&#39;s response to the tested client and receive tested client&#39;s response</span>
+            <span class="n">tested_client_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tested_client_session</span><span class="o">.</span><span class="n">say</span><span class="p">(</span><span class="n">attacker_response</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot; </span><span class="se">\t\n</span><span class="s2">[]&lt;&gt;</span><span class="se">\&quot;</span><span class="s2">&#39;&quot;</span><span class="p">))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_step</span><span class="si">}</span><span class="s2">: Tested client response: </span><span class="si">{</span><span class="n">tested_client_response</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Check stopping criterion by history</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop_criterion</span><span class="p">(</span><span class="n">tested_client_history</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tested_client_session</span><span class="o">.</span><span class="n">history</span><span class="p">):</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Stopping criterion met.&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">True</span>
+
+            <span class="c1"># Check history limit</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_step</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">history_limit</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;History limit exceeded.&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">False</span>
+
+            <span class="c1"># Handling the tested client&#39;s response before passing it to the attacker</span>
+            <span class="c1"># (e.g. adding scoring, more instructions for attacker)</span>
+            <span class="n">attacker_prompt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tested_client_response_handler</span><span class="p">(</span>
+                <span class="n">tested_client_response</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">refine_args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">refine_kwargs</span>
+            <span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_step</span><span class="si">}</span><span class="s2">: Attacker prompt: </span><span class="si">{</span><span class="n">attacker_prompt</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Send the handled tested client&#39;s response to the attacker for refinement and sending next iteration</span>
+            <span class="n">attacker_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attacker_session</span><span class="o">.</span><span class="n">say</span><span class="p">(</span><span class="n">attacker_prompt</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_step</span><span class="si">}</span><span class="s2">: Attacker response: </span><span class="si">{</span><span class="n">attacker_response</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Increment step</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_step</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current step incremented to: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_step</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_attacker_responses</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the responses of the attacker.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        List[Dict[str, str]]</span>
+<span class="sd">            The responses of the attacker&#39;s session.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">message</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">attacker_session</span><span class="o">.</span><span class="n">history</span> <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;role&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;assistant&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_tested_client_responses</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the responses of the tested client.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        List[Dict[str, str]]</span>
+<span class="sd">            The responses of the tested client&#39;s session.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">message</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tested_client_session</span><span class="o">.</span><span class="n">history</span> <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;role&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;assistant&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_current_step</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the current step of the attacker.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            The current step of the attacker.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_step</span>
 </pre></div>
         </article>
       </div>
@@ -409,10 +681,10 @@
           <div class="right-details">
             <div class="icons">
               <a class="muted-link " href="https://github.com/RomiconEZ/llamator" aria-label="GitHub">
-                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
-                    </svg>
-                </a>
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
               
             </div>
           </div>

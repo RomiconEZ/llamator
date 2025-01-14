@@ -2,17 +2,16 @@
 
 ## Notebooks Examples
 
-- **RAG Chatbot testing via API (RU)** - [GitHub](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-api.ipynb)
-- **Testing the Gandalf webbot** - [GitHub](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-selenium.ipynb)
-- **Telegram bot testing via Telethon (RU)** - [GitHub](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-telegram.ipynb)
-- **LangChain client testing with custom attack (RU)** - [GitHub](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-langchain-custom-attack.ipynb)
-- **WhatsApp client testing via Selenium (ENG)** - [GitHub](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-whatsapp.ipynb)
-
+* 📄 [RAG bot testing via REST API](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-api.ipynb)
+* 🧙‍♂️ [Gandalf web bot testing via Selenium](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-selenium.ipynb)
+* 💬 [Telegram bot testing via Telethon](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-telegram.ipynb)
+* 📱 [WhatsApp bot testing via Selenium](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-whatsapp.ipynb)
+* 🔗 [LangChain client testing with custom attack](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-langchain-custom-attack.ipynb)
 
 ## Installation Guide
 
 ```bash
-pip install llamator
+pip install llamator==2.0.0
 ```
 
 ## Usage Guide (using LM Studio)
@@ -48,9 +47,12 @@ tests_with_attempts = [
     # ("RU_do_anything_now_jailbreak", 2),
     # ("ethical_compliance", 2),
     # ("harmful_behavior", 2),
+    # ("harmful_behavior_multistage", 2),
     # ("linguistic_evasion", 2),
+    # ("logical_inconsistencies", 2),
     # ("past_tense", 2),
-    # ("sycophancy_test", 2),
+    # ("sycophancy", 2),
+    # ("system_prompt_leakage", 2),
     # ("typoglycemia_attack", 2),
     # ("RU_typoglycemia_attack", 2),
     # ("ucar", 2),
@@ -71,6 +73,7 @@ llamator.start_testing(
     attack_model,
     tested_model,
     config=config,
-    tests_with_attempts=tests_with_attempts
+    tests_with_attempts=tests_with_attempts,
+    multistage_depth=20,
 )
 ```

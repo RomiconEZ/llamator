@@ -3,11 +3,11 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Licenses" href="licenses.html" /><link rel="prev" title="Attacks" href="attacks_description.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Licenses" href="licenses.html" /><link rel="prev" title="Attacks" href="attack_descriptions.html" />
 
     <!-- Generated with Sphinx 8.0.2 and Furo 2024.08.06 -->
-        <title>Code documentation - LLAMATOR</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+        <title>Code Documentation - LLAMATOR</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a5519fdd" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
     
@@ -16,38 +16,77 @@
 
 <style>
   body {
-    --color-code-background: #eeffcc;
-  --color-code-foreground: black;
-  --color-brand-primary: #1d3d64;
-  --color-brand-content: #18578d;
-  --color-admonition-background: #f0f8ff;
-  --color-admonition-title-background: #007acc;
-  --color-admonition-border: #007acc;
-  --color-admonition-title: #007acc;
+    --color-code-background: #282a36;
+  --color-code-foreground: #f8f8f2;
+  --color-background-primary: #f8f5fa;
+  --color-background-secondary: #f0ebf3;
+  --color-foreground-primary: #2d1b36;
+  --color-foreground-secondary: #432952;
+  --color-brand-primary: #2d1b36;
+  --color-brand-content: #432952;
+  --color-link: #614378;
+  --color-link-hover: #7b5696;
+  --color-admonition-background: #fff9fc;
+  --color-admonition-title-background: #2d1b36;
+  --color-admonition-title: #ffffff;
+  --color-admonition-border: #2d1b36;
+  --color-code-background: #f5f0f7;
+  --color-code-foreground: #2d1b36;
+  --color-sidebar-background: #f5f0f7;
+  --color-sidebar-item-background--hover: #ebe4ef;
+  --color-sidebar-item-expander-background--hover: #e0d7e6;
+  --color-sidebar-search-background: #fff9fc;
+  --color-sidebar-search-background--focus: #fff9fc;
   
   }
   @media not print {
     body[data-theme="dark"] {
-      --color-code-background: #272822;
+      --color-code-background: #282a36;
   --color-code-foreground: #f8f8f2;
-  --color-brand-primary: #d8673e;
-  --color-brand-content: #f99470;
-  --color-admonition-background: #333333;
-  --color-admonition-title-background: #d8673e;
-  --color-admonition-border: #d8673e;
-  --color-admonition-title: #f99470;
+  --color-background-primary: #1a1b24;
+  --color-background-secondary: #44475a;
+  --color-foreground-primary: #f8f8f2;
+  --color-foreground-secondary: #6272a4;
+  --color-brand-primary: #bd93f9;
+  --color-brand-content: #ff79c6;
+  --color-link: #8be9fd;
+  --color-link-hover: #ff79c6;
+  --color-admonition-background: #282a36;
+  --color-admonition-title-background: #44475a;
+  --color-admonition-title: #f8f8f2;
+  --color-admonition-border: #6272a4;
+  --color-code-background: #282a36;
+  --color-code-foreground: #f8f8f2;
+  --color-sidebar-background: #282a36;
+  --color-sidebar-item-background--hover: #44475a;
+  --color-sidebar-item-expander-background--hover: #6272a4;
+  --color-sidebar-search-background: #44475a;
+  --color-sidebar-search-background--focus: #44475a;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
-        --color-code-background: #272822;
+        --color-code-background: #282a36;
   --color-code-foreground: #f8f8f2;
-  --color-brand-primary: #d8673e;
-  --color-brand-content: #f99470;
-  --color-admonition-background: #333333;
-  --color-admonition-title-background: #d8673e;
-  --color-admonition-border: #d8673e;
-  --color-admonition-title: #f99470;
+  --color-background-primary: #1a1b24;
+  --color-background-secondary: #44475a;
+  --color-foreground-primary: #f8f8f2;
+  --color-foreground-secondary: #6272a4;
+  --color-brand-primary: #bd93f9;
+  --color-brand-content: #ff79c6;
+  --color-link: #8be9fd;
+  --color-link-hover: #ff79c6;
+  --color-admonition-background: #282a36;
+  --color-admonition-title-background: #44475a;
+  --color-admonition-title: #f8f8f2;
+  --color-admonition-border: #6272a4;
+  --color-code-background: #282a36;
+  --color-code-foreground: #f8f8f2;
+  --color-sidebar-background: #282a36;
+  --color-sidebar-item-background--hover: #44475a;
+  --color-sidebar-item-expander-background--hover: #6272a4;
+  --color-sidebar-search-background: #44475a;
+  --color-sidebar-search-background--focus: #44475a;
   
       }
     }
@@ -220,8 +259,8 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="project_overview.html">Project Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="howtos.html">How To Use</a></li>
-<li class="toctree-l1"><a class="reference internal" href="attacks_description.html">Attacks</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Code documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="attack_descriptions.html">Attacks</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Code Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
 </ul>
 
@@ -268,12 +307,12 @@
         </div>
         <article role="main" id="furo-main-content">
           <section id="code-documentation">
-<h1>Code documentation<a class="headerlink" href="#code-documentation" title="Link to this heading">¶</a></h1>
+<h1>Code Documentation<a class="headerlink" href="#code-documentation" title="Link to this heading">¶</a></h1>
 <section id="main-functions">
 <h2>Main Functions<a class="headerlink" href="#main-functions" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">start_testing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attack_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#llamator.ClientBase" title="llamator.client.chat_client.ClientBase"><span class="pre">ClientBase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">tested_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#llamator.ClientBase" title="llamator.client.chat_client.ClientBase"><span class="pre">ClientBase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_threads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tests_with_attempts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.13)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.13)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_tests_with_attempts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.13)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.13)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.13)"><span class="pre">Type</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#llamator.TestBase" title="llamator.attack_provider.test_base.TestBase"><span class="pre">TestBase</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/llamator/main.html#start_testing"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<span class="sig-name descname"><span class="pre">start_testing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attack_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#llamator.ClientBase" title="llamator.client.chat_client.ClientBase"><span class="pre">ClientBase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">tested_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#llamator.ClientBase" title="llamator.client.chat_client.ClientBase"><span class="pre">ClientBase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_threads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tests_with_attempts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.13)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.13)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_tests_with_attempts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.13)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.13)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.13)"><span class="pre">Type</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#llamator.TestBase" title="llamator.attack_provider.test_base.TestBase"><span class="pre">TestBase</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multistage_depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/llamator/main.html#start_testing"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Start testing.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -322,15 +361,19 @@ Available tests:
 - do_anything_now_jailbreak
 - ethical_compliance
 - harmful_behavior
+- harmful_behavior_multistage
 - linguistic_evasion
+- logical_inconsistencies
 - past_tense
 - RU_do_anything_now_jailbreak
 - RU_typoglycemia_attack
 - RU_ucar
-- sycophancy_test
+- sycophancy
+- system_prompt_leakage
 - typoglycemia_attack
 - ucar</p></li>
 <li><p><strong>custom_tests_with_attempts</strong> (<em>List</em><em>[</em><em>Tuple</em><em>[</em><em>Type</em><em>[</em><a class="reference internal" href="#llamator.TestBase" title="llamator.TestBase"><em>TestBase</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – List of custom test instances and their corresponding number of attempts.</p></li>
+<li><p><strong>multistage_depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – The maximum allowed history length that can be passed to multi-stage interactions (default is 20).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -387,7 +430,7 @@ The history and new messages are passed as a list of dictionaries.</p>
 </div>
 <dl class="py class">
 <dt class="sig sig-object py" id="llamator.TestBase">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TestBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ClientConfig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attack_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AttackConfig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">artifacts_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_attempts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/llamator/attack_provider/test_base.html#TestBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#llamator.TestBase" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TestBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ClientConfig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attack_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AttackConfig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">artifacts_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_attempts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/llamator/attack_provider/test_base.html#TestBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#llamator.TestBase" title="Link to this definition">¶</a></dt>
 <dd><p>A base class for test classes. Each test represents a different kind of attack against the target LLM model.
 The test sends a sequence of prompts and evaluate the responses while updating the status.</p>
 <dl class="field-list simple">
@@ -507,7 +550,7 @@ This client can be used to interact with any language model that supports the Op
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="attacks_description.html">
+          <a class="prev-page" href="attack_descriptions.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
@@ -532,10 +575,10 @@ This client can be used to interact with any language model that supports the Op
           <div class="right-details">
             <div class="icons">
               <a class="muted-link " href="https://github.com/RomiconEZ/llamator" aria-label="GitHub">
-                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
-                    </svg>
-                </a>
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
               
             </div>
           </div>
@@ -555,7 +598,7 @@ This client can be used to interact with any language model that supports the Op
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Code documentation</a><ul>
+<li><a class="reference internal" href="#">Code Documentation</a><ul>
 <li><a class="reference internal" href="#main-functions">Main Functions</a></li>
 <li><a class="reference internal" href="#abstract-classes">Abstract Classes</a><ul>
 <li><a class="reference internal" href="#llamator.ClientBase"><code class="docutils literal notranslate"><span class="pre">ClientBase</span></code></a><ul>

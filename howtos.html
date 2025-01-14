@@ -3,11 +3,11 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Attacks" href="attacks_description.html" /><link rel="prev" title="Project Overview" href="project_overview.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Attacks" href="attack_descriptions.html" /><link rel="prev" title="Project Overview" href="project_overview.html" />
 
     <!-- Generated with Sphinx 8.0.2 and Furo 2024.08.06 -->
         <title>How To Use - LLAMATOR</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a5519fdd" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
     
@@ -16,38 +16,77 @@
 
 <style>
   body {
-    --color-code-background: #eeffcc;
-  --color-code-foreground: black;
-  --color-brand-primary: #1d3d64;
-  --color-brand-content: #18578d;
-  --color-admonition-background: #f0f8ff;
-  --color-admonition-title-background: #007acc;
-  --color-admonition-border: #007acc;
-  --color-admonition-title: #007acc;
+    --color-code-background: #282a36;
+  --color-code-foreground: #f8f8f2;
+  --color-background-primary: #f8f5fa;
+  --color-background-secondary: #f0ebf3;
+  --color-foreground-primary: #2d1b36;
+  --color-foreground-secondary: #432952;
+  --color-brand-primary: #2d1b36;
+  --color-brand-content: #432952;
+  --color-link: #614378;
+  --color-link-hover: #7b5696;
+  --color-admonition-background: #fff9fc;
+  --color-admonition-title-background: #2d1b36;
+  --color-admonition-title: #ffffff;
+  --color-admonition-border: #2d1b36;
+  --color-code-background: #f5f0f7;
+  --color-code-foreground: #2d1b36;
+  --color-sidebar-background: #f5f0f7;
+  --color-sidebar-item-background--hover: #ebe4ef;
+  --color-sidebar-item-expander-background--hover: #e0d7e6;
+  --color-sidebar-search-background: #fff9fc;
+  --color-sidebar-search-background--focus: #fff9fc;
   
   }
   @media not print {
     body[data-theme="dark"] {
-      --color-code-background: #272822;
+      --color-code-background: #282a36;
   --color-code-foreground: #f8f8f2;
-  --color-brand-primary: #d8673e;
-  --color-brand-content: #f99470;
-  --color-admonition-background: #333333;
-  --color-admonition-title-background: #d8673e;
-  --color-admonition-border: #d8673e;
-  --color-admonition-title: #f99470;
+  --color-background-primary: #1a1b24;
+  --color-background-secondary: #44475a;
+  --color-foreground-primary: #f8f8f2;
+  --color-foreground-secondary: #6272a4;
+  --color-brand-primary: #bd93f9;
+  --color-brand-content: #ff79c6;
+  --color-link: #8be9fd;
+  --color-link-hover: #ff79c6;
+  --color-admonition-background: #282a36;
+  --color-admonition-title-background: #44475a;
+  --color-admonition-title: #f8f8f2;
+  --color-admonition-border: #6272a4;
+  --color-code-background: #282a36;
+  --color-code-foreground: #f8f8f2;
+  --color-sidebar-background: #282a36;
+  --color-sidebar-item-background--hover: #44475a;
+  --color-sidebar-item-expander-background--hover: #6272a4;
+  --color-sidebar-search-background: #44475a;
+  --color-sidebar-search-background--focus: #44475a;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
-        --color-code-background: #272822;
+        --color-code-background: #282a36;
   --color-code-foreground: #f8f8f2;
-  --color-brand-primary: #d8673e;
-  --color-brand-content: #f99470;
-  --color-admonition-background: #333333;
-  --color-admonition-title-background: #d8673e;
-  --color-admonition-border: #d8673e;
-  --color-admonition-title: #f99470;
+  --color-background-primary: #1a1b24;
+  --color-background-secondary: #44475a;
+  --color-foreground-primary: #f8f8f2;
+  --color-foreground-secondary: #6272a4;
+  --color-brand-primary: #bd93f9;
+  --color-brand-content: #ff79c6;
+  --color-link: #8be9fd;
+  --color-link-hover: #ff79c6;
+  --color-admonition-background: #282a36;
+  --color-admonition-title-background: #44475a;
+  --color-admonition-title: #f8f8f2;
+  --color-admonition-border: #6272a4;
+  --color-code-background: #282a36;
+  --color-code-foreground: #f8f8f2;
+  --color-sidebar-background: #282a36;
+  --color-sidebar-item-background--hover: #44475a;
+  --color-sidebar-item-expander-background--hover: #6272a4;
+  --color-sidebar-search-background: #44475a;
+  --color-sidebar-search-background--focus: #44475a;
   
       }
     }
@@ -220,8 +259,8 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="project_overview.html">Project Overview</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">How To Use</a></li>
-<li class="toctree-l1"><a class="reference internal" href="attacks_description.html">Attacks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="code_documentation.html">Code documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="attack_descriptions.html">Attacks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_documentation.html">Code Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
 </ul>
 
@@ -272,22 +311,22 @@
 <section id="notebooks-examples">
 <h2>Notebooks Examples<a class="headerlink" href="#notebooks-examples" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><strong>RAG Chatbot testing via API (RU)</strong> - <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-api.ipynb">GitHub</a></p></li>
-<li><p><strong>Testing the Gandalf webbot</strong> - <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-selenium.ipynb">GitHub</a></p></li>
-<li><p><strong>Telegram bot testing via Telethon (RU)</strong> - <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-telegram.ipynb">GitHub</a></p></li>
-<li><p><strong>LangChain client testing with custom attack (RU)</strong> - <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-langchain-custom-attack.ipynb">GitHub</a></p></li>
-<li><p><strong>WhatsApp client testing via Selenium (ENG)</strong> - <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-whatsapp.ipynb">GitHub</a></p></li>
+<li><p>📄 <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-api.ipynb">RAG bot testing via REST API</a></p></li>
+<li><p>🧙‍♂️ <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-selenium.ipynb">Gandalf web bot testing via Selenium</a></p></li>
+<li><p>💬 <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-telegram.ipynb">Telegram bot testing via Telethon</a></p></li>
+<li><p>📱 <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-whatsapp.ipynb">WhatsApp bot testing via Selenium</a></p></li>
+<li><p>🔗 <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-langchain-custom-attack.ipynb">LangChain client testing with custom attack</a></p></li>
 </ul>
 </section>
 <section id="installation-guide">
 <h2>Installation Guide<a class="headerlink" href="#installation-guide" title="Link to this heading">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>llamator
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">llamator</span><span class="o">==</span><span class="m">2</span>.0.0
 </pre></div>
 </div>
 </section>
 <section id="usage-guide-using-lm-studio">
 <h2>Usage Guide (using LM Studio)<a class="headerlink" href="#usage-guide-using-lm-studio" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">llamator</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">llamator</span>
 
 <span class="c1"># Initialize the attack model</span>
 <span class="n">attack_model</span> <span class="o">=</span> <span class="n">llamator</span><span class="o">.</span><span class="n">ClientOpenAI</span><span class="p">(</span>
@@ -317,9 +356,12 @@
     <span class="c1"># (&quot;RU_do_anything_now_jailbreak&quot;, 2),</span>
     <span class="c1"># (&quot;ethical_compliance&quot;, 2),</span>
     <span class="c1"># (&quot;harmful_behavior&quot;, 2),</span>
+    <span class="c1"># (&quot;harmful_behavior_multistage&quot;, 2),</span>
     <span class="c1"># (&quot;linguistic_evasion&quot;, 2),</span>
+    <span class="c1"># (&quot;logical_inconsistencies&quot;, 2),</span>
     <span class="c1"># (&quot;past_tense&quot;, 2),</span>
-    <span class="c1"># (&quot;sycophancy_test&quot;, 2),</span>
+    <span class="c1"># (&quot;sycophancy&quot;, 2),</span>
+    <span class="c1"># (&quot;system_prompt_leakage&quot;, 2),</span>
     <span class="c1"># (&quot;typoglycemia_attack&quot;, 2),</span>
     <span class="c1"># (&quot;RU_typoglycemia_attack&quot;, 2),</span>
     <span class="c1"># (&quot;ucar&quot;, 2),</span>
@@ -340,7 +382,8 @@
     <span class="n">attack_model</span><span class="p">,</span>
     <span class="n">tested_model</span><span class="p">,</span>
     <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
-    <span class="n">tests_with_attempts</span><span class="o">=</span><span class="n">tests_with_attempts</span>
+    <span class="n">tests_with_attempts</span><span class="o">=</span><span class="n">tests_with_attempts</span><span class="p">,</span>
+    <span class="n">multistage_depth</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -352,7 +395,7 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="attacks_description.html">
+          <a class="next-page" href="attack_descriptions.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
@@ -386,10 +429,10 @@
           <div class="right-details">
             <div class="icons">
               <a class="muted-link " href="https://github.com/RomiconEZ/llamator" aria-label="GitHub">
-                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
-                    </svg>
-                </a>
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
               
             </div>
           </div>

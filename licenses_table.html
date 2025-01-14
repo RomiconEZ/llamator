@@ -7,7 +7,7 @@
 
     <!-- Generated with Sphinx 8.0.2 and Furo 2024.08.06 -->
         <title>&lt;no title&gt; - LLAMATOR</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a5519fdd" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
     
@@ -16,38 +16,77 @@
 
 <style>
   body {
-    --color-code-background: #eeffcc;
-  --color-code-foreground: black;
-  --color-brand-primary: #1d3d64;
-  --color-brand-content: #18578d;
-  --color-admonition-background: #f0f8ff;
-  --color-admonition-title-background: #007acc;
-  --color-admonition-border: #007acc;
-  --color-admonition-title: #007acc;
+    --color-code-background: #282a36;
+  --color-code-foreground: #f8f8f2;
+  --color-background-primary: #f8f5fa;
+  --color-background-secondary: #f0ebf3;
+  --color-foreground-primary: #2d1b36;
+  --color-foreground-secondary: #432952;
+  --color-brand-primary: #2d1b36;
+  --color-brand-content: #432952;
+  --color-link: #614378;
+  --color-link-hover: #7b5696;
+  --color-admonition-background: #fff9fc;
+  --color-admonition-title-background: #2d1b36;
+  --color-admonition-title: #ffffff;
+  --color-admonition-border: #2d1b36;
+  --color-code-background: #f5f0f7;
+  --color-code-foreground: #2d1b36;
+  --color-sidebar-background: #f5f0f7;
+  --color-sidebar-item-background--hover: #ebe4ef;
+  --color-sidebar-item-expander-background--hover: #e0d7e6;
+  --color-sidebar-search-background: #fff9fc;
+  --color-sidebar-search-background--focus: #fff9fc;
   
   }
   @media not print {
     body[data-theme="dark"] {
-      --color-code-background: #272822;
+      --color-code-background: #282a36;
   --color-code-foreground: #f8f8f2;
-  --color-brand-primary: #d8673e;
-  --color-brand-content: #f99470;
-  --color-admonition-background: #333333;
-  --color-admonition-title-background: #d8673e;
-  --color-admonition-border: #d8673e;
-  --color-admonition-title: #f99470;
+  --color-background-primary: #1a1b24;
+  --color-background-secondary: #44475a;
+  --color-foreground-primary: #f8f8f2;
+  --color-foreground-secondary: #6272a4;
+  --color-brand-primary: #bd93f9;
+  --color-brand-content: #ff79c6;
+  --color-link: #8be9fd;
+  --color-link-hover: #ff79c6;
+  --color-admonition-background: #282a36;
+  --color-admonition-title-background: #44475a;
+  --color-admonition-title: #f8f8f2;
+  --color-admonition-border: #6272a4;
+  --color-code-background: #282a36;
+  --color-code-foreground: #f8f8f2;
+  --color-sidebar-background: #282a36;
+  --color-sidebar-item-background--hover: #44475a;
+  --color-sidebar-item-expander-background--hover: #6272a4;
+  --color-sidebar-search-background: #44475a;
+  --color-sidebar-search-background--focus: #44475a;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
-        --color-code-background: #272822;
+        --color-code-background: #282a36;
   --color-code-foreground: #f8f8f2;
-  --color-brand-primary: #d8673e;
-  --color-brand-content: #f99470;
-  --color-admonition-background: #333333;
-  --color-admonition-title-background: #d8673e;
-  --color-admonition-border: #d8673e;
-  --color-admonition-title: #f99470;
+  --color-background-primary: #1a1b24;
+  --color-background-secondary: #44475a;
+  --color-foreground-primary: #f8f8f2;
+  --color-foreground-secondary: #6272a4;
+  --color-brand-primary: #bd93f9;
+  --color-brand-content: #ff79c6;
+  --color-link: #8be9fd;
+  --color-link-hover: #ff79c6;
+  --color-admonition-background: #282a36;
+  --color-admonition-title-background: #44475a;
+  --color-admonition-title: #f8f8f2;
+  --color-admonition-border: #6272a4;
+  --color-code-background: #282a36;
+  --color-code-foreground: #f8f8f2;
+  --color-sidebar-background: #282a36;
+  --color-sidebar-item-background--hover: #44475a;
+  --color-sidebar-item-expander-background--hover: #6272a4;
+  --color-sidebar-search-background: #44475a;
+  --color-sidebar-search-background--focus: #44475a;
   
       }
     }
@@ -220,8 +259,8 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="project_overview.html">Project Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="howtos.html">How To Use</a></li>
-<li class="toctree-l1"><a class="reference internal" href="attacks_description.html">Attacks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="code_documentation.html">Code documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="attack_descriptions.html">Attacks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_documentation.html">Code Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
 </ul>
 
@@ -283,7 +322,7 @@
 <td><p>This package provides a DateTime data type, as known from Zope. Unless you need to communicate with Zope APIs, you’re probably better off using Python’s built-in datetime module.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Jinja2</p></td>
-<td><p>3.1.4</p></td>
+<td><p>3.1.5</p></td>
 <td><p>BSD License</p></td>
 <td><p><a class="reference external" href="https://github.com/pallets/jinja/">https://github.com/pallets/jinja/</a></p></td>
 <td><p>A very fast and expressive template engine.</p></td>
@@ -307,13 +346,13 @@
 <td><p>YAML parser and emitter for Python</p></td>
 </tr>
 <tr class="row-odd"><td><p>Pygments</p></td>
-<td><p>2.18.0</p></td>
+<td><p>2.19.1</p></td>
 <td><p>BSD License</p></td>
 <td><p><a class="reference external" href="https://pygments.org">https://pygments.org</a></p></td>
 <td><p>Pygments is a syntax highlighting package written in Python.</p></td>
 </tr>
 <tr class="row-even"><td><p>SQLAlchemy</p></td>
-<td><p>2.0.36</p></td>
+<td><p>2.0.37</p></td>
 <td><p>MIT License</p></td>
 <td><p><a class="reference external" href="https://www.sqlalchemy.org">https://www.sqlalchemy.org</a></p></td>
 <td><p>Database Abstraction Library</p></td>
@@ -343,7 +382,7 @@
 <td><p>Happy Eyeballs for asyncio</p></td>
 </tr>
 <tr class="row-odd"><td><p>aiohttp</p></td>
-<td><p>3.11.10</p></td>
+<td><p>3.11.11</p></td>
 <td><p>Apache Software License</p></td>
 <td><p><a class="reference external" href="https://github.com/aio-libs/aiohttp">https://github.com/aio-libs/aiohttp</a></p></td>
 <td><p>Async http client/server framework (asyncio)</p></td>
@@ -367,7 +406,7 @@
 <td><p>Reusable constraint types to use with typing.Annotated</p></td>
 </tr>
 <tr class="row-odd"><td><p>anyio</p></td>
-<td><p>4.7.0</p></td>
+<td><p>4.8.0</p></td>
 <td><p>MIT License</p></td>
 <td><p><a class="reference external" href="https://anyio.readthedocs.io/en/stable/versionhistory.html">https://anyio.readthedocs.io/en/stable/versionhistory.html</a></p></td>
 <td><p>High level compatibility layer for multiple asynchronous event loop implementations</p></td>
@@ -475,9 +514,9 @@
 <td><p>Validate configuration and produce human readable error messages.</p></td>
 </tr>
 <tr class="row-odd"><td><p>charset-normalizer</p></td>
-<td><p>3.4.0</p></td>
+<td><p>3.4.1</p></td>
 <td><p>MIT License</p></td>
-<td><p><a class="reference external" href="https://github.com/Ousret/charset_normalizer">https://github.com/Ousret/charset_normalizer</a></p></td>
+<td><p><a class="reference external" href="https://github.com/jawah/charset_normalizer/blob/master/CHANGELOG.md">https://github.com/jawah/charset_normalizer/blob/master/CHANGELOG.md</a></p></td>
 <td><p>The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet.</p></td>
 </tr>
 <tr class="row-even"><td><p>colorama</p></td>
@@ -493,7 +532,7 @@
 <td><p>Jupyter Python Comm implementation, for usage in ipykernel, xeus-python etc.</p></td>
 </tr>
 <tr class="row-even"><td><p>coverage</p></td>
-<td><p>7.6.9</p></td>
+<td><p>7.6.10</p></td>
 <td><p>Apache Software License</p></td>
 <td><p><a class="reference external" href="https://github.com/nedbat/coveragepy">https://github.com/nedbat/coveragepy</a></p></td>
 <td><p>Code coverage measurement for Python</p></td>
@@ -607,7 +646,7 @@
 <td><p>A list-like structure which implements collections.abc.MutableSequence</p></td>
 </tr>
 <tr class="row-odd"><td><p>fsspec</p></td>
-<td><p>2024.10.0</p></td>
+<td><p>2024.12.0</p></td>
 <td><p>BSD License</p></td>
 <td><p><a class="reference external" href="https://github.com/fsspec/filesystem_spec">https://github.com/fsspec/filesystem_spec</a></p></td>
 <td><p>File-system specification</p></td>
@@ -631,7 +670,7 @@
 <td><p>Lightweight in-process concurrent programming</p></td>
 </tr>
 <tr class="row-odd"><td><p>grpcio</p></td>
-<td><p>1.68.1</p></td>
+<td><p>1.69.0</p></td>
 <td><p>Apache Software License</p></td>
 <td><p><a class="reference external" href="https://grpc.io">https://grpc.io</a></p></td>
 <td><p>HTTP/2-based RPC framework</p></td>
@@ -655,7 +694,7 @@
 <td><p>The next generation HTTP client.</p></td>
 </tr>
 <tr class="row-odd"><td><p>identify</p></td>
-<td><p>2.6.3</p></td>
+<td><p>2.6.5</p></td>
 <td><p>MIT License</p></td>
 <td><p><a class="reference external" href="https://github.com/pre-commit/identify">https://github.com/pre-commit/identify</a></p></td>
 <td><p>File identification library for Python</p></td>
@@ -697,7 +736,7 @@
 <td><p>IPython Kernel for Jupyter</p></td>
 </tr>
 <tr class="row-even"><td><p>ipython</p></td>
-<td><p>8.30.0</p></td>
+<td><p>8.31.0</p></td>
 <td><p>BSD License</p></td>
 <td><p><a class="reference external" href="https://ipython.org">https://ipython.org</a></p></td>
 <td><p>IPython: Productive Interactive Computing</p></td>
@@ -787,7 +826,7 @@
 <td><p>Jupyter terminal console</p></td>
 </tr>
 <tr class="row-odd"><td><p>jupyter-events</p></td>
-<td><p>0.10.0</p></td>
+<td><p>0.11.0</p></td>
 <td><p>BSD License</p></td>
 <td><p><a class="reference external" href="http://jupyter.org">http://jupyter.org</a></p></td>
 <td><p>Jupyter Event System library</p></td>
@@ -811,7 +850,7 @@
 <td><p>Jupyter core package. A base package on which Jupyter projects rely.</p></td>
 </tr>
 <tr class="row-odd"><td><p>jupyter_server</p></td>
-<td><p>2.14.2</p></td>
+<td><p>2.15.0</p></td>
 <td><p>BSD License</p></td>
 <td><p><a class="reference external" href="https://jupyter-server.readthedocs.io">https://jupyter-server.readthedocs.io</a></p></td>
 <td><p>The backend—i.e. core services, APIs, and REST endpoints—to Jupyter web applications.</p></td>
@@ -823,7 +862,7 @@
 <td><p>A Jupyter Server Extension Providing Terminals.</p></td>
 </tr>
 <tr class="row-odd"><td><p>jupyterlab</p></td>
-<td><p>4.3.3</p></td>
+<td><p>4.3.4</p></td>
 <td><p>BSD License</p></td>
 <td><p><a class="reference external" href="https://jupyter.org">https://jupyter.org</a></p></td>
 <td><p>JupyterLab computational environment</p></td>
@@ -847,7 +886,7 @@
 <td><p>Jupyter interactive widgets for JupyterLab</p></td>
 </tr>
 <tr class="row-odd"><td><p>keyring</p></td>
-<td><p>25.5.0</p></td>
+<td><p>25.6.0</p></td>
 <td><p>MIT License</p></td>
 <td><p><a class="reference external" href="https://github.com/jaraco/keyring">https://github.com/jaraco/keyring</a></p></td>
 <td><p>Store and access your passwords safely.</p></td>
@@ -883,13 +922,13 @@
 <td><p>Client library to connect to the LangSmith LLM Tracing and Evaluation Platform.</p></td>
 </tr>
 <tr class="row-odd"><td><p>llamator</p></td>
-<td><p>1.1.1</p></td>
+<td><p>2.0.0</p></td>
 <td><p>Other/Proprietary License</p></td>
 <td><p>UNKNOWN</p></td>
 <td><p>Framework for testing vulnerabilities of large language models (LLM).</p></td>
 </tr>
 <tr class="row-even"><td><p>llamator</p></td>
-<td><p>1.1.1</p></td>
+<td><p>2.0.0</p></td>
 <td><p>Other/Proprietary License</p></td>
 <td><p>UNKNOWN</p></td>
 <td><p>Framework for testing vulnerabilities of large language models (LLM).</p></td>
@@ -907,7 +946,7 @@
 <td><p>Python port of markdown-it. Markdown parsing, done right!</p></td>
 </tr>
 <tr class="row-odd"><td><p>marshmallow</p></td>
-<td><p>3.23.1</p></td>
+<td><p>3.25.1</p></td>
 <td><p>MIT License</p></td>
 <td><p><a class="reference external" href="https://github.com/marshmallow-code/marshmallow">https://github.com/marshmallow-code/marshmallow</a></p></td>
 <td><p>A lightweight library for converting complex datatypes to and from native Python datatypes.</p></td>
@@ -931,7 +970,7 @@
 <td><p>Markdown URL utilities</p></td>
 </tr>
 <tr class="row-odd"><td><p>mistune</p></td>
-<td><p>3.0.2</p></td>
+<td><p>3.1.0</p></td>
 <td><p>BSD License</p></td>
 <td><p><a class="reference external" href="https://github.com/lepture/mistune">https://github.com/lepture/mistune</a></p></td>
 <td><p>A sane and fast Markdown parser with useful plugins and renderers</p></td>
@@ -961,13 +1000,13 @@
 <td><p>An extended [CommonMark](<a class="reference external" href="https://spec.commonmark.org/">https://spec.commonmark.org/</a>) compliant parser,</p></td>
 </tr>
 <tr class="row-even"><td><p>nbclient</p></td>
-<td><p>0.10.1</p></td>
+<td><p>0.10.2</p></td>
 <td><p>BSD License</p></td>
 <td><p><a class="reference external" href="https://jupyter.org">https://jupyter.org</a></p></td>
 <td><p>A client library for executing notebooks. Formerly nbconvert’s ExecutePreprocessor.</p></td>
 </tr>
 <tr class="row-odd"><td><p>nbconvert</p></td>
-<td><p>7.16.4</p></td>
+<td><p>7.16.5</p></td>
 <td><p>BSD License</p></td>
 <td><p><a class="reference external" href="https://jupyter.org">https://jupyter.org</a></p></td>
 <td><p>Converting Jupyter Notebooks (.ipynb files) to other formats.  Output formats include asciidoc, html, latex, markdown, pdf, py, rst, script.  nbconvert can be used both as a Python library (<cite>import nbconvert</cite>) or as a command line tool (invoked as <cite>jupyter nbconvert …</cite>).</p></td>
@@ -985,10 +1024,10 @@
 <td><p>Patch asyncio to allow nested event loops</p></td>
 </tr>
 <tr class="row-even"><td><p>nh3</p></td>
-<td><p>0.2.19</p></td>
+<td><p>0.2.20</p></td>
 <td><p>MIT</p></td>
 <td><p>UNKNOWN</p></td>
-<td><p>Python bindings to the ammonia HTML sanitization library.</p></td>
+<td><p>Python binding to Ammonia HTML sanitizer Rust crate</p></td>
 </tr>
 <tr class="row-odd"><td><p>nodeenv</p></td>
 <td><p>1.9.1</p></td>
@@ -997,7 +1036,7 @@
 <td><p>Node.js virtual environment builder</p></td>
 </tr>
 <tr class="row-even"><td><p>notebook</p></td>
-<td><p>7.3.1</p></td>
+<td><p>7.3.2</p></td>
 <td><p>BSD License</p></td>
 <td><p><a class="reference external" href="https://github.com/jupyter/notebook">https://github.com/jupyter/notebook</a></p></td>
 <td><p>Jupyter Notebook - A web-based notebook environment for interactive computing</p></td>
@@ -1027,7 +1066,7 @@
 <td><p>A Python library to read/write Excel 2010 xlsx/xlsm files</p></td>
 </tr>
 <tr class="row-odd"><td><p>orjson</p></td>
-<td><p>3.10.12</p></td>
+<td><p>3.10.14</p></td>
 <td><p>Apache Software License; MIT License</p></td>
 <td><p><a class="reference external" href="https://github.com/ijl/orjson">https://github.com/ijl/orjson</a></p></td>
 <td><p>Fast, correct Python JSON library supporting dataclasses, datetimes, and numpy</p></td>
@@ -1117,7 +1156,7 @@
 <td><p>UNKNOWN</p></td>
 </tr>
 <tr class="row-even"><td><p>psutil</p></td>
-<td><p>6.1.0</p></td>
+<td><p>6.1.1</p></td>
 <td><p>BSD License</p></td>
 <td><p><a class="reference external" href="https://github.com/giampaolo/psutil">https://github.com/giampaolo/psutil</a></p></td>
 <td><p>Cross-platform lib for process and system monitoring in Python.</p></td>
@@ -1141,13 +1180,13 @@
 <td><p>C parser in Python</p></td>
 </tr>
 <tr class="row-even"><td><p>pydantic</p></td>
-<td><p>2.10.3</p></td>
+<td><p>2.10.5</p></td>
 <td><p>MIT License</p></td>
 <td><p><a class="reference external" href="https://github.com/pydantic/pydantic">https://github.com/pydantic/pydantic</a></p></td>
 <td><p>Data validation using Python type hints</p></td>
 </tr>
 <tr class="row-odd"><td><p>pydantic_core</p></td>
-<td><p>2.27.1</p></td>
+<td><p>2.27.2</p></td>
 <td><p>MIT License</p></td>
 <td><p><a class="reference external" href="https://github.com/pydantic/pydantic-core">https://github.com/pydantic/pydantic-core</a></p></td>
 <td><p>Core functionality for Pydantic validation and serialization</p></td>
@@ -1417,13 +1456,13 @@
 <td><p>RFC 6570 URI Template Processor</p></td>
 </tr>
 <tr class="row-even"><td><p>urllib3</p></td>
-<td><p>2.2.3</p></td>
+<td><p>2.3.0</p></td>
 <td><p>MIT License</p></td>
 <td><p><a class="reference external" href="https://github.com/urllib3/urllib3/blob/main/CHANGES.rst">https://github.com/urllib3/urllib3/blob/main/CHANGES.rst</a></p></td>
 <td><p>HTTP library with thread-safe connection pooling, file post, and more.</p></td>
 </tr>
 <tr class="row-odd"><td><p>virtualenv</p></td>
-<td><p>20.28.0</p></td>
+<td><p>20.28.1</p></td>
 <td><p>MIT License</p></td>
 <td><p><a class="reference external" href="https://github.com/pypa/virtualenv">https://github.com/pypa/virtualenv</a></p></td>
 <td><p>Virtual Python Environment builder</p></td>
@@ -1507,10 +1546,10 @@
           <div class="right-details">
             <div class="icons">
               <a class="muted-link " href="https://github.com/RomiconEZ/llamator" aria-label="GitHub">
-                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
-                    </svg>
-                </a>
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
               
             </div>
           </div>
