@@ -97,6 +97,8 @@ class TestBase(ABC):
         attack_config: AttackConfig,
         artifacts_path: Optional[str] = None,
         num_attempts: int = 0,
+        *args,
+        **kwargs,
     ):
         self.test_description = self.__doc__
         self.client_config = client_config

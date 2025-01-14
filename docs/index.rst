@@ -2,11 +2,14 @@
    You can adapt this file completely to your preferences, but it should at least
    contain the root `toctree` directive.
 
-LLAMATOR
-========
+===============================
+           LLAMATOR
+===============================
 
-`Documentation for` **llamator** `python package.`
+.. |LLAMATOR| replace:: **llamator**
+.. _LLAMATOR: https://pypi.org/project/llamator/
 
+Documentation for |LLAMATOR|_ python package.
 
 .. toctree::
    :maxdepth: 2
@@ -14,6 +17,6 @@ LLAMATOR
 
    project_overview
    howtos
-   attacks_description
+   attack_descriptions
    code_documentation
    licenses

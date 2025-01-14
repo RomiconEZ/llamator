@@ -101,7 +101,7 @@ def simpleProgressBar(progress, total, color, bar_length=50):
         bar = "█" * filled_length + "-" * (bar_length - filled_length)
         return f"[{color}{bar}{RESET}] {progress}/{total}"
     else:
-        return f"[]"
+        return "[]"
 
 
 def isResilient(test_status: TestStatus):
@@ -116,6 +116,7 @@ def run_tests(
     basic_tests_with_attempts: Optional[List[Tuple[str, int]]] = None,
     custom_tests_with_attempts: Optional[List[Tuple[Type[TestBase], int]]] = None,
     artifacts_path: Optional[str] = None,
+    multistage_depth: Optional[int] = 20,
 ):
     """
     Run the tests on the given client and attack configurations.
@@ -136,6 +137,8 @@ def run_tests(
         to be executed (default is None).
     artifacts_path : str, optional
         The path to the folder where artifacts (logs, reports) will be saved.
+    multistage_depth : int, optional
+        The maximum allowed history length that can be passed to multi-stage interactions (default is 20).
 
     Returns
     -------
@@ -155,6 +158,7 @@ def run_tests(
         basic_tests_with_attempts=basic_tests_with_attempts,
         custom_tests_with_attempts=custom_tests_with_attempts,
         artifacts_path=artifacts_path,
+        multistage_depth=multistage_depth,
     )
 
     # Run tests in parallel mode
@@ -279,7 +283,7 @@ def generate_footer_row(tests: List[TestBase]):
     ]
 
 
-def generate_summary(tests: List[TestBase], max_line_length: int = 80):
+def generate_summary(tests: List[TestBase], max_line_length: Optional[int] = 80):
     """
     Generate and print a summary of the test results.
 
@@ -323,10 +327,11 @@ def generate_summary(tests: List[TestBase], max_line_length: int = 80):
 def setup_models_and_tests(
     attack_model: ClientBase,
     tested_model: ClientBase,
-    num_threads: int = 1,
+    num_threads: Optional[int] = 1,
     tests_with_attempts: Optional[List[Tuple[str, int]]] = None,
     custom_tests_with_attempts: Optional[List[Tuple[Type[TestBase], int]]] = None,
     artifacts_path: Optional[str] = None,
+    multistage_depth: Optional[int] = 20,
 ):
     """
     Set up and validate the models, then run the tests.
@@ -347,6 +352,8 @@ def setup_models_and_tests(
         to be executed (default is None).
     artifacts_path : str, optional
         The path to the folder where artifacts (logs, reports) will be saved.
+    multistage_depth : int, optional
+        The maximum allowed history length that can be passed to multi-stage interactions (default is 20).
 
     Returns
     -------
@@ -374,4 +381,5 @@ def setup_models_and_tests(
         basic_tests_with_attempts=tests_with_attempts,
         custom_tests_with_attempts=custom_tests_with_attempts,
         artifacts_path=artifacts_path,
+        multistage_depth=multistage_depth,
     )

@@ -43,8 +43,17 @@ class TestHarmfulBehaviors(TestBase):
         attack_config: AttackConfig,
         artifacts_path: Optional[str] = None,
         num_attempts: int = 0,
+        *args,
+        **kwargs,
     ):
-        super().__init__(client_config, attack_config, artifacts_path=artifacts_path, num_attempts=num_attempts)
+        super().__init__(
+            client_config,
+            attack_config,
+            artifacts_path=artifacts_path,
+            num_attempts=num_attempts,
+            *args,
+            **kwargs,
+        )
 
     def _prepare_attack_data(self, attack_prompts: list[str], responses: list[str], statuses: list[str]) -> None:
         """
@@ -65,7 +74,7 @@ class TestHarmfulBehaviors(TestBase):
         if self.artifacts_path:
             csv_path = os.path.join(self.artifacts_path, f"{self.test_name}.csv")
             df.to_csv(csv_path, index=False)
-            logging.info(f"Harmful Behavior attack report saved to {csv_path}")
+            logging.info(f"{self.test_name} attack report saved to {csv_path}")
 
     def run(self) -> Generator[StatusUpdate, None, None]:
         attack_prompts = []
@@ -86,7 +95,11 @@ class TestHarmfulBehaviors(TestBase):
             )  # constant `random_state` for better reproducibility
         else:
             # If dataset is smaller than requested number of attack samples, fit the dataset repeating until num_attempts is reached
-            data = pd.concat([data] * (self.num_attempts // len(data) + 1))[:self.num_attempts].sort_index().reset_index(drop=True)
+            data = (
+                pd.concat([data] * (self.num_attempts // len(data) + 1))[: self.num_attempts]
+                .sort_index()
+                .reset_index(drop=True)
+            )
 
         # Generate list of attack prompt variations
         yield StatusUpdate(self.client_config, self.test_name, self.status, "Generating", 0, self.num_attempts)
@@ -156,7 +169,7 @@ class TestHarmfulBehaviors(TestBase):
             self.client_config,
             self.test_name,
             self.status,
-            "Completed",
+            "Finished",
             self.num_attempts,
             self.num_attempts,
         )
