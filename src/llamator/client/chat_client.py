@@ -68,9 +68,13 @@ class ChatSession:
     history : List[Dict[str, str]]
         The conversation history, containing both user and assistant messages.
 
-    use_history : Optional[bool]
+    use_history : bool
         Determines whether to use the existing conversation history.
         If False, only the system prompts and the current user prompt are used.
+        Defaults to True.
+
+    strip_client_responses : bool
+        Determines whether to strip space, tab, new line, [, ], <, >, \", ' from the start and end of the Client response.
         Defaults to True.
 
     Methods
@@ -83,7 +87,11 @@ class ChatSession:
     """
 
     def __init__(
-        self, client: ClientBase, system_prompts: Optional[List[str]] = None, use_history: Optional[bool] = True
+        self,
+        client: ClientBase,
+        system_prompts: Optional[List[str]] = None,
+        use_history: Optional[bool] = True,
+        strip_client_responses: Optional[bool] = True,
     ):
         """
         Initializes the ChatSession with a client and optional system prompts.
@@ -93,12 +101,16 @@ class ChatSession:
         client : ClientBase
             The client that handles interaction with the LLM.
 
-        system_prompts : Optional[List[str]]
+        system_prompts : List[str], Optional
             A list of system prompts to guide the conversation from the start.
 
-        use_history : Optional[bool]
+        use_history : bool, Optional
             Determines whether to use the existing conversation history.
             If False, only the system prompts and the current user prompt are used.
+            Defaults to True.
+
+        strip_client_responses : bool, Optional
+            Determines whether to strip space, tab, new line, [, ], <, >, \", ' from the start and end of the Client response.
             Defaults to True.
         """
         self.client = client
@@ -111,6 +123,7 @@ class ChatSession:
             self.system_prompts = []
         # Initialize history with system prompts
         self.history = list(self.system_prompts)
+        self.strip_client_responses = strip_client_responses
 
     def say(self, user_prompt: str) -> str:
         """
@@ -135,6 +148,8 @@ class ChatSession:
             history=self.history if self.use_history else list(self.system_prompts),
             messages=[{"role": "user", "content": user_prompt}],
         )
+        if self.strip_client_responses:
+            result["content"] = result["content"].strip(" \t\n[]<>\"'")
         logger.debug(f"say: result={result}")
 
         self.history.append({"role": "user", "content": user_prompt})
@@ -189,7 +204,7 @@ class MultiStageInteractionSession:
         attacker_session: ChatSession,
         tested_client_session: ChatSession,
         stop_criterion: Optional[Callable[[List[Dict[str, str]]], bool]] = None,
-        history_limit: Optional[int] = 20,
+        history_limit: int = 20,
         tested_client_response_handler: Optional[Callable[..., str]] = None,
         refine_args: Optional[tuple] = None,
         refine_kwargs: Optional[dict] = None,
@@ -206,7 +221,7 @@ class MultiStageInteractionSession:
         stop_criterion : Callable[[List[Dict[str, str]]], bool]], optional
             A function that takes the tested client's history and returns True if the conversation should stop.
             If None, a default criterion that always returns False is used. (default is None)
-        history_limit : int, optional
+        history_limit : int
             The maximum number of messages allowed in the attacker's history. (default is 20)
         tested_client_response_handler : Callable[..., str], optional
             A function that handles the tested client's response before passing it to the attacker.
@@ -295,7 +310,7 @@ class MultiStageInteractionSession:
 
         while True:
             # Send attacker's response to the tested client and receive tested client's response
-            tested_client_response = self.tested_client_session.say(attacker_response.strip(" \t\n[]<>\"'"))
+            tested_client_response = self.tested_client_session.say(attacker_response)
             logger.debug(f"Step {self.current_step}: Tested client response: {tested_client_response}")
 
             # Check stopping criterion by history
