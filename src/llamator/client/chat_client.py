@@ -101,15 +101,15 @@ class ChatSession:
         client : ClientBase
             The client that handles interaction with the LLM.
 
-        system_prompts : List[str], Optional
+        system_prompts : List[str], optional
             A list of system prompts to guide the conversation from the start.
 
-        use_history : bool, Optional
+        use_history : bool, optional
             Determines whether to use the existing conversation history.
             If False, only the system prompts and the current user prompt are used.
             Defaults to True.
 
-        strip_client_responses : bool, Optional
+        strip_client_responses : bool, optional
             Determines whether to strip space, tab, new line, [, ], <, >, \", ' from the start and end of the Client response.
             Defaults to True.
         """
