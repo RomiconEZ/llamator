@@ -372,9 +372,13 @@
 <span class="sd">    history : List[Dict[str, str]]</span>
 <span class="sd">        The conversation history, containing both user and assistant messages.</span>
 
-<span class="sd">    use_history : Optional[bool]</span>
+<span class="sd">    use_history : bool</span>
 <span class="sd">        Determines whether to use the existing conversation history.</span>
 <span class="sd">        If False, only the system prompts and the current user prompt are used.</span>
+<span class="sd">        Defaults to True.</span>
+
+<span class="sd">    strip_client_responses : bool</span>
+<span class="sd">        Determines whether to strip space, tab, new line, [, ], &lt;, &gt;, \&quot;, &#39; from the start and end of the Client response.</span>
 <span class="sd">        Defaults to True.</span>
 
 <span class="sd">    Methods</span>
@@ -387,7 +391,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">ClientBase</span><span class="p">,</span> <span class="n">system_prompts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">use_history</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">client</span><span class="p">:</span> <span class="n">ClientBase</span><span class="p">,</span>
+        <span class="n">system_prompts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">use_history</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">strip_client_responses</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initializes the ChatSession with a client and optional system prompts.</span>
@@ -397,12 +405,16 @@
 <span class="sd">        client : ClientBase</span>
 <span class="sd">            The client that handles interaction with the LLM.</span>
 
-<span class="sd">        system_prompts : Optional[List[str]]</span>
+<span class="sd">        system_prompts : List[str], optional</span>
 <span class="sd">            A list of system prompts to guide the conversation from the start.</span>
 
-<span class="sd">        use_history : Optional[bool]</span>
+<span class="sd">        use_history : bool, optional</span>
 <span class="sd">            Determines whether to use the existing conversation history.</span>
 <span class="sd">            If False, only the system prompts and the current user prompt are used.</span>
+<span class="sd">            Defaults to True.</span>
+
+<span class="sd">        strip_client_responses : bool, optional</span>
+<span class="sd">            Determines whether to strip space, tab, new line, [, ], &lt;, &gt;, \&quot;, &#39; from the start and end of the Client response.</span>
 <span class="sd">            Defaults to True.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">client</span>
@@ -415,6 +427,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">system_prompts</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="c1"># Initialize history with system prompts</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">system_prompts</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">strip_client_responses</span> <span class="o">=</span> <span class="n">strip_client_responses</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">say</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -439,6 +452,8 @@
             <span class="n">history</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_history</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">system_prompts</span><span class="p">),</span>
             <span class="n">messages</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">user_prompt</span><span class="p">}],</span>
         <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">strip_client_responses</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot; </span><span class="se">\t\n</span><span class="s2">[]&lt;&gt;</span><span class="se">\&quot;</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;say: result=</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">user_prompt</span><span class="p">})</span>
@@ -465,7 +480,7 @@
 <span class="sd">        The session for the tested client.</span>
 <span class="sd">    stop_criterion : Callable[[List[Dict[str, str]]], bool], optional</span>
 <span class="sd">        A function that determines whether to stop the conversation based on the tested client&#39;s responses.</span>
-<span class="sd">    history_limit : int</span>
+<span class="sd">    history_limit : int, optional</span>
 <span class="sd">        The maximum allowed history length for the attacker.</span>
 <span class="sd">    tested_client_response_handler : Callable[..., str], optional</span>
 <span class="sd">        A function that handles the tested client&#39;s response before passing it to the attacker.</span>
@@ -599,7 +614,7 @@
 
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="c1"># Send attacker&#39;s response to the tested client and receive tested client&#39;s response</span>
-            <span class="n">tested_client_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tested_client_session</span><span class="o">.</span><span class="n">say</span><span class="p">(</span><span class="n">attacker_response</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot; </span><span class="se">\t\n</span><span class="s2">[]&lt;&gt;</span><span class="se">\&quot;</span><span class="s2">&#39;&quot;</span><span class="p">))</span>
+            <span class="n">tested_client_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tested_client_session</span><span class="o">.</span><span class="n">say</span><span class="p">(</span><span class="n">attacker_response</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_step</span><span class="si">}</span><span class="s2">: Tested client response: </span><span class="si">{</span><span class="n">tested_client_response</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
             <span class="c1"># Check stopping criterion by history</span>
