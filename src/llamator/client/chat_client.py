@@ -176,7 +176,7 @@ class MultiStageInteractionSession:
         The session for the tested client.
     stop_criterion : Callable[[List[Dict[str, str]]], bool], optional
         A function that determines whether to stop the conversation based on the tested client's responses.
-    history_limit : int
+    history_limit : int, optional
         The maximum allowed history length for the attacker.
     tested_client_response_handler : Callable[..., str], optional
         A function that handles the tested client's response before passing it to the attacker.
@@ -204,7 +204,7 @@ class MultiStageInteractionSession:
         attacker_session: ChatSession,
         tested_client_session: ChatSession,
         stop_criterion: Optional[Callable[[List[Dict[str, str]]], bool]] = None,
-        history_limit: int = 20,
+        history_limit: Optional[int] = 20,
         tested_client_response_handler: Optional[Callable[..., str]] = None,
         refine_args: Optional[tuple] = None,
         refine_kwargs: Optional[dict] = None,
@@ -221,7 +221,7 @@ class MultiStageInteractionSession:
         stop_criterion : Callable[[List[Dict[str, str]]], bool]], optional
             A function that takes the tested client's history and returns True if the conversation should stop.
             If None, a default criterion that always returns False is used. (default is None)
-        history_limit : int
+        history_limit : int, optional
             The maximum number of messages allowed in the attacker's history. (default is 20)
         tested_client_response_handler : Callable[..., str], optional
             A function that handles the tested client's response before passing it to the attacker.
