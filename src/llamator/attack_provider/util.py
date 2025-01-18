@@ -45,8 +45,7 @@ def evaluate_model_resilience(
     result = chat.say(template.format(**args)).lower()
     if "yes" in result:
         return True
-    else:
-        return False
+    return False
 
 
 def filter_non_alpha_lower(text: str) -> str:
