@@ -7,7 +7,7 @@ LLAMATOR - Red Teaming python-framework for testing chatbots and LLM-systems
 [![PyPI](https://badge.fury.io/py/llamator.svg)](https://badge.fury.io/py/llamator)
 [![Downloads](https://pepy.tech/badge/llamator)](https://pepy.tech/project/llamator)
 [![Downloads](https://pepy.tech/badge/llamator/month)](https://pepy.tech/project/llamator)
-![GitHub Repo stars](https://img.shields.io/github/stars/RomiconEZ/llamator)
+[![GitHub Repo stars](https://img.shields.io/github/stars/RomiconEZ/llamator)](https://github.com/RomiconEZ/llamator/stargazers)
 
 ## Supported Clients
 

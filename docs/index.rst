@@ -9,7 +9,7 @@
 .. |LLAMATOR| replace:: **llamator**
 .. _LLAMATOR: https://pypi.org/project/llamator/
 
-Documentation for |LLAMATOR|_ python package.
+Documentation for the |LLAMATOR|_ LLM Red Teaming Python Framework.
 
 .. toctree::
    :maxdepth: 2
