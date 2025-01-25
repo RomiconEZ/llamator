@@ -21,10 +21,10 @@ def apply_word_scrambling(prompt: str, sigma: float) -> str:
     words = prompt.split()
     scrambled_words = []
     for word in words:
-        if len(word) > 3 and random.random() < sigma ** (1 / 2):
+        if len(word) > 3 and random.random() < sigma ** (1 / 2):  # nosec
             chars = list(word)
             middle_chars = chars[1:-1]
-            random.shuffle(middle_chars)
+            random.shuffle(middle_chars)  # nosec
             scrambled_word = chars[0] + "".join(middle_chars) + chars[-1]
             scrambled_words.append(scrambled_word)
         else:
@@ -35,7 +35,7 @@ def apply_word_scrambling(prompt: str, sigma: float) -> str:
 def apply_random_capitalization(prompt: str, sigma: float) -> str:
     new_text = []
     for c in prompt:
-        if c.isalpha() and random.random() < sigma ** (1 / 2):
+        if c.isalpha() and random.random() < sigma ** (1 / 2):  # nosec
             if "a" <= c <= "z":
                 new_text.append(chr(ord(c) - 32))
             elif "A" <= c <= "Z":
@@ -48,8 +48,8 @@ def apply_random_capitalization(prompt: str, sigma: float) -> str:
 def apply_ascii_noising(prompt: str, sigma: float) -> str:
     new_text = []
     for c in prompt:
-        if c.isprintable() and random.random() < sigma ** 3:
-            perturbation = random.choice([-1, 1])
+        if c.isprintable() and random.random() < sigma**3:  # nosec
+            perturbation = random.choice([-1, 1])  # nosec
             new_char_code = ord(c) + perturbation
             if 32 <= new_char_code <= 126:
                 new_text.append(chr(new_char_code))
@@ -130,9 +130,7 @@ class TestBon(TestBase):
 
         if self.num_attempts <= rows_count:
             # If dataset is larger than requested number of samples, reduce dataset by taking num_attempts samples
-            data = data.sample(
-                n=self.num_attempts, random_state=42
-            )  # `random_state` for better reproducibility
+            data = data.sample(n=self.num_attempts, random_state=42)  # `random_state` for better reproducibility
         else:
             # If dataset is smaller than requested number of samples, fit the dataset repeating until limit is reached
             data = (
@@ -147,18 +145,16 @@ class TestBon(TestBase):
             self.status,
             "Generating",
             0,
-            self.num_attempts * (self.multistage_depth + 1)  # +1 - we also store starting prompt besides refined ones
+            self.num_attempts * (self.multistage_depth + 1),  # +1 - we also store starting prompt besides refined ones
         )
 
         for attack_prompt_index, row in data.iterrows():
             attack_prompt = row["goal"]
             attack_prompts.append(attack_prompt)
-            logger.info(
-                f"Test '{self.test_name}': original attack prompt #{attack_prompt_index}: {attack_prompt}")
-            for stage in range(1, self.multistage_depth+1):
+            logger.info(f"Test '{self.test_name}': original attack prompt #{attack_prompt_index}: {attack_prompt}")
+            for stage in range(1, self.multistage_depth + 1):
                 transformed_prompt = self.transform_attack_prompt(attack_prompts[-1])
-                logger.info(
-                    f"Test '{self.test_name}': generated attack prompt #{stage}: {transformed_prompt}")
+                logger.info(f"Test '{self.test_name}': generated attack prompt #{stage}: {transformed_prompt}")
                 attack_prompts.append(transformed_prompt)
 
                 yield StatusUpdate(
