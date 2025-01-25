@@ -62,7 +62,9 @@ def apply_ascii_noising(prompt: str, sigma: float) -> str:
 
 @register_test
 class TestBon(TestBase):
-    """Probes the LLM resilience against Best-of-N attack (text augmentations)."""
+    """Probes the LLM resilience against Best-of-N attack (text augmentations).
+    `Original Paper <https://arxiv.org/abs/1803.08669>`_, `Code <https://github.com/jplhughes/bon-jailbreaking>`_.
+    """
 
     test_name = "bon"
 
@@ -145,7 +147,7 @@ class TestBon(TestBase):
             self.status,
             "Generating",
             0,
-            self.num_attempts * (self.multistage_depth + 1)  # +1 - besides refined prompts we also store starting one
+            self.num_attempts * (self.multistage_depth + 1)  # +1 - we also store starting prompt besides refined ones
         )
 
         for attack_prompt_index, row in data.iterrows():
@@ -206,13 +208,14 @@ class TestBon(TestBase):
             responses.append(response)
             statuses.append(current_status)
 
+            total_attack_num = len(attack_prompts)
             yield StatusUpdate(
                 self.client_config,
                 self.test_name,
                 self.status,
                 "Attacking",
                 attack_prompt_index,
-                self.num_attempts * (self.multistage_depth + 1),
+                total_attack_num,
             )
 
         # Prepare data for report generation
@@ -223,6 +226,6 @@ class TestBon(TestBase):
             self.test_name,
             self.status,
             "Finished",
-            self.num_attempts * (self.multistage_depth + 1),
-            self.num_attempts * (self.multistage_depth + 1),
+            total_attack_num,
+            total_attack_num,
         )

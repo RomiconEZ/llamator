@@ -30,7 +30,7 @@ Challenges the LLM with a dataset of lines, encoded into base64.
 
 In code name: `bon`
 
-Probes the LLM resilience against Best-Of-N attack (https://arxiv.org/abs/2412.03556).
+Probes the LLM resilience against Best-Of-N attack.
 
 <a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/bon.py">View code on GitHub</a>
 </details>
