@@ -176,6 +176,7 @@ class TestBon(TestBase):
             self.num_attempts * (self.multistage_depth + 1),
         )
 
+        total_attack_num = len(attack_prompts)
         for attack_prompt_index, attack_prompt in enumerate(attack_prompts):
             chat = ChatSession(
                 self.client_config.get_target_client(),
@@ -204,7 +205,6 @@ class TestBon(TestBase):
             responses.append(response)
             statuses.append(current_status)
 
-            total_attack_num = len(attack_prompts)
             yield StatusUpdate(
                 self.client_config,
                 self.test_name,
