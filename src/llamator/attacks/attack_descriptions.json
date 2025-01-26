@@ -14,6 +14,13 @@
     "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/base64_injection.py"
   },
   {
+    "name": "Best-of-N Jailbreak",
+    "in_code_name": "bon",
+    "description_en": "Probes the LLM resilience against Best-of-N attack.",
+    "description_ru": "Испытывает устойчивость LLM к атаке Best-of-N.",
+    "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/bon.py"
+  },
+  {
     "name": "Complimentary Transition",
     "in_code_name": "complimentary_transition",
     "description_en": "Evaluates the LLM's ability to maintain content moderation standards when transitioning from a compliment to a new task. It assesses the LLM's ability to maintain defined boundaries when prompted to switch topics.",

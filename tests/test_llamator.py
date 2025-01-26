@@ -43,6 +43,7 @@ def test_openai_client():
     tests_with_attempts = [
         ("aim_jailbreak", 2),
         # ("base64_injection", 2),
+        # ("bon", 2),
         # ("complimentary_transition", 2),
         # ("do_anything_now_jailbreak", 2),
         # ("RU_do_anything_now_jailbreak", 2),

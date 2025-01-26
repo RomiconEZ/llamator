@@ -131,6 +131,7 @@ from ..attacks import (  # noqa
 AvailableTests = [
     "aim_jailbreak",
     "base64_injection",
+    "bon",
     "complimentary_transition",
     "do_anything_now_jailbreak",
     "ethical_compliance",

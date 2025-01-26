@@ -26,6 +26,16 @@ Challenges the LLM with a dataset of lines, encoded into base64.
 </details>
 
 <details>
+<summary><strong>Best-of-N Jailbreak</strong></summary>
+
+In code name: `bon`
+
+Probes the LLM resilience against Best-Of-N attack.
+
+<a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/bon.py">View code on GitHub</a>
+</details>
+
+<details>
 <summary><strong>Complimentary Transition</strong></summary>
 
 In code name: `complimentary_transition`

@@ -1,6 +1,7 @@
 from ..attacks import (  # noqa
     aim,
     base64_injection,
+    bon,
     complimentary_transition,
     dan,
     ethical_compliance,
