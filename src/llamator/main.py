@@ -19,7 +19,7 @@ from .initial_validation import (
     validate_model,
     validate_tests,
 )
-from .ps_logging import setup_logging
+from .logging import setup_logging
 from .report_generators.excel_report_generator import create_attack_report_from_artifacts
 from .report_generators.word_report_generator import create_word_report
 
