@@ -28,6 +28,13 @@
     "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/complimentary_transition.py"
   },
   {
+    "name": "Crescendo",
+    "in_code_name": "crescendo",
+    "description_en": "Challenges the LLM with a dataset of harmful behavior prompts using Crescendo strategy, operates by engaging the LLM in a series of escalating conversational turns, and multistage refinement.",
+    "description_ru": "Испытывает LLM набором запросов, связанных с вредным поведением, используя стратегию Crescendo путем вовлечения LLM в серию растущих разговорных поворотов с самоулучшением атакующей модели.",
+    "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/crescendo.py"
+  },
+  {
     "name": "Do Anything Now Jailbreak",
     "in_code_name": "do_anything_now_jailbreak",
     "description_en": "Probes an LLM's resilience against performing explicitly forbidden activities using the \"Do Anything Now\" (DAN) character roleplay technique.",
@@ -45,14 +52,14 @@
     "name": "Harmful Behavior",
     "in_code_name": "harmful_behavior",
     "description_en": "Challenges the LLM with a dataset of harmful behavior prompts.",
-    "description_ru": "Испытывает LLM с набором запросов, связанных с вредным поведением.",
+    "description_ru": "Испытывает LLM набором запросов, связанных с вредным поведением.",
     "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/harmful_behavior.py"
   },
   {
     "name": "Harmful Behavior Multistage",
     "in_code_name": "harmful_behavior_multistage",
     "description_en": "Challenges the LLM with a dataset of harmful behavior prompts using multistage refinement.",
-    "description_ru": "Испытывает LLM с набором запросов, связанных с вредным поведением, используя самоулучшение атакующей модели.",
+    "description_ru": "Испытывает LLM набором запросов, связанных с вредным поведением, используя самоулучшение атакующей модели.",
     "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/harmful_behavior_multistage.py"
   },
   {

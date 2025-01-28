@@ -46,6 +46,16 @@ Evaluates the LLM's ability to maintain content moderation standards when transi
 </details>
 
 <details>
+<summary><strong>Crescendo</strong></summary>
+
+In code name: `crescendo`
+
+Challenges the LLM with a dataset of harmful behavior prompts using Crescendo strategy, operates by engaging the LLM in a series of escalating conversational turns, and multistage refinement.
+
+<a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/crescendo.py">View code on GitHub</a>
+</details>
+
+<details>
 <summary><strong>Do Anything Now Jailbreak</strong></summary>
 
 In code name: `do_anything_now_jailbreak`

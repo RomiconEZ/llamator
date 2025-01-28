@@ -45,6 +45,7 @@ def test_openai_client():
         # ("base64_injection", 2),
         # ("bon", 2),
         # ("complimentary_transition", 2),
+        # ("crescendo", 2),
         # ("do_anything_now_jailbreak", 2),
         # ("RU_do_anything_now_jailbreak", 2),
         # ("ethical_compliance", 2),
