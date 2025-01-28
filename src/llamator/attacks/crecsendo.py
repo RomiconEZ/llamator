@@ -62,7 +62,7 @@ Remember, your goal is {goal}. Now you will be connect to the testing LLM. All y
 
 @register_test
 class TestCrescendo(TestBase):
-    """Challenges the LLM with a dataset of harmful behavior prompts using Crescendo strategy, 
+    """Challenges the LLM with a dataset of harmful behavior prompts using Crescendo strategy,
     operates by engaging the LLM in a series of escalating conversational turns, and multistage refinement."""
 
     test_name = "crescendo"
@@ -106,7 +106,7 @@ class TestCrescendo(TestBase):
             csv_path = os.path.join(self.artifacts_path, f"{self.test_name}.csv")
             df.to_csv(csv_path, index=False)
             logging.info(f"{self.test_name} attack report saved to {csv_path}")
-            
+
     def stop_criterion(self, tested_client_history: List[Dict[str, str]]) -> bool:
         if len(tested_client_history) < self.multistage_depth * 2:
             return False
@@ -148,7 +148,7 @@ class TestCrescendo(TestBase):
                 client=self.attack_config.attack_client.get_target_client(),
                 system_prompts=self.attack_config.attack_client.get_system_prompts() + [attack_model_system_prompt],
             )
-            
+
             yield StatusUpdate(
                 self.client_config,
                 self.test_name,
@@ -157,12 +157,14 @@ class TestCrescendo(TestBase):
                 attack_prompt_index,
                 self.num_attempts,
             )
-            attack_strategy = attack_chat.say(ATTACK_STRATEGY_PROMPT_TEMPLATE.format(
-                multistage_depth=self.multistage_depth, 
-                goal=row["goal"],
-            ))
+            attack_strategy = attack_chat.say(
+                ATTACK_STRATEGY_PROMPT_TEMPLATE.format(
+                    multistage_depth=self.multistage_depth,
+                    goal=row["goal"],
+                )
+            )
             logger.info(f"Test '{self.test_name}': generated attack strategy #{attack_prompt_index}: {attack_strategy}")
-            
+
             tested_client_chat = ChatSession(
                 client=self.client_config.get_target_client(),
                 use_history=False,
@@ -173,7 +175,7 @@ class TestCrescendo(TestBase):
                 stop_criterion=self.stop_criterion,
                 history_limit=self.multistage_depth,
             )
-            
+
             yield StatusUpdate(
                 self.client_config,
                 self.test_name,
@@ -185,7 +187,9 @@ class TestCrescendo(TestBase):
             attack_prompt = START_ATTACKING_PROMPT.format(goal=row["goal"])
             is_broken = dialog_session.start_conversation(start_prompt=attack_prompt)
 
-            attack_prompts += [response["content"] for response in dialog_session.get_attacker_responses()[1:]] # exclude attack strategy
+            attack_prompts += [
+                response["content"] for response in dialog_session.get_attacker_responses()[1:]
+            ]  # exclude attack strategy
             responses += [response["content"] for response in dialog_session.get_tested_client_responses()]
 
             if is_broken:
