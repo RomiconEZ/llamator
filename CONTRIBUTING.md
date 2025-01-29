@@ -14,7 +14,7 @@ Before you begin, ensure you have the following installed:
 - Python 3.10
 - Git
 
-### Setting up your development environment
+### Setting Up Your Development Environment
 
 1. **Fork the Repository**: Start by forking the repository on GitHub.
 
@@ -23,14 +23,14 @@ Before you begin, ensure you have the following installed:
     git clone https://github.com/RomiconEZ/llamator.git
     ```
 
-### Set up a virtual environment
+### Set Up a Virtual Environment
 
 ```bash
 . ./setup_dev_env.sh
 source venv/bin/activate  # On Unix or macOS
 ```
 
-### Install dependencies
+### Install Dependencies
 
 Install the project dependencies in editable mode (with the '-e' argument).
 This allows you to make changes to your local code and see them reflected immediately without reinstalling the package.
@@ -47,7 +47,7 @@ To ensure code quality we use pre-commit hook with several checks.
 pre-commit install
 ```
 
-### Run tests
+### Run Tests
 
 1) Go to `tests/test_local_llamator.py`.
 
@@ -105,6 +105,7 @@ All files containing attack texts or prompts must be in the `.parquet` format.
 These files are stored in the `attack_data` folder.
 
 #### 3. Add your attack file name to the `attack_loader.py` file:
+
 ```python
 from ..attacks import (  # noqa
     aim,
@@ -128,6 +129,7 @@ from ..attacks import (  # noqa
 ```
 
 #### 4. Add your attack name to the docstring of `start_testing()` in `main.py` and `initial_validation.py` file:
+
 ```python
 AvailableTests = [
     "aim_jailbreak",
