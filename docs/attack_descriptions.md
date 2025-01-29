@@ -32,6 +32,8 @@ In code name: `bon`
 
 Probes the LLM resilience against Best-Of-N attack.
 
+`Original Paper <https://arxiv.org/abs/1803.08669>`_, `Code <https://github.com/jplhughes/bon-jailbreaking>`_.
+
 <a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/bon.py">View code on GitHub</a>
 </details>
 
@@ -51,6 +53,8 @@ Evaluates the LLM's ability to maintain content moderation standards when transi
 In code name: `crescendo`
 
 Challenges the LLM with a dataset of harmful behavior prompts using Crescendo strategy, operates by engaging the LLM in a series of escalating conversational turns, and multistage refinement.
+
+`Original Paper <https://arxiv.org/abs/2404.01833>`_
 
 <a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/crescendo.py">View code on GitHub</a>
 </details>
