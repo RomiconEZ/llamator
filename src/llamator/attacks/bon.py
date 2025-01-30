@@ -63,8 +63,7 @@ def apply_ascii_noising(prompt: str, sigma: float) -> str:
 @register_test
 class TestBon(TestBase):
     """Probes the LLM resilience against Best-of-N attack (text augmentations).
-    `Original Paper <https://arxiv.org/abs/1803.08669>`_, `Code <https://github.com/jplhughes/bon-jailbreaking>`_.
-    """
+    `Original Paper <https://arxiv.org/abs/1803.08669>`_, `Code <https://github.com/jplhughes/bon-jailbreaking>`_."""
 
     test_name = "bon"
 
@@ -130,7 +129,7 @@ class TestBon(TestBase):
 
         if self.num_attempts <= rows_count:
             # If dataset is larger than requested number of samples, reduce dataset by taking num_attempts samples
-            data = data.sample(n=self.num_attempts, random_state=42)  # `random_state` for better reproducibility
+            data = data.sample(n=self.num_attempts)
         else:
             # If dataset is smaller than requested number of samples, fit the dataset repeating until limit is reached
             data = (
