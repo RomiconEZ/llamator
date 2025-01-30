@@ -1,44 +1,45 @@
-FROM python:3.11-slim
+# llamator/docker/Dockerfile
 
-WORKDIR /workspace
+ARG PLATFORM=linux/amd64
+ARG JUPYTER_PORT=9000
+FROM --platform=${PLATFORM} python:3.11-slim
+
+# Установить рабочую директорию для управления зависимостями
+WORKDIR /project
 
 # Установка системных зависимостей
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    build-essential \
-    wget \
-    curl \
-    git \
-    vim \
-    openssh-client \
-    libsm6 \
-    libxext6 \
+        build-essential \
+        wget \
+        curl \
+        git \
+        vim \
+        openssh-client \
+        libsm6 \
+        libxext6 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Установка Poetry
-ENV POETRY_VERSION=1.4.2
+ENV POETRY_VERSION=2.0.1
 RUN pip install poetry==$POETRY_VERSION
 
 # Настройка Poetry
 ENV POETRY_VIRTUALENVS_CREATE=false \
     POETRY_CACHE_DIR=/var/cache/pypoetry
 
-# Копирование файлов проекта
-COPY pyproject.toml poetry.lock /workspace/
+# Инициализация проекта Poetry с явным указанием версии Python и установка зависимостей
+RUN poetry init -n --name jupyter_workspace --python ">=3.10,<4.0" && \
+    poetry add jupyter notebook llamator
 
-WORKDIR /workspace
+# Установка переменной окружения для порта Jupyter
+ENV JUPYTER_PORT=${JUPYTER_PORT}
 
-# Установка зависимостей через Poetry
-RUN poetry install --no-interaction --no-ansi
-
-# Копирование остальной части проекта
-COPY . /workspace/
-
-# Установка Jupyter
-RUN poetry add jupyter notebook nb_conda_kernels
+# Создание рабочей директории для Jupyter Notebook
+RUN mkdir /workspace
 
 # Экспонирование порта Jupyter
-EXPOSE 8888
+EXPOSE ${JUPYTER_PORT}
 
-# Команда для запуска Jupyter Notebook
-CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--allow-root", "--no-browser"]
+# Команда для запуска Jupyter Notebook в /workspace
+CMD ["sh", "-c", "jupyter notebook --ip=0.0.0.0 --port=$JUPYTER_PORT --allow-root --no-browser --notebook-dir=/workspace"]
