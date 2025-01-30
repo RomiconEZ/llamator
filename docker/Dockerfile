@@ -1,7 +1,7 @@
 # llamator/docker/Dockerfile
 
+# Объявляем аргумент PLATFORM с дефолтным значением
 ARG PLATFORM=linux/amd64
-ARG JUPYTER_PORT=9000
 FROM --platform=${PLATFORM} python:3.11-slim
 
 # Установить рабочую директорию для управления зависимостями
@@ -32,8 +32,8 @@ ENV POETRY_VIRTUALENVS_CREATE=false \
 RUN poetry init -n --name jupyter_workspace --python ">=3.10,<4.0" && \
     poetry add jupyter notebook llamator
 
-# Установка переменной окружения для порта Jupyter
-ENV JUPYTER_PORT=${JUPYTER_PORT}
+# Установка переменной окружения для порта Jupyter с дефолтным значением 9000
+ENV JUPYTER_PORT=9000
 
 # Создание рабочей директории для Jupyter Notebook
 RUN mkdir /workspace

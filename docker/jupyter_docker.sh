@@ -1,72 +1,97 @@
-#!/usr/bin/env bash
-
-# llamator/docker/jupyter_docker.sh
-
+#!/bin/bash
 set -e
 
 # ===== Настраиваемые Параметры =====
 IMAGE_NAME="jupyter_img"                 # Имя Docker-образа
 CONTAINER_NAME="jupyter_cont"            # Имя Docker-контейнера
-DEFAULT_JUPYTER_PORT=9000                # Значение порта по умолчанию
+DEFAULT_JUPYTER_PORT=9001                # Значение порта по умолчанию
 PROJECT_DIR="/project"                   # Рабочая директория внутри контейнера
 MAX_RETRIES=30                           # Максимальное количество попыток получения токена
 SLEEP_INTERVAL=2                         # Интервал ожидания между попытками (секунды)
-PLATFORM="linux/amd64"                   # Платформа Docker
+PLATFORM_DEFAULT="linux/amd64"           # Платформа Docker по умолчанию
 
 # Определение платформы, если необходимо (опционально)
-if [[ $(uname -m) == "arm64" ]]; then
+ARCH=$(uname -m)
+if [[ "$ARCH" == "arm64" || "$ARCH" == "aarch64" ]]; then
     PLATFORM="linux/arm64/v8"
-fi
-
-# Получение порта из аргументов или использование значения по умолчанию
-if [ "$1" == "run" ] && [ -n "$2" ]; then
-    JUPYTER_PORT="$2"
-    shift 2
 else
-    JUPYTER_PORT="$DEFAULT_JUPYTER_PORT"
+    PLATFORM="$PLATFORM_DEFAULT"
 fi
 
-# Определение текущего рабочего каталога
+# Функция для отображения помощи
+function show_help {
+    echo "Использование: ./jupyter_docker.sh {build|run [порт]|add package_name|token|bash|stop|remove}"
+    exit 1
+}
+
+# Проверка наличия команды
+if [ -z "$1" ]; then
+    show_help
+fi
+
+# Определение текущего каталога, чтобы workspace монтировался относительно него
 CURRENT_DIR=$(pwd)
 WORKSPACE_DIR="$CURRENT_DIR/workspace"
 
+# Функция для проверки и создания рабочей директории
+function ensure_workspace {
+    if [ ! -d "$WORKSPACE_DIR" ]; then
+        echo "Директория '$WORKSPACE_DIR' не существует. Создание..."
+        mkdir -p "$WORKSPACE_DIR"
+        echo "Директория '$WORKSPACE_DIR' создана."
+    else
+        echo "Директория '$WORKSPACE_DIR' уже существует."
+    fi
+}
+
+# Функция для остановки и удаления контейнера, если он существует
+function remove_existing_container {
+    if [ "$(docker ps -aq -f name=^${CONTAINER_NAME}$)" ]; then
+        echo "Контейнер '$CONTAINER_NAME' существует."
+        if [ "$(docker ps -q -f name=^${CONTAINER_NAME}$)" ]; then
+            echo "Остановка работающего контейнера '$CONTAINER_NAME'..."
+            docker stop "$CONTAINER_NAME"
+            echo "Контейнер '$CONTAINER_NAME' остановлен."
+        fi
+        echo "Удаление контейнера '$CONTAINER_NAME'..."
+        docker rm "$CONTAINER_NAME"
+        echo "Контейнер '$CONTAINER_NAME' удалён."
+    fi
+}
+
 case $1 in
     build)
-        echo "Сборка Docker-образа '$IMAGE_NAME' для платформы $PLATFORM с портом $JUPYTER_PORT..."
-        docker build . -t "$IMAGE_NAME" --build-arg PLATFORM=$PLATFORM --build-arg JUPYTER_PORT=$JUPYTER_PORT
+        echo "Сборка Docker-образа '$IMAGE_NAME' для платформы $PLATFORM..."
+        docker build . -t "$IMAGE_NAME" --build-arg PLATFORM="$PLATFORM"
         echo "Образ '$IMAGE_NAME' успешно создан."
         ;;
 
     run)
-        # Проверка и создание локальной директории
-        if [ ! -d "$WORKSPACE_DIR" ]; then
-            echo "Директория '$WORKSPACE_DIR' не существует. Создание..."
-            mkdir -p "$WORKSPACE_DIR"
-            echo "Директория '$WORKSPACE_DIR' создана."
+        # Определение порта
+        if [ -n "$2" ]; then
+            JUPYTER_PORT="$2"
         else
-            echo "Директория '$WORKSPACE_DIR' уже существует."
+            JUPYTER_PORT="$DEFAULT_JUPYTER_PORT"
         fi
 
-        # Проверка существующего контейнера
-        if [ "$(docker ps -aq -f name=^${CONTAINER_NAME}$)" ]; then
-            if [ "$(docker ps -q -f name=^${CONTAINER_NAME}$)" ]; then
-                echo "Контейнер '$CONTAINER_NAME' уже запущен."
-            else
-                echo "Запуск существующего контейнера '$CONTAINER_NAME' с портом $JUPYTER_PORT..."
-                docker start "$CONTAINER_NAME"
-                echo "Контейнер '$CONTAINER_NAME' запущен."
-            fi
-        else
-            echo "Создание и запуск нового контейнера '$CONTAINER_NAME' с портом $JUPYTER_PORT..."
-            docker run \
-                --platform $PLATFORM \
-                -v "$WORKSPACE_DIR":/workspace \
-                -d \
-                -p "$JUPYTER_PORT:$JUPYTER_PORT" \
-                --name "$CONTAINER_NAME" \
-                "$IMAGE_NAME"
-            echo "Контейнер '$CONTAINER_NAME' успешно запущен."
-        fi
+        echo "Используемый порт Jupyter Notebook: $JUPYTER_PORT"
+
+        # Проверка и создание локальной директории workspace
+        ensure_workspace
+
+        # Остановка и удаление существующего контейнера, если он существует
+        remove_existing_container
+
+        echo "Создание и запуск нового контейнера '$CONTAINER_NAME' на порту $JUPYTER_PORT..."
+        docker run \
+            --platform "$PLATFORM" \
+            -v "$WORKSPACE_DIR":/workspace \
+            -d \
+            -p "$JUPYTER_PORT:$JUPYTER_PORT" \
+            -e JUPYTER_PORT="$JUPYTER_PORT" \
+            --name "$CONTAINER_NAME" \
+            "$IMAGE_NAME"
+        echo "Контейнер '$CONTAINER_NAME' успешно запущен."
 
         # Ожидание запуска Jupyter и получение токена
         echo "Ожидание запуска Jupyter Notebook..."
@@ -98,7 +123,6 @@ case $1 in
             exit 1
         fi
         echo "Добавление пакета '$2' с помощью Poetry..."
-        # Выполняем команду в директории /project контейнера
         docker exec -w "$PROJECT_DIR" "$CONTAINER_NAME" poetry add "$2"
         echo "Пакет '$2' успешно добавлен."
         ;;
@@ -135,7 +159,6 @@ case $1 in
 
     *)
         echo "Неизвестная команда."
-        echo "Использование: ./jupyter_docker.sh {build|run [port]|add|token|bash|stop|remove}"
-        exit 1
+        show_help
         ;;
 esac
