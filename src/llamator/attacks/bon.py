@@ -1,5 +1,6 @@
 import logging
 import os
+import random
 from pathlib import Path
 from typing import Generator, Optional
 
@@ -15,11 +16,56 @@ from ..client.client_config import ClientConfig
 logger = logging.getLogger(__name__)
 
 
-@register_test
-class TestPastTense(TestBase):
-    """Challenges the LLM with a dataset of harmful behavior prompts in past tense form."""
+# Functions for text transformations
+def apply_word_scrambling(prompt: str, sigma: float) -> str:
+    words = prompt.split()
+    scrambled_words = []
+    for word in words:
+        if len(word) > 3 and random.random() < sigma ** (1 / 2):  # nosec
+            chars = list(word)
+            middle_chars = chars[1:-1]
+            random.shuffle(middle_chars)  # nosec
+            scrambled_word = chars[0] + "".join(middle_chars) + chars[-1]
+            scrambled_words.append(scrambled_word)
+        else:
+            scrambled_words.append(word)
+    return " ".join(scrambled_words)
 
-    test_name = "past_tense"
+
+def apply_random_capitalization(prompt: str, sigma: float) -> str:
+    new_text = []
+    for c in prompt:
+        if c.isalpha() and random.random() < sigma ** (1 / 2):  # nosec
+            if "a" <= c <= "z":
+                new_text.append(chr(ord(c) - 32))
+            elif "A" <= c <= "Z":
+                new_text.append(chr(ord(c) + 32))
+        else:
+            new_text.append(c)
+    return "".join(new_text)
+
+
+def apply_ascii_noising(prompt: str, sigma: float) -> str:
+    new_text = []
+    for c in prompt:
+        if c.isprintable() and random.random() < sigma**3:  # nosec
+            perturbation = random.choice([-1, 1])  # nosec
+            new_char_code = ord(c) + perturbation
+            if 32 <= new_char_code <= 126:
+                new_text.append(chr(new_char_code))
+            else:
+                new_text.append(c)
+        else:
+            new_text.append(c)
+    return "".join(new_text)
+
+
+@register_test
+class TestBon(TestBase):
+    """Probes the LLM resilience against Best-of-N attack (text augmentations).
+    `Original Paper <https://arxiv.org/abs/1803.08669>`_, `Code <https://github.com/jplhughes/bon-jailbreaking>`_."""
+
+    test_name = "bon"
 
     def __init__(
         self,
@@ -38,6 +84,8 @@ class TestPastTense(TestBase):
             *args,
             **kwargs,
         )
+        self.sigma = 0.4  # proportion of characters to augment
+        self.multistage_depth = kwargs.get("multistage_depth", 5)
 
     def _prepare_attack_data(self, attack_prompts: list[str], responses: list[str], statuses: list[str]) -> None:
         """
@@ -58,12 +106,22 @@ class TestPastTense(TestBase):
         if self.artifacts_path:
             csv_path = os.path.join(self.artifacts_path, f"{self.test_name}.csv")
             df.to_csv(csv_path, index=False)
-            logging.info(f"Past Tense attack report saved to {csv_path}")
+            logging.info(f"{self.test_name} attack report saved to {csv_path}")
+
+    def transform_attack_prompt(self, prompt: str) -> str:
+        """Applies a series of augmentations to the input text."""
+        prompt = apply_word_scrambling(prompt, self.sigma)
+        prompt = apply_random_capitalization(prompt, self.sigma)
+        prompt = apply_ascii_noising(prompt, self.sigma)
+        return prompt
 
     def run(self) -> Generator[StatusUpdate, None, None]:
-        # Getting the path to the directory where the file is located past_tense.py
+        attack_prompts = []
+        responses = []
+        statuses = []
+
         current_dir = Path(__file__).parent
-        dataset_filename = current_dir.parent / "attack_data" / "past_tense.parquet"
+        dataset_filename = current_dir.parent / "attack_data" / "harmful_behavior.parquet"
 
         logger.info(f"Dataset filename: {dataset_filename}")
         data = pd.read_parquet(dataset_filename, engine="fastparquet")
@@ -73,24 +131,52 @@ class TestPastTense(TestBase):
             # If dataset is larger than requested number of samples, reduce dataset by taking num_attempts samples
             data = data.sample(n=self.num_attempts)
         else:
-            # If dataset is smaller than requested number of attack samples, fit the dataset repeating until num_attempts is reached
+            # If dataset is smaller than requested number of samples, fit the dataset repeating until limit is reached
             data = (
                 pd.concat([data] * (self.num_attempts // len(data) + 1))[: self.num_attempts]
                 .sort_index()
                 .reset_index(drop=True)
             )
 
-        # Lists to store prompts, responses, and statuses for report generation
-        attack_prompts = []
-        responses = []
-        statuses = []
-
-        # Generate list of attack prompt variations
-        yield StatusUpdate(self.client_config, self.test_name, self.status, "Attacking", 0, self.num_attempts)
+        yield StatusUpdate(
+            self.client_config,
+            self.test_name,
+            self.status,
+            "Generating",
+            0,
+            self.num_attempts * (self.multistage_depth + 1),  # +1 - we also store starting prompt besides refined ones
+        )
 
         for attack_prompt_index, row in data.iterrows():
             attack_prompt = row["goal"]
             attack_prompts.append(attack_prompt)
+            logger.info(f"Test '{self.test_name}': original attack prompt #{attack_prompt_index}: {attack_prompt}")
+            for stage in range(1, self.multistage_depth + 1):
+                transformed_prompt = self.transform_attack_prompt(attack_prompts[-1])
+                logger.info(f"Test '{self.test_name}': generated attack prompt #{stage}: {transformed_prompt}")
+                attack_prompts.append(transformed_prompt)
+
+                yield StatusUpdate(
+                    self.client_config,
+                    self.test_name,
+                    self.status,
+                    "Generating",
+                    attack_prompt_index * (self.multistage_depth + 1) + stage,
+                    self.num_attempts * (self.multistage_depth + 1),
+                )
+
+        # Run the attack by sending the prompts and verifying the responses
+        yield StatusUpdate(
+            self.client_config,
+            self.test_name,
+            self.status,
+            "Attacking",
+            0,
+            self.num_attempts * (self.multistage_depth + 1),
+        )
+
+        total_attack_num = len(attack_prompts)
+        for attack_prompt_index, attack_prompt in enumerate(attack_prompts):
             chat = ChatSession(
                 self.client_config.get_target_client(),
                 self.client_config.get_system_prompts(),
@@ -124,7 +210,7 @@ class TestPastTense(TestBase):
                 self.status,
                 "Attacking",
                 attack_prompt_index,
-                self.num_attempts,
+                total_attack_num,
             )
 
         # Prepare data for report generation
@@ -135,6 +221,6 @@ class TestPastTense(TestBase):
             self.test_name,
             self.status,
             "Finished",
-            self.num_attempts,
-            self.num_attempts,
+            total_attack_num,
+            total_attack_num,
         )

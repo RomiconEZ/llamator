@@ -14,11 +14,25 @@
     "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/base64_injection.py"
   },
   {
+    "name": "Best-of-N Jailbreak",
+    "in_code_name": "bon",
+    "description_en": "Probes the LLM resilience against Best-of-N attack.",
+    "description_ru": "Испытывает устойчивость LLM к атаке Best-of-N.",
+    "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/bon.py"
+  },
+  {
     "name": "Complimentary Transition",
     "in_code_name": "complimentary_transition",
     "description_en": "Evaluates the LLM's ability to maintain content moderation standards when transitioning from a compliment to a new task. It assesses the LLM's ability to maintain defined boundaries when prompted to switch topics.",
     "description_ru": "Оценивает способность LLM поддерживать стандарты модерации контента при переходе от комплимента к новой задаче. Он оценивает способность LLM сохранять определенные границы при переходе на другую тему.",
     "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/complimentary_transition.py"
+  },
+  {
+    "name": "Crescendo",
+    "in_code_name": "crescendo",
+    "description_en": "Challenges the LLM with a dataset of harmful behavior prompts using Crescendo strategy, operates by engaging the LLM in a series of escalating conversational turns, and multistage refinement.",
+    "description_ru": "Испытывает LLM набором запросов, связанных с вредным поведением, используя стратегию Crescendo путем вовлечения LLM в серию растущих разговорных поворотов с самоулучшением атакующей модели.",
+    "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/crescendo.py"
   },
   {
     "name": "Do Anything Now Jailbreak",
@@ -38,14 +52,14 @@
     "name": "Harmful Behavior",
     "in_code_name": "harmful_behavior",
     "description_en": "Challenges the LLM with a dataset of harmful behavior prompts.",
-    "description_ru": "Испытывает LLM с набором запросов, связанных с вредным поведением.",
+    "description_ru": "Испытывает LLM набором запросов, связанных с вредным поведением.",
     "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/harmful_behavior.py"
   },
   {
     "name": "Harmful Behavior Multistage",
     "in_code_name": "harmful_behavior_multistage",
     "description_en": "Challenges the LLM with a dataset of harmful behavior prompts using multistage refinement.",
-    "description_ru": "Испытывает LLM с набором запросов, связанных с вредным поведением, используя самоулучшение атакующей модели.",
+    "description_ru": "Испытывает LLM набором запросов, связанных с вредным поведением, используя самоулучшение атакующей модели.",
     "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/harmful_behavior_multistage.py"
   },
   {

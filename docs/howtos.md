@@ -45,6 +45,7 @@ tests_with_attempts = [
     ("do_anything_now_jailbreak", 2),
     # Uncomment the following lines to include additional tests
     # ("RU_do_anything_now_jailbreak", 2),
+    # ("bon", 2),
     # ("ethical_compliance", 2),
     # ("harmful_behavior", 2),
     # ("harmful_behavior_multistage", 2),
