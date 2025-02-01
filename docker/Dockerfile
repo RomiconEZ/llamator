@@ -1,13 +1,13 @@
 # llamator/docker/Dockerfile
 
-# Объявляем аргумент PLATFORM с дефолтным значением
+# Declare PLATFORM argument with default value
 ARG PLATFORM=linux/amd64
 FROM --platform=${PLATFORM} python:3.11-slim
 
-# Установить рабочую директорию для управления зависимостями
+# Set working directory for dependency management
 WORKDIR /project
 
-# Установка системных зависимостей
+# Install system dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         build-essential \
@@ -20,26 +20,26 @@ RUN apt-get update && \
         libxext6 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Установка Poetry
+# Install Poetry
 ENV POETRY_VERSION=2.0.1
 RUN pip install poetry==$POETRY_VERSION
 
-# Настройка Poetry
+# Configure Poetry
 ENV POETRY_VIRTUALENVS_CREATE=false \
     POETRY_CACHE_DIR=/var/cache/pypoetry
 
-# Инициализация проекта Poetry с явным указанием версии Python и установка зависимостей
+# Initialize Poetry project with explicit Python version and install dependencies
 RUN poetry init -n --name jupyter_workspace --python ">=3.10,<4.0" && \
     poetry add jupyter notebook llamator
 
-# Установка переменной окружения для порта Jupyter с дефолтным значением 9000
+# Set environment variable for Jupyter port with default value 9000
 ENV JUPYTER_PORT=9000
 
-# Создание рабочей директории для Jupyter Notebook
+# Create working directory for Jupyter Notebook
 RUN mkdir /workspace
 
-# Экспонирование порта Jupyter
+# Expose Jupyter port
 EXPOSE ${JUPYTER_PORT}
 
-# Команда для запуска Jupyter Notebook в /workspace
+# Command to run Jupyter Notebook in /workspace
 CMD ["sh", "-c", "jupyter notebook --ip=0.0.0.0 --port=$JUPYTER_PORT --allow-root --no-browser --notebook-dir=/workspace"]

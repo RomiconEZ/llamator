@@ -1,8 +1,8 @@
-# Инструкции по Использованию
+# Usage Instructions
 
-## Предварительные Шаги
+## Preliminary Steps
 
-1. **Структура Проекта:**
+1. **Project Structure:**
 
    ```
    llamator/
@@ -11,124 +11,124 @@
    │   ├── jupyter_docker.sh
    │   └── instruction.md
    └── workspace/
-       └── (ваши рабочие файлы)
+       └── (your working files)
    ```
 
-2. **Создание Локальной Директории `workspace`:**
+2. **Creating Local `workspace` Directory:**
 
-   Если локальная директория `./workspace` не существует, она будет создана автоматически при запуске контейнера. Нет необходимости создавать её вручную.
+   If the local `./workspace` directory doesn't exist, it will be created automatically when the container starts. No need to create it manually.
 
-## Основные Команды
+## Main Commands
 
-Скрипт `jupyter_docker.sh` поддерживает следующие команды:
+The `jupyter_docker.sh` script supports the following commands:
 
-1. **Сборка Docker-образа:**
+1. **Building Docker Image:**
 
-   Перейдите в директорию `llamator/docker` и выполните:
+   Navigate to the `llamator/docker` directory and execute:
 
    ```bash
    ./jupyter_docker.sh build
    ```
 
-   Это создаст Docker-образ с именем по умолчанию `jupyter_img`. По умолчанию Jupyter Notebook будет запускаться на порту `9000`.
+   This will create a Docker image named `jupyter_img` by default. Jupyter Notebook will run on port `9000` by default.
 
-2. **Запуск Контейнера:**
+2. **Running Container:**
 
    ```bash
-   ./jupyter_docker.sh run [порт]
+   ./jupyter_docker.sh run [port]
    ```
 
-   - **Параметры:**
-     - `[порт]` *(необязательный)*: Порт для доступа к Jupyter Notebook. Если не указан, используется порт `9000`.
+   - **Parameters:**
+     - `[port]` *(optional)*: Port for accessing Jupyter Notebook. If not specified, port `9000` is used.
 
-   - **Примеры:**
+   - **Examples:**
 
-     - Использование порта по умолчанию:
+     - Using default port:
 
        ```bash
        ./jupyter_docker.sh run
        ```
 
-     - Задание кастомного порта, например `8888`:
+     - Setting custom port, e.g., `8888`:
 
        ```bash
        ./jupyter_docker.sh run 8888
        ```
 
-   - **Особенности:**
-     - Все аргументы и настройки определены внутри скрипта `jupyter_docker.sh`.
-     - При запуске команды `run` можно указать порт как аргумент, который будет передан в контейнер.
-     - Если локальная директория `./workspace` не существует в текущем каталоге, она будет создана автоматически.
-     - Если контейнер с тем же именем уже существует, он будет остановлен и удалён перед запуском нового.
-     - Контейнер будет запущен в фоновом режиме.
-     - Скрипт автоматически извлечёт токен и выведет полный URL для доступа к Jupyter Notebook, например: `http://localhost:9000/?token=abc123def456ghi789jkl012mno345pqr678stu901vwx234yz`.
+   - **Features:**
+     - All arguments and settings are defined within the `jupyter_docker.sh` script.
+     - When running the `run` command, you can specify a port as an argument that will be passed to the container.
+     - If the local `./workspace` directory doesn't exist in the current directory, it will be created automatically.
+     - If a container with the same name already exists, it will be stopped and removed before starting a new one.
+     - The container will be launched in background mode.
+     - The script will automatically extract the token and display the complete URL for accessing Jupyter Notebook, e.g.: `http://localhost:9000/?token=abc123def456ghi789jkl012mno345pqr678stu901vwx234yz`.
 
-3. **Получение URL с токеном:**
+3. **Getting URL with Token:**
 
-   Если вам нужно повторно получить URL с текущим токеном:
+   If you need to retrieve the URL with the current token again:
 
    ```bash
    ./jupyter_docker.sh token
    ```
 
-   Вы увидите вывод с URL, который можно открыть в браузере для доступа к Jupyter Notebook.
+   You'll see output with a URL that can be opened in a browser to access Jupyter Notebook.
 
-4. **Добавление Новых Пакетов через Poetry:**
+4. **Adding New Packages via Poetry:**
 
-   Например, чтобы добавить пакет `numpy`:
+   For example, to add the `numpy` package:
 
    ```bash
    ./jupyter_docker.sh add numpy
    ```
 
-5. **Доступ к Оболочке Bash Контейнера:**
+5. **Accessing Container's Bash Shell:**
 
-   Если вам нужно выполнить команды внутри контейнера:
+   If you need to execute commands inside the container:
 
    ```bash
    ./jupyter_docker.sh bash
    ```
 
-6. **Остановка Контейнера:**
+6. **Stopping Container:**
 
-   Чтобы остановить работающий контейнер:
+   To stop the running container:
 
    ```bash
    ./jupyter_docker.sh stop
    ```
 
-7. **Удаление Контейнера:**
+7. **Removing Container:**
 
-   Если вам нужно полностью удалить контейнер:
+   If you need to completely remove the container:
 
    ```bash
    ./jupyter_docker.sh remove
    ```
 
-## Примеры Использования
+## Usage Examples
 
-### 1. Сборка и Запуск с Портом по Умолчанию
+### 1. Build and Run with Default Port
 
 ```bash
 ./jupyter_docker.sh build
 ./jupyter_docker.sh run
 ```
 
-- Jupyter Notebook будет доступен по адресу: `http://localhost:9000/?token=your_token_here`
+- Jupyter Notebook will be accessible at: `http://localhost:9000/?token=your_token_here`
 
-### 2. Сборка и Запуск с Кастомным Портом
+### 2. Build and Run with Custom Port
 
 ```bash
 ./jupyter_docker.sh build
 ./jupyter_docker.sh run 8888
 ```
 
-- Jupyter Notebook будет доступен по адресу: `http://localhost:8888/?token=your_token_here`
+- Jupyter Notebook will be accessible at: `http://localhost:8888/?token=your_token_here`
 
-### 3. Добавление Пакета `pandas`
+### 3. Adding `pandas` Package
 
 ```bash
 ./jupyter_docker.sh add pandas
 ```
 
-- Пакет `pandas` будет установлен и доступен в вашем проекте.
+- The `pandas` package will be installed and available in your project.

@@ -1,16 +1,16 @@
 #!/bin/bash
 set -e
 
-# ===== Настраиваемые Параметры =====
-IMAGE_NAME="jupyter_img"                 # Имя Docker-образа
-CONTAINER_NAME="jupyter_cont"            # Имя Docker-контейнера
-DEFAULT_JUPYTER_PORT=9001                # Значение порта по умолчанию
-PROJECT_DIR="/project"                   # Рабочая директория внутри контейнера
-MAX_RETRIES=30                           # Максимальное количество попыток получения токена
-SLEEP_INTERVAL=2                         # Интервал ожидания между попытками (секунды)
-PLATFORM_DEFAULT="linux/amd64"           # Платформа Docker по умолчанию
+# ===== Configurable Parameters =====
+IMAGE_NAME="jupyter_img"                 # Docker image name
+CONTAINER_NAME="jupyter_cont"            # Docker container name
+DEFAULT_JUPYTER_PORT=9001                # Default port value
+PROJECT_DIR="/project"                   # Working directory inside container
+MAX_RETRIES=30                           # Maximum number of token retrieval attempts
+SLEEP_INTERVAL=2                         # Wait interval between attempts (seconds)
+PLATFORM_DEFAULT="linux/amd64"           # Default Docker platform
 
-# Определение платформы, если необходимо (опционально)
+# Platform determination if needed (optional)
 ARCH=$(uname -m)
 if [[ "$ARCH" == "arm64" || "$ARCH" == "aarch64" ]]; then
     PLATFORM="linux/arm64/v8"
@@ -18,71 +18,71 @@ else
     PLATFORM="$PLATFORM_DEFAULT"
 fi
 
-# Функция для отображения помощи
+# Help display function
 function show_help {
-    echo "Использование: ./jupyter_docker.sh {build|run [порт]|add package_name|token|bash|stop|remove}"
+    echo "Usage: ./jupyter_docker.sh {build|run [port]|add package_name|token|bash|stop|remove}"
     exit 1
 }
 
-# Проверка наличия команды
+# Command presence check
 if [ -z "$1" ]; then
     show_help
 fi
 
-# Определение текущего каталога, чтобы workspace монтировался относительно него
+# Determine current directory for workspace mounting relative to it
 CURRENT_DIR=$(pwd)
 WORKSPACE_DIR="$CURRENT_DIR/workspace"
 
-# Функция для проверки и создания рабочей директории
+# Function to check and create working directory
 function ensure_workspace {
     if [ ! -d "$WORKSPACE_DIR" ]; then
-        echo "Директория '$WORKSPACE_DIR' не существует. Создание..."
+        echo "Directory '$WORKSPACE_DIR' doesn't exist. Creating..."
         mkdir -p "$WORKSPACE_DIR"
-        echo "Директория '$WORKSPACE_DIR' создана."
+        echo "Directory '$WORKSPACE_DIR' created."
     else
-        echo "Директория '$WORKSPACE_DIR' уже существует."
+        echo "Directory '$WORKSPACE_DIR' already exists."
     fi
 }
 
-# Функция для остановки и удаления контейнера, если он существует
+# Function to stop and remove container if it exists
 function remove_existing_container {
     if [ "$(docker ps -aq -f name=^${CONTAINER_NAME}$)" ]; then
-        echo "Контейнер '$CONTAINER_NAME' существует."
+        echo "Container '$CONTAINER_NAME' exists."
         if [ "$(docker ps -q -f name=^${CONTAINER_NAME}$)" ]; then
-            echo "Остановка работающего контейнера '$CONTAINER_NAME'..."
+            echo "Stopping running container '$CONTAINER_NAME'..."
             docker stop "$CONTAINER_NAME"
-            echo "Контейнер '$CONTAINER_NAME' остановлен."
+            echo "Container '$CONTAINER_NAME' stopped."
         fi
-        echo "Удаление контейнера '$CONTAINER_NAME'..."
+        echo "Removing container '$CONTAINER_NAME'..."
         docker rm "$CONTAINER_NAME"
-        echo "Контейнер '$CONTAINER_NAME' удалён."
+        echo "Container '$CONTAINER_NAME' removed."
     fi
 }
 
 case $1 in
     build)
-        echo "Сборка Docker-образа '$IMAGE_NAME' для платформы $PLATFORM..."
+        echo "Building Docker image '$IMAGE_NAME' for platform $PLATFORM..."
         docker build . -t "$IMAGE_NAME" --build-arg PLATFORM="$PLATFORM"
-        echo "Образ '$IMAGE_NAME' успешно создан."
+        echo "Image '$IMAGE_NAME' successfully created."
         ;;
 
     run)
-        # Определение порта
+        # Port determination
         if [ -n "$2" ]; then
             JUPYTER_PORT="$2"
         else
             JUPYTER_PORT="$DEFAULT_JUPYTER_PORT"
         fi
 
-        echo "Используемый порт Jupyter Notebook: $JUPYTER_PORT"
+        echo "Using Jupyter Notebook port: $JUPYTER_PORT"
 
-        # Проверка и создание локальной директории workspace
+        # Check and create local workspace directory
         ensure_workspace
 
-        # Остановка и удаление существующего контейнера, если он существует
+        # Stop and remove existing container if it exists
         remove_existing_container
 
-        echo "Создание и запуск нового контейнера '$CONTAINER_NAME' на порту $JUPYTER_PORT..."
+        echo "Creating and starting new container '$CONTAINER_NAME' on port $JUPYTER_PORT..."
         docker run \
             --platform "$PLATFORM" \
             -v "$WORKSPACE_DIR":/workspace \
@@ -91,14 +91,14 @@ case $1 in
             -e JUPYTER_PORT="$JUPYTER_PORT" \
             --name "$CONTAINER_NAME" \
             "$IMAGE_NAME"
-        echo "Контейнер '$CONTAINER_NAME' успешно запущен."
+        echo "Container '$CONTAINER_NAME' successfully started."
 
-        # Ожидание запуска Jupyter и получение токена
-        echo "Ожидание запуска Jupyter Notebook..."
+        # Wait for Jupyter to start and get token
+        echo "Waiting for Jupyter Notebook to start..."
         RETRIES=0
         while true; do
             if [ $RETRIES -ge $MAX_RETRIES ]; then
-                echo "Не удалось получить токен Jupyter Notebook после $(($MAX_RETRIES * $SLEEP_INTERVAL)) секунд."
+                echo "Failed to get Jupyter Notebook token after $(($MAX_RETRIES * $SLEEP_INTERVAL)) seconds."
                 exit 1
             fi
 
@@ -113,18 +113,18 @@ case $1 in
         done
 
         URL="http://localhost:$JUPYTER_PORT/?token=$TOKEN"
-        echo "Jupyter Notebook доступен по адресу:"
+        echo "Jupyter Notebook is accessible at:"
         echo "$URL"
         ;;
 
     add)
         if [ -z "$2" ]; then
-            echo "Пожалуйста, укажите название пакета: ./jupyter_docker.sh add package_name"
+            echo "Please specify package name: ./jupyter_docker.sh add package_name"
             exit 1
         fi
-        echo "Добавление пакета '$2' с помощью Poetry..."
+        echo "Adding package '$2' using Poetry..."
         docker exec -w "$PROJECT_DIR" "$CONTAINER_NAME" poetry add "$2"
-        echo "Пакет '$2' успешно добавлен."
+        echo "Package '$2' successfully added."
         ;;
 
     token)
@@ -132,33 +132,33 @@ case $1 in
         if [[ $TOKEN_OUTPUT == *"token="* ]]; then
             TOKEN=$(echo "$TOKEN_OUTPUT" | grep -o 'token=[a-zA-Z0-9]*' | cut -d'=' -f2)
             URL="http://localhost:$JUPYTER_PORT/?token=$TOKEN"
-            echo "Jupyter Notebook доступен по адресу:"
+            echo "Jupyter Notebook is accessible at:"
             echo "$URL"
         else
-            echo "Не удалось получить токен. Убедитесь, что контейнер запущен и Jupyter Notebook работает."
+            echo "Failed to get token. Make sure the container is running and Jupyter Notebook is working."
             exit 1
         fi
         ;;
 
     bash)
-        echo "Запуск оболочки Bash внутри контейнера '$CONTAINER_NAME'..."
+        echo "Starting Bash shell inside container '$CONTAINER_NAME'..."
         docker exec -it "$CONTAINER_NAME" /bin/bash
         ;;
 
     stop)
-        echo "Остановка контейнера '$CONTAINER_NAME'..."
+        echo "Stopping container '$CONTAINER_NAME'..."
         docker stop "$CONTAINER_NAME"
-        echo "Контейнер '$CONTAINER_NAME' остановлен."
+        echo "Container '$CONTAINER_NAME' stopped."
         ;;
 
     remove)
-        echo "Удаление контейнера '$CONTAINER_NAME'..."
+        echo "Removing container '$CONTAINER_NAME'..."
         docker rm -f "$CONTAINER_NAME" 2>/dev/null || true
-        echo "Контейнер '$CONTAINER_NAME' удалён."
+        echo "Container '$CONTAINER_NAME' removed."
         ;;
 
     *)
-        echo "Неизвестная команда."
+        echo "Unknown command."
         show_help
         ;;
 esac
