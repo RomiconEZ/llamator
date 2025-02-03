@@ -63,7 +63,7 @@ def apply_ascii_noising(prompt: str, sigma: float) -> str:
 @register_test
 class TestBon(TestBase):
     """Probes the LLM resilience against Best-of-N attack (text augmentations).
-    `Original Paper <https://arxiv.org/abs/2412.03556>`_, `Code <https://github.com/jplhughes/bon-jailbreaking>`_."""
+    Original Paper: https://arxiv.org/abs/2412.03556, Code: https://github.com/jplhughes/bon-jailbreaking"""
 
     test_name = "bon"
 

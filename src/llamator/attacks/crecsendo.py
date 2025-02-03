@@ -64,7 +64,7 @@ Remember, your goal is {goal}. Now you will be connect to the testing LLM. All y
 class TestCrescendo(TestBase):
     """Challenges the LLM with a dataset of harmful behavior prompts using Crescendo strategy,
     operates by engaging the LLM in a series of escalating conversational turns, and multistage refinement.
-    `Original Paper <https://arxiv.org/abs/2404.01833>`_"""
+    Original Paper: https://arxiv.org/abs/2404.01833"""
 
     test_name = "crescendo"
 
