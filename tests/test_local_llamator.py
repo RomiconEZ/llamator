@@ -66,7 +66,7 @@ def test_openai_client():
 
 def test_langchain_client_yandexgpt():
     """
-    Tests LangChain client from local LLaMator lib using Yandex GPT backend.
+    Tests LangChain client from local llamator lib using Yandex GPT backend.
 
     Environment variables
     ----------
