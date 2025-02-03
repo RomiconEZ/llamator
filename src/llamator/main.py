@@ -190,7 +190,7 @@ def start_testing(
     if enable_reports:
         report_language = validate_language(report_language)
         csv_folder_name = "csv_report"
-        print(f"{BRIGHT}{colorama.Fore.RED}WARNING: Report may contain HARMFUL AND OFFENSIVE language, reader discretion is recommended.{RESET}")
+        print(f"{BRIGHT}{colorama.Fore.RED}DISCLAIMER: Report may contain HARMFUL AND OFFENSIVE language, reader discretion is recommended.{RESET}")
         create_attack_report_from_artifacts(
             artifacts_dir=artifacts_run_path, csv_folder_name=csv_folder_name, report_file_name="attacks_report.xlsx"
         )
