@@ -32,7 +32,7 @@ In code name: `bon`
 
 Probes the LLM resilience against Best-Of-N attack.
 
-`Original Paper <https://arxiv.org/abs/1803.08669>`_, `Code <https://github.com/jplhughes/bon-jailbreaking>`_.
+`Original Paper <https://arxiv.org/abs/2412.03556>`_, `Code <https://github.com/jplhughes/bon-jailbreaking>`_.
 
 <a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/bon.py">View code on GitHub</a>
 </details>
@@ -224,6 +224,8 @@ Attacks the LLM system during a multistage conversation to generate logical inco
 In code name: `sycophancy`
 
 Attacks the LLM system during a multistage conversation using the argumentum ad verecundiam method based on the system's domain.
+
+`Original Paper <https://arxiv.org/abs/2310.13548>`_
 
 <a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/sycophancy.py">View code on GitHub</a>
 </details>
