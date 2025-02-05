@@ -8,11 +8,12 @@ Red Teaming python-framework for testing chatbots and LLM-systems
 [![Downloads](https://pepy.tech/badge/llamator)](https://pepy.tech/project/llamator)
 [![Downloads](https://pepy.tech/badge/llamator/month)](https://pepy.tech/project/llamator)
 [![GitHub Repo stars](https://img.shields.io/github/stars/RomiconEZ/llamator)](https://github.com/RomiconEZ/llamator/stargazers)
+[![Docker](https://img.shields.io/badge/dockerfile-gray.svg?logo=docker)](https://github.com/RomiconEZ/llamator/blob/release/docker)
 
 ## Install 🚀
 
 ```bash
-pip install llamator==2.0.1
+pip install llamator==2.1.0
 ```
 
 ## Documentation 📚
@@ -26,6 +27,8 @@ Documentation Link: [https://romiconez.github.io/llamator](https://romiconez.git
 * 💬 [Telegram bot testing via Telethon](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-telegram.ipynb)
 * 📱 [WhatsApp bot testing via Selenium](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-whatsapp.ipynb)
 * 🔗 [LangChain client testing with custom attack](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-langchain-custom-attack.ipynb)
+* 🐋 [Running LLAMATOR in Docker](https://github.com/RomiconEZ/llamator/blob/release/docker)
+
 
 ## Supported Clients 🛠️
 

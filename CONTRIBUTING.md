@@ -18,19 +18,19 @@ Before you begin, ensure you have the following installed:
 
 1. **Fork the Repository**: Start by forking the repository on GitHub.
 
-2. **Clone Your Fork**:
+2. **Clone your fork**:
     ```bash
-    git clone https://github.com/RomiconEZ/llamator/tree/release
+    git clone https://github.com/RomiconEZ/llamator.git
     ```
 
-### Set up a virtual environment
+### Set Up a Virtual Environment
 
 ```bash
 . ./setup_dev_env.sh
 source venv/bin/activate  # On Unix or macOS
 ```
 
-### Install dependencies
+### Install Dependencies
 
 Install the project dependencies in editable mode (with the '-e' argument).
 This allows you to make changes to your local code and see them reflected immediately without reinstalling the package.
@@ -47,7 +47,7 @@ To ensure code quality we use pre-commit hook with several checks.
 pre-commit install
 ```
 
-### Run tests
+### Run Tests
 
 1) Go to `tests/test_local_llamator.py`.
 
@@ -57,9 +57,10 @@ pre-commit install
 
 ## Making Changes
 
-1. Always create a new side-branch for your work.
+1. Always create a new side-branch for your work from the **`main`** branch.
 
     ```bash
+    git checkout main
     git checkout -b your-branch-name
     ```
 
@@ -86,11 +87,11 @@ pre-commit install
 The easist way to contribute to LLAMATOR project is by creating a new test!
 This can be easily acheived by:
 
-#### 1. Create a Test File:
+#### 1. Create a test file:
 * Navigate to the `attacks` directory.
 * Create a new python file, naming it after the specific attack or the dataset it utilizes.
 
-#### 2. Set Up Your File.
+#### 2. Set up your file.
 
 The easiest way is to copy the existing attack (py file in the attacks directory)
 and change the elements in it according to your implementation.
@@ -99,11 +100,12 @@ For multi-stage attack implementation see "What Drives the Multi-stage?" notes i
 
 #### 3. Creating datasets with texts for attacks.
 
-All files containing attack texts or prompts must be in `.parquet` format.
+All files containing attack texts or prompts must be in the `.parquet` format.
 
 These files are stored in the `attack_data` folder.
 
 #### 3. Add your attack file name to the `attack_loader.py` file:
+
 ```python
 from ..attacks import (  # noqa
     aim,
@@ -127,10 +129,12 @@ from ..attacks import (  # noqa
 ```
 
 #### 4. Add your attack name to the docstring of `start_testing()` in `main.py` and `initial_validation.py` file:
+
 ```python
 AvailableTests = [
     "aim_jailbreak",
     "base64_injection",
+    "bon",
     "complimentary_transition",
     "do_anything_now_jailbreak",
     "ethical_compliance",
@@ -151,9 +155,9 @@ AvailableTests = [
 
 #### 5. Add your attack to the `attack_descriptions.json` and `attack_descriptions.md` files.
 
-#### 6. Open a PR! Submit your changes for review by opening a pull request.
+#### 6. Open a PR! Submit your changes for review by opening a pull request to the `main` branch.
 
-## Submitting a pull request.
+## Submitting a Pull Request.
 
 1. Update your branch.
 
@@ -165,12 +169,12 @@ AvailableTests = [
 
 2. Submit a Pull Request.
 
-    Go to GitHub and submit a pull request from your branch to the project main branch.
+    Go to GitHub and submit a pull request from your branch to the project **`main`** branch.
 
-3. Request Reviews.
+3. Request reviews.
 
     Request reviews from other contributors listed as maintainers. If you receive a feedback - make any necessary changes and push them.
 
 4. Merge.
 
-    Once your pull request is approved, it will be merged into the main branch.
+    Once your pull request is approved, it will be merged into the **`main`** branch.

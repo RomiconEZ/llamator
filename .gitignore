@@ -91,3 +91,4 @@ cmake-build-*/
 */artifacts/
 /examples/chrome-data/
 /venv/
+/docker/workspace/

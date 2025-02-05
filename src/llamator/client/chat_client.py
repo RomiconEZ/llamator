@@ -149,7 +149,7 @@ class ChatSession:
             messages=[{"role": "user", "content": user_prompt}],
         )
         if self.strip_client_responses:
-            result["content"] = result["content"].strip(" \t\n[]<>\"'")
+            result["content"] = result["content"].strip(" \t\n[]<>\"'`")
         logger.debug(f"say: result={result}")
 
         self.history.append({"role": "user", "content": user_prompt})

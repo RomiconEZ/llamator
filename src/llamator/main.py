@@ -19,7 +19,7 @@ from .initial_validation import (
     validate_model,
     validate_tests,
 )
-from .ps_logging import setup_logging
+from .logging import setup_logging
 from .report_generators.excel_report_generator import create_attack_report_from_artifacts
 from .report_generators.word_report_generator import create_word_report
 
@@ -76,7 +76,9 @@ def start_testing(
         Available tests:
         - aim_jailbreak
         - base64_injection
+        - bon
         - complimentary_transition
+        - crescendo
         - do_anything_now_jailbreak
         - ethical_compliance
         - harmful_behavior
@@ -188,7 +190,9 @@ def start_testing(
     if enable_reports:
         report_language = validate_language(report_language)
         csv_folder_name = "csv_report"
-        # Create Excel report
+        print(
+            f"{BRIGHT}{colorama.Fore.RED}DISCLAIMER: Report may contain HARMFUL and OFFENSIVE language, reader discretion is recommended.{RESET}"
+        )
         create_attack_report_from_artifacts(
             artifacts_dir=artifacts_run_path, csv_folder_name=csv_folder_name, report_file_name="attacks_report.xlsx"
         )

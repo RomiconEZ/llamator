@@ -1,10 +1,12 @@
 import importlib
 import os
 
+from dotenv import load_dotenv
+
 
 def test_openai_client():
     """
-    Tests OpenAI client from public LLaMator lib.
+    Tests OpenAI client from public llamator lib.
 
     Environment variables
     ----------
@@ -15,7 +17,8 @@ def test_openai_client():
     OPENAI_CLIENT_MODEL : str
         Type of model
     """
-    # Перезагрузка необходимых модулей
+    load_dotenv()
+
     import llamator
 
     importlib.reload(llamator)
@@ -43,7 +46,9 @@ def test_openai_client():
     tests_with_attempts = [
         ("aim_jailbreak", 2),
         # ("base64_injection", 2),
+        # ("bon", 2),
         # ("complimentary_transition", 2),
+        # ("crescendo", 2),
         # ("do_anything_now_jailbreak", 2),
         # ("RU_do_anything_now_jailbreak", 2),
         # ("ethical_compliance", 2),
@@ -61,11 +66,11 @@ def test_openai_client():
     ]
 
     config = {
-        "enable_logging": True,  # Включить логирование
-        "enable_reports": True,  # Включить генерацию отчетов
-        "artifacts_path": "./artifacts",  # Путь к директории для сохранения артефактов
-        "debug_level": 1,  # Уровень логирования: 0 - WARNING, 1 - INFO, 2 - DEBUG
-        "report_language": "ru",  # Язык отчета: 'en', 'ru'
+        "enable_logging": True,  # Enable logging
+        "enable_reports": True,  # Enable report generation
+        "artifacts_path": "./artifacts",  # Path to the directory for saving artifacts
+        "debug_level": 1,  # Logging level: 0 - WARNING, 1 - INFO, 2 - DEBUG
+        "report_language": "en",  # Report language: 'en', 'ru'
     }
 
     llamator.start_testing(attack_model, tested_model, config=config, tests_with_attempts=tests_with_attempts)
