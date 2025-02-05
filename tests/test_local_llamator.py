@@ -18,7 +18,7 @@ def test_openai_client():
         Type of model
     """
     load_dotenv()
-    
+
     import llamator.client.specific_chat_clients
     import llamator.main
 
