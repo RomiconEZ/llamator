@@ -8,7 +8,9 @@ from .client.chat_client import ClientBase
 AvailableTests = [
     "aim_jailbreak",
     "base64_injection",
+    "bon",
     "complimentary_transition",
+    "crescendo",
     "do_anything_now_jailbreak",
     "ethical_compliance",
     "harmful_behavior",

@@ -7,6 +7,7 @@
 * 💬 [Telegram bot testing via Telethon](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-telegram.ipynb)
 * 📱 [WhatsApp bot testing via Selenium](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-whatsapp.ipynb)
 * 🔗 [LangChain client testing with custom attack](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-langchain-custom-attack.ipynb)
+* 🐋 [Running LLAMATOR in Docker](https://github.com/RomiconEZ/llamator/blob/release/docker)
 
 ## Installation Guide
 
@@ -45,6 +46,7 @@ tests_with_attempts = [
     ("do_anything_now_jailbreak", 2),
     # Uncomment the following lines to include additional tests
     # ("RU_do_anything_now_jailbreak", 2),
+    # ("bon", 2),
     # ("ethical_compliance", 2),
     # ("harmful_behavior", 2),
     # ("harmful_behavior_multistage", 2),
