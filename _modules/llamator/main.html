@@ -317,7 +317,7 @@
     <span class="n">validate_model</span><span class="p">,</span>
     <span class="n">validate_tests</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.ps_logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup_logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup_logging</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.report_generators.excel_report_generator</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_attack_report_from_artifacts</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.report_generators.word_report_generator</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_word_report</span>
 
@@ -376,7 +376,9 @@
 <span class="sd">        Available tests:</span>
 <span class="sd">        - aim_jailbreak</span>
 <span class="sd">        - base64_injection</span>
+<span class="sd">        - bon</span>
 <span class="sd">        - complimentary_transition</span>
+<span class="sd">        - crescendo</span>
 <span class="sd">        - do_anything_now_jailbreak</span>
 <span class="sd">        - ethical_compliance</span>
 <span class="sd">        - harmful_behavior</span>
@@ -488,7 +490,9 @@
     <span class="k">if</span> <span class="n">enable_reports</span><span class="p">:</span>
         <span class="n">report_language</span> <span class="o">=</span> <span class="n">validate_language</span><span class="p">(</span><span class="n">report_language</span><span class="p">)</span>
         <span class="n">csv_folder_name</span> <span class="o">=</span> <span class="s2">&quot;csv_report&quot;</span>
-        <span class="c1"># Create Excel report</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">BRIGHT</span><span class="si">}{</span><span class="n">colorama</span><span class="o">.</span><span class="n">Fore</span><span class="o">.</span><span class="n">RED</span><span class="si">}</span><span class="s2">DISCLAIMER: Report may contain HARMFUL and OFFENSIVE language, reader discretion is recommended.</span><span class="si">{</span><span class="n">RESET</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
         <span class="n">create_attack_report_from_artifacts</span><span class="p">(</span>
             <span class="n">artifacts_dir</span><span class="o">=</span><span class="n">artifacts_run_path</span><span class="p">,</span> <span class="n">csv_folder_name</span><span class="o">=</span><span class="n">csv_folder_name</span><span class="p">,</span> <span class="n">report_file_name</span><span class="o">=</span><span class="s2">&quot;attacks_report.xlsx&quot;</span>
         <span class="p">)</span>
