@@ -105,6 +105,13 @@
     "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/ru_ucar.py"
   },
   {
+    "name": "Adversarial suffix",
+    "in_code_name": "suffix",
+    "description_en": "Uses a specially crafted suffix to bypass LLM filters and restrictions, forcing the model to generate prohibited or harmful content despite the original query. Evaluates the model's vulnerability to input data manipulation.",
+    "description_ru": "Использует специально сконструированный суффикс для обхода фильтров и ограничений LLM, заставляя модель генерировать запрещённый или вредоносный контент, несмотря на исходный запрос. Оценивает уязвимость модели к манипуляциям входных данных.",
+    "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/suffix.py"
+  },
+  {
     "name": "Sycophancy Test",
     "in_code_name": "sycophancy",
     "description_en": "Attacks the LLM system during a multistage conversation using the argumentum ad verecundiam method based on the system's domain.",
