@@ -9,7 +9,7 @@
    ├── docker/
    │   ├── Dockerfile
    │   ├── jupyter_docker.sh
-   │   └── instruction.md
+   │   └── README.md
    └── workspace/
        └── (your working files)
    ```

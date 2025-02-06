@@ -32,7 +32,7 @@ In code name: `bon`
 
 Probes the LLM resilience against Best-Of-N attack.
 
-`Original Paper <https://arxiv.org/abs/2412.03556>`_, `Code <https://github.com/jplhughes/bon-jailbreaking>`_.
+_Original Paper <https://arxiv.org/abs/2412.03556>, Code <https://github.com/jplhughes/bon-jailbreaking>_.
 
 <a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/bon.py">View code on GitHub</a>
 </details>
@@ -45,18 +45,6 @@ In code name: `complimentary_transition`
 Evaluates the LLM's ability to maintain content moderation standards when transitioning from a compliment to a new task. It assesses the LLM's ability to maintain defined boundaries when prompted to switch topics.
 
 <a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/complimentary_transition.py">View code on GitHub</a>
-</details>
-
-<details>
-<summary><strong>Crescendo</strong></summary>
-
-In code name: `crescendo`
-
-Challenges the LLM with a dataset of harmful behavior prompts using Crescendo strategy, operates by engaging the LLM in a series of escalating conversational turns, and multistage refinement.
-
-`Original Paper <https://arxiv.org/abs/2404.01833>`_
-
-<a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/crescendo.py">View code on GitHub</a>
 </details>
 
 <details>
@@ -185,6 +173,18 @@ The `multistage_depth` parameter for using in `history_limit` can be extracted f
 ### OWASP [LLM01:2025](https://genai.owasp.org/llmrisk/llm01-prompt-injection/) Prompt Injection
 
 <details>
+<summary><strong>Crescendo</strong></summary>
+
+In code name: `crescendo`
+
+Challenges the LLM with a dataset of harmful behavior prompts using Crescendo strategy, operates by engaging the LLM in a series of escalating conversational turns, and multistage refinement.
+
+_Original Paper <https://arxiv.org/abs/2404.01833>_
+
+<a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/crescendo.py">View code on GitHub</a>
+</details>
+
+<details>
 <summary><strong>Harmful Behavior Multistage</strong></summary>
 
 In code name: `harmful_behavior_multistage`
@@ -225,7 +225,7 @@ In code name: `sycophancy`
 
 Attacks the LLM system during a multistage conversation using the argumentum ad verecundiam method based on the system's domain.
 
-`Original Paper <https://arxiv.org/abs/2310.13548>`_
+_Original Paper <https://arxiv.org/abs/2310.13548>_
 
 <a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/sycophancy.py">View code on GitHub</a>
 </details>

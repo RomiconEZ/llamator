@@ -42,11 +42,12 @@ tested_model = llamator.ClientOpenAI(
 tests_with_attempts = [
     ("aim_jailbreak", 2),
     ("base64_injection", 2),
+    ("bon", 2),
     ("complimentary_transition", 2),
-    ("do_anything_now_jailbreak", 2),
+    ("crescendo", 2),
     # Uncomment the following lines to include additional tests
+    # ("do_anything_now_jailbreak", 2),
     # ("RU_do_anything_now_jailbreak", 2),
-    # ("bon", 2),
     # ("ethical_compliance", 2),
     # ("harmful_behavior", 2),
     # ("harmful_behavior_multistage", 2),
