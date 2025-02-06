@@ -54,6 +54,7 @@ tests_with_attempts = [
     # ("linguistic_evasion", 2),
     # ("logical_inconsistencies", 2),
     # ("past_tense", 2),
+    # ("suffix", 2),
     # ("sycophancy", 2),
     # ("system_prompt_leakage", 2),
     # ("typoglycemia_attack", 2),
