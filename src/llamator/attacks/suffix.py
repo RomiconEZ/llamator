@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 @register_test
 class TestSuffix(TestBase):
-    """Challenges the LLM with a dataset of harmful behavior prompts with adversarial suffixes."""
+    """Uses a specially crafted suffix to bypass LLM filters and restrictions, forcing the model to generate prohibited or harmful content despite the original query. Evaluates the model's vulnerability to input data manipulation."""
 
     test_name = "suffix"
 
