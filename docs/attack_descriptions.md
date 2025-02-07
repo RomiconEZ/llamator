@@ -147,6 +147,18 @@ Probes a Russian-language LLM's adherence to content restrictions when explicitl
 <a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/ru_ucar.py">View code on GitHub</a>
 </details>
 
+<details>
+<summary><strong>Adversarial suffix</strong></summary>
+
+In code name: `suffix`
+
+Uses a specially crafted suffix to bypass LLM filters and restrictions, forcing the model to generate prohibited or harmful content despite the original query. Evaluates the model's vulnerability to input data manipulation.
+
+`Original Paper <https://arxiv.org/abs/2307.15043>`_, `Code <https://github.com/llm-attacks/llm-attacks>`_.
+
+<a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/suffix.py">View code on GitHub</a>
+</details>
+
 ## Multi-stage attacks
 
 <details>
