@@ -149,11 +149,13 @@ AvailableTests = [
     "typoglycemia_attack",
     "ucar",
 
-    #TODO: YOUR TEST HERE
+    #TODO: YOUR TEST HERE (in alphabetical order!)
 ]
 ```
 
 #### 5. Add your attack to the `attack_descriptions.json` and `attack_descriptions.md` files.
+
+Please pay attention to the `attack_descriptions.md` structure. Description should be the same as docstring of the attack class. If your attack has an original paper or repository, it would be nice if you mentioned it in docstring and `attack_descriptions.md`.
 
 #### 6. Open a PR! Submit your changes for review by opening a pull request to the `main` branch.
 

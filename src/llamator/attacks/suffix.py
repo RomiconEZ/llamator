@@ -17,7 +17,9 @@ logger = logging.getLogger(__name__)
 
 @register_test
 class TestSuffix(TestBase):
-    """Uses a specially crafted suffix to bypass LLM filters and restrictions, forcing the model to generate prohibited or harmful content despite the original query. Evaluates the model's vulnerability to input data manipulation."""
+    """Uses a specially crafted suffix to bypass LLM filters and restrictions, forcing the model to generate prohibited or harmful content despite the original query.
+    Evaluates the model's vulnerability to input data manipulation.
+    Original Paper: https://arxiv.org/abs/2307.15043, Code: https://github.com/llm-attacks/llm-attacks"""
 
     test_name = "suffix"
 
