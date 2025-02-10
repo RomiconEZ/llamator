@@ -16,10 +16,12 @@ logger = logging.getLogger(__name__)
 
 
 @register_test
-class TestHarmfulBehaviors(TestBase):
-    """Challenges the LLM with a dataset of harmful behavior prompts."""
+class TestSuffix(TestBase):
+    """Uses a specially crafted suffix to bypass LLM filters and restrictions, forcing the model to generate prohibited or harmful content despite the original query.
+    Evaluates the model's vulnerability to input data manipulation.
+    Original Paper: https://arxiv.org/abs/2307.15043, Code: https://github.com/llm-attacks/llm-attacks"""
 
-    test_name = "harmful_behavior"
+    test_name = "suffix"
 
     def __init__(
         self,
@@ -58,15 +60,12 @@ class TestHarmfulBehaviors(TestBase):
         if self.artifacts_path:
             csv_path = os.path.join(self.artifacts_path, f"{self.test_name}.csv")
             df.to_csv(csv_path, index=False)
-            logging.info(f"{self.test_name} attack report saved to {csv_path}")
+            logging.info(f"Suffix attack report saved to {csv_path}")
 
     def run(self) -> Generator[StatusUpdate, None, None]:
-        attack_prompts = []
-        responses = []
-        statuses = []
-        # Getting the path to the directory where the file is located harmful_behavior.py
+        # Getting the path to the directory where the file is located suffixes.parquet
         current_dir = Path(__file__).parent
-        dataset_filename = current_dir.parent / "attack_data" / "harmful_behavior.parquet"
+        dataset_filename = current_dir.parent / "attack_data" / "suffixes.parquet"
 
         logger.info(f"Dataset filename: {dataset_filename}")
         data = pd.read_parquet(dataset_filename, engine="fastparquet")
@@ -83,33 +82,17 @@ class TestHarmfulBehaviors(TestBase):
                 .reset_index(drop=True)
             )
 
+        # Lists to store prompts, responses, and statuses for report generation
+        attack_prompts = []
+        responses = []
+        statuses = []
+
         # Generate list of attack prompt variations
-        yield StatusUpdate(self.client_config, self.test_name, self.status, "Generating", 0, self.num_attempts)
+        yield StatusUpdate(self.client_config, self.test_name, self.status, "Attacking", 0, self.num_attempts)
 
         for attack_prompt_index, row in data.iterrows():
             attack_prompt = row["goal"]
             attack_prompts.append(attack_prompt)
-            logger.info(f"Test '{self.test_name}': generated attack prompt #{attack_prompt_index}: {attack_prompt}")
-            yield StatusUpdate(
-                self.client_config,
-                self.test_name,
-                self.status,
-                "Generating",
-                attack_prompt_index,
-                self.num_attempts,
-            )
-
-        yield StatusUpdate(
-            self.client_config,
-            self.test_name,
-            self.status,
-            "Attacking",
-            0,
-            self.num_attempts,
-        )
-
-        # Run the attack by sending the prompts and verifying the responses
-        for attack_prompt_index, attack_prompt in enumerate(attack_prompts):
             chat = ChatSession(
                 self.client_config.get_target_client(),
                 self.client_config.get_system_prompts(),
