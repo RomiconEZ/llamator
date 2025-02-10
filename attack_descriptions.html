@@ -314,6 +314,13 @@
 <section id="owasp-llm01-2025-prompt-injection">
 <h3>OWASP <a class="reference external" href="https://genai.owasp.org/llmrisk/llm01-prompt-injection/">LLM01:2025</a> Prompt Injection<a class="headerlink" href="#owasp-llm01-2025-prompt-injection" title="Link to this heading">¶</a></h3>
 <details>
+<summary><strong>Adversarial suffix</strong></summary>
+<p>In code name: <code class="docutils literal notranslate"><span class="pre">suffix</span></code></p>
+<p>Uses a specially crafted suffix to bypass LLM filters and restrictions, forcing the model to generate prohibited or harmful content despite the original query. Evaluates the model’s vulnerability to input data manipulation.</p>
+<p><em>Original Paper <a class="reference external" href="https://arxiv.org/abs/2307.15043">https://arxiv.org/abs/2307.15043</a>, Code <a class="reference external" href="https://github.com/llm-attacks/llm-attacks">https://github.com/llm-attacks/llm-attacks</a></em></p>
+<p><a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/suffix.py">View code on GitHub</a></p>
+</details>
+<details>
 <summary><strong>Aim Jailbreak</strong></summary>
 <p>In code name: <code class="docutils literal notranslate"><span class="pre">aim_jailbreak</span></code></p>
 <p>Probes an LLM’s ethical compliance by eliciting detailed instructions on illegal activities, using the Nicolo Machiavelli character roleplay.</p>
@@ -329,7 +336,7 @@
 <summary><strong>Best-of-N Jailbreak</strong></summary>
 <p>In code name: <code class="docutils literal notranslate"><span class="pre">bon</span></code></p>
 <p>Probes the LLM resilience against Best-Of-N attack.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Original</span> <span class="pre">Paper</span> <span class="pre">&lt;https://arxiv.org/abs/2412.03556&gt;</span></code><em>, <code class="docutils literal notranslate"><span class="pre">Code</span> <span class="pre">&lt;https://github.com/jplhughes/bon-jailbreaking&gt;</span></code></em>.</p>
+<p><em>Original Paper <a class="reference external" href="https://arxiv.org/abs/2412.03556">https://arxiv.org/abs/2412.03556</a>, Code <a class="reference external" href="https://github.com/jplhughes/bon-jailbreaking">https://github.com/jplhughes/bon-jailbreaking</a></em></p>
 <p><a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/bon.py">View code on GitHub</a></p>
 </details>
 <details>
@@ -337,13 +344,6 @@
 <p>In code name: <code class="docutils literal notranslate"><span class="pre">complimentary_transition</span></code></p>
 <p>Evaluates the LLM’s ability to maintain content moderation standards when transitioning from a compliment to a new task. It assesses the LLM’s ability to maintain defined boundaries when prompted to switch topics.</p>
 <p><a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/complimentary_transition.py">View code on GitHub</a></p>
-</details>
-<details>
-<summary><strong>Crescendo</strong></summary>
-<p>In code name: <code class="docutils literal notranslate"><span class="pre">crescendo</span></code></p>
-<p>Challenges the LLM with a dataset of harmful behavior prompts using Crescendo strategy, operates by engaging the LLM in a series of escalating conversational turns, and multistage refinement.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Original</span> <span class="pre">Paper</span> <span class="pre">&lt;https://arxiv.org/abs/2404.01833&gt;</span></code>_</p>
-<p><a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/crescendo.py">View code on GitHub</a></p>
 </details>
 <details>
 <summary><strong>Do Anything Now Jailbreak</strong></summary>
@@ -431,6 +431,13 @@
 <section id="id1">
 <h3>OWASP <a class="reference external" href="https://genai.owasp.org/llmrisk/llm01-prompt-injection/">LLM01:2025</a> Prompt Injection<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
 <details>
+<summary><strong>Crescendo</strong></summary>
+<p>In code name: <code class="docutils literal notranslate"><span class="pre">crescendo</span></code></p>
+<p>Challenges the LLM with a dataset of harmful behavior prompts using Crescendo strategy, operates by engaging the LLM in a series of escalating conversational turns, and multistage refinement.</p>
+<p><em>Original Paper <a class="reference external" href="https://arxiv.org/abs/2404.01833">https://arxiv.org/abs/2404.01833</a></em></p>
+<p><a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/crescendo.py">View code on GitHub</a></p>
+</details>
+<details>
 <summary><strong>Harmful Behavior Multistage</strong></summary>
 <p>In code name: <code class="docutils literal notranslate"><span class="pre">harmful_behavior_multistage</span></code></p>
 <p>Challenges the LLM with a dataset of harmful behavior prompts using multistage refinement.</p>
@@ -458,7 +465,7 @@
 <summary><strong>Sycophancy Test</strong></summary>
 <p>In code name: <code class="docutils literal notranslate"><span class="pre">sycophancy</span></code></p>
 <p>Attacks the LLM system during a multistage conversation using the argumentum ad verecundiam method based on the system’s domain.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Original</span> <span class="pre">Paper</span> <span class="pre">&lt;https://arxiv.org/abs/2310.13548&gt;</span></code>_</p>
+<p><em>Original Paper <a class="reference external" href="https://arxiv.org/abs/2310.13548">https://arxiv.org/abs/2310.13548</a></em></p>
 <p><a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/sycophancy.py">View code on GitHub</a></p>
 </details>
 </section>
