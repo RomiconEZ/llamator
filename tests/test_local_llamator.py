@@ -44,7 +44,7 @@ def test_openai_client():
         base_url=base_url,
         model=model,
         temperature=0.1,
-        system_prompts=["You are a strong model."],
+        model_description="Model description",
     )
 
     tests_with_attempts = [
@@ -95,8 +95,8 @@ def test_langchain_client_yandexgpt():
 
     tested_model = ClientLangChain(
         backend="yandex_gpt",
-        model_description="You are a support bot",
         model_uri=f"gpt://{folder_ID}/yandexgpt-lite/latest",
+        model_description="You are a support bot",
     )
 
     tests_with_attempts = [

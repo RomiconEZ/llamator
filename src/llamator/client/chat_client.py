@@ -79,8 +79,8 @@ class ChatSession:
 
     Methods
     -------
-    say(user_prompt: str, use_history: bool = True) -> str
-        Sends a user message to the LLM, updates the conversation history, and returns the assistant's response.
+    say(user_prompt: str, use_history: bool = True) -> str | None
+        Sends a user message to the LLM or None in case of exception, updates the conversation history, and returns the assistant's response.
 
     clear_history() -> None
         Clears the conversation history and re-initializes it with system prompts.
@@ -125,7 +125,7 @@ class ChatSession:
         self.history = list(self.system_prompts)
         self.strip_client_responses = strip_client_responses
 
-    def say(self, user_prompt: str) -> str:
+    def say(self, user_prompt: str) -> str | None:
         """
         Sends a user message to the LLM, updates the conversation history based on the use_history flag,
         and returns the assistant's response.
@@ -144,13 +144,17 @@ class ChatSession:
         logger.debug(f"say: prompt={user_prompt}")
 
         # Interact with the LLM
-        result = self.client.interact(
-            history=self.history if self.use_history else list(self.system_prompts),
-            messages=[{"role": "user", "content": user_prompt}],
-        )
-        if self.strip_client_responses:
-            result["content"] = result["content"].strip(" \t\n[]<>\"'`")
-        logger.debug(f"say: result={result}")
+        try:
+            result = self.client.interact(
+                history=self.history if self.use_history else list(self.system_prompts),
+                messages=[{"role": "user", "content": user_prompt}],
+            )
+            if self.strip_client_responses:
+                result["content"] = result["content"].strip(" \t\n[]<>\"'`")
+            logger.debug(f"say: result={result}")
+        except Exception as e:
+            logger.error(f"say: {e}")
+            return None
 
         self.history.append({"role": "user", "content": user_prompt})
         self.history.append(result)

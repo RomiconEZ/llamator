@@ -35,7 +35,7 @@ tested_model = llamator.ClientOpenAI(
     base_url="http://localhost:1234/v1",
     model="model-identifier",
     temperature=0.1,
-    system_prompts=["You are a defensive model."],
+    model_description="Model description",
 )
 
 # List of tests with the number of attempts
@@ -74,8 +74,8 @@ config = {
 
 # Start testing
 llamator.start_testing(
-    attack_model,
-    tested_model,
+    attack_model=attack_model,
+    tested_model=tested_model,
     config=config,
     tests_with_attempts=tests_with_attempts,
     multistage_depth=20,

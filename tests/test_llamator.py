@@ -40,7 +40,7 @@ def test_openai_client():
         base_url=base_url,
         model=model,
         temperature=0.1,
-        system_prompts=["You are a strong model."],
+        model_description="Model description",
     )
 
     tests_with_attempts = [

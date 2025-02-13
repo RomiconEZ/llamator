@@ -1,6 +1,6 @@
-# LLAMATOR
+# ![LLAMATOR](assets/LLAMATOR.svg)
 
-Red Teaming python-framework for testing chatbots and LLM-systems
+Red Teaming python-framework for testing chatbots and LLM systems
 
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/llamator)](https://pypi.org/project/llamator)
