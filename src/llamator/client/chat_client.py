@@ -310,6 +310,8 @@ class MultiStageInteractionSession:
 
         # Attacker initiates the conversation
         attacker_response = self.attacker_session.say(start_prompt)
+        if not attacker_response:
+            return True
         logger.debug(f"Step {self.current_step}: Attacker response: {attacker_response}")
 
         while True:

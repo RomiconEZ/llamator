@@ -132,6 +132,10 @@ class TestSystemPromptLeakage(TestBase):
                 use_history=False,
             )
             response = tested_client_chat.say(attack_prompt)
+            if not response:
+                logger.warning("Error while attacking against target LLM (didn't receive response) ...")
+                self.status.report_error(attack_prompt)
+                continue
             verified = self.stop_criterion(tested_client_chat.history)
             logger.info(f"Test '{self.test_name}': attack prompt #{attack_prompt_index}: {attack_prompt}")
             logger.info(

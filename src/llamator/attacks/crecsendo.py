@@ -162,6 +162,10 @@ class TestCrescendo(TestBase):
                     goal=row["goal"],
                 )
             )
+            if not attack_strategy:
+                logger.warning("Error while generating attack prompt (didn't receive response) ...")
+                self.status.report_error(row["goal"])
+                continue
             logger.info(f"Test '{self.test_name}': generated attack strategy #{attack_prompt_index}: {attack_strategy}")
 
             tested_client_chat = ChatSession(
