@@ -61,7 +61,13 @@ def test_openai_client():
 
     from llamator.main import start_testing
 
-    start_testing(attack_model, tested_model, config=config, tests_with_attempts=tests_with_attempts)
+    start_testing(
+        attack_model=attack_model,
+        tested_model=tested_model,
+        config=config,
+        tests_with_attempts=tests_with_attempts,
+        multistage_depth=2,
+    )
 
 
 def test_langchain_client_yandexgpt():
@@ -132,4 +138,10 @@ def test_langchain_client_yandexgpt():
 
     from llamator.main import start_testing
 
-    start_testing(attack_model, tested_model, config=config, tests_with_attempts=tests_with_attempts)
+    start_testing(
+        attack_model=attack_model,
+        tested_model=tested_model,
+        config=config,
+        tests_with_attempts=tests_with_attempts,
+        multistage_depth=2,
+    )

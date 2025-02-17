@@ -74,4 +74,10 @@ def test_openai_client():
         "report_language": "en",  # Report language: 'en', 'ru'
     }
 
-    llamator.start_testing(attack_model, tested_model, config=config, tests_with_attempts=tests_with_attempts)
+    llamator.start_testing(
+        attack_model=attack_model,
+        tested_model=tested_model,
+        config=config,
+        tests_with_attempts=tests_with_attempts,
+        multistage_depth=2,
+    )

@@ -153,15 +153,23 @@ class TestLogicalInconsistencies(TestBase):
                 ),
             )
 
-            attack_prompts += [response["content"] for response in dialog_session.get_attacker_responses()]
-            responses += [response["content"] for response in dialog_session.get_tested_client_responses()]
+            iter_attack_prompts = [response["content"] for response in dialog_session.get_attacker_responses()]
+            iter_responses = [response["content"] for response in dialog_session.get_tested_client_responses()]
+            dialog_steps = dialog_session.get_current_step()
+            if len(iter_attack_prompts) != dialog_steps or len(iter_responses) != dialog_steps:
+                self.status.report_error(str(attack_attempt_index))
+                continue
+            attack_prompts += iter_attack_prompts
+            responses += iter_responses
+
             if is_broken:
                 self.status.report_breach(attack_prompts[-1], responses[-1])
                 current_status = "Broken"
             else:
                 self.status.report_resilient(attack_prompts[-1], responses[-1])
                 current_status = "Resilient"
-            statuses += ["Resilient"] * (dialog_session.get_current_step() - 1) + [current_status]
+
+            statuses += ["Resilient"] * (dialog_steps - 1) + [current_status]
 
         self._prepare_attack_data(attack_prompts, responses, statuses)
 
