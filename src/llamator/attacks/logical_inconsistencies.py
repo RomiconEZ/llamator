@@ -152,24 +152,27 @@ class TestLogicalInconsistencies(TestBase):
                     description=self.client_config.get_model_description(),
                 ),
             )
+            if is_broken is None:
+                logger.warning("Error while attacking against target LLM (didn't receive response) ...")
+                self.status.report_error(str(attack_attempt_index))
+                continue
 
             iter_attack_prompts = [response["content"] for response in dialog_session.get_attacker_responses()]
             iter_responses = [response["content"] for response in dialog_session.get_tested_client_responses()]
-            dialog_steps = dialog_session.get_current_step()
-            if len(iter_attack_prompts) != dialog_steps or len(iter_responses) != dialog_steps:
+            if len(iter_attack_prompts) != len(iter_responses):
                 self.status.report_error(str(attack_attempt_index))
                 continue
             attack_prompts += iter_attack_prompts
             responses += iter_responses
 
+            statuses += ["Resilient"] * len(iter_responses)
             if is_broken:
                 self.status.report_breach(attack_prompts[-1], responses[-1])
                 current_status = "Broken"
             else:
                 self.status.report_resilient(attack_prompts[-1], responses[-1])
                 current_status = "Resilient"
-
-            statuses += ["Resilient"] * (dialog_steps - 1) + [current_status]
+            statuses[-1] = current_status
 
         self._prepare_attack_data(attack_prompts, responses, statuses)
 

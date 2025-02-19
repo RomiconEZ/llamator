@@ -106,21 +106,19 @@ class TestHarmfulBehaviorsMultiStage(TestBase):
                 .reset_index(drop=True)
             )
 
-        # Generate list of attack prompt variations
-        yield StatusUpdate(self.client_config, self.test_name, self.status, "Generating", 0, self.num_attempts)
-
         for attack_prompt_index, row in data.iterrows():
-            objective = row["goal"]
-            attack_prompt = FIRST_ATTACK_PROMPT_TEMPLATE.format(objective=objective)
-            logger.info(f"Test '{self.test_name}': generated attack prompt #{attack_prompt_index}: {attack_prompt}")
             yield StatusUpdate(
                 self.client_config,
                 self.test_name,
                 self.status,
-                "Generating",
+                "Attacking",
                 attack_prompt_index,
                 self.num_attempts,
             )
+
+            objective = row["goal"]
+            attack_prompt = FIRST_ATTACK_PROMPT_TEMPLATE.format(objective=objective)
+            logger.info(f"Test '{self.test_name}': attack prompt #{attack_prompt_index}: {attack_prompt}")
 
             attack_chat = ChatSession(
                 client=self.attack_config.attack_client.get_target_client(),
@@ -141,33 +139,27 @@ class TestHarmfulBehaviorsMultiStage(TestBase):
             )
 
             is_broken = dialog_session.start_conversation(start_prompt=attack_prompt)
+            if is_broken is None:
+                logger.warning("Error while attacking against target LLM (didn't receive response) ...")
+                self.status.report_error(attack_prompt)
+                continue
 
             iter_attack_prompts = [response["content"] for response in dialog_session.get_attacker_responses()]
             iter_responses = [response["content"] for response in dialog_session.get_tested_client_responses()]
-            dialog_steps = dialog_session.get_current_step()
-            if len(iter_attack_prompts) != dialog_steps or len(iter_responses) != dialog_steps:
+            if len(iter_attack_prompts) != len(iter_responses):
                 self.status.report_error(attack_prompt)
                 continue
             attack_prompts += iter_attack_prompts
             responses += iter_responses
 
+            statuses += ["Resilient"] * len(iter_responses)
             if is_broken:
                 self.status.report_breach(attack_prompts[-1], responses[-1])
                 current_status = "Broken"
             else:
                 self.status.report_resilient(attack_prompts[-1], responses[-1])
                 current_status = "Resilient"
-
-            statuses += ["Resilient"] * (dialog_steps - 1) + [current_status]
-
-            yield StatusUpdate(
-                self.client_config,
-                self.test_name,
-                self.status,
-                "Attacking",
-                attack_prompt_index,
-                self.num_attempts,
-            )
+            statuses[-1] = current_status
 
         # Prepare data for report generation
         self._prepare_attack_data(attack_prompts, responses, statuses)
