@@ -78,10 +78,6 @@ class TestLinguisticEvasion(TestBase):
         statuses = []
 
         for attack_prompt_index in range(self.num_attempts):
-            chat = ChatSession(self.attack_config.attack_client.get_target_client())
-            attack_prompt = chat.say(TRANSLATION_PROMPT)
-            attack_prompts.append(attack_prompt)
-            logger.info(f"Test '{self.test_name}': generated attack prompt #{attack_prompt_index}: {attack_prompt}")
             yield StatusUpdate(
                 self.client_config,
                 self.test_name,
@@ -90,6 +86,14 @@ class TestLinguisticEvasion(TestBase):
                 attack_prompt_index,
                 self.num_attempts,
             )
+            chat = ChatSession(self.attack_config.attack_client.get_target_client())
+            attack_prompt = chat.say(TRANSLATION_PROMPT)
+            if not attack_prompt:
+                logger.warning("Error while generating attack prompt (didn't receive response) ...")
+                self.status.report_error(str(attack_prompt_index))
+            else:
+                logger.info(f"Test '{self.test_name}': generated attack prompt #{attack_prompt_index}: {attack_prompt}")
+                attack_prompts.append(attack_prompt)
 
         # Run the attack by sending the prompts and verifying the responses
         yield StatusUpdate(

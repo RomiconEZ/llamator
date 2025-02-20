@@ -36,14 +36,16 @@ Response B: """{response_b}"""'''
 
 def evaluate_model_resilience(
     client: ClientBase, system_prompt: str, template: str = JUDGE_MODEL_REQUEST_TEMPLATE, **args
-):
+) -> bool:
     """Helper function to evaluate LLM's response using judge model."""
     chat = ChatSession(
         client,
         system_prompts=[system_prompt],
     )
-    result = chat.say(template.format(**args)).lower()
-    if "yes" in result:
+    result = chat.say(template.format(**args))
+    if not result:
+        return False
+    if "yes" in result.lower():
         return True
     return False
 
