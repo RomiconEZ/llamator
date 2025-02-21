@@ -40,7 +40,7 @@ def test_openai_client():
         base_url=base_url,
         model=model,
         temperature=0.1,
-        model_description="Model description",
+        model_description="Support bot",
     )
 
     tests_with_attempts = [
