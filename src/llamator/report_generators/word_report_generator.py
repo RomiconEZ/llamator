@@ -165,17 +165,17 @@ def create_word_report(
     strings = {
         "ru": {
             "framework_title": "LLAMATOR",
-            "testing_report": "Отчёт по Тестированию",
-            "legend_title": "Легенда Статусов:",
+            "testing_report": "Отчёт о тестировании",
+            "legend_title": "Легенда статусов:",
             "status": "Статус",
-            "attempts": "Количество Попыток",
-            "attack_results": "Результаты Атаки: {}",
-            "report_created": "Word отчёт создан: {}",
-            "report_failed": "Не удалось создать Word отчёт: {}",
+            "attempts": "Количество попыток",
+            "attack_results": "Результаты атаки: {}",
+            "report_created": "Отчёт в Word создан: {}",
+            "report_failed": "Не удалось создать отчёт в Word: {}",
             "csv_not_found": "Папка с CSV-файлами не найдена: {}",
             "csv_read_failed": "Не удалось прочитать CSV-файл {}: {}",
             "status_column_missing": "Столбец 'status' не найден в {}. Пропуск файла.",
-            "test_not_found": "Тест с in_code_name '{in_code}' не найден в JSON. Пропуск файла {file}.",
+            "test_not_found": "Тест с `in_code_name = '{in_code}'` не найден в JSON. Пропуск файла {file}.",
             "description_missing": "Описание для теста '{test}' не найдено. Используется название CSV файла.",
             "total": "Итого",
         },
@@ -191,7 +191,7 @@ def create_word_report(
             "csv_not_found": "CSV folder not found: {}",
             "csv_read_failed": "Failed to read CSV file {}: {}",
             "status_column_missing": "The 'status' column is missing in {}. Skipping file.",
-            "test_not_found": "Test with in_code_name '{in_code}' not found in JSON. Skipping file {file}.",
+            "test_not_found": "Test with `in_code_name = '{in_code}'` not found in JSON. Skipping file {file}.",
             "description_missing": "Description for test '{test}' not found. Using CSV file name.",
             "total": "Total",
         },
@@ -210,8 +210,8 @@ def create_word_report(
     if status_legend is None:
         if language == "ru":
             status_legend = {
-                "Broken": "Модель не смогла противостоять атаке.",
-                "Resilient": "Модель успешно сопротивлялась атаке.",
+                "Broken": "Модель успешно атакована.",
+                "Resilient": "Модель успешно противостояла атаке.",
                 "Errors": "Во время попытки атаки произошла ошибка.",
             }
         elif language == "en":
@@ -336,7 +336,7 @@ def create_word_report(
         logging.error(lang["csv_not_found"].format(csv_folder_path))
         return
 
-    # Собираем все CSV-файлы в список
+    # Collect all CSV files into a list
     csv_files = sorted([f for f in os.listdir(csv_folder_path) if f.endswith(".csv")])
 
     # Iterate through all CSV files to create tables with results
@@ -469,23 +469,23 @@ def create_word_report(
                     run.font.eastasia = "Times New Roman"
                     run.font.ascii = "Times New Roman"
 
-        # Установить светло-серый фон для ячеек итоговой строки
-        set_cell_background(total_row[0], "d6d6d6")  # Светло-серый
-        set_cell_background(total_row[1], "d6d6d6")  # Светло-серый
+        # Set a light gray background for the cells of the summary row
+        set_cell_background(total_row[0], "d6d6d6")  # Light gray background
+        set_cell_background(total_row[1], "d6d6d6")  # Light gray background
 
         # Set table borders
         set_table_border(table, border_color="404040", border_size=4, border_space=0, border_type="single")
 
-        # Изменение заливки всей таблицы на более светлый оттенок
+        # Change the fill of the entire table to a lighter shade
         set_table_background(table, "ededed")
 
         # Prevent table rows from breaking across pages
         for row in table.rows:
             row.allow_break_across_pages = False
 
-        # Добавляем пустой абзац для отступа, только если это не последний CSV-файл
+        # Add a blank paragraph for indentation only if it is not the last CSV file
         if idx < len(csv_files) - 1:
-            document.add_paragraph()  # Добавить пустой абзац между таблицами
+            document.add_paragraph()  # Add a blank paragraph between tables
 
     # Save the document
     try:

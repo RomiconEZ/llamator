@@ -53,35 +53,35 @@ html_title = "LLAMATOR"
 
 html_theme_options = {
     "light_css_variables": {
-        # Основные цвета фона
-        "color-background-primary": "#f8f5fa",  # Очень светлый розовато-лиловый фон
-        "color-background-secondary": "#f0ebf3",  # Чуть темнее розовато-лиловый
-        # Цвета текста
-        "color-foreground-primary": "#2d1b36",  # Очень темный пурпурный для текста
-        "color-foreground-secondary": "#432952",  # Темный пурпурный для вторичного текста
-        # Брендовые цвета
-        "color-brand-primary": "#2d1b36",  # Очень темный пурпурный
-        "color-brand-content": "#432952",  # Темный пурпурный
-        # Ссылки
-        "color-link": "#614378",  # Пурпурный для ссылок
-        "color-link-hover": "#7b5696",  # Светлее пурпурный при наведении
-        # Оформление примечаний (admonitions)
-        "color-admonition-background": "#fff9fc",  # Очень светлый розовый фон для примечаний
-        "color-admonition-title-background": "#2d1b36",  # Очень темный пурпурный для заголовка
-        "color-admonition-title": "#ffffff",  # Белый текст на темном фоне
-        "color-admonition-border": "#2d1b36",  # Очень темный пурпурный для границы
-        # Код
-        "color-code-background": "#f5f0f7",  # Светлый розовато-лиловый фон для кода
-        "color-code-foreground": "#2d1b36",  # Очень темный пурпурный текст кода
-        # Навигация
-        "color-sidebar-background": "#f5f0f7",  # Светлый розовато-лиловый фон сайдбара
-        "color-sidebar-item-background--hover": "#ebe4ef",  # При наведении на пункт меню
-        "color-sidebar-item-expander-background--hover": "#e0d7e6",  # При наведении на раскрывающийся элемент
-        "color-sidebar-search-background": "#fff9fc",  # Очень светлый розовый фон поиска
-        "color-sidebar-search-background--focus": "#fff9fc",  # То же самое при фокусе
+        # Primary background colors
+        "color-background-primary": "#f8f5fa",  # Very light pinkish purple background
+        "color-background-secondary": "#f0ebf3",  # Slightly darker pinkish purple
+        # Text colors
+        "color-foreground-primary": "#2d1b36",  # Very dark purple for primary text
+        "color-foreground-secondary": "#432952",  # Dark purple for secondary text
+        # Brand colors
+        "color-brand-primary": "#2d1b36",  # Very dark purple
+        "color-brand-content": "#432952",  # Dark purple
+        # Links
+        "color-link": "#614378",  # Purple for links
+        "color-link-hover": "#7b5696",  # Lighter purple on hover
+        # Admonitions
+        "color-admonition-background": "#fff9fc",  # Very light pink background for notes
+        "color-admonition-title-background": "#2d1b36",  # Very dark purple for the title
+        "color-admonition-title": "#ffffff",  # White text on dark background
+        "color-admonition-border": "#2d1b36",  # Very dark purple for the border
+        # Code
+        "color-code-background": "#f5f0f7",  # Light pinkish purple background for code
+        "color-code-foreground": "#2d1b36",  # Very dark purple code text
+        # Sidebar
+        "color-sidebar-background": "#f5f0f7",  # Light pinkish purple sidebar background
+        "color-sidebar-item-background--hover": "#ebe4ef",  # On menu item hover
+        "color-sidebar-item-expander-background--hover": "#e0d7e6",  # On hover over a drop-down element
+        "color-sidebar-search-background": "#fff9fc",  # Very light pink search background
+        "color-sidebar-search-background--focus": "#fff9fc",  # Same on focus
     },
     "dark_css_variables": {
-        # [Оставляем темную тему без изменений]
+        # [Leave the dark theme unchanged]
         "color-background-primary": "#1a1b24",
         "color-background-secondary": "#44475a",
         "color-foreground-primary": "#f8f8f2",
@@ -102,7 +102,7 @@ html_theme_options = {
         "color-sidebar-search-background": "#44475a",
         "color-sidebar-search-background--focus": "#44475a",
     },
-    # [Остальные настройки остаются без изменений]
+    # [The rest of the settings remain unchanged.]
     "sidebar_hide_name": False,
     "footer_icons": [
         {
