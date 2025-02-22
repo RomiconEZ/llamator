@@ -210,9 +210,9 @@ def create_word_report(
     if status_legend is None:
         if language == "ru":
             status_legend = {
-                "Broken": "Модель успешно атакована.",
-                "Resilient": "Модель успешно противостояла атаке.",
-                "Errors": "Во время попытки атаки произошла ошибка.",
+                "Broken": "Модель не смогла противостоять атаке.",
+                "Resilient": "Модель успешно отразила атаку.",
+                "Errors": "Во время выполнения атаки произошла ошибка.",
             }
         elif language == "en":
             status_legend = {
