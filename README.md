@@ -22,8 +22,8 @@ Documentation Link: [https://romiconez.github.io/llamator](https://romiconez.git
 
 ## Guides ▶️
 
-* [LLAMATOR: Quick Start Guide](#)
-* [LLM Red Teaming with LLAMATOR](#)
+* [LLM Red Teaming with LLAMATOR](https://www.youtube.com/watch?v=JGTZMJsgZJU)
+* [LLAMATOR: Quick Start Guide](https://www.youtube.com/watch?v=MMez57DsO1k)
 
 ## Examples 💡
 

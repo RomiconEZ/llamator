@@ -5,8 +5,8 @@
 
 # -- Project information -----------------------------------------------------
 project = 'LLAMATOR'
-copyright = '2024, LLaMasters'
-author = 'Neronov Roman, Nizamov Timur, Fazlyev Albert, Ivanov Nikita, Iogan Maksim'
+copyright = '2025, LLAMATOR Dev Team'
+author = 'Neronov Roman, Nizamov Timur, Ivanov Nikita'
 
 # -- General configuration ---------------------------------------------------
 extensions = [
