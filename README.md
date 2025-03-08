@@ -13,12 +13,17 @@ Red Teaming python-framework for testing chatbots and LLM systems
 ## Install 🚀
 
 ```bash
-pip install llamator==2.2.0
+pip install llamator==2.3.1
 ```
 
 ## Documentation 📚
 
 Documentation Link: [https://romiconez.github.io/llamator](https://romiconez.github.io/llamator/)
+
+## Guides ▶️
+
+* [LLM Red Teaming with LLAMATOR](https://www.youtube.com/watch?v=JGTZMJsgZJU)
+* [LLAMATOR: Quick Start Guide](https://www.youtube.com/watch?v=MMez57DsO1k)
 
 ## Examples 💡
 
