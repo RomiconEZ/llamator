@@ -5,7 +5,7 @@
 
 # -- Project information -----------------------------------------------------
 project = 'LLAMATOR'
-copyright = '2025, LLAMATOR Dev Team'
+copyright = '2025, Neronov Roman, Nizamov Timur, Ivanov Nikita'
 author = 'Neronov Roman, Nizamov Timur, Ivanov Nikita'
 
 # -- General configuration ---------------------------------------------------
@@ -39,7 +39,6 @@ myst_heading_anchors = 3
 html_theme = "furo"
 html_static_path = ["_static"]
 
-# Добавляем логотип (относительный путь от docs, если assets находится на уровне llamator/)
 html_logo = "../assets/LLAMATOR.svg"
 
 html_title = "LLAMATOR"
