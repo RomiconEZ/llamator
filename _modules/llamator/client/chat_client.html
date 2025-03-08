@@ -245,8 +245,10 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
   
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/LLAMATOR.svg" alt="Logo"/>
+  </div>
   
-  <span class="sidebar-brand-text">LLAMATOR</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -258,6 +260,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../project_overview.html">Project Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../howtos.html">How To Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides.html">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../attack_descriptions.html">Attacks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../code_documentation.html">Code Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../licenses.html">Licenses</a></li>
@@ -383,7 +386,7 @@
 
 <span class="sd">    Methods</span>
 <span class="sd">    -------</span>
-<span class="sd">    say(user_prompt: str, use_history: bool = True) -&gt; str</span>
+<span class="sd">    say(user_prompt: str, use_history: bool = True) -&gt; str | None</span>
 <span class="sd">        Sends a user message to the LLM, updates the conversation history, and returns the assistant&#39;s response.</span>
 
 <span class="sd">    clear_history() -&gt; None</span>
@@ -429,7 +432,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">system_prompts</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">strip_client_responses</span> <span class="o">=</span> <span class="n">strip_client_responses</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">say</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">say</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sends a user message to the LLM, updates the conversation history based on the use_history flag,</span>
 <span class="sd">        and returns the assistant&#39;s response.</span>
@@ -441,20 +444,24 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        str</span>
-<span class="sd">            The response from the assistant (LLM) as a string.</span>
+<span class="sd">        str | None</span>
+<span class="sd">            The response from the assistant (LLM) as a string or None in case of exception.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;say: system_prompts=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">system_prompts</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;say: prompt=</span><span class="si">{</span><span class="n">user_prompt</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="c1"># Interact with the LLM</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span>
-            <span class="n">history</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_history</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">system_prompts</span><span class="p">),</span>
-            <span class="n">messages</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">user_prompt</span><span class="p">}],</span>
-        <span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">strip_client_responses</span><span class="p">:</span>
-            <span class="n">result</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot; </span><span class="se">\t\n</span><span class="s2">[]&lt;&gt;</span><span class="se">\&quot;</span><span class="s2">&#39;`&quot;</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;say: result=</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span>
+                <span class="n">history</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_history</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">system_prompts</span><span class="p">),</span>
+                <span class="n">messages</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">user_prompt</span><span class="p">}],</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">strip_client_responses</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot; </span><span class="se">\t\n</span><span class="s2">[]&lt;&gt;</span><span class="se">\&quot;</span><span class="s2">&#39;`&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;say: result=</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;say: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">user_prompt</span><span class="p">})</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
@@ -493,7 +500,7 @@
 
 <span class="sd">    Methods</span>
 <span class="sd">    -------</span>
-<span class="sd">    start_conversation(start_prompt: str) -&gt; bool</span>
+<span class="sd">    start_conversation(start_prompt: str) -&gt; bool | None</span>
 <span class="sd">        Starts the conversation using the attacker and alternates between attacker and tested client until a stopping condition is met.</span>
 <span class="sd">    get_attacker_responses() -&gt; List[Dict[str, str]]</span>
 <span class="sd">        Returns the responses of the attacker.</span>
@@ -592,7 +599,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">tested_client_response</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">start_conversation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">start_conversation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Starts the conversation with the attacker and alternates between attacker and tested client.</span>
 
@@ -603,19 +610,23 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        bool</span>
-<span class="sd">            Returns True if the stopping criterion was met, otherwise False.</span>
+<span class="sd">        bool | None</span>
+<span class="sd">            Returns True if the stopping criterion was met, otherwise False. In case of exception returns None.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Starting multi-stage conversation.&quot;</span><span class="p">)</span>
 
         <span class="c1"># Attacker initiates the conversation</span>
         <span class="n">attacker_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attacker_session</span><span class="o">.</span><span class="n">say</span><span class="p">(</span><span class="n">start_prompt</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">attacker_response</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_step</span><span class="si">}</span><span class="s2">: Attacker response: </span><span class="si">{</span><span class="n">attacker_response</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="c1"># Send attacker&#39;s response to the tested client and receive tested client&#39;s response</span>
             <span class="n">tested_client_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tested_client_session</span><span class="o">.</span><span class="n">say</span><span class="p">(</span><span class="n">attacker_response</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_step</span><span class="si">}</span><span class="s2">: Tested client response: </span><span class="si">{</span><span class="n">tested_client_response</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">tested_client_response</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
 
             <span class="c1"># Check stopping criterion by history</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop_criterion</span><span class="p">(</span><span class="n">tested_client_history</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tested_client_session</span><span class="o">.</span><span class="n">history</span><span class="p">):</span>
@@ -637,6 +648,8 @@
             <span class="c1"># Send the handled tested client&#39;s response to the attacker for refinement and sending next iteration</span>
             <span class="n">attacker_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attacker_session</span><span class="o">.</span><span class="n">say</span><span class="p">(</span><span class="n">attacker_prompt</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_step</span><span class="si">}</span><span class="s2">: Attacker response: </span><span class="si">{</span><span class="n">attacker_response</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">attacker_response</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
 
             <span class="c1"># Increment step</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">current_step</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -663,17 +676,6 @@
 <span class="sd">            The responses of the tested client&#39;s session.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">message</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tested_client_session</span><span class="o">.</span><span class="n">history</span> <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;role&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;assistant&quot;</span><span class="p">]</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_current_step</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the current step of the attacker.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        int</span>
-<span class="sd">            The current step of the attacker.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_step</span>
 </pre></div>
         </article>
       </div>
@@ -686,7 +688,7 @@
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2024, LLaMasters
+                Copyright &#169; 2025, Neronov Roman, Nizamov Timur, Ivanov Nikita
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             

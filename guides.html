@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Guides" href="guides.html" /><link rel="prev" title="Project Overview" href="project_overview.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Attacks" href="attack_descriptions.html" /><link rel="prev" title="How To Use" href="howtos.html" />
 
     <!-- Generated with Sphinx 8.0.2 and Furo 2024.08.06 -->
-        <title>How To Use - LLAMATOR</title>
+        <title>Guides - LLAMATOR</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a5519fdd" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
@@ -235,7 +235,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -260,8 +260,8 @@
   <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="project_overview.html">Project Overview</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">How To Use</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guides.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howtos.html">How To Use</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="attack_descriptions.html">Attacks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code_documentation.html">Code Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
@@ -285,12 +285,12 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="https://github.com/RomiconEZ/llamator/blob/release/src/howtos.md?plain=true" title="View this page">
+  <a class="muted-link" href="https://github.com/RomiconEZ/llamator/blob/release/src/guides.rst?plain=true" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/RomiconEZ/llamator/edit/release/src/howtos.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/RomiconEZ/llamator/edit/release/src/guides.rst" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
@@ -303,122 +303,48 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="how-to-use">
-<h1>How To Use<a class="headerlink" href="#how-to-use" title="Link to this heading">¶</a></h1>
-<section id="notebooks-examples">
-<h2>Notebooks Examples<a class="headerlink" href="#notebooks-examples" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>📄 <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-api.ipynb">RAG bot testing via REST API</a></p></li>
-<li><p>🧙‍♂️ <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-selenium.ipynb">Gandalf web bot testing via Selenium</a></p></li>
-<li><p>💬 <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-telegram.ipynb">Telegram bot testing via Telethon</a></p></li>
-<li><p>📱 <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-whatsapp.ipynb">WhatsApp bot testing via Selenium</a></p></li>
-<li><p>🔗 <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-langchain-custom-attack.ipynb">LangChain client testing with custom attack</a></p></li>
-<li><p>🐋 <a class="reference external" href="https://github.com/RomiconEZ/llamator/blob/release/docker">Running LLAMATOR in Docker</a></p></li>
-</ul>
-</section>
-<section id="installation-guide">
-<h2>Installation Guide<a class="headerlink" href="#installation-guide" title="Link to this heading">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">llamator</span><span class="o">==</span><span class="m">2</span>.3.1
-</pre></div>
-</div>
-</section>
-<section id="usage-guide-using-lm-studio">
-<h2>Usage Guide (using LM Studio)<a class="headerlink" href="#usage-guide-using-lm-studio" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">llamator</span>
-
-<span class="c1"># Initialize the attack model</span>
-<span class="n">attack_model</span> <span class="o">=</span> <span class="n">llamator</span><span class="o">.</span><span class="n">ClientOpenAI</span><span class="p">(</span>
-    <span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;lm-studio&quot;</span><span class="p">,</span>
-    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;http://localhost:1234/v1&quot;</span><span class="p">,</span>
-    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;model-identifier&quot;</span><span class="p">,</span>
-    <span class="n">temperature</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-    <span class="n">system_prompts</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;You are an attacking model.&quot;</span><span class="p">],</span>
-<span class="p">)</span>
-
-<span class="c1"># Initialize the tested model</span>
-<span class="n">tested_model</span> <span class="o">=</span> <span class="n">llamator</span><span class="o">.</span><span class="n">ClientOpenAI</span><span class="p">(</span>
-    <span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;lm-studio&quot;</span><span class="p">,</span>
-    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;http://localhost:1234/v1&quot;</span><span class="p">,</span>
-    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;model-identifier&quot;</span><span class="p">,</span>
-    <span class="n">temperature</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-    <span class="n">model_description</span><span class="o">=</span><span class="s2">&quot;Model description&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="c1"># List of tests with the number of attempts</span>
-<span class="n">tests_with_attempts</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s2">&quot;aim_jailbreak&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;base64_injection&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;bon&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;complimentary_transition&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;crescendo&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-    <span class="c1"># Uncomment the following lines to include additional tests</span>
-    <span class="c1"># (&quot;do_anything_now_jailbreak&quot;, 2),</span>
-    <span class="c1"># (&quot;RU_do_anything_now_jailbreak&quot;, 2),</span>
-    <span class="c1"># (&quot;ethical_compliance&quot;, 2),</span>
-    <span class="c1"># (&quot;harmful_behavior&quot;, 2),</span>
-    <span class="c1"># (&quot;harmful_behavior_multistage&quot;, 2),</span>
-    <span class="c1"># (&quot;linguistic_evasion&quot;, 2),</span>
-    <span class="c1"># (&quot;logical_inconsistencies&quot;, 2),</span>
-    <span class="c1"># (&quot;past_tense&quot;, 2),</span>
-    <span class="c1"># (&quot;suffix&quot;, 2),</span>
-    <span class="c1"># (&quot;sycophancy&quot;, 2),</span>
-    <span class="c1"># (&quot;system_prompt_leakage&quot;, 2),</span>
-    <span class="c1"># (&quot;typoglycemia_attack&quot;, 2),</span>
-    <span class="c1"># (&quot;RU_typoglycemia_attack&quot;, 2),</span>
-    <span class="c1"># (&quot;ucar&quot;, 2),</span>
-    <span class="c1"># (&quot;RU_ucar&quot;, 2),</span>
-<span class="p">]</span>
-
-<span class="c1"># Configuration for testing</span>
-<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;enable_logging&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># Enable logging</span>
-    <span class="s2">&quot;enable_reports&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># Enable report generation</span>
-    <span class="s2">&quot;artifacts_path&quot;</span><span class="p">:</span> <span class="s2">&quot;./artifacts&quot;</span><span class="p">,</span>  <span class="c1"># Path to save artifacts</span>
-    <span class="s2">&quot;debug_level&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>  <span class="c1"># Logging level: 0 - WARNING, 1 - INFO, 2 - DEBUG</span>
-    <span class="s2">&quot;report_language&quot;</span><span class="p">:</span> <span class="s2">&quot;en&quot;</span><span class="p">,</span>  <span class="c1"># Report language: &#39;en&#39;, &#39;ru&#39;</span>
-<span class="p">}</span>
-
-<span class="c1"># Start testing</span>
-<span class="n">llamator</span><span class="o">.</span><span class="n">start_testing</span><span class="p">(</span>
-    <span class="n">attack_model</span><span class="o">=</span><span class="n">attack_model</span><span class="p">,</span>
-    <span class="n">tested_model</span><span class="o">=</span><span class="n">tested_model</span><span class="p">,</span>
-    <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
-    <span class="n">tests_with_attempts</span><span class="o">=</span><span class="n">tests_with_attempts</span><span class="p">,</span>
-    <span class="n">multistage_depth</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
+          <section id="guides">
+<h1>Guides<a class="headerlink" href="#guides" title="Link to this heading">¶</a></h1>
+<p>This section contains YouTube video tutorials providing detailed guides on using LLAMATOR.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+  <div style="flex: 1 1 45%; min-width: 300px;">
+    <h3 style="font-size: 20px;">LLM Red Teaming with LLAMATOR</h3>
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/JGTZMJsgZJU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+  <div style="flex: 1 1 45%; min-width: 300px;">
+    <h3 style="font-size: 20px;">LLAMATOR: Quick Start Guide</h3>
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/MMez57DsO1k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div></section>
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="guides.html">
+          <a class="next-page" href="attack_descriptions.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Guides</div>
+                <div class="title">Attacks</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="project_overview.html">
+          <a class="prev-page" href="howtos.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Project Overview</div>
+                <div class="title">How To Use</div>
                 
               </div>
             </a>
@@ -447,29 +373,8 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">How To Use</a><ul>
-<li><a class="reference internal" href="#notebooks-examples">Notebooks Examples</a></li>
-<li><a class="reference internal" href="#installation-guide">Installation Guide</a></li>
-<li><a class="reference internal" href="#usage-guide-using-lm-studio">Usage Guide (using LM Studio)</a></li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>

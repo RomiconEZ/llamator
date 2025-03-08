@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Code Documentation" href="code_documentation.html" /><link rel="prev" title="How To Use" href="howtos.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Code Documentation" href="code_documentation.html" /><link rel="prev" title="Guides" href="guides.html" />
 
     <!-- Generated with Sphinx 8.0.2 and Furo 2024.08.06 -->
         <title>Attacks - LLAMATOR</title>
@@ -246,8 +246,10 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="_static/LLAMATOR.svg" alt="Logo"/>
+  </div>
   
-  <span class="sidebar-brand-text">LLAMATOR</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -259,6 +261,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="project_overview.html">Project Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="howtos.html">How To Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides.html">Guides</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Attacks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code_documentation.html">Code Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="licenses.html">Licenses</a></li>
@@ -428,8 +431,8 @@
 </pre></div>
 </div>
 </details>
-<section id="id1">
-<h3>OWASP <a class="reference external" href="https://genai.owasp.org/llmrisk/llm01-prompt-injection/">LLM01:2025</a> Prompt Injection<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<section id="owasp-llm01-2025-continuous-prompt-injection">
+<h3>OWASP <a class="reference external" href="https://genai.owasp.org/llmrisk/llm01-prompt-injection/">LLM01:2025</a> Continuous Prompt Injection<a class="headerlink" href="#owasp-llm01-2025-continuous-prompt-injection" title="Link to this heading">¶</a></h3>
 <details>
 <summary><strong>Crescendo</strong></summary>
 <p>In code name: <code class="docutils literal notranslate"><span class="pre">crescendo</span></code></p>
@@ -467,8 +470,7 @@
 <p>Attacks the LLM system during a multistage conversation using the argumentum ad verecundiam method based on the system’s domain.</p>
 <p><em>Original Paper <a class="reference external" href="https://arxiv.org/abs/2310.13548">https://arxiv.org/abs/2310.13548</a></em></p>
 <p><a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/sycophancy.py">View code on GitHub</a></p>
-</details>
-</section>
+</details></section>
 </section>
 </section>
 
@@ -486,14 +488,14 @@
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="howtos.html">
+          <a class="prev-page" href="guides.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">How To Use</div>
+                <div class="title">Guides</div>
                 
               </div>
             </a>
@@ -501,7 +503,7 @@
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2024, LLaMasters
+                Copyright &#169; 2025, Neronov Roman, Nizamov Timur, Ivanov Nikita
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -540,7 +542,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#multi-stage-attacks">Multi-stage attacks</a><ul>
-<li><a class="reference internal" href="#id1">OWASP LLM01:2025 Prompt Injection</a></li>
+<li><a class="reference internal" href="#owasp-llm01-2025-continuous-prompt-injection">OWASP LLM01:2025 Continuous Prompt Injection</a></li>
 <li><a class="reference internal" href="#owasp-llm07-2025-system-prompt-leakage">OWASP LLM07:2025 System Prompt Leakage</a></li>
 <li><a class="reference internal" href="#owasp-llm09-2025-misinformation">OWASP LLM09:2025 Misinformation</a></li>
 </ul>
