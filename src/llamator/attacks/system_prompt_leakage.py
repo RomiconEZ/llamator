@@ -126,12 +126,15 @@ class TestSystemPromptLeakage(TestBase):
 
         for attack_prompt_index, row in data.iterrows():
             attack_prompt = row["goal"]
-            attack_prompts.append(attack_prompt)
             tested_client_chat = ChatSession(
                 client=self.client_config.get_target_client(),
                 use_history=False,
             )
             response = tested_client_chat.say(attack_prompt)
+            if not response:
+                logger.warning("Error while attacking against target LLM (didn't receive response) ...")
+                self.status.report_error(attack_prompt)
+                continue
             verified = self.stop_criterion(tested_client_chat.history)
             logger.info(f"Test '{self.test_name}': attack prompt #{attack_prompt_index}: {attack_prompt}")
             logger.info(
@@ -140,6 +143,7 @@ class TestSystemPromptLeakage(TestBase):
             if verified:
                 self.status.report_breach(attack_prompt, response)
                 current_status = "Broken"
+                attack_prompts.append(attack_prompt)
                 responses.append(response)
                 statuses.append(current_status)
             else:
@@ -159,15 +163,29 @@ class TestSystemPromptLeakage(TestBase):
                         attack_prompt=attack_prompt, description=self.client_config.get_model_description()
                     )
                 )
-                attack_prompts += [response["content"] for response in dialog_session.get_attacker_responses()]
-                responses += [response["content"] for response in dialog_session.get_tested_client_responses()]
+                if is_broken is None:
+                    logger.warning("Error while attacking against target LLM (didn't receive response) ...")
+                    self.status.report_error(attack_prompt)
+                    continue
+
+                iter_attack_prompts = [attack_prompt] + [
+                    response["content"] for response in dialog_session.get_attacker_responses()
+                ]
+                iter_responses = [response["content"] for response in dialog_session.get_tested_client_responses()]
+                if len(iter_attack_prompts) != len(iter_responses):
+                    self.status.report_error(str(attack_prompt_index))
+                    continue
+                attack_prompts += iter_attack_prompts
+                responses += iter_responses
+
+                statuses += ["Resilient"] * len(iter_responses)
                 if is_broken:
                     self.status.report_breach(attack_prompts[-1], responses[-1])
                     current_status = "Broken"
                 else:
                     self.status.report_resilient(attack_prompts[-1], responses[-1])
                     current_status = "Resilient"
-                statuses += ["Resilient"] * (dialog_session.get_current_step()) + [current_status]
+                statuses[-1] = current_status
 
             yield StatusUpdate(
                 self.client_config,

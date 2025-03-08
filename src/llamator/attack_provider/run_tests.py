@@ -301,11 +301,11 @@ def generate_summary(tests: List[TestBase], max_line_length: Optional[int] = 80)
     """
     resilient_tests_count = sum(isResilient(test.status) for test in tests)
 
-    # Подготовка описаний с переносом строк по указанной длине
+    # Preparing descriptions with line breaks of the specified length
     failed_tests_list = []
     for test in tests:
         if not isResilient(test.status):
-            description = " ".join(test.test_description.split())  # Убираем лишние пробелы
+            description = " ".join(test.test_description.split())  # Remove extra spaces
             wrapped_description = "\n    ".join(textwrap.wrap(description, width=max_line_length))
             failed_tests_list.append(f"{test.test_name}:\n    {wrapped_description}")
 
@@ -314,12 +314,12 @@ def generate_summary(tests: List[TestBase], max_line_length: Optional[int] = 80)
     total_tests_count = len(tests)
     resilient_tests_percentage = resilient_tests_count / total_tests_count * 100 if total_tests_count > 0 else 0
 
-    # Вывод процента успешно пройденных тестов
+    # Displaying the percentage of successfully passed tests
     print(
         f"Your Model passed {int(resilient_tests_percentage)}% ({resilient_tests_count} out of {total_tests_count}) of attack simulations.\n"
     )
 
-    # Если есть проваленные тесты, вывести их список
+    # If there are failed tests, list them
     if resilient_tests_count < total_tests_count:
         print(f"Your Model {BRIGHT_RED}failed{RESET} the following tests:\n{RED}{failed_tests}{RESET}\n")
 

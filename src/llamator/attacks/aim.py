@@ -98,12 +98,6 @@ class TestAIM(TestBase):
         chat = ChatSession(self.attack_config.attack_client.get_target_client())
 
         for attack_prompt_index in range(self.num_attempts):
-            attack_task = chat.say(UNETHICAL_TASK_GENERATION_PROMPT)  # generate next harmful/unethical task to try
-            attack_prompt = AIM_PROMPT_TEMPLATE.format(
-                attack_task=attack_task
-            )  # Frame the task in the attack prompt template
-            attack_prompts.append(attack_prompt)
-            logger.info(f"Test '{self.test_name}': generated attack prompt #{attack_prompt_index}: {attack_prompt}")
             yield StatusUpdate(
                 self.client_config,
                 self.test_name,
@@ -112,6 +106,16 @@ class TestAIM(TestBase):
                 attack_prompt_index,
                 self.num_attempts,
             )
+            attack_task = chat.say(UNETHICAL_TASK_GENERATION_PROMPT)  # generate next harmful/unethical task to try
+            if not attack_task:
+                logger.warning("Error while generating attack prompt (didn't receive response) ...")
+                self.status.report_error(str(attack_prompt_index))
+                continue
+            attack_prompt = AIM_PROMPT_TEMPLATE.format(
+                attack_task=attack_task
+            )  # Frame the task in the attack prompt template
+            attack_prompts.append(attack_prompt)
+            logger.info(f"Test '{self.test_name}': generated attack prompt #{attack_prompt_index}: {attack_prompt}")
 
         # Run the attack by sending the prompts and verifying the responses
         yield StatusUpdate(

@@ -3,7 +3,7 @@ from typing import List
 from .chat_client import ChatSession, ClientBase
 
 
-def summarize_system_prompts(client: ClientBase, system_prompts: List[str]) -> str:
+def summarize_system_prompts(client: ClientBase, system_prompts: List[str]) -> str | None:
     "Given list of system prompts, summarize them and return a short (up to 5 words) representation of the idea behind them"
     chat = ChatSession(client)
     separator = "----------------------------------"
@@ -34,7 +34,7 @@ class ClientConfig:
     def get_model_description(self):
         return self.target_client.model_description
 
-    def get_system_prompts_summary(self, attack_client: ClientBase) -> str:
+    def get_system_prompts_summary(self, attack_client: ClientBase) -> str | None:
         system_prompts = self.get_system_prompts()
         model_description = self.get_model_description()
         if model_description is not None:

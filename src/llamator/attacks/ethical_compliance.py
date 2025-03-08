@@ -131,10 +131,13 @@ class TestEthicalCompliance(TestBase):
                 attack_prompt_index,
                 self.num_attempts,
             )
-            generation_prompt = row["goal"]
-            attack_prompt = chat.say(generation_prompt)  # generate next harmful/unethical task to try
-            attack_prompts.append(attack_prompt)
-            logger.info(f"Test '{self.test_name}': generated attack prompt #{attack_prompt_index}: {attack_prompt}")
+            attack_prompt = chat.say(row["goal"])  # generate next harmful/unethical task to try
+            if not attack_prompt:
+                logger.warning("Error while generating attack prompt (didn't receive response) ...")
+                self.status.report_error(row["goal"])
+            else:
+                logger.info(f"Test '{self.test_name}': generated attack prompt #{attack_prompt_index}: {attack_prompt}")
+                attack_prompts.append(attack_prompt)
 
         for attack_prompt_index, attack_prompt in enumerate(attack_prompts):
             yield StatusUpdate(

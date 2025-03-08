@@ -79,7 +79,7 @@ class ChatSession:
 
     Methods
     -------
-    say(user_prompt: str, use_history: bool = True) -> str
+    say(user_prompt: str, use_history: bool = True) -> str | None
         Sends a user message to the LLM, updates the conversation history, and returns the assistant's response.
 
     clear_history() -> None
@@ -125,7 +125,7 @@ class ChatSession:
         self.history = list(self.system_prompts)
         self.strip_client_responses = strip_client_responses
 
-    def say(self, user_prompt: str) -> str:
+    def say(self, user_prompt: str) -> str | None:
         """
         Sends a user message to the LLM, updates the conversation history based on the use_history flag,
         and returns the assistant's response.
@@ -137,20 +137,24 @@ class ChatSession:
 
         Returns
         -------
-        str
-            The response from the assistant (LLM) as a string.
+        str | None
+            The response from the assistant (LLM) as a string or None in case of exception.
         """
         logger.debug(f"say: system_prompts={self.system_prompts}")
         logger.debug(f"say: prompt={user_prompt}")
 
         # Interact with the LLM
-        result = self.client.interact(
-            history=self.history if self.use_history else list(self.system_prompts),
-            messages=[{"role": "user", "content": user_prompt}],
-        )
-        if self.strip_client_responses:
-            result["content"] = result["content"].strip(" \t\n[]<>\"'`")
-        logger.debug(f"say: result={result}")
+        try:
+            result = self.client.interact(
+                history=self.history if self.use_history else list(self.system_prompts),
+                messages=[{"role": "user", "content": user_prompt}],
+            )
+            if self.strip_client_responses:
+                result["content"] = result["content"].strip(" \t\n[]<>\"'`")
+            logger.debug(f"say: result={result}")
+        except Exception as e:
+            logger.error(f"say: {e}")
+            return None
 
         self.history.append({"role": "user", "content": user_prompt})
         self.history.append(result)
@@ -189,7 +193,7 @@ class MultiStageInteractionSession:
 
     Methods
     -------
-    start_conversation(start_prompt: str) -> bool
+    start_conversation(start_prompt: str) -> bool | None
         Starts the conversation using the attacker and alternates between attacker and tested client until a stopping condition is met.
     get_attacker_responses() -> List[Dict[str, str]]
         Returns the responses of the attacker.
@@ -288,7 +292,7 @@ class MultiStageInteractionSession:
         """
         return tested_client_response
 
-    def start_conversation(self, start_prompt: str) -> bool:
+    def start_conversation(self, start_prompt: str) -> bool | None:
         """
         Starts the conversation with the attacker and alternates between attacker and tested client.
 
@@ -299,19 +303,23 @@ class MultiStageInteractionSession:
 
         Returns
         -------
-        bool
-            Returns True if the stopping criterion was met, otherwise False.
+        bool | None
+            Returns True if the stopping criterion was met, otherwise False. In case of exception returns None.
         """
         logger.debug("Starting multi-stage conversation.")
 
         # Attacker initiates the conversation
         attacker_response = self.attacker_session.say(start_prompt)
+        if not attacker_response:
+            return None
         logger.debug(f"Step {self.current_step}: Attacker response: {attacker_response}")
 
         while True:
             # Send attacker's response to the tested client and receive tested client's response
             tested_client_response = self.tested_client_session.say(attacker_response)
             logger.debug(f"Step {self.current_step}: Tested client response: {tested_client_response}")
+            if not tested_client_response:
+                return None
 
             # Check stopping criterion by history
             if self.stop_criterion(tested_client_history=self.tested_client_session.history):
@@ -333,6 +341,8 @@ class MultiStageInteractionSession:
             # Send the handled tested client's response to the attacker for refinement and sending next iteration
             attacker_response = self.attacker_session.say(attacker_prompt)
             logger.debug(f"Step {self.current_step}: Attacker response: {attacker_response}")
+            if not attacker_response:
+                return None
 
             # Increment step
             self.current_step += 1
@@ -359,14 +369,3 @@ class MultiStageInteractionSession:
             The responses of the tested client's session.
         """
         return [message for message in self.tested_client_session.history if message["role"] == "assistant"]
-
-    def get_current_step(self) -> int:
-        """
-        Returns the current step of the attacker.
-
-        Returns
-        -------
-        int
-            The current step of the attacker.
-        """
-        return self.current_step
