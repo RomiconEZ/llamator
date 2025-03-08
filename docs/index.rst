@@ -2,8 +2,10 @@
    You can adapt this file completely to your preferences, but it should at least
    contain the root `toctree` directive.
 
+.. |LLAMATORitalic| replace:: *LLAMATOR*
+
 ===============================
-           LLAMATOR
+          |LLAMATORitalic|
 ===============================
 
 .. |LLAMATOR| replace:: **llamator**
