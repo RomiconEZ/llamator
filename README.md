@@ -20,6 +20,11 @@ pip install llamator==2.2.0
 
 Documentation Link: [https://romiconez.github.io/llamator](https://romiconez.github.io/llamator/)
 
+## Guides ▶️
+
+* [LLAMATOR: Quick Start Guide](#)
+* [LLM Red Teaming with LLAMATOR](#)
+
 ## Examples 💡
 
 * 📄 [RAG bot testing via REST API](https://github.com/RomiconEZ/llamator/blob/release/examples/llamator-api.ipynb)
