@@ -12,7 +12,7 @@
 ## Installation Guide
 
 ```bash
-pip install llamator==2.3.0
+pip install llamator==2.3.1
 ```
 
 ## Usage Guide (using LM Studio)
