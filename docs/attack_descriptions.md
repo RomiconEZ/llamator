@@ -183,7 +183,7 @@ The `multistage_depth` parameter for using in `history_limit` can be extracted f
 ```
 </details>
 
-### OWASP [LLM01:2025](https://genai.owasp.org/llmrisk/llm01-prompt-injection/) Prompt Injection
+### OWASP [LLM01:2025](https://genai.owasp.org/llmrisk/llm01-prompt-injection/) Continuous Prompt Injection
 
 <details>
 <summary><strong>Crescendo</strong></summary>

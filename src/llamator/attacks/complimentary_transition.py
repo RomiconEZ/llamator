@@ -83,14 +83,6 @@ class TestComplimentaryTransition(TestBase):
         chat = ChatSession(self.attack_config.attack_client.get_target_client())
 
         for attack_prompt_index in range(self.num_attempts):
-            target_system_prompt_summary = self.client_config.get_system_prompts_summary(
-                attack_client=self.attack_config.attack_client.get_target_client()
-            )
-            attack_prompt = chat.say(
-                COMPLIMENTARY_TRANSITION_PROMPT.format(target_system_prompts_summary=target_system_prompt_summary)
-            )  # generate another task
-            attack_prompts.append(attack_prompt)
-            logger.info(f"Test '{self.test_name}': generated attack prompt #{attack_prompt_index}: {attack_prompt}")
             yield StatusUpdate(
                 self.client_config,
                 self.test_name,
@@ -99,6 +91,18 @@ class TestComplimentaryTransition(TestBase):
                 attack_prompt_index,
                 self.num_attempts,
             )
+            target_system_prompt_summary = self.client_config.get_system_prompts_summary(
+                attack_client=self.attack_config.attack_client.get_target_client()
+            )
+            attack_prompt = chat.say(
+                COMPLIMENTARY_TRANSITION_PROMPT.format(target_system_prompts_summary=target_system_prompt_summary)
+            )  # generate another task
+            if not attack_prompt:
+                logger.warning("Error while generating attack prompt (didn't receive response) ...")
+                self.status.report_error(str(attack_prompt_index))
+            else:
+                logger.info(f"Test '{self.test_name}': generated attack prompt #{attack_prompt_index}: {attack_prompt}")
+                attack_prompts.append(attack_prompt)
 
         # Run the attack by sending the prompts and verifying the responses
         yield StatusUpdate(

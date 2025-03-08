@@ -4,22 +4,18 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
 # -- Project information -----------------------------------------------------
-# https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
-
 project = 'LLAMATOR'
-copyright = '2024, LLaMasters'
-author = 'Neronov Roman, Nizamov Timur, Fazlyev Albert, Ivanov Nikita, Iogan Maksim'
+copyright = '2025, Neronov Roman, Nizamov Timur, Ivanov Nikita'
+author = 'Neronov Roman, Nizamov Timur, Ivanov Nikita'
 
 # -- General configuration ---------------------------------------------------
-# https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
-
 extensions = [
-    "sphinx.ext.napoleon",# support for google style docstrings
-    "sphinx.ext.autodoc", # auto* are for automatic code docs generation
-    "sphinx.ext.autosummary", # as above
-    "sphinx.ext.intersphinx", # allows to cross reference other sphinx documentations
+    "sphinx.ext.napoleon",         # support for google style docstrings
+    "sphinx.ext.autodoc",          # auto* are for automatic code docs generation
+    "sphinx.ext.autosummary",      # as above
+    "sphinx.ext.intersphinx",      # allows to cross reference other sphinx documentations
     "sphinx.ext.autosectionlabel", # each doc section gets automatic reference generated
-    "myst_parser", # adds support for Markdown
+    "myst_parser",                 # adds support for Markdown
     "sphinx.ext.extlinks",
     "sphinx.ext.mathjax",
     "sphinx.ext.todo",
@@ -30,13 +26,9 @@ templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # -- Options for TODOs -------------------------------------------------------
-#
-
 todo_include_todos = False
 
 # -- Options for Markdown files ----------------------------------------------
-#
-
 myst_enable_extensions = [
     "colon_fence",
     "deflist",
@@ -44,44 +36,36 @@ myst_enable_extensions = [
 myst_heading_anchors = 3
 
 # -- Options for HTML output -------------------------------------------------
-# https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
-
 html_theme = "furo"
 html_static_path = ["_static"]
-# Set link name generated in the top bar.
+
+html_logo = "../assets/LLAMATOR.svg"
+
 html_title = "LLAMATOR"
 
 html_theme_options = {
     "light_css_variables": {
-        # Основные цвета фона
-        "color-background-primary": "#f8f5fa",  # Очень светлый розовато-лиловый фон
-        "color-background-secondary": "#f0ebf3",  # Чуть темнее розовато-лиловый
-        # Цвета текста
-        "color-foreground-primary": "#2d1b36",  # Очень темный пурпурный для текста
-        "color-foreground-secondary": "#432952",  # Темный пурпурный для вторичного текста
-        # Брендовые цвета
-        "color-brand-primary": "#2d1b36",  # Очень темный пурпурный
-        "color-brand-content": "#432952",  # Темный пурпурный
-        # Ссылки
-        "color-link": "#614378",  # Пурпурный для ссылок
-        "color-link-hover": "#7b5696",  # Светлее пурпурный при наведении
-        # Оформление примечаний (admonitions)
-        "color-admonition-background": "#fff9fc",  # Очень светлый розовый фон для примечаний
-        "color-admonition-title-background": "#2d1b36",  # Очень темный пурпурный для заголовка
-        "color-admonition-title": "#ffffff",  # Белый текст на темном фоне
-        "color-admonition-border": "#2d1b36",  # Очень темный пурпурный для границы
-        # Код
-        "color-code-background": "#f5f0f7",  # Светлый розовато-лиловый фон для кода
-        "color-code-foreground": "#2d1b36",  # Очень темный пурпурный текст кода
-        # Навигация
-        "color-sidebar-background": "#f5f0f7",  # Светлый розовато-лиловый фон сайдбара
-        "color-sidebar-item-background--hover": "#ebe4ef",  # При наведении на пункт меню
-        "color-sidebar-item-expander-background--hover": "#e0d7e6",  # При наведении на раскрывающийся элемент
-        "color-sidebar-search-background": "#fff9fc",  # Очень светлый розовый фон поиска
-        "color-sidebar-search-background--focus": "#fff9fc",  # То же самое при фокусе
+        "color-background-primary": "#f8f5fa",  # Very light pinkish purple background
+        "color-background-secondary": "#f0ebf3",  # Slightly darker pinkish purple
+        "color-foreground-primary": "#2d1b36",  # Very dark purple for primary text
+        "color-foreground-secondary": "#432952",  # Dark purple for secondary text
+        "color-brand-primary": "#2d1b36",  # Very dark purple
+        "color-brand-content": "#432952",  # Dark purple
+        "color-link": "#614378",  # Purple for links
+        "color-link-hover": "#7b5696",  # Lighter purple on hover
+        "color-admonition-background": "#fff9fc",  # Very light pink background for notes
+        "color-admonition-title-background": "#2d1b36",  # Very dark purple for the title
+        "color-admonition-title": "#ffffff",  # White text on dark background
+        "color-admonition-border": "#2d1b36",  # Very dark purple for the border
+        "color-code-background": "#f5f0f7",  # Light pinkish purple background for code
+        "color-code-foreground": "#2d1b36",  # Very dark purple code text
+        "color-sidebar-background": "#f5f0f7",  # Light pinkish purple sidebar background
+        "color-sidebar-item-background--hover": "#ebe4ef",  # On menu item hover
+        "color-sidebar-item-expander-background--hover": "#e0d7e6",  # On hover over a drop-down element
+        "color-sidebar-search-background": "#fff9fc",  # Very light pink search background
+        "color-sidebar-search-background--focus": "#fff9fc",  # Same on focus
     },
     "dark_css_variables": {
-        # [Оставляем темную тему без изменений]
         "color-background-primary": "#1a1b24",
         "color-background-secondary": "#44475a",
         "color-foreground-primary": "#f8f8f2",
@@ -102,8 +86,7 @@ html_theme_options = {
         "color-sidebar-search-background": "#44475a",
         "color-sidebar-search-background--focus": "#44475a",
     },
-    # [Остальные настройки остаются без изменений]
-    "sidebar_hide_name": False,
+    "sidebar_hide_name": True,
     "footer_icons": [
         {
             "name": "GitHub",
@@ -123,13 +106,11 @@ html_theme_options = {
 
 autosectionlabel_prefix_document = True
 
-# Mapping to link other documentations
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3', None),
     "scipy": ("https://docs.scipy.org/doc/scipy/reference/", None),
     "numpy": ("https://numpy.org/doc/stable", None),
 }
-
 
 # Configuration for Napoleon extension
 napoleon_google_docstring = True
@@ -158,10 +139,3 @@ source_suffix = {
 
 pygments_style = "dracula"
 pygments_dark_style = "dracula"
-
-# workaround for sphinx material issue with empty left sidebar
-# See: https://github.com/bashtage/sphinx-material/issues/30
-# uncomment below lines if you use: html_theme = "sphinx_material"
-# html_sidebars = {
-#    "**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
-# }
