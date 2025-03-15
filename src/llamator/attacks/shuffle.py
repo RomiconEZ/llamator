@@ -66,8 +66,8 @@ class TestShuffle(TestBase):
     @staticmethod
     def shuffle_words(prompt: str) -> str:
         words = prompt.split()
-        random.shuffle(words)
-        return ' '.join(words)
+        random.shuffle(words)  # nosec
+        return " ".join(words)
 
     def run(self) -> Generator[StatusUpdate, None, None]:
         attack_prompts = []
