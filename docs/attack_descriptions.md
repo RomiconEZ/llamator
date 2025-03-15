@@ -7,18 +7,6 @@ This section provides an overview of all available attacks.
 ### OWASP [LLM01:2025](https://genai.owasp.org/llmrisk/llm01-prompt-injection/) Prompt Injection
 
 <details>
-<summary><strong>Adversarial suffix</strong></summary>
-
-In code name: `suffix`
-
-Uses a specially crafted suffix to bypass LLM filters and restrictions, forcing the model to generate prohibited or harmful content despite the original query. Evaluates the model's vulnerability to input data manipulation.
-
-_Original Paper <https://arxiv.org/abs/2307.15043>, Code <https://github.com/llm-attacks/llm-attacks>_
-
-<a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/suffix.py">View code on GitHub</a>
-</details>
-
-<details>
 <summary><strong>Aim Jailbreak</strong></summary>
 
 In code name: `aim_jailbreak`
@@ -158,6 +146,30 @@ In code name: `RU_ucar`
 Probes a Russian-language LLM's adherence to content restrictions when explicitly requested to ignore such filters. It assesses the robustness of the LLM's content moderation systems against direct challenges.
 
 <a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/ru_ucar.py">View code on GitHub</a>
+</details>
+
+<details>
+<summary><strong>Adversarial suffix</strong></summary>
+
+In code name: `shuffle`
+
+Uses a specially crafted suffix to bypass LLM filters and restrictions, forcing the model to generate prohibited or harmful content despite the original query. Evaluates the model's vulnerability to input data manipulation.
+
+_Original Paper <https://arxiv.org/abs/2307.15043>
+
+<a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/suffix.py">View code on GitHub</a>
+</details>
+
+<details>
+<summary><strong>Adversarial suffix</strong></summary>
+
+In code name: `suffix`
+
+Uses a specially crafted suffix to bypass LLM filters and restrictions, forcing the model to generate prohibited or harmful content despite the original query. Evaluates the model's vulnerability to input data manipulation.
+
+_Original Paper <https://arxiv.org/abs/2307.15043>, Code <https://github.com/llm-attacks/llm-attacks>_
+
+<a href="https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/suffix.py">View code on GitHub</a>
 </details>
 
 ## Multi-stage attacks

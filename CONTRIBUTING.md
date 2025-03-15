@@ -120,7 +120,10 @@ from ..attacks import (  # noqa
     ru_dan,
     ru_typoglycemia,
     ru_ucar,
+    shuffle,
+    suffix,
     sycophancy,
+    system_prompt_leakage,
     typoglycemia,
     ucar,
 
@@ -145,8 +148,11 @@ AvailableTests = [
     "RU_do_anything_now_jailbreak",
     "RU_typoglycemia_attack",
     "RU_ucar",
+    "shuffle",
+    "suffix",
     "sycophancy",
-    "typoglycemia_attack",
+    "system_prompt_leakage",
+    "typoglycemia",
     "ucar",
 
     #TODO: YOUR TEST HERE (in alphabetical order!)
