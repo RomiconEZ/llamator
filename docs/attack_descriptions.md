@@ -17,7 +17,7 @@ Probes an LLM's ethical compliance by eliciting detailed instructions on illegal
 </details>
 
 <details>
-<summary><strong>Adversarial suffix</strong></summary>
+<summary><strong>Adversarial Suffix</strong></summary>
 
 In code name: `suffix`
 
