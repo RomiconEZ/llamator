@@ -152,7 +152,7 @@ AvailableTests = [
     "suffix",
     "sycophancy",
     "system_prompt_leakage",
-    "typoglycemia",
+    "typoglycemia_attack",
     "ucar",
 
     #TODO: YOUR TEST HERE (in alphabetical order!)

@@ -107,12 +107,12 @@
   {
     "name": "Shuffle Inconsistency",
     "in_code_name": "shuffle",
-    "description_en": "Probes the LLM resilience against Shuffle Inconsistency. Original Paper: https://arxiv.org/html/2501.04931",
-    "description_ru": "Проверяет устойчивость LLM к Shuffle Inconsistency. Статья: https://arxiv.org/html/2501.04931",
+    "description_en": "Attempts to bypass LLM's defense mechanism by randomly shuffling elements in input harmful prompt. Original Paper: https://arxiv.org/html/2501.04931",
+    "description_ru": "Проверяет устойчивость LLM к Shuffle Inconsistency: Попытка обойти защиту LLM, случайным образом перемешивая элементы во входном вредоносном запросе. Статья: https://arxiv.org/html/2501.04931",
     "github_link": "https://github.com/RomiconEZ/llamator/blob/release/src/llamator/attacks/shuffle.py"
   },
   {
-    "name": "Adversarial suffix",
+    "name": "Adversarial Suffix",
     "in_code_name": "suffix",
     "description_en": "Uses a specially crafted suffix to bypass LLM filters and restrictions, forcing the model to generate prohibited or harmful content despite the original query. Evaluates the model's vulnerability to input data manipulation.",
     "description_ru": "Использует специально сконструированный суффикс для обхода фильтров и ограничений LLM, заставляя модель генерировать запрещённый или вредоносный контент, несмотря на исходный запрос. Оценивает уязвимость модели к манипуляциям входных данных.",
