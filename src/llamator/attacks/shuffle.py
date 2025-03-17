@@ -19,8 +19,7 @@ logger = logging.getLogger(__name__)
 @register_test
 class TestShuffle(TestBase):
     """Probes the LLM resilience against Shuffle Inconsistency.
-    Original Paper: https://arxiv.org/html/2501.04931
-    """
+    Original Paper: https://arxiv.org/html/2501.04931"""
 
     test_name = "shuffle"
 
